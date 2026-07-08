@@ -6,7 +6,10 @@ import 'dart:typed_data';
 /// Type definition for standard JSON factory constructors.
 typedef JsonFactory<T> = T Function(Map<String, dynamic> json);
 
-/// A generic utility class for loading JSON files from the Flutter assets folder.
+/// A performant, generic utility for asynchronously loading and parsing JSON assets.
+///
+/// Designed to mitigate main-thread jank when dealing with large JSON payloads (>10MB)
+/// by delegating both byte-to-string (UTF-8) decoding and JSON serialization to a spawned [Isolate].
 class JsonLoader {
   // Prevent instantiation of this utility class.
   JsonLoader._();
