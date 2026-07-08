@@ -28,12 +28,14 @@ class LanguageDictionary {
   List<DictionaryEntry> search(String query) {
     final q = query.toLowerCase();
     final matches = <Map<String, dynamic>>[];
+
     for (final e in _rawEntries) {
       final map = e as Map<String, dynamic>;
       if ((map['word'] as String? ?? '').toLowerCase().contains(q)) {
         matches.add(map);
       }
     }
+
     return matches.map(DictionaryEntry.fromJson).toList();
   }
 }
@@ -70,15 +72,17 @@ class Meaning {
   factory Meaning.fromJson(Map<String, dynamic> json) {
     final raw = json['definition'];
     final List<String> defs;
+
     if (raw is List) {
       defs = raw.cast<String>();
     } else {
       defs = [(raw as String? ?? '')];
     }
 
-    // Handles legacy 'form' (string) during migration
+    // Handles legacy 'form' (singular string) during migration
     final rawForms = json.containsKey('forms') ? json['forms'] : json['form'];
     final List<String>? formsList;
+
     if (rawForms is List) {
       formsList = rawForms.cast<String>();
     } else if (rawForms is String) {
@@ -89,6 +93,7 @@ class Meaning {
 
     final rawNotes = json['notes'];
     final List<String>? notesList;
+
     if (rawNotes is List) {
       notesList = rawNotes.cast<String>();
     } else if (rawNotes is String) {

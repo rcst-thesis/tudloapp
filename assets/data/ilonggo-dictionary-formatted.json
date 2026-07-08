@@ -467,7 +467,8 @@
             "Arabian"
           ],
           "notes": [
-            "person/s"
+            "person",
+            "s"
           ]
         },
         {
@@ -1580,7 +1581,8 @@
             "Indian"
           ],
           "notes": [
-            "person/s"
+            "person",
+            "s"
           ]
         },
         {
@@ -3738,7 +3740,8 @@
             "Chinese"
           ],
           "notes": [
-            "person/s"
+            "person",
+            "s"
           ]
         },
         {
@@ -3851,7 +3854,8 @@
             "Italian"
           ],
           "notes": [
-            "person/s"
+            "person",
+            "s"
           ]
         },
         {
@@ -4375,8 +4379,9 @@
           "definition": [
             "(to) eat"
           ],
-          "notes": [
-            "INF & IMP"
+          "forms": [
+            "INF",
+            "IMP"
           ]
         }
       ]
@@ -5181,15 +5186,7 @@
       "meanings": [
         {
           "definition": [
-            ""
-          ],
-          "notes": [
-            "you",
-            "singular/plural"
-          ]
-        },
-        {
-          "definition": [
+            "(you, singular/plural)",
             "walk here"
           ]
         }
@@ -5293,7 +5290,7 @@
       "meanings": [
         {
           "definition": [
-            "chupa, a unit of measure for rice or other grains"
+            "a unit of measure for rice or other grains"
           ]
         }
       ]
@@ -6661,7 +6658,8 @@
             "short"
           ],
           "notes": [
-            "size or height"
+            "size",
+            "height"
           ]
         }
       ]
@@ -8761,7 +8759,8 @@
             "Filipino"
           ],
           "notes": [
-            "person/s"
+            "person",
+            "s"
           ]
         }
       ]
@@ -9005,7 +9004,8 @@
             "French"
           ],
           "notes": [
-            "person/s"
+            "person",
+            "s"
           ]
         },
         {
@@ -9035,7 +9035,8 @@
             "fresh"
           ],
           "notes": [
-            "food and air"
+            "food",
+            "air"
           ]
         }
       ]
@@ -9869,7 +9870,8 @@
             "that"
           ],
           "notes": [
-            "far from the speaker and near the listener"
+            "far from the speaker",
+            "near the listener"
           ]
         }
       ]
@@ -12135,7 +12137,8 @@
             "believe/right"
           ],
           "notes": [
-            "side/arm"
+            "side",
+            "arm"
           ]
         }
       ]

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 final _formPattern = RegExp(r'\s*\(([^)]+)\)\s*$');
+final _tokenDelimiter = RegExp(r'\s*(?:,|&|/|\band\b|\bor\b)\s*');
 
 void main() async {
   final rawFile = File('assets/data/ilonggo_dictionary_dataset.json');
@@ -67,37 +68,46 @@ void main() async {
     for (final seg in segments) {
       final match = _formPattern.firstMatch(seg);
       final rawParenContent = match?.group(1);
-      var text = seg.replaceFirst(_formPattern, '').trim();
-
+      var text = seg;
       List<String>? forms;
       List<String>? notes;
 
       if (rawParenContent != null) {
-        final tokens = rawParenContent
-            .split(',')
-            .map((s) => s.trim())
-            .where((s) => s.isNotEmpty)
-            .toList();
+        final textBeforeParen = seg.substring(0, match!.start).trim();
 
-        final validForms = <String>[];
-        final invalidTokens = <String>[];
+        // ONLY extract if parenthetical comes AFTER definition text
+        if (textBeforeParen.isNotEmpty) {
+          text = seg.replaceFirst(_formPattern, '').trim();
 
-        for (final token in tokens) {
-          final cleanToken = token.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '');
-          if (abbreviations.containsKey(cleanToken)) {
-            validForms.add(cleanToken);
-          } else {
-            invalidTokens.add(token); // ORIGINAL text preserved
+          final tokens = rawParenContent
+              .split(_tokenDelimiter)
+              .map((s) => s.trim())
+              .where((s) => s.isNotEmpty)
+              .toList();
+
+          final validForms = <String>[];
+          final invalidTokens = <String>[];
+
+          for (final token in tokens) {
+            final cleanToken = token.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '');
+            if (abbreviations.containsKey(cleanToken)) {
+              validForms.add(cleanToken);
+            } else {
+              invalidTokens.add(token);
+            }
           }
-        }
 
-        if (validForms.isNotEmpty) forms = validForms;
-        if (invalidTokens.isNotEmpty) notes = invalidTokens;
+          if (validForms.isNotEmpty) forms = validForms;
+          if (invalidTokens.isNotEmpty) notes = invalidTokens;
+        }
+        // else: parenthetical is BEFORE the words or IS the entire segment → leave it alone
       }
 
-      texts.add(text);
-      formsPerSegment.add(forms);
-      notesPerSegment.add(notes);
+      if (text.isNotEmpty) {
+        texts.add(text);
+        formsPerSegment.add(forms);
+        notesPerSegment.add(notes);
+      }
     }
 
     final bySignature = <String, List<String>>{};
