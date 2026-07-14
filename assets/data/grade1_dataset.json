@@ -1,0 +1,1642 @@
+﻿{
+    "datasetName":  "Tudlo Updated Lesson Game Dataset",
+    "version":  "updated_scrollable_grade_based_v1",
+    "source":  "lesson dataset (raw).pdf",
+    "notes":  [
+                  "Converted from the uploaded lesson dataset and updated to the revised Tudlo system.",
+                  "Grade 1 and Grade 2 use Lesson â†’ Example â†’ Short Quiz.",
+                  "Grade 3 uses Story â†’ Lesson â†’ Example â†’ Short Quiz.",
+                  "Evaluation/pre-test, pet/Koka system, energy, typed translation in lesson game, and Next/Continue buttons are not used.",
+                  "Old text labels were replaced with the updated Hiligaynon terms requested by the user."
+              ],
+    "globalUiRules":  {
+                          "scrollableLevels":  true,
+                          "allTappable":  true,
+                          "noNextButton":  true,
+                          "noContinueButton":  true,
+                          "checkButtonPerQuiz":  true,
+                          "largeButtonsAndText":  true,
+                          "brightColorsNoMutedColors":  true,
+                          "voiceMessages":  true,
+                          "noTypedTranslationInLessonGame":  true
+                      },
+    "textReplacementsApplied":  {
+                                    "usernamePrompt":  "Ano ang imo ngalan?",
+                                    "vocabularySection":  "Gamita Ini",
+                                    "thinkingSection":  "Tanda-i Ini",
+                                    "correctLabel":  "Husto",
+                                    "arrangePrompt":  "Ano ini sa Hiligaynon",
+                                    "wordLabel":  "Tinaga",
+                                    "choicePrompt":  "Pili-a ang husto nga sabat",
+                                    "leavePrompt":  "Mahalin ka na?",
+                                    "quizSection":  "Pagtilaw",
+                                    "wordOfTheDay":  "Tinaga subong nga adlaw"
+                                },
+    "grades":  [
+                   {
+                       "gradeLevel":  1,
+                       "flow":  [
+                                    "lesson",
+                                    "example",
+                                    "shortQuiz"
+                                ],
+                       "description":  "Basic letters, sounds, numbers, pictures, listening, tracing, matching, and simple tappable activities.",
+                       "units":  [
+                                     {
+                                         "unitNumber":  1,
+                                         "title":  "ALPHABETO KAG NUMERO",
+                                         "description":  "",
+                                         "assetList":  "Unit 1 asset list: letter cards Ã—20 (upper+lower), numeral cards 1â€“10, trace paths Ã—30, anchor images ",
+                                         "lessons":  [
+                                                         {
+                                                             "id":  "g1_u1_l1",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  1,
+                                                             "lessonNumber":  1,
+                                                             "title":  "Letters A, N, T, Y",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "New: /a/ /n/ /t/ /y/ Â· Anchors: nanay, tatay\n\nPresentation (big letter + anchor image, letter pulses inside the word; Tudlo Guide wing-traces each shape):\n- A: â€œ/a/â€¦ A! May A sa nanay!â€ - N: â€œ/n/â€¦ N! Nanay!â€ (image: mother) - T: â€œ/t/â€¦ T! Tatay!â€ (image:\nfather) - Y: â€œ/y/â€¦ Y! Nanay! Tatay!â€",
+                                                             "examples":  [
+                                                                              {
+                                                                                  "hiligaynon":  "- A: â€œ/a/â€¦ A! May A sa nanay!â€ - N: â€œ/n/â€¦ N! Nanay!â€ (image: mother) - T: â€œ/t/â€¦ T! Tatay!â€ (image:",
+                                                                                  "english":  null,
+                                                                                  "imageAsset":  null,
+                                                                                  "audioAsset":  null
+                                                                              }
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Hear /a/",
+                                                                                   "choices":  [
+                                                                                                   "tap A",
+                                                                                                   "T"
+                                                                                               ],
+                                                                                   "answer":  "tap A",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Hear /a/ â†’ tap A (vs T) - sound plays twice"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q2",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Hear /n/",
+                                                                                   "choices":  [
+                                                                                                   "tap N",
+                                                                                                   "A"
+                                                                                               ],
+                                                                                   "answer":  "tap N",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Hear /n/ â†’ tap N (vs A) - sound plays twice"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q3",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Hear /t/",
+                                                                                   "choices":  [
+                                                                                                   "tap T",
+                                                                                                   "N",
+                                                                                                   "Y"
+                                                                                               ],
+                                                                                   "answer":  "tap T",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Hear /t/ â†’ tap T (vs N, Y)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q4",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Hear /y/",
+                                                                                   "choices":  [
+                                                                                                   "tap Y",
+                                                                                                   "A",
+                                                                                                   "T"
+                                                                                               ],
+                                                                                   "answer":  "tap Y",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Hear /y/ â†’ tap Y (vs A, T)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q5",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Diin ang letra sang nanay?",
+                                                                                   "choices":  [
+                                                                                                   "N",
+                                                                                                   "T",
+                                                                                                   "Y"
+                                                                                               ],
+                                                                                   "answer":  "N",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "â€œDiin ang letra sang nanay?â€ â†’ N (vs T, Y)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q6",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Diin ang letra sang tatay?",
+                                                                                   "choices":  [
+                                                                                                   "T",
+                                                                                                   "N",
+                                                                                                   "A"
+                                                                                               ],
+                                                                                   "answer":  "T",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "â€œDiin ang letra sang tatay?â€ â†’ T (vs N, A)"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "new":  "New: /a/ /n/ /t/ /y/ Â· Anchors: nanay, tatay",
+                                                                                    "warm-up":  "Warm-up: First lesson - mascot intro instead. Tudlo Guide waves: â€œKamusta! Ako si Tudlo Guide! Magtuon\nkita sang English! Tap-tapa ako!â€ (child taps Tudlo Guide - teaches the gesture).",
+                                                                                    "presentation":  "Presentation (big letter + anchor image, letter pulses inside the word; Tudlo Guide wing-traces each shape):\n- A: â€œ/a/â€¦ A! May A sa nanay!â€ - N: â€œ/n/â€¦ N! Nanay!â€ (image: mother) - T: â€œ/t/â€¦ T! Tatay!â€ (image:\nfather) - Y: â€œ/y/â€¦ Y! Nanay! Tatay!â€",
+                                                                                    "receptive_trials":  "Receptive trials (6):\n1. Hear /a/ â†’ tap A (vs T) - sound plays twice\n2. Hear /n/ â†’ tap N (vs A) - sound plays twice\n3. Hear /t/ â†’ tap T (vs N, Y)\n4. Hear /y/ â†’ tap Y (vs A, T)\n5. â€œDiin ang letra sang nanay?â€ â†’ N (vs T, Y)\n6. â€œDiin ang letra sang tatay?â€ â†’ T (vs N, A)",
+                                                                                    "productive":  "Productive: finger-trace A N T Y on dotted guides (wide tolerance, Tudlo Guide claps each) Â· voice repeat\n(unscored): â€œSunda si Tudlo Guide: /a/!â€ â†’ record â†’ playback â†’ clap.",
+                                                                                    "consolidation":  "Consolidation - â€œNadula ang mga letra ni Tudlo Guide!â€: 4 letters hidden on floating leaves; hear the sound,\ntap the letter. Wrong = leaf wiggles + replay. Ends with all 4 in Tudlo Guideâ€™s nest.",
+                                                                                    "reward":  "Reward: sticker â€œLetter Nest 1â€ Â· Teaser: a dog - â€œSunod: I, D, O!â€"
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u1_l2",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  1,
+                                                             "lessonNumber":  2,
+                                                             "title":  "Letters I, D, O",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "New: /i/ /d/ /o/ Â· Anchor: ido (dog)\n\nPresentation: a friendly dog appears. \"Ini si Bantay â€” ang ido!\"\nI: \"/i/... I! Ido!\"\nD: \"/d/... D! Ido!\"\nO: \"/o/... O! Ido!\" (Payoff moment: \"I... D... O... IDO! Nabasa mo ang imo una nga tinaga!\" â€” the\nchild\u0027s first read word.)",
+                                                             "examples":  [
+                                                                              {
+                                                                                  "hiligaynon":  "New: /i/ /d/ /o/ Â· Anchor: ido (dog)",
+                                                                                  "english":  null,
+                                                                                  "imageAsset":  null,
+                                                                                  "audioAsset":  null
+                                                                              }
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Consolidation â€” \"Ginlubong ni Bantay ang mga letra!\": garden with 4 soil mounds; hear a sound,\ntap the right mound, letter pops out, Bantay barks happily. 3 letters + 1 review (/n/).",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Consolidation â€” \"Ginlubong ni Bantay ang mga letra!\": garden with 4 soil mounds; hear a sound,\ntap the right mound, letter pops out, Bantay barks happily. 3 letters + 1 review (/n/)."
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "new":  "New: /i/ /d/ /o/ Â· Anchor: ido (dog)",
+                                                                                    "warm-up":  "Warm-up: hear /n/ â†’ tap N (vs T) Â· hear /a/ â†’ tap A (vs Y).",
+                                                                                    "presentation":  "Presentation: a friendly dog appears. \"Ini si Bantay â€” ang ido!\"\nI: \"/i/... I! Ido!\"\nD: \"/d/... D! Ido!\"\nO: \"/o/... O! Ido!\" (Payoff moment: \"I... D... O... IDO! Nabasa mo ang imo una nga tinaga!\" â€” the\nchild\u0027s first read word.)",
+                                                                                    "receptive_trials":  "Receptive trials (6): /i/â†’I (vs O) Ã—2 scaffolded; /d/â†’D (vs I, O); /o/â†’O (vs D, A); \"Diin ang una nga\nletra sang ido?\" â†’ I; \"Diin ang katapusan?\" â†’ O.",
+                                                                                    "productive":  "Productive: trace I D O Â· voice repeat 3 sounds, then whole word: \"I-D-O... ido... dog!\"",
+                                                                                    "consolidation":  "Consolidation â€” \"Ginlubong ni Bantay ang mga letra!\": garden with 4 soil mounds; hear a sound,\ntap the right mound, letter pops out, Bantay barks happily. 3 letters + 1 review (/n/).",
+                                                                                    "reward":  "Reward: sticker \"Letter Nest 2\" Â· Teaser: chicken â€” \"Sunod: M, K, U!\""
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u1_l3",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  1,
+                                                             "lessonNumber":  3,
+                                                             "title":  "Letters M, K, U",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "New: /m/ /k/ /u/ Â· Anchors: manok (chicken), kuring (cat)\n\nPresentation:\nM: \"/m/... M! Manok!\" (chicken clucks)\nK: \"/k/... K! Kuring!\" (cat meows)\nU: \"/u/... U! Kuring... manuk? Indi â€” manok! Pero may U sa kuring!\"",
+                                                             "examples":  [
+                                                                              {
+                                                                                  "hiligaynon":  "New: /m/ /k/ /u/ Â· Anchors: manok (chicken), kuring (cat)",
+                                                                                  "english":  null,
+                                                                                  "imageAsset":  null,
+                                                                                  "audioAsset":  null
+                                                                              }
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Consolidation â€” \"Pakan-a ang manok!\": hungry chicken; letter-grains scatter; hear the sound, drag\nthe right grain to the chicken (wrong grain = chicken shakes head + replay). 3 + 1 review (/o/).",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Consolidation â€” \"Pakan-a ang manok!\": hungry chicken; letter-grains scatter; hear the sound, drag\nthe right grain to the chicken (wrong grain = chicken shakes head + replay). 3 + 1 review (/o/)."
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "new":  "New: /m/ /k/ /u/ Â· Anchors: manok (chicken), kuring (cat)",
+                                                                                    "warm-up":  "Warm-up: /d/â†’D (vs O) Â· /i/â†’I (vs A).",
+                                                                                    "presentation":  "Presentation:\nM: \"/m/... M! Manok!\" (chicken clucks)\nK: \"/k/... K! Kuring!\" (cat meows)\nU: \"/u/... U! Kuring... manuk? Indi â€” manok! Pero may U sa kuring!\"",
+                                                                                    "receptive_trials":  "Receptive trials (6): /m/â†’M (vs K) Ã—2; /k/â†’K (vs M, U); /u/â†’U (vs O, M) â€” note: U vs O is THE\nconfusable pair, give it 2 trials; \"Letra sang manok?\" â†’ M; \"Letra sang kuring?\" â†’ K.",
+                                                                                    "productive":  "Productive: trace M K U Â· voice repeat; bonus play: \"Maghimo tingog sang manok!\" (cluck along â€”\npure fun, mic normalization).",
+                                                                                    "consolidation":  "Consolidation â€” \"Pakan-a ang manok!\": hungry chicken; letter-grains scatter; hear the sound, drag\nthe right grain to the chicken (wrong grain = chicken shakes head + replay). 3 + 1 review (/o/).",
+                                                                                    "reward":  "Reward: sticker \"Letter Nest 3\" Â· Teaser: a house â€” \"Sunod: B, L, S!\""
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u1_l4",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  1,
+                                                             "lessonNumber":  4,
+                                                             "title":  "Letters B, L, S",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "New: /b/ /l/ /s/ Â· Anchors: balay (house), lola (grandmother), isda (fish)\n\nPresentation: - B: â€œ/b/â€¦ B! Balay!â€ (house) - L: â€œ/l/â€¦ L! Lola!â€ (grandmother waves) - S: â€œ/s/â€¦ S!\nIsda!â€ (fish splashes)",
+                                                             "examples":  [
+                                                                              {
+                                                                                  "hiligaynon":  "New: /b/ /l/ /s/ Â· Anchors: balay (house), lola (grandmother), isda (fish)",
+                                                                                  "english":  null,
+                                                                                  "imageAsset":  null,
+                                                                                  "audioAsset":  null
+                                                                              }
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Consolidation - â€œIbalik ang sign sang balay!â€: the houseâ€™s door sign lost its letters; hear each sound,\ntap the letter tile and it flies onto the sign. 3 + 1 review (/k/).",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Consolidation - â€œIbalik ang sign sang balay!â€: the houseâ€™s door sign lost its letters; hear each sound,\ntap the letter tile and it flies onto the sign. 3 + 1 review (/k/)."
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "new":  "New: /b/ /l/ /s/ Â· Anchors: balay (house), lola (grandmother), isda (fish)",
+                                                                                    "warm-up":  "Warm-up: /m/â†’M (vs K) Â· /u/â†’U (vs O).",
+                                                                                    "presentation":  "Presentation: - B: â€œ/b/â€¦ B! Balay!â€ (house) - L: â€œ/l/â€¦ L! Lola!â€ (grandmother waves) - S: â€œ/s/â€¦ S!\nIsda!â€ (fish splashes)",
+                                                                                    "receptive_trials":  "Receptive trials (6): /b/â†’B (vs L) Ã—2; /l/â†’L (vs B, S); /s/â†’S (vs L, B); â€œLetra sang balay?â€ â†’ B; â€œLetra\nsang lola?â€ â†’ L.",
+                                                                                    "productive":  "Productive: trace B L S Â· voice repeat Â· quick game: â€œSâ€¦ sssssâ€¦ pareho sang tingog sang sapat nga\nman-og!â€ (snake hiss = /s/ mnemonic).",
+                                                                                    "consolidation":  "Consolidation - â€œIbalik ang sign sang balay!â€: the houseâ€™s door sign lost its letters; hear each sound,\ntap the letter tile and it flies onto the sign. 3 + 1 review (/k/).",
+                                                                                    "reward":  "Reward: sticker â€œLetter Nest 4â€ Â· Teaser: lolo with a school bag - â€œSunod: E, G, P!â€"
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u1_l5",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  1,
+                                                             "lessonNumber":  5,
+                                                             "title":  "Letters E, G, P",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "New: /e/ /g/ /p/ Â· Anchors: eskwelahan (school), lolo (grandfather), baboy (pig)\n\nPresentation:\nE: \"/e/... E! Eskwelahan!\" (school bell rings)\nG: \"/g/... G! Magulang... log... may G sa lolo? Wala! Pero may G sa magulang!\" â€” simpler: \"G! Gatas!\"\n(milk) â€” use gatas as the G anchor (cleaner)\nP: \"/p/... P! Pamilya! Baboy... pig!\"",
+                                                             "examples":  [
+                                                                              {
+                                                                                  "hiligaynon":  "New: /e/ /g/ /p/ Â· Anchors: eskwelahan (school), lolo (grandfather), baboy (pig)",
+                                                                                  "english":  null,
+                                                                                  "imageAsset":  null,
+                                                                                  "audioAsset":  null
+                                                                              }
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Consolidation - â€œIsulod sa bag!â€: school bag open; hear a sound, drag the letter into the bag; bag\nzips with a happy sound when full. 3 + 1 review (/l/).",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Consolidation - â€œIsulod sa bag!â€: school bag open; hear a sound, drag the letter into the bag; bag\nzips with a happy sound when full. 3 + 1 review (/l/)."
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "new":  "New: /e/ /g/ /p/ Â· Anchors: eskwelahan (school), lolo (grandfather), baboy (pig)",
+                                                                                    "warm-up":  "Warm-up: /b/â†’B (vs L) Â· /s/â†’S (vs B).",
+                                                                                    "presentation":  "Presentation:\nE: \"/e/... E! Eskwelahan!\" (school bell rings)\nG: \"/g/... G! Magulang... log... may G sa lolo? Wala! Pero may G sa magulang!\" â€” simpler: \"G! Gatas!\"\n(milk) â€” use gatas as the G anchor (cleaner)\nP: \"/p/... P! Pamilya! Baboy... pig!\"",
+                                                                                    "receptive_trials":  "Receptive trials (6): /e/â†’E (vs A) Ã—2 (E vs A is confusable for Hiligaynon speakers - 2 scaffolded\ntrials); /g/â†’G (vs P); /p/â†’P (vs B, G) - P vs B minimal pair, 2 trials; â€œLetra sang eskwelahan?â€ â†’ E.",
+                                                                                    "productive":  "Productive: trace E G P Â· voice repeat with minimal-pair play: â€œ/p/â€¦ /b/â€¦ lain sila! P! B!â€",
+                                                                                    "consolidation":  "Consolidation - â€œIsulod sa bag!â€: school bag open; hear a sound, drag the letter into the bag; bag\nzips with a happy sound when full. 3 + 1 review (/l/).",
+                                                                                    "reward":  "Reward: sticker â€œLetter Nest 5â€ Â· Teaser: doctor - â€œSunod: ang katapusan nga mga letra!â€"
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u1_l6",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  1,
+                                                             "lessonNumber":  6,
+                                                             "title":  "Letters R, H, W, C",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "New: /r/ /h/ /w/ /k/ (soft c as in â€œcatâ€ context) Â· Anchors: doktor, ospital, karbaw, cat\n\nPresentation: - R: â€œ/r/â€¦ R! Doktor!â€ - H: â€œ/h/â€¦ H! Hospital! (Sa Hiligaynon: ospital - sa English may\nH!)â€ - W: â€œ/w/â€¦ W! Karbaw!â€ - C: â€œCâ€¦ pareho ang tingog sa K kon kaisa: cat! /k/â€¦ cat!â€",
+                                                             "examples":  [
+                                                                              {
+                                                                                  "hiligaynon":  "New: /r/ /h/ /w/ /k/ (soft c as in â€œcatâ€ context) Â· Anchors: doktor, ospital, karbaw, cat",
+                                                                                  "english":  null,
+                                                                                  "imageAsset":  null,
+                                                                                  "audioAsset":  null
+                                                                              }
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Consolidation - â€œBulig sa karbaw!â€: the carabao carries 4 letter-baskets across the field; each basket\nmust go to the matching sound-post. Drag baskets. 4 items.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Consolidation - â€œBulig sa karbaw!â€: the carabao carries 4 letter-baskets across the field; each basket\nmust go to the matching sound-post. Drag baskets. 4 items."
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "new":  "New: /r/ /h/ /w/ /k/ (soft c as in â€œcatâ€ context) Â· Anchors: doktor, ospital, karbaw, cat",
+                                                                                    "warm-up":  "Warm-up: /p/â†’P (vs B) Â· /e/â†’E (vs A).",
+                                                                                    "presentation":  "Presentation: - R: â€œ/r/â€¦ R! Doktor!â€ - H: â€œ/h/â€¦ H! Hospital! (Sa Hiligaynon: ospital - sa English may\nH!)â€ - W: â€œ/w/â€¦ W! Karbaw!â€ - C: â€œCâ€¦ pareho ang tingog sa K kon kaisa: cat! /k/â€¦ cat!â€",
+                                                                                    "receptive_trials":  "Receptive trials (6): /r/â†’R (vs W); /h/â†’H (vs R); /w/â†’W (vs M - visual confusable, 2 trials); â€œC ukon\nK - ano ang una nga letra sang cat sa English?â€ â†’ C (vs K); â€œLetra sang doktor?â€ â†’ R.",
+                                                                                    "productive":  "Productive: trace R H W C Â· voice repeat.",
+                                                                                    "consolidation":  "Consolidation - â€œBulig sa karbaw!â€: the carabao carries 4 letter-baskets across the field; each basket\nmust go to the matching sound-post. Drag baskets. 4 items.",
+                                                                                    "reward":  "Reward: sticker â€œLetter Nest 6â€ Â· Teaser: fingers counting - â€œSunod: NUMERO!â€"
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u1_l7",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  1,
+                                                             "lessonNumber":  7,
+                                                             "title":  "Numbers 1â€“5 (one, two, three, four, five)",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "New: oneâ€“five (isa, duha, tatlo, apat, lima) - learned as a CHANT, then individually.\n\nPresentation: Tudlo Guide counts her feathers with fingers: â€œOne, two, three, four, five!â€ (numeral +\nfinger-count + objects appear per number; chant plays twice, second time child counts fingers along).\nThen each: â€œIsaâ€¦ one!â€ (numeral 1 + one mango) â€¦ through â€œLimaâ€¦ five!â€ (5 shells).",
+                                                             "examples":  [
+                                                                              {
+                                                                                  "hiligaynon":  "New: oneâ€“five (isa, duha, tatlo, apat, lima) - learned as a CHANT, then individually.",
+                                                                                  "english":  null,
+                                                                                  "imageAsset":  null,
+                                                                                  "audioAsset":  null
+                                                                              }
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Hear â€œthree",
+                                                                                   "choices":  [
+                                                                                                   "tap numeral 3",
+                                                                                                   "1",
+                                                                                                   "5"
+                                                                                               ],
+                                                                                   "answer":  "tap numeral 3",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Hear â€œthreeâ€ â†’ tap numeral 3 (vs 1, 5)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q2",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Hear â€œtwo",
+                                                                                   "choices":  [
+                                                                                                   "tap 2",
+                                                                                                   "4"
+                                                                                               ],
+                                                                                   "answer":  "tap 2",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Hear â€œtwoâ€ â†’ tap 2 (vs 4)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q3",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Hear â€œfour",
+                                                                                   "choices":  [
+                                                                                                   "tap the plate with 4 mangoes"
+                                                                                               ],
+                                                                                   "answer":  "tap the plate with 4 mangoes",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Hear â€œfourâ€ â†’ tap the plate with 4 mangoes (counting, vs 3, 5)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q4",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Hear â€œfive",
+                                                                                   "choices":  [
+                                                                                                   "tap 5 fingers",
+                                                                                                   "4",
+                                                                                                   "2"
+                                                                                               ],
+                                                                                   "answer":  "tap 5 fingers",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Hear â€œfiveâ€ â†’ tap 5 fingers (vs 4, 2)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q5",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Pila ang ido?â€ (3 dogs shown)",
+                                                                                   "choices":  [
+                                                                                                   "tap 3"
+                                                                                               ],
+                                                                                   "answer":  "tap 3",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "â€œPila ang ido?â€ (3 dogs shown) â†’ tap 3"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q6",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Pila ang isda?â€ (5 fish)",
+                                                                                   "choices":  [
+                                                                                                   "tap 5"
+                                                                                               ],
+                                                                                   "answer":  "tap 5",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "â€œPila ang isda?â€ (5 fish) â†’ tap 5"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "new":  "New: oneâ€“five (isa, duha, tatlo, apat, lima) - learned as a CHANT, then individually.",
+                                                                                    "warm-up":  "Warm-up: 2 letter trials (schedulerâ€™s weakest).",
+                                                                                    "presentation":  "Presentation: Tudlo Guide counts her feathers with fingers: â€œOne, two, three, four, five!â€ (numeral +\nfinger-count + objects appear per number; chant plays twice, second time child counts fingers along).\nThen each: â€œIsaâ€¦ one!â€ (numeral 1 + one mango) â€¦ through â€œLimaâ€¦ five!â€ (5 shells).",
+                                                                                    "receptive_trials":  "Receptive trials (6):\n1. Hear â€œthreeâ€ â†’ tap numeral 3 (vs 1, 5)\n2. Hear â€œtwoâ€ â†’ tap 2 (vs 4)\n3. Hear â€œfourâ€ â†’ tap the plate with 4 mangoes (counting, vs 3, 5)\n4. Hear â€œfiveâ€ â†’ tap 5 fingers (vs 4, 2)\n5. â€œPila ang ido?â€ (3 dogs shown) â†’ tap 3\n6. â€œPila ang isda?â€ (5 fish) â†’ tap 5",
+                                                                                    "productive":  "Productive: count-and-drag: â€œIbutang ang two ka isda sa basket!â€ (basket counts aloud: â€œoneâ€¦\ntwo!â€) Ã—3 rounds Â· voice repeat: count 1â€“5 with Tudlo Guide.",
+                                                                                    "consolidation":  "Consolidation - â€œBaligya sa tinda!â€: vendor asks quantities: â€œPalihog, three saging!â€ â†’ drag exactly 3\n(wrong count = vendor recounts aloud kindly + retry). 3 items + 1 letter warm-in.",
+                                                                                    "reward":  "Reward: sticker â€œNumero 1â€ Â· Teaser: two open hands."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u1_l8",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  1,
+                                                             "lessonNumber":  8,
+                                                             "title":  "Numbers 6â€“10 (six, seven, eight, nine, ten)",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "Presentation: chant extends with a big finish: â€œone two three four fiveâ€¦ six, seven, eight, nine,\nTEN!â€ (both hands up). Individually: 6 eggs (anum), 7 stars (pito), 8 shells (walo), 9 flowers (siyam),\n10 fingers (napulo).",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Consolidation - â€œPanagoay!â€: Tudlo Guide counts to ten before seeking; numerals 1â€“10 appear as stepping\nstones - child taps each in order as the chant plays (missed one gently pulses). Then 2 questions: â€œPila\nang bata nga nagpanago?â€ (6 kids peeking) â†’ 6; â€œPila ang nakita ni Tudlo Guide?â€ (4) â†’ 4.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Consolidation - â€œPanagoay!â€: Tudlo Guide counts to ten before seeking; numerals 1â€“10 appear as stepping\nstones - child taps each in order as the chant plays (missed one gently pulses). Then 2 questions: â€œPila\nang bata nga nagpanago?â€ (6 kids peeking) â†’ 6; â€œPila ang nakita ni Tudlo Guide?â€ (4) â†’ 4."
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "warm-up":  "Warm-up: tap numeral 2 Â· tap numeral 4 (vs neighbors).",
+                                                                                    "presentation":  "Presentation: chant extends with a big finish: â€œone two three four fiveâ€¦ six, seven, eight, nine,\nTEN!â€ (both hands up). Individually: 6 eggs (anum), 7 stars (pito), 8 shells (walo), 9 flowers (siyam),\n10 fingers (napulo).",
+                                                                                    "receptive_trials":  "Receptive trials (6): numeral taps 6 (vs 9 - mirror confusable, 2 trials), 7 (vs 1), 10 (vs 1+0 separate);\ncounting trials for 7 and 8 with objects in two rows (subitizing support: row of 5 + extras).",
+                                                                                    "productive":  "Productive: count-and-drag: â€œSeven ka sigay sa timba!â€ Ã—2 Â· voice repeat full 1â€“10 chant.",
+                                                                                    "consolidation":  "Consolidation - â€œPanagoay!â€: Tudlo Guide counts to ten before seeking; numerals 1â€“10 appear as stepping\nstones - child taps each in order as the chant plays (missed one gently pulses). Then 2 questions: â€œPila\nang bata nga nagpanago?â€ (6 kids peeking) â†’ 6; â€œPila ang nakita ni Tudlo Guide?â€ (4) â†’ 4.",
+                                                                                    "reward":  "Reward: sticker â€œNumero 2â€ Â· Teaser: fiesta lanterns."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u1_l9",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  1,
+                                                             "lessonNumber":  9,
+                                                             "title":  "UNIT 1 REVIEW: â€œLetra kag Numero Fiesta!â€ (zero",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "new)",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Complete the activity for this lesson.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "new)\nContent: 8 fast trials mixing letter-sound taps, numeral taps, and counting taps (drawn from the\nchildâ€™s logged weakest items) + 3 finger-traces of the weakest symbols. Every correct answer adds a\nlantern to the fiesta scene.\nReward: UNIT BADGE â€œAlphabeto kag Numeroâ€ + the SCHOOL unlocks on the barangay map.\nUNIT 2 - MIYEMBRO SANG PAMILYA\nUNIT 2 - MIYEMBRO SANG PAMILYA (4 lessons)\nUnit 2 asset list: 7 family character images (consistent style, strong lola/lolo and size contrasts),\nhouse sce"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "overview":  "new)",
+                                                                                    "content":  "Content: 8 fast trials mixing letter-sound taps, numeral taps, and counting taps (drawn from the\nchildâ€™s logged weakest items) + 3 finger-traces of the weakest symbols. Every correct answer adds a\nlantern to the fiesta scene.",
+                                                                                    "reward":  "Reward: UNIT BADGE â€œAlphabeto kag Numeroâ€ + the SCHOOL unlocks on the barangay map.\nUNIT 2 - MIYEMBRO SANG PAMILYA\nUNIT 2 - MIYEMBRO SANG PAMILYA (4 lessons)\nUnit 2 asset list: 7 family character images (consistent style, strong lola/lolo and size contrasts),\nhouse scene with 3 windows, door scene, photo-frame scene, full-house placement scene, HIL+ENG\naudio per word, instruction audio set."
+                                                                                }
+                                                         }
+                                                     ]
+                                     },
+                                     {
+                                         "unitNumber":  2,
+                                         "title":  "MIYEMBRO SANG PAMILYA",
+                                         "description":  "",
+                                         "assetList":  "Unit 2 asset list: 7 family character images (consistent style, strong lola/lolo and size contrasts), ",
+                                         "lessons":  [
+                                                         {
+                                                             "id":  "g1_u2_l1",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  2,
+                                                             "lessonNumber":  1,
+                                                             "title":  "nanay, tatay, bata (mother, father, child)",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "Presentation (image + HIL audio + ENG audio + small written word; Tudlo Guide hugs each):\n1. â€œNanay. Sa Englishâ€¦ mother. Mother.â€ (N pulses in the word - Alphabeto callback)\n2. â€œTatay. Sa Englishâ€¦ father. Father.â€\n3. â€œBata. Sa Englishâ€¦ child. Child.â€",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Tap mother!â€¦ ang nanay!",
+                                                                                   "choices":  [
+                                                                                                   "2 choices"
+                                                                                               ],
+                                                                                   "answer":  "2 choices",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "â€œTap mother!â€¦ ang nanay!â€ â†’ 2 choices (mother/father) - with Hiligaynon scaffold"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q2",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Tap father!â€¦ ang tatay!",
+                                                                                   "choices":  [
+                                                                                                   "2 choices"
+                                                                                               ],
+                                                                                   "answer":  "2 choices",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "â€œTap father!â€¦ ang tatay!â€ â†’ 2 choices - scaffolded"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q3",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Tap child!â€¦ ang bata!",
+                                                                                   "choices":  [
+                                                                                                   "2 choices"
+                                                                                               ],
+                                                                                   "answer":  "2 choices",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "â€œTap child!â€¦ ang bata!â€ â†’ 2 choices - scaffolded"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q4",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Tap mother!",
+                                                                                   "choices":  [
+                                                                                                   "3 choices"
+                                                                                               ],
+                                                                                   "answer":  "3 choices",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "â€œTap mother!â€ â†’ 3 choices - no scaffold"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q5",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Tap child!",
+                                                                                   "choices":  [
+                                                                                                   "3 choices"
+                                                                                               ],
+                                                                                   "answer":  "3 choices",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "â€œTap child!â€ â†’ 3 choices - no scaffold"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q6",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Tap father!",
+                                                                                   "choices":  [
+                                                                                                   "3 choices"
+                                                                                               ],
+                                                                                   "answer":  "3 choices",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "â€œTap father!â€ â†’ 3 choices - no scaffold"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "warm-up":  "Warm-up: hear /n/ â†’ tap N (vs T) Â· hear /t/ â†’ tap T (vs N). Tudlo Guide: â€œKabalo ka na sang N kag Tâ€¦\nkaron, kilalahon ta ang pamilya!â€",
+                                                                                    "presentation":  "Presentation (image + HIL audio + ENG audio + small written word; Tudlo Guide hugs each):\n1. â€œNanay. Sa Englishâ€¦ mother. Mother.â€ (N pulses in the word - Alphabeto callback)\n2. â€œTatay. Sa Englishâ€¦ father. Father.â€\n3. â€œBata. Sa Englishâ€¦ child. Child.â€",
+                                                                                    "receptive_trials":  "Receptive trials (6):\n1. â€œTap mother!â€¦ ang nanay!â€ â†’ 2 choices (mother/father) - with Hiligaynon scaffold\n2. â€œTap father!â€¦ ang tatay!â€ â†’ 2 choices - scaffolded\n3. â€œTap child!â€¦ ang bata!â€ â†’ 2 choices - scaffolded\n4. â€œTap mother!â€ â†’ 3 choices - no scaffold\n5. â€œTap child!â€ â†’ 3 choices - no scaffold\n6. â€œTap father!â€ â†’ 3 choices - no scaffold",
+                                                                                    "productive":  "Productive: drag audio-buttons (speaker icons saying mother/father/child) onto the 3 pictures Â· voice\nrepeat Ã—3 (unscored, Tudlo Guide claps).",
+                                                                                    "consolidation":  "Consolidation - â€œBuligi si Tudlo Guide makita ang iya pamilya sa balay!â€: house with 3 windows. â€œDiin si\nmother?â€ â†’ tap the right window (wrong = curtain wiggles + replay). All 3 found â†’ family hug\nanimation. +1 warm-in: â€œTap the letter of nanay!â€ â†’ N.",
+                                                                                    "reward":  "Reward: sticker â€œPamilya 1â€ Â· Teaser: lola waving."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u2_l2",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  2,
+                                                             "lessonNumber":  2,
+                                                             "title":  "lola, lolo (grandmother, grandfather)",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "Presentation (strong visual contrast: lola = bun + baston; lolo = hat + glasses):\n1. â€œLola. Sa Englishâ€¦ grandmother. Grand-mo-THER.â€\n2. â€œLolo. Sa Englishâ€¦ grandfather. Grand-fa-THER.â€ (Audio exaggerates the differing syllable.)",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Consolidation - â€œMay bisita sa balay ni Tudlo Guide!â€: grandparents at the door. â€œKilala mo si grandmother?\nTap-tapa siya!â€ â†’ tap the right visitor. 3 items (grandmother, grandfather, review: mother).",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Consolidation - â€œMay bisita sa balay ni Tudlo Guide!â€: grandparents at the door. â€œKilala mo si grandmother?\nTap-tapa siya!â€ â†’ tap the right visitor. 3 items (grandmother, grandfather, review: mother)."
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "warm-up":  "Warm-up: tap mother (vs child) Â· tap father (vs mother) + any lesson-2.1 first-attempt misses.",
+                                                                                    "presentation":  "Presentation (strong visual contrast: lola = bun + baston; lolo = hat + glasses):\n1. â€œLola. Sa Englishâ€¦ grandmother. Grand-mo-THER.â€\n2. â€œLolo. Sa Englishâ€¦ grandfather. Grand-fa-THER.â€ (Audio exaggerates the differing syllable.)",
+                                                                                    "receptive_trials":  "Receptive trials (6): 4 direct lola-vs-lolo contrasts (2 choices): â€œTap grandmother!â€ Ã—2, â€œTap\ngrandfather!â€ Ã—2 Â· 2 mixed 3-choice trials with mother/child in the mix.",
+                                                                                    "productive":  "Productive: drag-match 3 pairs (grandmother, grandfather + review: mother) Â· voice repeat both,\nslow syllables: â€œgrand-mo-ther!â€",
+                                                                                    "consolidation":  "Consolidation - â€œMay bisita sa balay ni Tudlo Guide!â€: grandparents at the door. â€œKilala mo si grandmother?\nTap-tapa siya!â€ â†’ tap the right visitor. 3 items (grandmother, grandfather, review: mother).",
+                                                                                    "reward":  "Reward: sticker â€œPamilya 2â€ Â· Teaser: two kids, one tall one small."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u2_l3",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  2,
+                                                             "lessonNumber":  3,
+                                                             "title":  "magulang, manghod (older sibling, younger",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "sibling)\n\nPresentation (SIZE is the cue: magulang = taller kid; manghod = smaller kid with toy):\n1. â€œMagulang. Sa Englishâ€¦ older sibling! Big brother! Big sister!â€\n2. â€œManghod. Sa Englishâ€¦ younger sibling! Little brother! Little sister!â€ (Teach â€œbig/little\nbrother/sisterâ€ as spoken chunks - no grammar.)",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Consolidation - â€œPhoto sang pamilya!â€: empty photo frame; audio calls each member: â€œIbutang si\nolder sibling sa wala!â€ â†’ drag them in. 4 items (2 new + grandmother + father). Finished photo\nflashes with a camera click.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Consolidation - â€œPhoto sang pamilya!â€: empty photo frame; audio calls each member: â€œIbutang si\nolder sibling sa wala!â€ â†’ drag them in. 4 items (2 new + grandmother + father). Finished photo\nflashes with a camera click."
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "overview":  "sibling)",
+                                                                                    "warm-up":  "Warm-up: grandmother vs grandfather (the confusable pair) + 1 scheduler item.",
+                                                                                    "presentation":  "Presentation (SIZE is the cue: magulang = taller kid; manghod = smaller kid with toy):\n1. â€œMagulang. Sa Englishâ€¦ older sibling! Big brother! Big sister!â€\n2. â€œManghod. Sa Englishâ€¦ younger sibling! Little brother! Little sister!â€ (Teach â€œbig/little\nbrother/sisterâ€ as spoken chunks - no grammar.)",
+                                                                                    "receptive_trials":  "Receptive trials (6): 3 size-contrast trials (2 choices): â€œTap the older sibling!â€ etc. Â· 3 mixed trials (3\nchoices) drawing from all 7 family words.",
+                                                                                    "productive":  "Productive: drag-match 4 pairs (2 new + grandmother + father) Â· voice repeat: â€œbig sister!â€¦ little\nbrother!â€",
+                                                                                    "consolidation":  "Consolidation - â€œPhoto sang pamilya!â€: empty photo frame; audio calls each member: â€œIbutang si\nolder sibling sa wala!â€ â†’ drag them in. 4 items (2 new + grandmother + father). Finished photo\nflashes with a camera click.",
+                                                                                    "reward":  "Reward: sticker â€œPamilya 3â€ Â· Teaser: fiesta."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u2_l4",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  2,
+                                                             "lessonNumber":  4,
+                                                             "title":  "UNIT REVIEW: â€œKompleto ang pamilya ni Tudlo Guide!â€",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "(zero new)",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Complete the activity for this lesson.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "(zero new)\nContent: 10 fast tap trials, all 7 words, 3 choices, no scaffold (scheduler weights the weakest) + big\nconsolidation: full house scene - place all 7 family members as each is called in English.\nRetry-until-correct.\nReward: UNIT BADGE â€œPamilyaâ€ + the HOUSE unlocks on the barangay map (the childâ€™s home base).\nUNIT 3 - MGA COMMUNITY\nHELPERS\nUNIT 3 - MGA COMMUNITY HELPERS (4\nlessons)\nHelpers are identified by TOOL/PLACE cues (what they hold, where they work) - how 6â€“7-year-olds\nactually r"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "overview":  "(zero new)",
+                                                                                    "content":  "Content: 10 fast tap trials, all 7 words, 3 choices, no scaffold (scheduler weights the weakest) + big\nconsolidation: full house scene - place all 7 family members as each is called in English.\nRetry-until-correct.",
+                                                                                    "reward":  "Reward: UNIT BADGE â€œPamilyaâ€ + the HOUSE unlocks on the barangay map (the childâ€™s home base).\nUNIT 3 - MGA COMMUNITY\nHELPERS\nUNIT 3 - MGA COMMUNITY HELPERS (4\nlessons)\nHelpers are identified by TOOL/PLACE cues (what they hold, where they work) - how 6â€“7-year-olds\nactually recognize roles.\nUnit 3 asset list: 8 helper characters + their props (chalkboard, stethoscope, thermometer,\nbadge/whistle, helmet/hose, stall, rice field, boat/net), fire scene (mild), parade scene, meal-chain\nscene, HIL+ENG audio per word + chunk audio for â€œpolice officerâ€."
+                                                                                }
+                                                         }
+                                                     ]
+                                     },
+                                     {
+                                         "unitNumber":  3,
+                                         "title":  "MGA COMMUNITY",
+                                         "description":  "",
+                                         "assetList":  "Unit 3 asset list: 8 helper characters + their props (chalkboard, stethoscope, thermometer, ",
+                                         "lessons":  [
+                                                         {
+                                                             "id":  "g1_u3_l1",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  3,
+                                                             "lessonNumber":  1,
+                                                             "title":  "teacher, doctor, nurse",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "Presentation:\n1. Teacher at chalkboard, Tudlo Guide sits like a student: â€œManunudlo. Sa Englishâ€¦ teacher. Teacher.â€\n2. Doctor with stethoscope: â€œDoktorâ€¦ doctor! Pareho gid ang tunog!â€ (cognate = confidence)\n3. Nurse with thermometer: â€œNarsâ€¦ nurse! Pareho man!â€",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "â€œTap the doctor!â€ (vs nurse, teacher)",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "â€œTap the doctor!â€ (vs nurse, teacher)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q2",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "â€œTap the nurse!â€ (vs doctor, teacher)",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "â€œTap the nurse!â€ (vs doctor, teacher)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q3",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "PROP TRIAL: stethoscope shown - â€œSin-o ang nagagamit sini?",
+                                                                                   "choices":  [
+                                                                                                   "doctor"
+                                                                                               ],
+                                                                                   "answer":  "doctor",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "PROP TRIAL: stethoscope shown - â€œSin-o ang nagagamit sini?â€ â†’ doctor"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q4",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "PROP TRIAL: chalkboard -",
+                                                                                   "choices":  [
+                                                                                                   "teacher"
+                                                                                               ],
+                                                                                   "answer":  "teacher",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "PROP TRIAL: chalkboard - â†’ teacher"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "warm-up":  "Warm-up: 2 scheduler items from Unit 2 (e.g., tap grandmother; tap child).",
+                                                                                    "presentation":  "Presentation:\n1. Teacher at chalkboard, Tudlo Guide sits like a student: â€œManunudlo. Sa Englishâ€¦ teacher. Teacher.â€\n2. Doctor with stethoscope: â€œDoktorâ€¦ doctor! Pareho gid ang tunog!â€ (cognate = confidence)\n3. Nurse with thermometer: â€œNarsâ€¦ nurse! Pareho man!â€",
+                                                                                    "receptive_trials":  "Receptive trials (6):\n1â€“2. â€œTap the teacher!â€ (vs doctor) scaffolded Ã—2 word rotation\n3. â€œTap the doctor!â€ (vs nurse, teacher)\n4. â€œTap the nurse!â€ (vs doctor, teacher)\n5. PROP TRIAL: stethoscope shown - â€œSin-o ang nagagamit sini?â€ â†’ doctor\n6. PROP TRIAL: chalkboard - â†’ teacher",
+                                                                                    "productive":  "Productive: tool-to-helper drag (chalkboardâ†’teacher, stethoscopeâ†’doctor, thermometerâ†’nurse),\nthen audio-button-to-helper drag Â· voice repeat Ã—3.",
+                                                                                    "consolidation":  "Consolidation - â€œNagmasakit ang manghod ni Tudlo Guide!â€: mini-story: tap younger sibling (review, story\nopener) â†’ tap doctor to check her â†’ tap nurse for medicine â†’ back at school tap teacher who\nwelcomes her. 4 taps, retry with kind head-shake.",
+                                                                                    "reward":  "Reward: sticker â€œHelper 1â€ Â· Teaser: firefighter helmet."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u3_l2",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  3,
+                                                             "lessonNumber":  2,
+                                                             "title":  "police officer, firefighter, vendor",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "Presentation:\n1. â€œPulis. Sa Englishâ€¦ police officer.â€ (2-word chunk = ONE unit of sound: â€œpo-lice-of-fi-cerâ€)\n2. â€œBumberoâ€¦ firefighter!â€ (helmet + hose)\n3. â€œTinderaâ€¦ vendor!â€ (market stall with fruits)",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Consolidation - â€œMay kalayo sa tinda!â€: small cartoon fire (not scary): tap firefighter â†’ puts it out;\ntap police officer â†’ guides people; tap vendor â†’ reopens the stall, everyone cheers; tap teacher\n(review) â†’ brings the class to say salamat. 4 taps.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Consolidation - â€œMay kalayo sa tinda!â€: small cartoon fire (not scary): tap firefighter â†’ puts it out;\ntap police officer â†’ guides people; tap vendor â†’ reopens the stall, everyone cheers; tap teacher\n(review) â†’ brings the class to say salamat. 4 taps."
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "warm-up":  "Warm-up: doctor vs nurse + 1 scheduler item.",
+                                                                                    "presentation":  "Presentation:\n1. â€œPulis. Sa Englishâ€¦ police officer.â€ (2-word chunk = ONE unit of sound: â€œpo-lice-of-fi-cerâ€)\n2. â€œBumberoâ€¦ firefighter!â€ (helmet + hose)\n3. â€œTinderaâ€¦ vendor!â€ (market stall with fruits)",
+                                                                                    "receptive_trials":  "Receptive trials (6): standard taps 2â†’3 choices for each Â· PROP TRIALS: helmet â†’ firefighter;\nwhistle/badge â†’ police officer.",
+                                                                                    "productive":  "Productive: tool drags (hoseâ†’firefighter, badgeâ†’police officer, saging bunchâ†’vendor) then audio\ndrags Â· voice repeat, â€œpolice officerâ€ modeled in two slow beats.",
+                                                                                    "consolidation":  "Consolidation - â€œMay kalayo sa tinda!â€: small cartoon fire (not scary): tap firefighter â†’ puts it out;\ntap police officer â†’ guides people; tap vendor â†’ reopens the stall, everyone cheers; tap teacher\n(review) â†’ brings the class to say salamat. 4 taps.",
+                                                                                    "reward":  "Reward: sticker â€œHelper 2â€ Â· Teaser: rice field."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u3_l3",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  3,
+                                                             "lessonNumber":  3,
+                                                             "title":  "farmer, fisherman",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "Presentation:\n1. â€œMangunguma. Sa Englishâ€¦ farmer.â€ (rice field, carabao beside - â€œAng farmer nagatanom sang\nhumay!â€)\n2. â€œMangingisdaâ€¦ fisherman.â€ (boat + net - â€œAng fisherman nagadakop sang isda!â€) (Both pre-load\nUnit 4 imagery: karbaw, isda.)",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Consolidation - â€œDiin naghalin ang pagkaon ni Tudlo Guide?â€: trace the meal: tap farmer (rice) â†’ tap\nfisherman (fish) â†’ tap vendor (sells them) â†’ tap mother (review - nanay cooks it, family eats). 4\ntaps.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Consolidation - â€œDiin naghalin ang pagkaon ni Tudlo Guide?â€: trace the meal: tap farmer (rice) â†’ tap\nfisherman (fish) â†’ tap vendor (sells them) â†’ tap mother (review - nanay cooks it, family eats). 4\ntaps."
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "warm-up":  "Warm-up: vendor vs police officer + 1 scheduler item.",
+                                                                                    "presentation":  "Presentation:\n1. â€œMangunguma. Sa Englishâ€¦ farmer.â€ (rice field, carabao beside - â€œAng farmer nagatanom sang\nhumay!â€)\n2. â€œMangingisdaâ€¦ fisherman.â€ (boat + net - â€œAng fisherman nagadakop sang isda!â€) (Both pre-load\nUnit 4 imagery: karbaw, isda.)",
+                                                                                    "receptive_trials":  "Receptive trials (6): 3 farmer/fisherman contrasts (2 choices) Â· 3 mixed 3-choice trials from all 8\nhelpers.",
+                                                                                    "productive":  "Productive: harvest drag (humayâ†’farmer, isdaâ†’fisherman, prutasâ†’vendor) Â· voice repeat.",
+                                                                                    "consolidation":  "Consolidation - â€œDiin naghalin ang pagkaon ni Tudlo Guide?â€: trace the meal: tap farmer (rice) â†’ tap\nfisherman (fish) â†’ tap vendor (sells them) â†’ tap mother (review - nanay cooks it, family eats). 4\ntaps.",
+                                                                                    "reward":  "Reward: sticker â€œHelper 3â€ Â· Teaser: parade."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u3_l4",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  3,
+                                                             "lessonNumber":  4,
+                                                             "title":  "UNIT REVIEW: â€œSalamat sa mga Helpers!â€ (zero",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "new)",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Complete the activity for this lesson.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "new)\nContent: 10 fast trials mixing wordâ†’picture and propâ†’helper (all 8 helpers, scheduler-weighted) +\nconsolidation: thank-you parade - tap each helper as called to join the parade line (8 items).\nReward: UNIT BADGE â€œHelpersâ€ + PLAZA and MARKET unlock on the map (helpers become tappable\nNPCs there).\nUNIT 4 - MGA SAPAT SA PALIBOT\nUNIT 4 - MGA SAPAT SA PALIBOT (4 lessons)\nThe high-interest unit: every animal arrives WITH its sound, and soundâ†’picture trials give even the\nweakest readers pure liste"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "overview":  "new)",
+                                                                                    "content":  "Content: 10 fast trials mixing wordâ†’picture and propâ†’helper (all 8 helpers, scheduler-weighted) +\nconsolidation: thank-you parade - tap each helper as called to join the parade line (8 items).",
+                                                                                    "reward":  "Reward: UNIT BADGE â€œHelpersâ€ + PLAZA and MARKET unlock on the map (helpers become tappable\nNPCs there).\nUNIT 4 - MGA SAPAT SA PALIBOT\nUNIT 4 - MGA SAPAT SA PALIBOT (4 lessons)\nThe high-interest unit: every animal arrives WITH its sound, and soundâ†’picture trials give even the\nweakest readers pure listening wins.\nUnit 4 asset list: 9 animal images (ONE consistent illustration style - never mix cartoon and realistic),\n9 sound effects (double as reward feedback), habitat scenes (pen/grass/paddy/water/tree/hill),\nsunset farm, hide-and-seek scene, parade scene, HIL+ENG audio per word."
+                                                                                }
+                                                         }
+                                                     ]
+                                     },
+                                     {
+                                         "unitNumber":  4,
+                                         "title":  "MGA SAPAT SA PALIBOT",
+                                         "description":  "",
+                                         "assetList":  "Unit 4 asset list: 9 animal images (ONE consistent illustration style - never mix cartoon and realistic), ",
+                                         "lessons":  [
+                                                         {
+                                                             "id":  "g1_u4_l1",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  4,
+                                                             "lessonNumber":  1,
+                                                             "title":  "dog, cat, chicken",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "Presentation (sound FIRST as the attention hook):\n1. (bark: aw aw!) â€œIdo! Sa Englishâ€¦ dog. Dog!â€ (tail wag)\n2. (meow: ngiyaw!) â€œKuringâ€¦ cat. Cat!â€\n3. (cluck: tok-tok!) â€œManokâ€¦ chicken. Chicken!â€ Letter callbacks: â€œMay I sa idoâ€¦ may D sa ido!â€",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "â€œTap the dog!â€ (vs cat)",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "â€œTap the dog!â€ (vs cat)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q2",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "SOUND TRIAL: hear â€œmeow!",
+                                                                                   "choices":  [
+                                                                                                   "tap the cat",
+                                                                                                   "dog"
+                                                                                               ],
+                                                                                   "answer":  "tap the cat",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "SOUND TRIAL: hear â€œmeow!â€ â†’ tap the cat (vs dog)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q3",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "â€œTap the chicken!â€ (vs dog, cat)",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "â€œTap the chicken!â€ (vs dog, cat)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q4",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "SOUND TRIAL: hear â€œwoof!",
+                                                                                   "choices":  [
+                                                                                                   "tap the dog"
+                                                                                               ],
+                                                                                   "answer":  "tap the dog",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "SOUND TRIAL: hear â€œwoof!â€ â†’ tap the dog (3 choices)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q5",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "â€œTap the cat!â€ (3 choices)",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "â€œTap the cat!â€ (3 choices)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q6",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "SOUND TRIAL: cluck",
+                                                                                   "choices":  [
+                                                                                                   "chicken"
+                                                                                               ],
+                                                                                   "answer":  "chicken",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "SOUND TRIAL: cluck â†’ chicken (3 choices)"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "warm-up":  "Warm-up: tap farmer Â· tap fisherman (their scenes contain animals - deliberate bridge).",
+                                                                                    "presentation":  "Presentation (sound FIRST as the attention hook):\n1. (bark: aw aw!) â€œIdo! Sa Englishâ€¦ dog. Dog!â€ (tail wag)\n2. (meow: ngiyaw!) â€œKuringâ€¦ cat. Cat!â€\n3. (cluck: tok-tok!) â€œManokâ€¦ chicken. Chicken!â€ Letter callbacks: â€œMay I sa idoâ€¦ may D sa ido!â€",
+                                                                                    "receptive_trials":  "Receptive trials (6) - two types alternate:\n1. â€œTap the dog!â€ (vs cat)\n2. SOUND TRIAL: hear â€œmeow!â€ â†’ tap the cat (vs dog)\n3. â€œTap the chicken!â€ (vs dog, cat)\n4. SOUND TRIAL: hear â€œwoof!â€ â†’ tap the dog (3 choices)\n5. â€œTap the cat!â€ (3 choices)\n6. SOUND TRIAL: cluck â†’ chicken (3 choices)",
+                                                                                    "productive":  "Productive: drag each animal onto its sound-button (tap speaker â†’ woof/meow/cluck) Â· voice\nrepeat: â€œSay dog!â€¦ Now bark like the dog!â€ (word, then animal-sound play - doubles mic practice,\nzero pressure).",
+                                                                                    "consolidation":  "Consolidation - â€œGutom na ang mga sapat ni Tudlo Guide!â€: farm scene, 3 food bowls: â€œSin-o ang gusto\nsang tinapay? Ang dog!â€ â†’ drag bowl to dog. 3 items + review tap: the farmer arrives to help.",
+                                                                                    "reward":  "Reward: sticker â€œSapat 1â€ Â· Teaser: pig in mud."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u4_l2",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  4,
+                                                             "lessonNumber":  2,
+                                                             "title":  "pig, cow, carabao",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "Presentation:\n1. (oink!) â€œBaboyâ€¦ pig!â€\n2. (moo!) â€œBakaâ€¦ cow!â€ (white/spotted, grass field)\n3. â€œKarbawâ€¦ carabao!â€ (dark, curved horns, mud/rice paddy, pulling the farmerâ€™s plow: â€œAng\nkarbaw, bulig sang farmer!â€) COW vs CARABAO is THE confusable pair - visuals must contrast hard.",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Consolidation - â€œPauli na ang mga sapat!â€: sunset farm; guide each called animal home (â€œAng\ncarabao, sa lunang!â€). 3 items + review: chicken to the coop.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Consolidation - â€œPauli na ang mga sapat!â€: sunset farm; guide each called animal home (â€œAng\ncarabao, sa lunang!â€). 3 items + review: chicken to the coop."
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "warm-up":  "Warm-up: dog vs cat + 1 scheduler item.",
+                                                                                    "presentation":  "Presentation:\n1. (oink!) â€œBaboyâ€¦ pig!â€\n2. (moo!) â€œBakaâ€¦ cow!â€ (white/spotted, grass field)\n3. â€œKarbawâ€¦ carabao!â€ (dark, curved horns, mud/rice paddy, pulling the farmerâ€™s plow: â€œAng\nkarbaw, bulig sang farmer!â€) COW vs CARABAO is THE confusable pair - visuals must contrast hard.",
+                                                                                    "receptive_trials":  "Receptive trials (6): 3 cow/carabao direct contrasts (2 choices) Â· SOUND TRIALS for pig (oink) and cow\n(moo) Â· 1 mixed 3-choice.",
+                                                                                    "productive":  "Productive: homes drag (pigâ†’pen, cowâ†’grass, carabaoâ†’rice paddy) Â· voice repeat + oink/moo\nplay.",
+                                                                                    "consolidation":  "Consolidation - â€œPauli na ang mga sapat!â€: sunset farm; guide each called animal home (â€œAng\ncarabao, sa lunang!â€). 3 items + review: chicken to the coop.",
+                                                                                    "reward":  "Reward: sticker â€œSapat 2â€ Â· Teaser: fishbowl."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u4_l3",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  4,
+                                                             "lessonNumber":  3,
+                                                             "title":  "fish, bird, goat",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "Presentation:\n1. (bubbles) â€œIsdaâ€¦ fish!â€ (â€œAng fisherman nagadakop sang fish!â€)\n2. (tweet: tsirit!) â€œPispisâ€¦ bird!â€ - Tudlo Guide gasps: â€œPareho sa akon! Bird man ako!â€ (mascot identity\nmoment)\n3. (meee!) â€œKandingâ€¦ goat!â€",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Consolidation - â€œHide and seek sa uma!â€: animals hide in the farm scene (tail behind tree, bubbles in\npond, horns behind rock); â€œDiin ang bird?â€ â†’ tap where it peeks. 3 items + review: pig.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Consolidation - â€œHide and seek sa uma!â€: animals hide in the farm scene (tail behind tree, bubbles in\npond, horns behind rock); â€œDiin ang bird?â€ â†’ tap where it peeks. 3 items + review: pig."
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "warm-up":  "Warm-up: cow vs carabao (hardest pair) + 1 scheduler item.",
+                                                                                    "presentation":  "Presentation:\n1. (bubbles) â€œIsdaâ€¦ fish!â€ (â€œAng fisherman nagadakop sang fish!â€)\n2. (tweet: tsirit!) â€œPispisâ€¦ bird!â€ - Tudlo Guide gasps: â€œPareho sa akon! Bird man ako!â€ (mascot identity\nmoment)\n3. (meee!) â€œKandingâ€¦ goat!â€",
+                                                                                    "receptive_trials":  "Receptive trials (6): taps 2â†’3 choices Â· SOUND TRIALS for bird and goat Â· HABITAT TRIAL: â€œDiin\nnagapuyo ang fish?â€ â†’ tap water (vs tree, grass).",
+                                                                                    "productive":  "Productive: habitat drag (fishâ†’water, birdâ†’tree, goatâ†’hill) Â· voice repeat + tweet/meee play.",
+                                                                                    "consolidation":  "Consolidation - â€œHide and seek sa uma!â€: animals hide in the farm scene (tail behind tree, bubbles in\npond, horns behind rock); â€œDiin ang bird?â€ â†’ tap where it peeks. 3 items + review: pig.",
+                                                                                    "reward":  "Reward: sticker â€œSapat 3â€ Â· Teaser: all animals together."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u4_l4",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  4,
+                                                             "lessonNumber":  4,
+                                                             "title":  "UNIT REVIEW: â€œAnimal Parada!â€ (zero new)",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Complete the activity for this lesson.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Content: 10 fast trials, heavy on soundâ†’picture + 3-choice wordâ†’picture (all 9 animals,\nscheduler-weighted) + consolidation: parade - tap each animal as called into the parade line (9\nitems); finale: all animal sounds play together as a silly â€œanimal band.â€\nReward: UNIT BADGE â€œSapatâ€ + the FARM unlocks on the map, populated with all 9 animals - each\ntappable forever (tap â†’ English name + sound = permanent free-play review).\nUNIT 5 - MGA LUGAR SA PALIBOT\nUNIT 5 - MGA LUGAR SA PALIBOT (4 lessons)\n"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "content":  "Content: 10 fast trials, heavy on soundâ†’picture + 3-choice wordâ†’picture (all 9 animals,\nscheduler-weighted) + consolidation: parade - tap each animal as called into the parade line (9\nitems); finale: all animal sounds play together as a silly â€œanimal band.â€",
+                                                                                    "reward":  "Reward: UNIT BADGE â€œSapatâ€ + the FARM unlocks on the map, populated with all 9 animals - each\ntappable forever (tap â†’ English name + sound = permanent free-play review).\nUNIT 5 - MGA LUGAR SA PALIBOT\nUNIT 5 - MGA LUGAR SA PALIBOT (4 lessons)\nThe capstone unit: the places ARE the barangay map the child has been unlocking all along.\nUnit 5 asset list: 8 place illustrations (built as the mapâ€™s actual tiles - draw once, use twice),\nside-scroll walk scene, field-trip scene, capstone fiesta animation, HIL+ENG audio per word,\nwho-lives-here instruction set."
+                                                                                }
+                                                         }
+                                                     ]
+                                     },
+                                     {
+                                         "unitNumber":  5,
+                                         "title":  "MGA LUGAR SA PALIBOT",
+                                         "description":  "",
+                                         "assetList":  "Unit 5 asset list: 8 place illustrations (built as the mapâ€™s actual tiles - draw once, use twice), ",
+                                         "lessons":  [
+                                                         {
+                                                             "id":  "g1_u5_l1",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  5,
+                                                             "lessonNumber":  1,
+                                                             "title":  "house, school, church",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "Presentation (each place shown WITH a familiar character in front - people make places concrete):\n1. House + the whole family: â€œBalay. Sa Englishâ€¦ house. Diri nagapuyo ang pamilya!â€\n2. School + teacher: â€œEskwelahanâ€¦ school. Diri si teacher!â€\n3. Church + lolo \u0026 lola: â€œSimbahanâ€¦ church.â€",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "â€œTap the house!â€ (vs school)",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "â€œTap the house!â€ (vs school)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q2",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "â€œTap the school!â€ (vs church, house)",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "â€œTap the school!â€ (vs church, house)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q3",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "â€œTap the church!â€ (3 choices)",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "â€œTap the church!â€ (3 choices)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q4",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "WHO-LIVES-HERE: â€œDiin si teacher?",
+                                                                                   "choices":  [
+                                                                                                   "tap school"
+                                                                                               ],
+                                                                                   "answer":  "tap school",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "WHO-LIVES-HERE: â€œDiin si teacher?â€ â†’ tap school"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q5",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "WHO-LIVES-HERE: â€œDiin ang family?",
+                                                                                   "choices":  [
+                                                                                                   "tap house"
+                                                                                               ],
+                                                                                   "answer":  "tap house",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "WHO-LIVES-HERE: â€œDiin ang family?â€ â†’ tap house"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q6",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "â€œTap the school!â€ (3 choices, no scaffold) (Who-lives-here trials silently review old words while teaching new ones.)",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "â€œTap the school!â€ (3 choices, no scaffold) (Who-lives-here trials silently review old words while teaching new ones.)"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "warm-up":  "Warm-up: tap carabao Â· SOUND TRIAL: tweet â†’ bird.",
+                                                                                    "presentation":  "Presentation (each place shown WITH a familiar character in front - people make places concrete):\n1. House + the whole family: â€œBalay. Sa Englishâ€¦ house. Diri nagapuyo ang pamilya!â€\n2. School + teacher: â€œEskwelahanâ€¦ school. Diri si teacher!â€\n3. Church + lolo \u0026 lola: â€œSimbahanâ€¦ church.â€",
+                                                                                    "receptive_trials":  "Receptive trials (6) - two types:\n1. â€œTap the house!â€ (vs school)\n2. â€œTap the school!â€ (vs church, house)\n3. â€œTap the church!â€ (3 choices)\n4. WHO-LIVES-HERE: â€œDiin si teacher?â€ â†’ tap school\n5. WHO-LIVES-HERE: â€œDiin ang family?â€ â†’ tap house\n6. â€œTap the school!â€ (3 choices, no scaffold) (Who-lives-here trials silently review old words while\nteaching new ones.)",
+                                                                                    "productive":  "Productive: character drag (familyâ†’house, teacherâ†’school, lolaâ†’church) Â· voice repeat Ã—3.",
+                                                                                    "consolidation":  "Consolidation - â€œNaglakat si Tudlo Guide sa banwa!â€: side-scrolling walk past the 3 places: â€œAri na kita saâ€¦\nhouse! Tap the house!â€ 3 items + review: the dog follows Tudlo Guide - tap it.",
+                                                                                    "reward":  "Reward: sticker â€œLugar 1â€ Â· house, school, church LIGHT UP on the real map Â· Teaser: market stalls."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u5_l2",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  5,
+                                                             "lessonNumber":  2,
+                                                             "title":  "market, plaza, hospital",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "Presentation:\n1. Market + tindera: â€œTindaâ€¦ market! Diri si vendor!â€\n2. Plaza with fiesta lanterns: â€œPlasaâ€¦ plaza!â€\n3. Hospital + doktor kag nars: â€œOspitalâ€¦ hospital! Halos pareho ang tunog!â€ (cognate flag)",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Consolidation - â€œMay diperensya si manghod!â€: little sibling scrapes a knee at the plaza: tap plaza\n(where it happened) â†’ tap hospital (where to go - nurse waves) â†’ tap market (buy a treat for being\nbrave). 3 items + review tap: nurse.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Consolidation - â€œMay diperensya si manghod!â€: little sibling scrapes a knee at the plaza: tap plaza\n(where it happened) â†’ tap hospital (where to go - nurse waves) â†’ tap market (buy a treat for being\nbrave). 3 items + review tap: nurse."
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "warm-up":  "Warm-up: house vs church + 1 scheduler item.",
+                                                                                    "presentation":  "Presentation:\n1. Market + tindera: â€œTindaâ€¦ market! Diri si vendor!â€\n2. Plaza with fiesta lanterns: â€œPlasaâ€¦ plaza!â€\n3. Hospital + doktor kag nars: â€œOspitalâ€¦ hospital! Halos pareho ang tunog!â€ (cognate flag)",
+                                                                                    "receptive_trials":  "Receptive trials (6): standard taps 2â†’3 Â· WHO-WORKS-HERE: vendor â†’ market; nurse â†’ hospital.",
+                                                                                    "productive":  "Productive: workplace drag (vendorâ†’market, doctorâ†’hospital + review pair teacherâ†’school) Â·\nvoice repeat, â€œhospitalâ€ in beats: â€œhos-pi-tal!â€",
+                                                                                    "consolidation":  "Consolidation - â€œMay diperensya si manghod!â€: little sibling scrapes a knee at the plaza: tap plaza\n(where it happened) â†’ tap hospital (where to go - nurse waves) â†’ tap market (buy a treat for being\nbrave). 3 items + review tap: nurse.",
+                                                                                    "reward":  "Reward: sticker â€œLugar 2â€ Â· market, plaza, hospital light up Â· Teaser: waves."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u5_l3",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  5,
+                                                             "lessonNumber":  3,
+                                                             "title":  "farm, beach",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "Presentation (this lesson is a review festival wearing a 2-new-word costume):\n1. â€œUmaâ€¦ farm! Diri ang farmer, ang cow, ang carabao!â€\n2. â€œBaybayâ€¦ beach! Diri ang fishermanâ€¦ kag ang fish!â€",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Consolidation - â€œField trip!â€: the class (teacher + kids) visits: tap farm â†’ greet the animals (tap\ncarabao) â†’ tap beach â†’ wave to the fisherman. 4 items (2 new + 2 review).",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Consolidation - â€œField trip!â€: the class (teacher + kids) visits: tap farm â†’ greet the animals (tap\ncarabao) â†’ tap beach â†’ wave to the fisherman. 4 items (2 new + 2 review)."
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "warm-up":  "Warm-up: market vs plaza + 1 scheduler item.",
+                                                                                    "presentation":  "Presentation (this lesson is a review festival wearing a 2-new-word costume):\n1. â€œUmaâ€¦ farm! Diri ang farmer, ang cow, ang carabao!â€\n2. â€œBaybayâ€¦ beach! Diri ang fishermanâ€¦ kag ang fish!â€",
+                                                                                    "receptive_trials":  "Receptive trials (6): farm vs beach taps Â· WHAT-LIVES-WHERE: pig â†’ farm; fish â†’ beach Â· 2 mixed\n3-choice trials with all 8 places.",
+                                                                                    "productive":  "Productive: BIG sorting drag - 6 items (pig, carabao, chicken / fish, boat, fisherman) sorted onto farm\nvs beach Â· voice repeat.",
+                                                                                    "consolidation":  "Consolidation - â€œField trip!â€: the class (teacher + kids) visits: tap farm â†’ greet the animals (tap\ncarabao) â†’ tap beach â†’ wave to the fisherman. 4 items (2 new + 2 review).",
+                                                                                    "reward":  "Reward: sticker â€œLugar 3â€ Â· farm and beach light up Â· Teaser: the whole map glowing."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g1_u5_l4",
+                                                             "gradeLevel":  1,
+                                                             "unitNumber":  5,
+                                                             "lessonNumber":  4,
+                                                             "title":  "GRADE 1 CAPSTONE: â€œFiesta sa banwa ni Tudlo Guide!â€",
+                                                             "flow":  [
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "(zero new)\nThe completed barangay map becomes the play space. Tudlo Guide tours every unlocked place; 2â€“3 quick\nretrieval items per stop, ~13 items total, retry-until-correct, celebration per stop:\n1. HOUSE â†’ tap mother; tap grandfather\n2. SCHOOL â†’ letter trial /m/; tap teacher\n3. MARKET â†’ tap vendor; counting trial: â€œPila ang saging?â€ (4) â†’ 4\n4. HOSPITAL â†’ tap doctor; tap nurse\n5. FARM â†’ tap carabao; sound trial: oink â†’ pig; tap chicken\n6. BEACH â†’ tap fisherman; tap fish\n7. PLAZA (finale) â†’ tap plaza; the fiesta erupts\nFirst-attempt data here = the Grade 1 retention measure (thesis evaluation instrument).",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Complete the activity for this lesson.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "(zero new)\nThe completed barangay map becomes the play space. Tudlo Guide tours every unlocked place; 2â€“3 quick\nretrieval items per stop, ~13 items total, retry-until-correct, celebration per stop:\n1. HOUSE â†’ tap mother; tap grandfather\n2. SCHOOL â†’ letter trial /m/; tap teacher\n3. MARKET â†’ tap vendor; counting trial: â€œPila ang saging?â€ (4) â†’ 4\n4. HOSPITAL â†’ tap doctor; tap nurse\n5. FARM â†’ tap carabao; sound trial: oink â†’ pig; tap chicken\n6. BEACH â†’ tap fisherman; tap fish\n7. PLAZA (finale) â†’ tap"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "overview":  "(zero new)\nThe completed barangay map becomes the play space. Tudlo Guide tours every unlocked place; 2â€“3 quick\nretrieval items per stop, ~13 items total, retry-until-correct, celebration per stop:\n1. HOUSE â†’ tap mother; tap grandfather\n2. SCHOOL â†’ letter trial /m/; tap teacher\n3. MARKET â†’ tap vendor; counting trial: â€œPila ang saging?â€ (4) â†’ 4\n4. HOSPITAL â†’ tap doctor; tap nurse\n5. FARM â†’ tap carabao; sound trial: oink â†’ pig; tap chicken\n6. BEACH â†’ tap fisherman; tap fish\n7. PLAZA (finale) â†’ tap plaza; the fiesta erupts\nFirst-attempt data here = the Grade 1 retention measure (thesis evaluation instrument).",
+                                                                                    "reward":  "Reward: GRADE 1 TROPHY Â· full-map fiesta animation (lanterns, every character and animal gathered\nat the plaza) Â· the â€œGrade 2 gateâ€ appears at the mapâ€™s edge Â· map enters permanent free-play (every\nplace/person/animal tappable â†’ speaks its English word).\nG1 MASTER WORD LIST\nGRADE 1 MASTER WORD LIST\n# Hiligaynon English Unit\n1-20 letter sounds A N T Y I D O M K U B L S E G P R H W C (phonemes) 1\n21â€“30 isaâ€“napulo oneâ€“ten 1\n31 nanay mother 2\n32 tatay father 2\n33 bata child 2\n34 lola grandmother 2\n35 lolo grandfather 2\n36 magulang older sibling 2\n37 manghod younger sibling 2\n38 manunudlo teacher 3\n39 doktor doctor 3\n40 nars nurse 3\n41 pulis police 3\n42 bumbero firefighter 3\n43 tindera vendor 3\n44 mangunguma farmer 3\n45 mangingisda fisherman 3\n46 ido dog 4\n47 kuring cat 4\n48 manok chicken 4\n49 baboy pig 4\n50 baka cow 4\n51 karbaw carabao 4\n# Hiligaynon English Unit\n52 isda fish 4\n53 pispis bird 4\n54 kanding goat 4\n55 balay house 5\n56 eskwelahan school 5\n57 simbahan church 5\n58 tinda market 5\n59 plasa plaza 5\n60 ospital hospital 5\n61 uma farm 5\n62 baybay beach 5\nðŸ¥’ J.V Grade 2\nG2 READ ME\nGRADE 2 - COMPLETE CONTENT PACK\nMobile-Based Hiligaynon-English Language Learning Application Level: Grade 2 (ages 7-8, emerging\nreaders) Â· 5 Units Â· 15 Lessons.\nGlobal rules (all Grade 2 lessons):\nâ— Lesson length 6-8 min Â· 4-5 new items per lesson Â· chunks are learned as WHOLE units, never\nsplit into words\nâ— Short phrases now appear as TEXT with audio (audio remains primary; text is supported, not\nrequired)\nâ— New component for the whole grade: TileBuilderScreen - arrange 2-3 word tiles into a\nspoken sentence; each tile speaks when tapped; the finished sentence plays back in full\nâ— No timers, no lives, no red X. Wrong answer = wiggle + audio replay + retry until correct\nâ— Warm-ups draw from BOTH grades: 1 item from the previous Grade 2 lesson + 1\nscheduler-selected Grade 1 item\nâ— Reward arc: the Grade 1 map COMES ALIVE - completed units add interactions to existing\nlocations\nUNIT 1 - PAGPAKILALA\nUNIT 1 - PAGPAKILALA (Introducing Myself) - 3\nlessons\nSelf-introduction chunks: Hello! My name is . I am years old. This is my ___.\nUnit 1 asset list: Juan and Ana character art (reused all grade), speech-bubble UI, cake art with 6/7/8\ncandles, stage scene, chunk audio (HIL+ENG) for all frames, tile audio per tile."
+                                                                                }
+                                                         }
+                                                     ]
+                                     }
+                                 ],
+                       "lessonCount":  25
+                   }
+               ]
+}

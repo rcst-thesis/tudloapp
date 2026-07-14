@@ -40,7 +40,7 @@ class AppData {
 
   /// Home Map unit definitions shared by the Map and Profile screens.
   ///
-  /// These titles mirror `assets/data/tudlo_updated_lesson_dataset.json`.
+  /// These titles mirror the current grade lesson dataset structure.
   static List<AppUnit> get units => _unitsByGrade[selectedGradeLevel]!;
 
   static const Map<GradeLevel, List<AppUnit>> _unitsByGrade = {

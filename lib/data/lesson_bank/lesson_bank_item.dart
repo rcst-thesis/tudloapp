@@ -20,6 +20,7 @@ class LessonQuestion {
   final List<String> choices;
   final List<String> leftItems;
   final List<String> rightItems;
+  final Map<String, String> matchingPairs;
   final List<String> sentenceWords;
   final List<LessonTerm> imageChoices;
   final String imagePath;
@@ -42,6 +43,7 @@ class LessonQuestion {
   }) : type = QuestionType.choice,
        leftItems = const [],
        rightItems = const [],
+       matchingPairs = const {},
        sentenceWords = const [],
        imageChoices = const [];
 
@@ -58,6 +60,7 @@ class LessonQuestion {
   }) : type = QuestionType.translationChoice,
        leftItems = const [],
        rightItems = const [],
+       matchingPairs = const {},
        sentenceWords = const [],
        imageChoices = const [];
 
@@ -74,6 +77,7 @@ class LessonQuestion {
   }) : type = QuestionType.fillBlank,
        leftItems = const [],
        rightItems = const [],
+       matchingPairs = const {},
        sentenceWords = const [],
        imageChoices = const [];
 
@@ -81,6 +85,7 @@ class LessonQuestion {
     required this.prompt,
     required this.leftItems,
     required this.rightItems,
+    this.matchingPairs = const {},
     this.targetPhrase = '',
     this.targetMeaning = '',
     this.directionLabel = '',
@@ -106,6 +111,7 @@ class LessonQuestion {
   }) : type = QuestionType.completeSentence,
        leftItems = const [],
        rightItems = const [],
+       matchingPairs = const {},
        sentenceWords = const [],
        imageChoices = const [];
 
@@ -123,6 +129,7 @@ class LessonQuestion {
        choices = const [],
        leftItems = const [],
        rightItems = const [],
+       matchingPairs = const {},
        imageChoices = const [];
 
   const LessonQuestion.arrangeWords({
@@ -139,6 +146,7 @@ class LessonQuestion {
        choices = const [],
        leftItems = const [],
        rightItems = const [],
+       matchingPairs = const {},
        imageChoices = const [];
 
   const LessonQuestion.imageChoice({
@@ -155,6 +163,7 @@ class LessonQuestion {
        choices = const [],
        leftItems = const [],
        rightItems = const [],
+       matchingPairs = const {},
        sentenceWords = const [];
 }
 

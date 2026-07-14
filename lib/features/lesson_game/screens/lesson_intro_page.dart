@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -53,7 +54,10 @@ class _LessonIntroPageState extends State<LessonIntroPage> {
           ),
           child: Column(
             children: [
-              _IntroHeader(onBack: () => Navigator.pop(context)),
+              _IntroHeader(
+                lessonNumber: _localLessonNumber,
+                onBack: () => Navigator.pop(context),
+              ),
               const SizedBox(height: 46),
               Expanded(
                 child: FutureBuilder<LevelContent>(
@@ -95,30 +99,46 @@ class _LessonIntroPageState extends State<LessonIntroPage> {
 }
 
 class _IntroHeader extends StatelessWidget {
+  final int lessonNumber;
   final VoidCallback onBack;
 
-  const _IntroHeader({required this.onBack});
+  const _IntroHeader({required this.lessonNumber, required this.onBack});
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.sizeOf(context).width;
     final backButtonSize = screenWidth < 380 ? 48.0 : 56.0;
 
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: SizedBox(
-        width: backButtonSize,
-        height: backButtonSize,
-        child: IconButton(
-          padding: EdgeInsets.zero,
-          onPressed: onBack,
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: TudloColors.blue,
-            size: screenWidth < 380 ? 34 : 42,
+    return Row(
+      children: [
+        SizedBox(
+          width: backButtonSize,
+          height: backButtonSize,
+          child: IconButton(
+            padding: EdgeInsets.zero,
+            onPressed: onBack,
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              color: TudloColors.blue,
+              size: screenWidth < 380 ? 34 : 42,
+            ),
           ),
         ),
-      ),
+        Expanded(
+          child: Center(
+            child: Text(
+              'Leksiyon $lessonNumber',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.nunito(
+                color: TudloColors.forest,
+                fontSize: 26,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(width: backButtonSize),
+      ],
     );
   }
 }
@@ -172,36 +192,37 @@ class _AnimatedLessonIntroContentState
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return Stack(
       children: [
-        Text(
-          'Leksiyon ${widget.lessonNumber}',
-          textAlign: TextAlign.center,
-          style: GoogleFonts.nunito(
-            color: TudloColors.forest,
-            fontSize: 38,
-            height: 1.02,
-            fontWeight: FontWeight.w900,
+        Center(
+          child: Transform.translate(
+            offset: const Offset(0, -28),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _IntroLetterGrid(
+                  children: [
+                    for (var index = 0; index < _letters.length; index++)
+                      _AnimatedIntroLetterCard(
+                        item: _letters[index],
+                        index: index,
+                        visible: index < _visibleLetters,
+                      ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
-        const SizedBox(height: 34),
-        _IntroLetterGrid(
-          children: [
-            for (var index = 0; index < _letters.length; index++)
-              _AnimatedIntroLetterCard(
-                item: _letters[index],
-                index: index,
-                visible: index < _visibleLetters,
-              ),
-          ],
-        ),
-        const Spacer(),
-        AnimatedSwitcher(
-          duration: const Duration(milliseconds: 260),
-          child: _showStart
-              ? _IntroStartButton(onPressed: widget.onStart)
-              : const SizedBox(height: 72),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 260),
+            child: _showStart
+                ? _IntroStartButton(onPressed: widget.onStart)
+                : const SizedBox(height: 72),
+          ),
         ),
       ],
     );
@@ -271,16 +292,18 @@ class _IntroLetterGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
     final rowCount = ((children.length + 1) ~/ 2).clamp(1, 3);
+    final gridWidth = math.min(380, screenWidth - 48).toDouble();
     return SizedBox(
-      width: 238,
-      height: (rowCount * 120).toDouble(),
+      width: gridWidth,
+      height: (rowCount * 178).toDouble(),
       child: GridView.count(
         physics: const NeverScrollableScrollPhysics(),
         padding: EdgeInsets.zero,
         crossAxisCount: 2,
-        mainAxisSpacing: 18,
-        crossAxisSpacing: 18,
+        mainAxisSpacing: 24,
+        crossAxisSpacing: 26,
         childAspectRatio: 1,
         children: children,
       ),
@@ -311,8 +334,8 @@ class _AnimatedIntroLetterCard extends StatelessWidget {
     final color = colors[index % colors.length];
 
     return SizedBox(
-      width: 110,
-      height: 110,
+      width: 172,
+      height: 172,
       child: AnimatedOpacity(
         opacity: visible ? 1 : 0,
         duration: const Duration(milliseconds: 160),
@@ -348,7 +371,7 @@ class _AnimatedIntroLetterCard extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: GoogleFonts.nunito(
                           color: TudloColors.ink,
-                          fontSize: item.label.length == 1 ? 42 : 20,
+                          fontSize: item.label.length == 1 ? 56 : 24,
                           height: 1,
                           fontWeight: FontWeight.w900,
                         ),
@@ -357,8 +380,8 @@ class _AnimatedIntroLetterCard extends StatelessWidget {
                   )
                 : Image.asset(
                     item.asset!,
-                    width: 108,
-                    height: 108,
+                    width: 166,
+                    height: 166,
                     fit: BoxFit.contain,
                     filterQuality: FilterQuality.high,
                     errorBuilder: (_, __, ___) => Text(

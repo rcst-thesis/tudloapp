@@ -1,0 +1,1133 @@
+﻿{
+    "datasetName":  "Tudlo Updated Lesson Game Dataset",
+    "version":  "updated_scrollable_grade_based_v1",
+    "source":  "lesson dataset (raw).pdf",
+    "notes":  [
+                  "Converted from the uploaded lesson dataset and updated to the revised Tudlo system.",
+                  "Grade 1 and Grade 2 use Lesson â†’ Example â†’ Short Quiz.",
+                  "Grade 3 uses Story â†’ Lesson â†’ Example â†’ Short Quiz.",
+                  "Evaluation/pre-test, pet/Koka system, energy, typed translation in lesson game, and Next/Continue buttons are not used.",
+                  "Old text labels were replaced with the updated Hiligaynon terms requested by the user."
+              ],
+    "globalUiRules":  {
+                          "scrollableLevels":  true,
+                          "allTappable":  true,
+                          "noNextButton":  true,
+                          "noContinueButton":  true,
+                          "checkButtonPerQuiz":  true,
+                          "largeButtonsAndText":  true,
+                          "brightColorsNoMutedColors":  true,
+                          "voiceMessages":  true,
+                          "noTypedTranslationInLessonGame":  true
+                      },
+    "textReplacementsApplied":  {
+                                    "usernamePrompt":  "Ano ang imo ngalan?",
+                                    "vocabularySection":  "Gamita Ini",
+                                    "thinkingSection":  "Tanda-i Ini",
+                                    "correctLabel":  "Husto",
+                                    "arrangePrompt":  "Ano ini sa Hiligaynon",
+                                    "wordLabel":  "Tinaga",
+                                    "choicePrompt":  "Pili-a ang husto nga sabat",
+                                    "leavePrompt":  "Mahalin ka na?",
+                                    "quizSection":  "Pagtilaw",
+                                    "wordOfTheDay":  "Tinaga subong nga adlaw"
+                                },
+    "grades":  [
+                   {
+                       "gradeLevel":  3,
+                       "flow":  [
+                                    "story",
+                                    "lesson",
+                                    "example",
+                                    "shortQuiz"
+                                ],
+                       "description":  "Story-based lessons, vocabulary, sentence examples, comprehension questions, sequencing, predicting, main idea, and word power.",
+                       "units":  [
+                                     {
+                                         "unitNumber":  1,
+                                         "title":  "NUMBERS",
+                                         "description":  "",
+                                         "assetList":  "Unit 1 asset list: lily-pad raft/tally art, numbered stepping stones, bus with numbered seats, price ",
+                                         "lessons":  [
+                                                         {
+                                                             "id":  "g3_u1_l1",
+                                                             "gradeLevel":  3,
+                                                             "unitNumber":  1,
+                                                             "lessonNumber":  1,
+                                                             "title":  "one to ten solid + â€œHow many?â€",
+                                                             "flow":  [
+                                                                          "story",
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "New: the question frame How many? (Pila?) Â· review one-ten\n\nPresentation: rapid chant refresh (the Grade 1 chant audio, reused) - Tudlo Guide hops across ten lily pads\ncounting each. Then the frame, modeled 3 times as one routine: \"How many mangoes?... Let\u0027s\ncount! One, two, three... three mangoes!\"",
+                                                             "examples":  [
+                                                                              {
+                                                                                  "hiligaynon":  "- Six!\"",
+                                                                                  "english":  null,
+                                                                                  "imageAsset":  null,
+                                                                                  "audioAsset":  null
+                                                                              }
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "\"How many fish?\" (4 fish shown)",
+                                                                                   "choices":  [
+                                                                                                   "count, tap numeral 4",
+                                                                                                   "3",
+                                                                                                   "5"
+                                                                                               ],
+                                                                                   "answer":  "count, tap numeral 4",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "\"How many fish?\" (4 fish shown) â†’ count, tap numeral 4 (vs 3, 5)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q2",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "\"How many lily pads?\" (6)",
+                                                                                   "choices":  [
+                                                                                                   "tap 6"
+                                                                                               ],
+                                                                                   "answer":  "tap 6",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "\"How many lily pads?\" (6) â†’ tap 6"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q3",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "\"How many flowers?\" (8, in two rows)",
+                                                                                   "choices":  [
+                                                                                                   "tap 8",
+                                                                                                   "7",
+                                                                                                   "9"
+                                                                                               ],
+                                                                                   "answer":  "tap 8",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "\"How many flowers?\" (8, in two rows) â†’ tap 8 (vs 7, 9)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q4",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "REVERSE: hear \"seven\"",
+                                                                                   "choices":  [
+                                                                                                   "tap the group of 7",
+                                                                                                   "6",
+                                                                                                   "8 - the classic hard discrimination"
+                                                                                               ],
+                                                                                   "answer":  "tap the group of 7",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "REVERSE: hear \"seven\" â†’ tap the group of 7 (vs 6, 8 - the classic hard discrimination)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q5",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "\"How many books?\" (5)",
+                                                                                   "choices":  [
+                                                                                                   "tap 5"
+                                                                                               ],
+                                                                                   "answer":  "tap 5",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "\"How many books?\" (5) â†’ tap 5"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q6",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "REVERSE: hear \"ten\"",
+                                                                                   "choices":  [
+                                                                                                   "tap the group of 10",
+                                                                                                   "9"
+                                                                                               ],
+                                                                                   "answer":  "tap the group of 10",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "REVERSE: hear \"ten\" â†’ tap the group of 10 (vs 9)"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "new":  "New: the question frame How many? (Pila?) Â· review one-ten",
+                                                                                    "warm-up":  "Warm-up: 1 Grade 2 chunk item + 1 numeral trial.",
+                                                                                    "presentation":  "Presentation: rapid chant refresh (the Grade 1 chant audio, reused) - Tudlo Guide hops across ten lily pads\ncounting each. Then the frame, modeled 3 times as one routine: \"How many mangoes?... Let\u0027s\ncount! One, two, three... three mangoes!\"",
+                                                                                    "receptive_trials":  "Receptive trials (6):\n1. \"How many fish?\" (4 fish shown) â†’ count, tap numeral 4 (vs 3, 5)\n2. \"How many lily pads?\" (6) â†’ tap 6\n3. \"How many flowers?\" (8, in two rows) â†’ tap 8 (vs 7, 9)\n4. REVERSE: hear \"seven\" â†’ tap the group of 7 (vs 6, 8 - the classic hard discrimination)\n5. \"How many books?\" (5) â†’ tap 5\n6. REVERSE: hear \"ten\" â†’ tap the group of 10 (vs 9)",
+                                                                                    "productive":  "Productive: count-and-drag: \"Put six shells in the pail!\" (pail counts aloud) Ã—2 Â· answer-tile: after\ncounting, tap the sentence tile \"Six shells!\" Â· voice repeat the full exchange with Tudlo Guide: \"How many...?\n- Six!\"",
+                                                                                    "consolidation":  "Consolidation - \"Inventory sa tindahan!\": help the vendor count stock: 4 How-many items (bananas,\neggs, cups, candles), tap numeral answers; wrong = vendor recounts aloud kindly, retry.",
+                                                                                    "reward":  "Reward: sticker \"Numero 1\" Â· the STORYBOOK SHELF appears at the school (empty - teasing Unit 2) Â·",
+                                                                                    "teaser":  "Teaser: a bus with numbered seats."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g3_u1_l2",
+                                                             "gradeLevel":  3,
+                                                             "unitNumber":  1,
+                                                             "lessonNumber":  2,
+                                                             "title":  "eleven to twenty",
+                                                             "flow":  [
+                                                                          "story",
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "New: eleven-fifteen, sixteen-twenty (chant-carried in two groups of five, like Grade 1)\n\nPresentation: teen chant 11-15, then 16-20; each number = numeral + a TALLY BUNDLE (one bundle\nof ten + extras - place-value seeded without naming it): \"Ten... and one more... eleven!\" Tudlo Guide stacks\nlily pads: a raft of ten plus loose ones.\n(Hiligaynon note: everyday speech uses Spanish-derived forms - onse, dose, trese, katorse, kinse,\ndisesais, disesiete, disiocho, disinueve, bainte. CONFIRM exact local forms/spellings with your\nvalidators; your panel may prefer native forms in the docs.) (Maam Alog corrected numbering:\nnapulo kag isa (11), napulo kag duha (12), napulo kag tatlo (13), napulo kag apat (14), napulo kag\nlima (15), napulo kag anum (16), napulo kag pito (17), napulo kag walo (18), napulo kag siyam (19),\nand duha ka napulo (20).)",
+                                                             "examples":  [
+                                                                              {
+                                                                                  "hiligaynon":  "New: eleven-fifteen, sixteen-twenty (chant-carried in two groups of five, like Grade 1)",
+                                                                                  "english":  null,
+                                                                                  "imageAsset":  null,
+                                                                                  "audioAsset":  null
+                                                                              }
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Hear \"twelve\"",
+                                                                                   "choices":  [
+                                                                                                   "tap 12",
+                                                                                                   "11"
+                                                                                               ],
+                                                                                   "answer":  "tap 12",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Hear \"twelve\" â†’ tap 12 (vs 11)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q2",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Hear \"thirteen\"",
+                                                                                   "choices":  [
+                                                                                                   "tap 13",
+                                                                                                   "14 - close pair"
+                                                                                               ],
+                                                                                   "answer":  "tap 13",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Hear \"thirteen\" â†’ tap 13 (vs 14 - close pair)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q3",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Hear \"seventeen\"",
+                                                                                   "choices":  [
+                                                                                                   "tap 17",
+                                                                                                   "19"
+                                                                                               ],
+                                                                                   "answer":  "tap 17",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Hear \"seventeen\" â†’ tap 17 (vs 19)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q4",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "BUNDLE COUNT: a ten-raft + 4 loose lily pads",
+                                                                                   "choices":  [
+                                                                                                   "tap 14"
+                                                                                               ],
+                                                                                   "answer":  "tap 14",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "BUNDLE COUNT: a ten-raft + 4 loose lily pads â†’ tap 14"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q5",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "BUNDLE COUNT: a ten-raft + 8 loose",
+                                                                                   "choices":  [
+                                                                                                   "tap 18"
+                                                                                               ],
+                                                                                   "answer":  "tap 18",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "BUNDLE COUNT: a ten-raft + 8 loose â†’ tap 18"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q6",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "Hear \"twenty\"",
+                                                                                   "choices":  [
+                                                                                                   "tap 20",
+                                                                                                   "12 - digit-reversal check"
+                                                                                               ],
+                                                                                   "answer":  "tap 20",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Hear \"twenty\" â†’ tap 20 (vs 12 - digit-reversal check)"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "new":  "New: eleven-fifteen, sixteen-twenty (chant-carried in two groups of five, like Grade 1)",
+                                                                                    "warm-up":  "Warm-up: two How-many trials.",
+                                                                                    "presentation":  "Presentation: teen chant 11-15, then 16-20; each number = numeral + a TALLY BUNDLE (one bundle\nof ten + extras - place-value seeded without naming it): \"Ten... and one more... eleven!\" Tudlo Guide stacks\nlily pads: a raft of ten plus loose ones.\n(Hiligaynon note: everyday speech uses Spanish-derived forms - onse, dose, trese, katorse, kinse,\ndisesais, disesiete, disiocho, disinueve, bainte. CONFIRM exact local forms/spellings with your\nvalidators; your panel may prefer native forms in the docs.) (Maam Alog corrected numbering:\nnapulo kag isa (11), napulo kag duha (12), napulo kag tatlo (13), napulo kag apat (14), napulo kag\nlima (15), napulo kag anum (16), napulo kag pito (17), napulo kag walo (18), napulo kag siyam (19),\nand duha ka napulo (20).)",
+                                                                                    "receptive_trials":  "Receptive trials (6):\n1. Hear \"twelve\" â†’ tap 12 (vs 11)\n2. Hear \"thirteen\" â†’ tap 13 (vs 14 - close pair)\n3. Hear \"seventeen\" â†’ tap 17 (vs 19)\n4. BUNDLE COUNT: a ten-raft + 4 loose lily pads â†’ tap 14\n5. BUNDLE COUNT: a ten-raft + 8 loose â†’ tap 18\n6. Hear \"twenty\" â†’ tap 20 (vs 12 - digit-reversal check)",
+                                                                                    "productive":  "Productive: NUMBER-LINE HOP: Tudlo Guide hops along stones 10-20; the child taps each stone as it\u0027s\nspoken (order + recognition - and hopping is literally what guides do) Â· voice repeat both chants.",
+                                                                                    "consolidation":  "Consolidation - \"Bus pa-plasa!\": passengers board a bus with seats 11-20; seat each passenger as\ntheir ticket number is called (5 items); wrong seat = passenger giggles and shows the ticket again.",
+                                                                                    "reward":  "Reward: sticker \"Numero 2\" Â· Teaser: a market price tag."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g3_u1_l3",
+                                                             "gradeLevel":  3,
+                                                             "unitNumber":  1,
+                                                             "lessonNumber":  3,
+                                                             "title":  "Using numbers: age, counting for others, market",
+                                                             "flow":  [
+                                                                          "story",
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "money\n\nNew: the frame How much? (Pila ang bili?) Â· pesos as a word\n\nPresentation (three real uses, one scene each):\n1. AGE: \"How old are you? - I am nine years old.\" (the Grade 2 frame, new number)\n2. COUNTING FOR OTHERS: \"How many chairs do we need? - Twelve chairs!\"\n3. MARKET: \"How much is the mango? - Ten pesos!\" (whole-number prices only - this is\nlanguage class, not math class)",
+                                                             "examples":  [
+                                                                              {
+                                                                                  "hiligaynon":  "New: the frame How much? (Pila ang bili?) Â· pesos as a word",
+                                                                                  "english":  null,
+                                                                                  "imageAsset":  null,
+                                                                                  "audioAsset":  null
+                                                                              }
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "QUESTION MATCH: hear \"How much is the fish?\"",
+                                                                                   "choices":  [
+                                                                                                   "tap the \"Fifteen pesos\" bubble",
+                                                                                                   "\"Fifteen fish\" - question-word discrimination",
+                                                                                                   "the real skill"
+                                                                                               ],
+                                                                                   "answer":  "tap the \"Fifteen pesos\" bubble",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "QUESTION MATCH: hear \"How much is the fish?\" â†’ tap the \"Fifteen pesos\" bubble (vs \"Fifteen fish\" - question-word discrimination, the real skill)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q2",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "QUESTION MATCH: hear \"How many mangoes?\"",
+                                                                                   "choices":  [
+                                                                                                   "tap \"Six mangoes\"",
+                                                                                                   "\"Six pesos\""
+                                                                                               ],
+                                                                                   "answer":  "tap \"Six mangoes\"",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "QUESTION MATCH: hear \"How many mangoes?\" â†’ tap \"Six mangoes\" (vs \"Six pesos\")"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q3",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "PRICE TAG: \"How much is the flower?\" (tag shows 5)",
+                                                                                   "choices":  [
+                                                                                                   "tap \"Five pesos\""
+                                                                                               ],
+                                                                                   "answer":  "tap \"Five pesos\"",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "PRICE TAG: \"How much is the flower?\" (tag shows 5) â†’ tap \"Five pesos\""
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q4",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "\"How old is Juan?\" (8 candles)",
+                                                                                   "choices":  [
+                                                                                                   "tap \"Eight years old\""
+                                                                                               ],
+                                                                                   "answer":  "tap \"Eight years old\"",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "\"How old is Juan?\" (8 candles) â†’ tap \"Eight years old\""
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q5",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "PRICE TAG: tag shows 20",
+                                                                                   "choices":  [
+                                                                                                   "tap \"Twenty pesos\""
+                                                                                               ],
+                                                                                   "answer":  "tap \"Twenty pesos\"",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "PRICE TAG: tag shows 20 â†’ tap \"Twenty pesos\""
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q6",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "\"How many spoons?\" (11)",
+                                                                                   "choices":  [
+                                                                                                   "tap 11"
+                                                                                               ],
+                                                                                   "answer":  "tap 11",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "\"How many spoons?\" (11) â†’ tap 11"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "overview":  "money",
+                                                                                    "new":  "New: the frame How much? (Pila ang bili?) Â· pesos as a word",
+                                                                                    "warm-up":  "Warm-up: 2 teen-numeral trials (scheduler picks the confused pairs).",
+                                                                                    "presentation":  "Presentation (three real uses, one scene each):\n1. AGE: \"How old are you? - I am nine years old.\" (the Grade 2 frame, new number)\n2. COUNTING FOR OTHERS: \"How many chairs do we need? - Twelve chairs!\"\n3. MARKET: \"How much is the mango? - Ten pesos!\" (whole-number prices only - this is\nlanguage class, not math class)",
+                                                                                    "receptive_trials":  "Receptive trials (6):\n1. QUESTION MATCH: hear \"How much is the fish?\" â†’ tap the \"Fifteen pesos\" bubble (vs\n\"Fifteen fish\" - question-word discrimination, the real skill)\n2. QUESTION MATCH: hear \"How many mangoes?\" â†’ tap \"Six mangoes\" (vs \"Six pesos\")\n3. PRICE TAG: \"How much is the flower?\" (tag shows 5) â†’ tap \"Five pesos\"\n4. \"How old is Juan?\" (8 candles) â†’ tap \"Eight years old\"\n5. PRICE TAG: tag shows 20 â†’ tap \"Twenty pesos\"\n6. \"How many spoons?\" (11) â†’ tap 11",
+                                                                                    "productive":  "Productive: TileBuilder: \"I am + nine + years old\" and \"Ten + pesos + please!\" Â· market role-play voice\nrepeat (child plays the buyer).",
+                                                                                    "consolidation":  "Consolidation - \"Shopping list ni Nanay!\": buy 3 items: read the list quantity (e.g., \"4 saging\"), count\nthem out by dragging, then tap the price answer when the vendor states it. 5 items + review taps\n(vendor, market).",
+                                                                                    "reward":  "Reward: UNIT BADGE \"Numero\" Â· map upgrade: market stalls get tappable price tags that speak Â·",
+                                                                                    "teaser":  "Teaser: a book opening.\nUNIT 2 - STORIES\nUNIT 2 - STORIES (Mga Sugilanon) - 3 lessons\nThree ORIGINAL stories starring Tudlo Guide, set on the appâ€™s own map with known characters - so every\nword is familiar and all effort goes to reading the sentences. Each story: 6-7 short sentences, 4 pages,\na question after every 1-2 pages (never more than ~30 seconds without interaction).\nUnit 2 asset list: StoryScreen component, 12 story-page illustrations, face cards (happy/sad),\nsequence-card sets, \"today/tomorrow\" icon cards, per-sentence audio (HIL instructions + ENG story\nlines), Shelf UI with re-read stars."
+                                                                                }
+                                                         }
+                                                     ]
+                                     },
+                                     {
+                                         "unitNumber":  2,
+                                         "title":  "STORIES",
+                                         "description":  "",
+                                         "assetList":  "Unit 2 asset list: StoryScreen component, 12 story-page illustrations, face cards (happy/sad), ",
+                                         "lessons":  [
+                                                         {
+                                                             "id":  "g3_u2_l1",
+                                                             "gradeLevel":  3,
+                                                             "unitNumber":  2,
+                                                             "lessonNumber":  1,
+                                                             "title":  "Story: â€œAng Nadula nga Idoâ€ (The Lost Dog)",
+                                                             "flow":  [
+                                                                          "story",
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  "Pre-story warm-up: 2 scheduler items.\nFULL STORY TEXT (6 sentences, 4 pages):\nâ— Page 1: \"Tudlo Guide has a dog. His name is Bantay.\"\nâ— QUESTION 1 - WHO: \"Sin-o ang nadula...? Wait - who is the DOG?\" â†’ tap Bantay (choices:\nBantay / Tudlo Guide / carabao)\nâ— Page 2: \"One morning, Bantay is not at the house! Tudlo Guide looks at the school. No Bantay.\"\nâ— QUESTION 2 - WHERE: \"Where does Tudlo Guide look?\" â†’ tap school (choices: school / market /\nbeach)\nâ— Page 3: \"Tudlo Guide hops to the market. The vendor says, \u0027Look at the farm!\u0027\"\nâ— QUESTION 3 - WHO: \"Who helps Tudlo Guide?\" â†’ tap vendor\nâ— Page 4: \"Bantay is at the farm with the carabao! Tudlo Guide is happy.\"\nâ— QUESTION 4 - WHERE: \"Where is Bantay?\" â†’ tap farm\nAfter-story (2 items): TileBuilder rebuilds a story sentence: \"Bantay + is at + the farm\" Â· VOICE-READ:\nthe child reads ONE sentence aloud, record â†’ playback â†’ Tudlo Guide\u0027s happy hop (the app\u0027s first\nread-aloud - unscored).",
+                                                             "lesson":  "Pre-story warm-up: 2 scheduler items.\nFULL STORY TEXT (6 sentences, 4 pages):\nâ— Page 1: \"Tudlo Guide has a dog. His name is Bantay.\"\nâ— QUESTION 1 - WHO: \"Sin-o ang nadula...? Wait - who is the DOG?\" â†’ tap Bantay (choices:\nBantay / Tudlo Guide / carabao)\nâ— Page 2: \"One morning, Bantay is not at the house! Tudlo Guide looks at the school. No Bantay.\"\nâ— QUESTION 2 - WHERE: \"Where does Tudlo Guide look?\" â†’ tap school (choices: school / market /\nbeach)\nâ— Page 3: \"Tudlo Guide hops to the market. The vendor says, \u0027Look at the farm!\u0027\"\nâ— QUESTION 3 - WHO: \"Who helps Tudlo Guide?\" â†’ tap vendor\nâ— Page 4: \"Bantay is at the farm with the carabao! Tudlo Guide is happy.\"\nâ— QUESTION 4 - WHERE: \"Where is Bantay?\" â†’ tap farm\nAfter-story (2 items): TileBuilder rebuilds a story sentence: \"Bantay + is at + the farm\" Â· VOICE-READ:\nthe child reads ONE sentence aloud, record â†’ playback â†’ Tudlo Guide\u0027s happy hop (the app\u0027s first\nread-aloud - unscored).",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Complete the activity for this lesson.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Pre-story warm-up: 2 scheduler items.\nFULL STORY TEXT (6 sentences, 4 pages):\nâ— Page 1: \"Tudlo Guide has a dog. His name is Bantay.\"\nâ— QUESTION 1 - WHO: \"Sin-o ang nadula...? Wait - who is the DOG?\" â†’ tap Bantay (choices:\nBantay / Tudlo Guide / carabao)\nâ— Page 2: \"One morning, Bantay is not at the house! Tudlo Guide looks at the school. No Bantay.\"\nâ— QUESTION 2 - WHERE: \"Where does Tudlo Guide look?\" â†’ tap school (choices: school / market /\nbeach)\nâ— Page 3: \"Tudlo Guide hops to the market. The v"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "overview":  "Pre-story warm-up: 2 scheduler items.\nFULL STORY TEXT (6 sentences, 4 pages):\nâ— Page 1: \"Tudlo Guide has a dog. His name is Bantay.\"\nâ— QUESTION 1 - WHO: \"Sin-o ang nadula...? Wait - who is the DOG?\" â†’ tap Bantay (choices:\nBantay / Tudlo Guide / carabao)\nâ— Page 2: \"One morning, Bantay is not at the house! Tudlo Guide looks at the school. No Bantay.\"\nâ— QUESTION 2 - WHERE: \"Where does Tudlo Guide look?\" â†’ tap school (choices: school / market /\nbeach)\nâ— Page 3: \"Tudlo Guide hops to the market. The vendor says, \u0027Look at the farm!\u0027\"\nâ— QUESTION 3 - WHO: \"Who helps Tudlo Guide?\" â†’ tap vendor\nâ— Page 4: \"Bantay is at the farm with the carabao! Tudlo Guide is happy.\"\nâ— QUESTION 4 - WHERE: \"Where is Bantay?\" â†’ tap farm\nAfter-story (2 items): TileBuilder rebuilds a story sentence: \"Bantay + is at + the farm\" Â· VOICE-READ:\nthe child reads ONE sentence aloud, record â†’ playback â†’ Tudlo Guide\u0027s happy hop (the app\u0027s first\nread-aloud - unscored).",
+                                                                                    "reward":  "Reward: the book \"The Lost Dog\" lands on the Storybook Shelf (re-readable forever) Â· sticker\n\"Sugilanon 1\" Â· Teaser: a sad girl at a school desk."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g3_u2_l2",
+                                                             "gradeLevel":  3,
+                                                             "unitNumber":  2,
+                                                             "lessonNumber":  2,
+                                                             "title":  "Story: â€œAng Bag-o nga Estudyanteâ€ (The New",
+                                                             "flow":  [
+                                                                          "story",
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  "Student)",
+                                                             "lesson":  "Student)",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Complete the activity for this lesson.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Student)\nWarm-up: 1 question from story 1 (fresh phrasing: \"Where was Bantay hiding?\") + 1 scheduler item.\nFULL STORY TEXT (7 sentences, 4 pages):\nâ— Page 1: \"Ana is new at school. She is sad.\"\nâ— QUESTION 1 - WHO + FEELING: \"Who is new?\" â†’ tap Ana; \"How does she feel?\" â†’ tap the\nsad face\nâ— Page 2: \"Juan says, \u0027Hello! What is your name?\u0027 \u0027My name is Ana.\u0027\"\nâ— QUESTION 2 - WHAT: \"What does Juan say first?\" â†’ tap the \"Hello!\" bubble (choices: Hello! /\nGoodbye! / Thank you!) - Grade 2 chunks, now READ"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "overview":  "Student)",
+                                                                                    "warm-up":  "Warm-up: 1 question from story 1 (fresh phrasing: \"Where was Bantay hiding?\") + 1 scheduler item.\nFULL STORY TEXT (7 sentences, 4 pages):\nâ— Page 1: \"Ana is new at school. She is sad.\"\nâ— QUESTION 1 - WHO + FEELING: \"Who is new?\" â†’ tap Ana; \"How does she feel?\" â†’ tap the\nsad face\nâ— Page 2: \"Juan says, \u0027Hello! What is your name?\u0027 \u0027My name is Ana.\u0027\"\nâ— QUESTION 2 - WHAT: \"What does Juan say first?\" â†’ tap the \"Hello!\" bubble (choices: Hello! /\nGoodbye! / Thank you!) - Grade 2 chunks, now READ\nâ— Page 3: \"Tudlo Guide says, \u0027Come, Ana! Let\u0027s play at the plaza!\u0027 They run and jump.\"\nâ— QUESTION 3 - WHERE: \"Where do they play?\" â†’ tap plaza\nâ— Page 4: \"Now Ana is happy. She has two friends!\"\nâ— QUESTION 4 - FEELING (the bridge to inference): \"How does Ana feel NOW?\" â†’ tap the\nhappy face; \"How many friends?\" â†’ tap 2\nAfter-story: TileBuilder: \"She has + two + friends\" Â· voice-read the dialogue line \"with feeling\":\n\"Basaha nga may emosyon: \u0027Come, Ana!\u0027\"",
+                                                                                    "reward":  "Reward: book #2 on the Shelf Â· sticker \"Sugilanon 2\" Â· Teaser: dark rain clouds over the plaza."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g3_u2_l3",
+                                                             "gradeLevel":  3,
+                                                             "unitNumber":  2,
+                                                             "lessonNumber":  3,
+                                                             "title":  "Story: â€œAng Ulan sa Fiestaâ€ (Rain at the Fiesta)",
+                                                             "flow":  [
+                                                                          "story",
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  "Slightly harder: a problem-solution arc + the first WHEN question.",
+                                                             "lesson":  "Slightly harder: a problem-solution arc + the first WHEN question.",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Complete the activity for this lesson.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Slightly harder: a problem-solution arc + the first WHEN question.\nWarm-up: 1 story-2 question + 1 scheduler item.\nFULL STORY TEXT (7 sentences, 4 pages):\nâ— Page 1: \"The plaza fiesta is today! But look at the sky - rain.\"\nâ— QUESTION 1 - WHAT/PROBLEM: \"What is the problem?\" â†’ tap the rain picture (choices: rain\n/ dog / bus)\nâ— Page 2: \"The children are sad. Teacher says, \u0027Let\u0027s have the fiesta at the school!\u0027\"\nâ— QUESTION 2 - WHO: \"Who has the idea?\" â†’ tap teacher\nâ— Page 3: \"Everyone helps. The ven"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "overview":  "Slightly harder: a problem-solution arc + the first WHEN question.",
+                                                                                    "warm-up":  "Warm-up: 1 story-2 question + 1 scheduler item.\nFULL STORY TEXT (7 sentences, 4 pages):\nâ— Page 1: \"The plaza fiesta is today! But look at the sky - rain.\"\nâ— QUESTION 1 - WHAT/PROBLEM: \"What is the problem?\" â†’ tap the rain picture (choices: rain\n/ dog / bus)\nâ— Page 2: \"The children are sad. Teacher says, \u0027Let\u0027s have the fiesta at the school!\u0027\"\nâ— QUESTION 2 - WHO: \"Who has the idea?\" â†’ tap teacher\nâ— Page 3: \"Everyone helps. The vendor brings food. Lolo tells riddles.\"\nâ— QUESTION 3 - WHERE: \"Where is the fiesta now?\" â†’ tap school\nâ— Page 4: \"The fiesta is happy - even in the rain!\"\nâ— QUESTION 4 - WHEN (first!): \"When is the fiesta?\" â†’ tap \"today\" (vs \"tomorrow\" - two short\nreadable words with sun-position icons)\nâ— QUESTION 5 - SEQUENCE FINALE: 4 story pictures shuffled â†’ tap in order\nAfter-story: TileBuilder rebuilds the solution: \"The fiesta + is at + the school\" Â· voice-read the last\nsentence like a cheer.",
+                                                                                    "reward":  "Reward: UNIT BADGE \"Sugilanon\" Â· book #3 Â· the Shelf gains a RE-READ counter (a star per re-read -\nfluency practice, gamified) Â· Teaser: a monkey and a turtle by a river.\nUNIT 3 - FABLES\nUNIT 3 - FABLES (Sugilanon nga may Leksyon) -\n3 lessons\nShort retold fables (public domain: one Philippine folktale + two Aesop) in the appâ€™s OWN simple\nwords - 8 short sentences max, 4 pages, question every 1-2 pages. New skill: the MORAL - what the\nstory teaches, not just what happens (the first step from literal to inferential comprehension). Tudlo Guide\nhosts each fable and reacts to it.\nEach fable pre-teaches its 3-4 new words Grade-1-style (image + audio + word, 90 seconds) BEFORE\nthe story - the standard comprehension scaffold.\nUnit 3 asset list: 12 fable-page illustrations, 5 fable-animal characters, moral-choice card UI,\nprediction-page UI (guess saved + revisited), pre-teach word cards, per-sentence audio."
+                                                                                }
+                                                         }
+                                                     ]
+                                     },
+                                     {
+                                         "unitNumber":  3,
+                                         "title":  "FABLES",
+                                         "description":  "",
+                                         "assetList":  "Unit 3 asset list: 12 fable-page illustrations, 5 fable-animal characters, moral-choice card UI, ",
+                                         "lessons":  [
+                                                         {
+                                                             "id":  "g3_u3_l1",
+                                                             "gradeLevel":  3,
+                                                             "unitNumber":  3,
+                                                             "lessonNumber":  1,
+                                                             "title":  "â€œThe Monkey and the Turtleâ€ (Philippine folktale)",
+                                                             "flow":  [
+                                                                          "story",
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  "Pre-story words: monkey (amo) Â· turtle (bao) Â· banana tree Â· share\nFULL RETOLD TEXT (8 short sentences, 4 pages):\nâ— Page 1: \"Turtle finds a banana tree in the river. Monkey says, \u0027Let\u0027s share!\u0027\"\nâ— Q1 - WHO: \"Who finds the tree?\" â†’ tap Turtle\nâ— Page 2: \"\u0027I take the top!\u0027 says Monkey. Turtle takes the bottom.\"\nâ— Q2 - WHAT: \"What does Monkey take?\" â†’ tap the leafy top (vs roots)\nâ— Page 3: \"Monkey\u0027s top dies. Turtle\u0027s bottom grows tall!\"\nâ— Q3 - WHY (the first WHY!): \"Why does Turtle\u0027s part grow?\" â†’ tap the roots picture (vs\nleaves) - Tudlo Guide whispers the hint if retried: \"Ang gamot ang nagakuha sang tubig!\"\nâ— Page 4: \"Now Turtle has many bananas. He shares them with his friends anyway!\"\nâ— MORAL PAGE: Tudlo Guide asks: \"Ano ang leksyon?\" â†’ 2 spoken+written choices: \"Share fairly.\" vs\n\"Bananas are yummy.\" (one real moral, one silly-literal - teaches the CATEGORY of moral by\ncontrast)\nAfter-story: TileBuilder: \"Turtle shares + his bananas\" Â· voice-read Turtle\u0027s kind line.",
+                                                             "lesson":  "Pre-story words: monkey (amo) Â· turtle (bao) Â· banana tree Â· share\nFULL RETOLD TEXT (8 short sentences, 4 pages):\nâ— Page 1: \"Turtle finds a banana tree in the river. Monkey says, \u0027Let\u0027s share!\u0027\"\nâ— Q1 - WHO: \"Who finds the tree?\" â†’ tap Turtle\nâ— Page 2: \"\u0027I take the top!\u0027 says Monkey. Turtle takes the bottom.\"\nâ— Q2 - WHAT: \"What does Monkey take?\" â†’ tap the leafy top (vs roots)\nâ— Page 3: \"Monkey\u0027s top dies. Turtle\u0027s bottom grows tall!\"\nâ— Q3 - WHY (the first WHY!): \"Why does Turtle\u0027s part grow?\" â†’ tap the roots picture (vs\nleaves) - Tudlo Guide whispers the hint if retried: \"Ang gamot ang nagakuha sang tubig!\"\nâ— Page 4: \"Now Turtle has many bananas. He shares them with his friends anyway!\"\nâ— MORAL PAGE: Tudlo Guide asks: \"Ano ang leksyon?\" â†’ 2 spoken+written choices: \"Share fairly.\" vs\n\"Bananas are yummy.\" (one real moral, one silly-literal - teaches the CATEGORY of moral by\ncontrast)\nAfter-story: TileBuilder: \"Turtle shares + his bananas\" Â· voice-read Turtle\u0027s kind line.",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Complete the activity for this lesson.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Pre-story words: monkey (amo) Â· turtle (bao) Â· banana tree Â· share\nFULL RETOLD TEXT (8 short sentences, 4 pages):\nâ— Page 1: \"Turtle finds a banana tree in the river. Monkey says, \u0027Let\u0027s share!\u0027\"\nâ— Q1 - WHO: \"Who finds the tree?\" â†’ tap Turtle\nâ— Page 2: \"\u0027I take the top!\u0027 says Monkey. Turtle takes the bottom.\"\nâ— Q2 - WHAT: \"What does Monkey take?\" â†’ tap the leafy top (vs roots)\nâ— Page 3: \"Monkey\u0027s top dies. Turtle\u0027s bottom grows tall!\"\nâ— Q3 - WHY (the first WHY!): \"Why does Turtle\u0027s part grow?\" â†’ "
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "overview":  "Pre-story words: monkey (amo) Â· turtle (bao) Â· banana tree Â· share\nFULL RETOLD TEXT (8 short sentences, 4 pages):\nâ— Page 1: \"Turtle finds a banana tree in the river. Monkey says, \u0027Let\u0027s share!\u0027\"\nâ— Q1 - WHO: \"Who finds the tree?\" â†’ tap Turtle\nâ— Page 2: \"\u0027I take the top!\u0027 says Monkey. Turtle takes the bottom.\"\nâ— Q2 - WHAT: \"What does Monkey take?\" â†’ tap the leafy top (vs roots)\nâ— Page 3: \"Monkey\u0027s top dies. Turtle\u0027s bottom grows tall!\"\nâ— Q3 - WHY (the first WHY!): \"Why does Turtle\u0027s part grow?\" â†’ tap the roots picture (vs\nleaves) - Tudlo Guide whispers the hint if retried: \"Ang gamot ang nagakuha sang tubig!\"\nâ— Page 4: \"Now Turtle has many bananas. He shares them with his friends anyway!\"\nâ— MORAL PAGE: Tudlo Guide asks: \"Ano ang leksyon?\" â†’ 2 spoken+written choices: \"Share fairly.\" vs\n\"Bananas are yummy.\" (one real moral, one silly-literal - teaches the CATEGORY of moral by\ncontrast)\nAfter-story: TileBuilder: \"Turtle shares + his bananas\" Â· voice-read Turtle\u0027s kind line.",
+                                                                                    "reward":  "Reward: fable book #1 (gold cover) on the Shelf Â· sticker \"Leksyon 1\" Â· Teaser: an ant carrying rice."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g3_u3_l2",
+                                                             "gradeLevel":  3,
+                                                             "unitNumber":  3,
+                                                             "lessonNumber":  2,
+                                                             "title":  "â€œThe Ant and the Grasshopperâ€ (Aesop)",
+                                                             "flow":  [
+                                                                          "story",
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  "Pre-story words: ant (subay) Â· grasshopper (apan) Â· work Â· save\nFULL RETOLD TEXT (8 sentences, 4 pages):\nâ— Page 1: \"Ant works all day. She saves rice for the rainy days.\"\nâ— Q1 - WHAT: \"What does Ant do all day?\" â†’ tap working-ant picture (vs sleeping)\nâ— Page 2: \"Grasshopper sings and plays. \u0027Why work? The sun is out!\u0027\"\nâ— Q2 - WHO: \"Who plays all day?\" â†’ tap Grasshopper\nâ— Page 3: \"The rains come. Grasshopper is hungry and cold.\"\nâ— Q3 - WHY: \"Why is Grasshopper hungry?\" â†’ tap \"He did not save\" picture (vs \"He is small\")\nâ— Page 4: \"Ant shares some rice. \u0027Next time - work first, play after.\u0027\"\nâ— MORAL PAGE: \"Work first, play after.\" vs \"Rain is cold.\" â†’ tap the real moral\nâ— CONNECT-TO-YOU PAGE (no wrong answer): Tudlo Guide asks: \"Ikaw? Ano ang una - homework\nukon hampang?\" â†’ tap either; Tudlo Guide responds warmly to both (\"Work first? Pareho kay Ant!\"\n/ \"Hampang anay? Okay - pero tandaan si Grasshopper, ha!\") - personal connection deepens\nmoral encoding.\nAfter-story: SEQUENCE: 4 pictures â†’ order Â· TileBuilder rebuilds the moral: \"Work first + play after.\"",
+                                                             "lesson":  "Pre-story words: ant (subay) Â· grasshopper (apan) Â· work Â· save\nFULL RETOLD TEXT (8 sentences, 4 pages):\nâ— Page 1: \"Ant works all day. She saves rice for the rainy days.\"\nâ— Q1 - WHAT: \"What does Ant do all day?\" â†’ tap working-ant picture (vs sleeping)\nâ— Page 2: \"Grasshopper sings and plays. \u0027Why work? The sun is out!\u0027\"\nâ— Q2 - WHO: \"Who plays all day?\" â†’ tap Grasshopper\nâ— Page 3: \"The rains come. Grasshopper is hungry and cold.\"\nâ— Q3 - WHY: \"Why is Grasshopper hungry?\" â†’ tap \"He did not save\" picture (vs \"He is small\")\nâ— Page 4: \"Ant shares some rice. \u0027Next time - work first, play after.\u0027\"\nâ— MORAL PAGE: \"Work first, play after.\" vs \"Rain is cold.\" â†’ tap the real moral\nâ— CONNECT-TO-YOU PAGE (no wrong answer): Tudlo Guide asks: \"Ikaw? Ano ang una - homework\nukon hampang?\" â†’ tap either; Tudlo Guide responds warmly to both (\"Work first? Pareho kay Ant!\"\n/ \"Hampang anay? Okay - pero tandaan si Grasshopper, ha!\") - personal connection deepens\nmoral encoding.\nAfter-story: SEQUENCE: 4 pictures â†’ order Â· TileBuilder rebuilds the moral: \"Work first + play after.\"",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Complete the activity for this lesson.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Pre-story words: ant (subay) Â· grasshopper (apan) Â· work Â· save\nFULL RETOLD TEXT (8 sentences, 4 pages):\nâ— Page 1: \"Ant works all day. She saves rice for the rainy days.\"\nâ— Q1 - WHAT: \"What does Ant do all day?\" â†’ tap working-ant picture (vs sleeping)\nâ— Page 2: \"Grasshopper sings and plays. \u0027Why work? The sun is out!\u0027\"\nâ— Q2 - WHO: \"Who plays all day?\" â†’ tap Grasshopper\nâ— Page 3: \"The rains come. Grasshopper is hungry and cold.\"\nâ— Q3 - WHY: \"Why is Grasshopper hungry?\" â†’ tap \"He did not save\" pic"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "overview":  "Pre-story words: ant (subay) Â· grasshopper (apan) Â· work Â· save\nFULL RETOLD TEXT (8 sentences, 4 pages):\nâ— Page 1: \"Ant works all day. She saves rice for the rainy days.\"\nâ— Q1 - WHAT: \"What does Ant do all day?\" â†’ tap working-ant picture (vs sleeping)\nâ— Page 2: \"Grasshopper sings and plays. \u0027Why work? The sun is out!\u0027\"\nâ— Q2 - WHO: \"Who plays all day?\" â†’ tap Grasshopper\nâ— Page 3: \"The rains come. Grasshopper is hungry and cold.\"\nâ— Q3 - WHY: \"Why is Grasshopper hungry?\" â†’ tap \"He did not save\" picture (vs \"He is small\")\nâ— Page 4: \"Ant shares some rice. \u0027Next time - work first, play after.\u0027\"\nâ— MORAL PAGE: \"Work first, play after.\" vs \"Rain is cold.\" â†’ tap the real moral\nâ— CONNECT-TO-YOU PAGE (no wrong answer): Tudlo Guide asks: \"Ikaw? Ano ang una - homework\nukon hampang?\" â†’ tap either; Tudlo Guide responds warmly to both (\"Work first? Pareho kay Ant!\"\n/ \"Hampang anay? Okay - pero tandaan si Grasshopper, ha!\") - personal connection deepens\nmoral encoding.\nAfter-story: SEQUENCE: 4 pictures â†’ order Â· TileBuilder rebuilds the moral: \"Work first + play after.\"",
+                                                                                    "reward":  "Reward: fable #2 Â· sticker \"Leksyon 2\" Â· Teaser: a rabbit laughing at a turtle."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g3_u3_l3",
+                                                             "gradeLevel":  3,
+                                                             "unitNumber":  3,
+                                                             "lessonNumber":  3,
+                                                             "title":  "â€œThe Turtle and the Rabbitâ€ (Aesop - starring Unit",
+                                                             "flow":  [
+                                                                          "story",
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  "3â€™s own Turtle!)\nPre-story words: rabbit (koneho) Â· race Â· fast Â· slow (taught as the unit\u0027s first OPPOSITE PAIR - seeding\nUnit 5)\nFULL RETOLD TEXT (8 sentences, 4 pages; the map IS the racetrack):\nâ— Page 1: \"Rabbit laughs at Turtle. \u0027You are so slow! Race me!\u0027\"\nâ— Q1 - WHO: \"Who is fast?\" â†’ tap Rabbit; \"Who is slow?\" â†’ tap Turtle\nâ— Page 2: \"The race starts at the school. It ends at the beach.\"\nâ— Q2 - WHERE: \"Where does the race end?\" â†’ tap beach\nâ— PREDICTION PAGE (first prediction practice - Unit 4 preview): Tudlo Guide asks mid-story: \"Sin-o ang\nmadaog?\" â†’ tap a guess (Rabbit or Turtle - EITHER accepted; the guess is saved and\nrevisited)\nâ— Page 3: \"Rabbit runs fast... then sleeps under the tree. Turtle walks slow, slow, slow - and\nnever stops.\"\nâ— Q3 - WHY (inferential): \"Why does Rabbit lose?\" â†’ tap the sleeping picture (vs the\nslow-walking picture)\nâ— Page 4: \"Turtle wins! \u0027Slow and steady wins the race!\u0027\" - then Tudlo Guide checks the child\u0027s earlier\nguess: \"Ang imo guess... husto ka!\" / \"Lain ang imo guess - pero maayo nga nag-guess ka!\nDetective ka gid!\" (the ACT of predicting is celebrated either way)\nâ— MORAL PAGE: \"Slow and steady wins the race.\" vs \"Rabbits are fast.\" â†’ tap the real moral\nAfter-story: TileBuilder: \"Slow and steady + wins + the race\" Â· voice-read the moral like a cheer.",
+                                                             "lesson":  "3â€™s own Turtle!)\nPre-story words: rabbit (koneho) Â· race Â· fast Â· slow (taught as the unit\u0027s first OPPOSITE PAIR - seeding\nUnit 5)\nFULL RETOLD TEXT (8 sentences, 4 pages; the map IS the racetrack):\nâ— Page 1: \"Rabbit laughs at Turtle. \u0027You are so slow! Race me!\u0027\"\nâ— Q1 - WHO: \"Who is fast?\" â†’ tap Rabbit; \"Who is slow?\" â†’ tap Turtle\nâ— Page 2: \"The race starts at the school. It ends at the beach.\"\nâ— Q2 - WHERE: \"Where does the race end?\" â†’ tap beach\nâ— PREDICTION PAGE (first prediction practice - Unit 4 preview): Tudlo Guide asks mid-story: \"Sin-o ang\nmadaog?\" â†’ tap a guess (Rabbit or Turtle - EITHER accepted; the guess is saved and\nrevisited)\nâ— Page 3: \"Rabbit runs fast... then sleeps under the tree. Turtle walks slow, slow, slow - and\nnever stops.\"\nâ— Q3 - WHY (inferential): \"Why does Rabbit lose?\" â†’ tap the sleeping picture (vs the\nslow-walking picture)\nâ— Page 4: \"Turtle wins! \u0027Slow and steady wins the race!\u0027\" - then Tudlo Guide checks the child\u0027s earlier\nguess: \"Ang imo guess... husto ka!\" / \"Lain ang imo guess - pero maayo nga nag-guess ka!\nDetective ka gid!\" (the ACT of predicting is celebrated either way)\nâ— MORAL PAGE: \"Slow and steady wins the race.\" vs \"Rabbits are fast.\" â†’ tap the real moral\nAfter-story: TileBuilder: \"Slow and steady + wins + the race\" Â· voice-read the moral like a cheer.",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Complete the activity for this lesson.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "3â€™s own Turtle!)\nPre-story words: rabbit (koneho) Â· race Â· fast Â· slow (taught as the unit\u0027s first OPPOSITE PAIR - seeding\nUnit 5)\nFULL RETOLD TEXT (8 sentences, 4 pages; the map IS the racetrack):\nâ— Page 1: \"Rabbit laughs at Turtle. \u0027You are so slow! Race me!\u0027\"\nâ— Q1 - WHO: \"Who is fast?\" â†’ tap Rabbit; \"Who is slow?\" â†’ tap Turtle\nâ— Page 2: \"The race starts at the school. It ends at the beach.\"\nâ— Q2 - WHERE: \"Where does the race end?\" â†’ tap beach\nâ— PREDICTION PAGE (first prediction practice - Uni"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "overview":  "3â€™s own Turtle!)\nPre-story words: rabbit (koneho) Â· race Â· fast Â· slow (taught as the unit\u0027s first OPPOSITE PAIR - seeding\nUnit 5)\nFULL RETOLD TEXT (8 sentences, 4 pages; the map IS the racetrack):\nâ— Page 1: \"Rabbit laughs at Turtle. \u0027You are so slow! Race me!\u0027\"\nâ— Q1 - WHO: \"Who is fast?\" â†’ tap Rabbit; \"Who is slow?\" â†’ tap Turtle\nâ— Page 2: \"The race starts at the school. It ends at the beach.\"\nâ— Q2 - WHERE: \"Where does the race end?\" â†’ tap beach\nâ— PREDICTION PAGE (first prediction practice - Unit 4 preview): Tudlo Guide asks mid-story: \"Sin-o ang\nmadaog?\" â†’ tap a guess (Rabbit or Turtle - EITHER accepted; the guess is saved and\nrevisited)\nâ— Page 3: \"Rabbit runs fast... then sleeps under the tree. Turtle walks slow, slow, slow - and\nnever stops.\"\nâ— Q3 - WHY (inferential): \"Why does Rabbit lose?\" â†’ tap the sleeping picture (vs the\nslow-walking picture)\nâ— Page 4: \"Turtle wins! \u0027Slow and steady wins the race!\u0027\" - then Tudlo Guide checks the child\u0027s earlier\nguess: \"Ang imo guess... husto ka!\" / \"Lain ang imo guess - pero maayo nga nag-guess ka!\nDetective ka gid!\" (the ACT of predicting is celebrated either way)\nâ— MORAL PAGE: \"Slow and steady wins the race.\" vs \"Rabbits are fast.\" â†’ tap the real moral\nAfter-story: TileBuilder: \"Slow and steady + wins + the race\" Â· voice-read the moral like a cheer.",
+                                                                                    "reward":  "Reward: UNIT BADGE \"Leksyon\" Â· fable #3 Â· map upgrade: Turtle and Rabbit RE-RACE across the map\nwhenever tapped (moral line plays at the finish flag) Â· the fable animals (monkey, turtle, ant,\ngrasshopper, rabbit) join the map as tappable animals Â· Teaser: Tudlo Guide wearing a detective hat.\nUNIT 4 - STORY DETECTIVES\nUNIT 4 - STORY DETECTIVES (Reading\nComprehension) - 3 lessons\nComprehension STRATEGIES trained explicitly, disguised as detective work: Detective Tudlo Guide gets a hat\nand a magnifying glass; every question type is a detective tool. Content = micro-mysteries of 4-6 short\nsentences (attention-span friendly), built entirely from known words - the skills are the curriculum.\nUnit 4 asset list: detective Tudlo Guide art (hat + glass), footprint-trail UI, crystal-ball UI, Goldilocks card UI\n(too small / wrong / just right), 10 micro-mystery illustration sets, question bank (4-6 extra questions\nper Unit 2-3 story for detective mode)."
+                                                                                }
+                                                         }
+                                                     ]
+                                     },
+                                     {
+                                         "unitNumber":  4,
+                                         "title":  "STORY DETECTIVES",
+                                         "description":  "",
+                                         "assetList":  "Unit 4 asset list: detective Tudlo Guide art (hat + glass), footprint-trail UI, crystal-ball UI, Goldilocks card UI ",
+                                         "lessons":  [
+                                                         {
+                                                             "id":  "g3_u4_l1",
+                                                             "gradeLevel":  3,
+                                                             "unitNumber":  4,
+                                                             "lessonNumber":  1,
+                                                             "title":  "The Question Glass (WH mastery + WHY +",
+                                                             "flow":  [
+                                                                          "story",
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "evidence-tapping)\n\nPresentation: Detective Tudlo Guide models on a 4-sentence micro-mystery, thinking ALOUD:\n\"The plate is empty! The fish is gone. Look - paw prints! The cat sleeps with a happy\nface.\"\nTudlo Guide: \"WHO?... WHAT happened?... WHY do I think it\u0027s the cat? - ang paw prints kag ang happy\nface!\" (evidence-pointing modeled explicitly).\nPractice - 3 micro-mysteries (FULL TEXTS), each followed by 3 questions; new mechanic: ANSWER,\nTHEN TAP YOUR CLUE (the evidence sentence or picture detail):\nMystery A - \"Ang Nadula nga Saging\":\n\"Tudlo Guide has three bananas. Now she has two! Monkey sits in the tree. He looks very full.\"\nâ— Q: \"How many bananas now?\" â†’ 2 Â· Q: \"WHO took the banana?\" â†’ Monkey, then TAP THE\nCLUE â†’ \"He looks very full.\" Â· Q: \"WHERE is Monkey?\" â†’ tree\nMystery B - \"Ang Basa nga Salog\" (The Wet Floor):\n\"The floor is wet. The window is open. It rained this morning. Bantay is dry.\"\nâ— Q: \"WHAT is the problem?\" â†’ wet floor Â· Q: \"WHY is the floor wet?\" â†’ rain through the\nwindow, TAP THE CLUE â†’ \"The window is open.\" Â· Q: \"Was it Bantay?\" â†’ No, TAP THE CLUE\nâ†’ \"Bantay is dry.\"\nMystery C - \"Ang Nagahibi nga Bata\" (The Crying Baby):\n\"The baby cries and cries. Her bottle is empty. Nanay brings milk. Now the baby smiles.\"\nâ— Q: \"WHY does the baby cry?\" â†’ hungry/empty bottle, TAP THE CLUE Â· Q: \"WHO helps?\" â†’\nNanay Â· Q: \"How does the baby feel at the end?\" â†’ happy",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Consolidation - \"Kaso #1: Ang Nadula nga Bola\" (FULL TEXT, 6 sentences):\n\"Juan\u0027s ball is lost. He looks at the plaza. No ball. Bantay runs to the school. The ball is\nunder the chair! Bantay is a good detective dog.\"\nâ— 4 questions (WHO lost it / WHERE does he look first / WHERE is the ball / WHO finds it), each\nwrong answer auto-highlights the evidence sentence.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Consolidation - \"Kaso #1: Ang Nadula nga Bola\" (FULL TEXT, 6 sentences):\n\"Juan\u0027s ball is lost. He looks at the plaza. No ball. Bantay runs to the school. The ball is\nunder the chair! Bantay is a good detective dog.\"\nâ— 4 questions (WHO lost it / WHERE does he look first / WHERE is the ball / WHO finds it), each\nwrong answer auto-highlights the evidence sentence."
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "overview":  "evidence-tapping)",
+                                                                                    "warm-up":  "Warm-up: 2 scheduler items.",
+                                                                                    "presentation":  "Presentation: Detective Tudlo Guide models on a 4-sentence micro-mystery, thinking ALOUD:\n\"The plate is empty! The fish is gone. Look - paw prints! The cat sleeps with a happy\nface.\"\nTudlo Guide: \"WHO?... WHAT happened?... WHY do I think it\u0027s the cat? - ang paw prints kag ang happy\nface!\" (evidence-pointing modeled explicitly).\nPractice - 3 micro-mysteries (FULL TEXTS), each followed by 3 questions; new mechanic: ANSWER,\nTHEN TAP YOUR CLUE (the evidence sentence or picture detail):\nMystery A - \"Ang Nadula nga Saging\":\n\"Tudlo Guide has three bananas. Now she has two! Monkey sits in the tree. He looks very full.\"\nâ— Q: \"How many bananas now?\" â†’ 2 Â· Q: \"WHO took the banana?\" â†’ Monkey, then TAP THE\nCLUE â†’ \"He looks very full.\" Â· Q: \"WHERE is Monkey?\" â†’ tree\nMystery B - \"Ang Basa nga Salog\" (The Wet Floor):\n\"The floor is wet. The window is open. It rained this morning. Bantay is dry.\"\nâ— Q: \"WHAT is the problem?\" â†’ wet floor Â· Q: \"WHY is the floor wet?\" â†’ rain through the\nwindow, TAP THE CLUE â†’ \"The window is open.\" Â· Q: \"Was it Bantay?\" â†’ No, TAP THE CLUE\nâ†’ \"Bantay is dry.\"\nMystery C - \"Ang Nagahibi nga Bata\" (The Crying Baby):\n\"The baby cries and cries. Her bottle is empty. Nanay brings milk. Now the baby smiles.\"\nâ— Q: \"WHY does the baby cry?\" â†’ hungry/empty bottle, TAP THE CLUE Â· Q: \"WHO helps?\" â†’\nNanay Â· Q: \"How does the baby feel at the end?\" â†’ happy",
+                                                                                    "consolidation":  "Consolidation - \"Kaso #1: Ang Nadula nga Bola\" (FULL TEXT, 6 sentences):\n\"Juan\u0027s ball is lost. He looks at the plaza. No ball. Bantay runs to the school. The ball is\nunder the chair! Bantay is a good detective dog.\"\nâ— 4 questions (WHO lost it / WHERE does he look first / WHERE is the ball / WHO finds it), each\nwrong answer auto-highlights the evidence sentence.",
+                                                                                    "reward":  "Reward: sticker \"Detective 1\" Â· DETECTIVE MODE unlocks: the magnifying glass appears on the Shelf -\nreopening any past story serves 2 fresh questions from a question bank Â· Teaser: footprints and a\ncrystal ball."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g3_u4_l2",
+                                                             "gradeLevel":  3,
+                                                             "unitNumber":  4,
+                                                             "lessonNumber":  2,
+                                                             "title":  "Footprints \u0026 Crystal Ball (sequencing + predicting)",
+                                                             "flow":  [
+                                                                          "story",
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Consolidation - \"Kaso #2: Ang Handa\" (FULL TEXT, 6 sentences, needs both tools):\n\"Today is Lola\u0027s birthday. First, Tudlo Guide buys flowers. Next, Juan brings a cake. Then, they\nhide at the house. Lola opens the door... SURPRISE! Lola is very happy.\"\nâ— Order the 4 events (footprints) Â· predict the ending BEFORE the last page (crystal ball) Â·\nconfirm with 1 evidence tap.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Consolidation - \"Kaso #2: Ang Handa\" (FULL TEXT, 6 sentences, needs both tools):\n\"Today is Lola\u0027s birthday. First, Tudlo Guide buys flowers. Next, Juan brings a cake. Then, they\nhide at the house. Lola opens the door... SURPRISE! Lola is very happy.\"\nâ— Order the 4 events (footprints) Â· predict the ending BEFORE the last page (crystal ball) Â·\nconfirm with 1 evidence tap."
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "warm-up":  "Warm-up: 1 WHY item + 1 evidence-tap from Lesson 4.1.\nSEQUENCING HALF - signal words first, next, then, last taught with a 4-step visual routine (planting:\n\"First dig. Next, the seed. Then, water. Last - a flower!\"). Practice: 3 scrambled picture-stories\n(getting dressed / cooking rice / Tudlo Guide\u0027s morning) â†’ drag into order along the footprint trail. Then\nONE TEXT-ONLY sequencing (4 short sentences, no pictures - the app\u0027s first pictureless\ncomprehension, the real milestone):\n\"First, Tudlo Guide wakes up. Next, she eats. Then, she hops to school. Last, she reads a book.\"\n(shuffled â†’ order)\nPREDICTING HALF - the crystal ball: stories stop before the ending; the child guesses. FULL TEXTS:\n1. \"The sky is dark. Nanay takes the laundry inside. What happens NEXT?\" â†’ 3 picture choices\n(rain / fiesta / turtle) â†’ rain\n2. \"Bantay smells food. He runs to the kitchen. What happens NEXT?\" â†’ (he begs for food / he\nsleeps / he swims)\n3. \"Ana plants a seed. She waters it every day. What happens NEXT?\" â†’ (a flower grows / it\nsnows / a bus comes) EITHER right or wrong, Tudlo Guide celebrates the ACT of predicting\n(\"Detective guess!\") and shows the clue that pointed to the answer.",
+                                                                                    "consolidation":  "Consolidation - \"Kaso #2: Ang Handa\" (FULL TEXT, 6 sentences, needs both tools):\n\"Today is Lola\u0027s birthday. First, Tudlo Guide buys flowers. Next, Juan brings a cake. Then, they\nhide at the house. Lola opens the door... SURPRISE! Lola is very happy.\"\nâ— Order the 4 events (footprints) Â· predict the ending BEFORE the last page (crystal ball) Â·\nconfirm with 1 evidence tap.",
+                                                                                    "reward":  "Reward: sticker \"Detective 2\" Â· Teaser: one giant glowing clue."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g3_u4_l3",
+                                                             "gradeLevel":  3,
+                                                             "unitNumber":  4,
+                                                             "lessonNumber":  3,
+                                                             "title":  "The Big Clue (main idea) + case finale",
+                                                             "flow":  [
+                                                                          "story",
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "Presentation - main idea as \"Ano ang PINAKA-importante?\" with the Goldilocks test: Tudlo Guide shows a\nstory and three summary cards - one TOO SMALL (a detail), one WRONG, one JUST RIGHT. Modeled\naloud on:\n\"Tudlo Guide helps all day. She carries Lola\u0027s bag. She feeds Bantay. She waters the plants.\"\nâ— Cards: \"Tudlo Guide waters plants\" (too small!) / \"Tudlo Guide plays games\" (wrong!) / \"Tudlo Guide is a big\nhelper\" (JUST RIGHT!)\nPractice - 2 more texts + 1 title-pick (FULL TEXTS):\n1. \"Juan runs every morning. He eats good food. He sleeps early. He is strong and healthy.\" â†’\nmain idea: \"Juan takes care of his body\"\n2. \"The market has fish. It has fruits. It has flowers. It has many things!\" â†’ \"The market sells\nmany things\"\n3. TITLE-PICK: the Lost Dog story reopens â†’ best title? \"Where Is Bantay?\" (vs \"The Big\nCarabao\" / \"Rain Today\") - a good title IS the main idea in disguise",
+                                                             "examples":  [
+
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Consolidation - \"Ang Dako nga Kaso!\" (THE BIG CASE - FULL TEXT, 8 short sentences, every tool):\n\"Lolo\u0027s riddle pouch is missing! First, Tudlo Guide looks at the porch. She finds small footprints.\nNext, she follows them to the plaza. Then she sees Monkey with the pouch! Monkey\nsays, \u0027I\u0027m sorry. I love riddles too.\u0027 Lolo smiles: \u0027Then let\u0027s play together!\u0027 Last, everyone\nanswers riddles at the plaza.\"\nâ— 2 WH + evidence taps Â· 1 sequence (4 pictures) Â· 1 mid-story prediction Â· 1 main-idea card\n(\"Everyone can play together\") = 5-6 items, retry-with-look-back throughout.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "Consolidation - \"Ang Dako nga Kaso!\" (THE BIG CASE - FULL TEXT, 8 short sentences, every tool):\n\"Lolo\u0027s riddle pouch is missing! First, Tudlo Guide looks at the porch. She finds small footprints.\nNext, she follows them to the plaza. Then she sees Monkey with the pouch! Monkey\nsays, \u0027I\u0027m sorry. I love riddles too.\u0027 Lolo smiles: \u0027Then let\u0027s play together!\u0027 Last, everyone\nanswers riddles at the plaza.\"\nâ— 2 WH + evidence taps Â· 1 sequence (4 pictures) Â· 1 mid-story prediction Â· 1 main-idea card\n(\"Everyone can play together\") = 5-6 items, retry-with-look-back throughout."
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "warm-up":  "Warm-up: 1 sequencing + 1 prediction item.",
+                                                                                    "presentation":  "Presentation - main idea as \"Ano ang PINAKA-importante?\" with the Goldilocks test: Tudlo Guide shows a\nstory and three summary cards - one TOO SMALL (a detail), one WRONG, one JUST RIGHT. Modeled\naloud on:\n\"Tudlo Guide helps all day. She carries Lola\u0027s bag. She feeds Bantay. She waters the plants.\"\nâ— Cards: \"Tudlo Guide waters plants\" (too small!) / \"Tudlo Guide plays games\" (wrong!) / \"Tudlo Guide is a big\nhelper\" (JUST RIGHT!)\nPractice - 2 more texts + 1 title-pick (FULL TEXTS):\n1. \"Juan runs every morning. He eats good food. He sleeps early. He is strong and healthy.\" â†’\nmain idea: \"Juan takes care of his body\"\n2. \"The market has fish. It has fruits. It has flowers. It has many things!\" â†’ \"The market sells\nmany things\"\n3. TITLE-PICK: the Lost Dog story reopens â†’ best title? \"Where Is Bantay?\" (vs \"The Big\nCarabao\" / \"Rain Today\") - a good title IS the main idea in disguise",
+                                                                                    "consolidation":  "Consolidation - \"Ang Dako nga Kaso!\" (THE BIG CASE - FULL TEXT, 8 short sentences, every tool):\n\"Lolo\u0027s riddle pouch is missing! First, Tudlo Guide looks at the porch. She finds small footprints.\nNext, she follows them to the plaza. Then she sees Monkey with the pouch! Monkey\nsays, \u0027I\u0027m sorry. I love riddles too.\u0027 Lolo smiles: \u0027Then let\u0027s play together!\u0027 Last, everyone\nanswers riddles at the plaza.\"\nâ— 2 WH + evidence taps Â· 1 sequence (4 pictures) Â· 1 mid-story prediction Â· 1 main-idea card\n(\"Everyone can play together\") = 5-6 items, retry-with-look-back throughout.",
+                                                                                    "reward":  "Reward: UNIT BADGE \"Story Detective\" Â· detective mode permanent for ALL Shelf books Â· Tudlo Guide keeps\nthe detective hat as a map cosmetic Â· Teaser: a see-saw with a big elephant and a small ant.\nUNIT 5 - WORD POWER\nUNIT 5 - WORD POWER (Language\nUnderstanding) - 3 lessons + GRADE 3\nCAPSTONE\nWord consciousness: words RELATE (opposites), words PAINT (describing words), and words can be\nFIGURED OUT (context clues - the most transferable skill for independent reading; it is how children\nlearn most vocabulary after this point). Hosts the app-wide capstone."
+                                                                                }
+                                                         }
+                                                     ]
+                                     },
+                                     {
+                                         "unitNumber":  5,
+                                         "title":  "WORD POWER",
+                                         "description":  "",
+                                         "assetList":  "",
+                                         "lessons":  [
+                                                         {
+                                                             "id":  "g3_u5_l1",
+                                                             "gradeLevel":  3,
+                                                             "unitNumber":  5,
+                                                             "lessonNumber":  1,
+                                                             "title":  "Opposites (Mga Kabaliskaran)",
+                                                             "flow":  [
+                                                                          "story",
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "New pairs (6): big-small Â· happy-sad Â· hot-cold Â· day-night Â· fast-slow (review, from the Rabbit fable) Â·\nold-new\n\nPresentation - the SEE-SAW: opposites taught as PAIRS on a see-saw: big elephant up, small ant\ndown (Ant from the fable!). \"Big... ang kabaliskaran... small!\" Each pair anchored in known scenes:\nhot sun - cold rain Â· day - night (the map\u0027s sky layer!) Â· happy - sad (the Grade 2 faces) Â· old lolo\u0027s\nradio - new bag Â· fast Rabbit - slow Turtle.",
+                                                             "examples":  [
+                                                                              {
+                                                                                  "hiligaynon":  "New pairs (6): big-small Â· happy-sad Â· hot-cold Â· day-night Â· fast-slow (review, from the Rabbit fable) Â·\nold-new",
+                                                                                  "english":  null,
+                                                                                  "imageAsset":  null,
+                                                                                  "audioAsset":  null
+                                                                              }
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "\"Tap the OPPOSITE of big!\"",
+                                                                                   "choices":  [
+                                                                                                   "small ant",
+                                                                                                   "big elephant"
+                                                                                               ],
+                                                                                   "answer":  "small ant",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "\"Tap the OPPOSITE of big!\" â†’ small ant (vs big elephant)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q2",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "\"Tap the OPPOSITE of hot!\"",
+                                                                                   "choices":  [
+                                                                                                   "cold/rain scene",
+                                                                                                   "sun"
+                                                                                               ],
+                                                                                   "answer":  "cold/rain scene",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "\"Tap the OPPOSITE of hot!\" â†’ cold/rain scene (vs sun)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q3",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "\"Tap the OPPOSITE of happy!\"",
+                                                                                   "choices":  [
+                                                                                                   "sad face"
+                                                                                               ],
+                                                                                   "answer":  "sad face",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "\"Tap the OPPOSITE of happy!\" â†’ sad face (3 choices)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q4",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "SCENE: night map shown",
+                                                                                   "choices":  [
+                                                                                                   "\"Ano ang opposite sini?\" â†’ tap day scene"
+                                                                                               ],
+                                                                                   "answer":  "\"Ano ang opposite sini?\" â†’ tap day scene",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "SCENE: night map shown â†’ \"Ano ang opposite sini?\" â†’ tap day scene"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q5",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "\"Tap the OPPOSITE of fast!\"",
+                                                                                   "choices":  [
+                                                                                                   "Turtle",
+                                                                                                   "Rabbit"
+                                                                                               ],
+                                                                                   "answer":  "Turtle",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "\"Tap the OPPOSITE of fast!\" â†’ Turtle (vs Rabbit)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q6",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "\"Tap the OPPOSITE of new!\"",
+                                                                                   "choices":  [
+                                                                                                   "the old radio"
+                                                                                               ],
+                                                                                   "answer":  "the old radio",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "\"Tap the OPPOSITE of new!\" â†’ the old radio (3 choices)"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "new":  "New pairs (6): big-small Â· happy-sad Â· hot-cold Â· day-night Â· fast-slow (review, from the Rabbit fable) Â·\nold-new",
+                                                                                    "warm-up":  "Warm-up: 2 scheduler items (include fast/slow - the seeded pair).",
+                                                                                    "presentation":  "Presentation - the SEE-SAW: opposites taught as PAIRS on a see-saw: big elephant up, small ant\ndown (Ant from the fable!). \"Big... ang kabaliskaran... small!\" Each pair anchored in known scenes:\nhot sun - cold rain Â· day - night (the map\u0027s sky layer!) Â· happy - sad (the Grade 2 faces) Â· old lolo\u0027s\nradio - new bag Â· fast Rabbit - slow Turtle.",
+                                                                                    "receptive_trials":  "Receptive trials (6):\n1. \"Tap the OPPOSITE of big!\" â†’ small ant (vs big elephant)\n2. \"Tap the OPPOSITE of hot!\" â†’ cold/rain scene (vs sun)\n3. \"Tap the OPPOSITE of happy!\" â†’ sad face (3 choices)\n4. SCENE: night map shown â†’ \"Ano ang opposite sini?\" â†’ tap day scene\n5. \"Tap the OPPOSITE of fast!\" â†’ Turtle (vs Rabbit)\n6. \"Tap the OPPOSITE of new!\" â†’ the old radio (3 choices)",
+                                                                                    "productive":  "Productive: SEE-SAW DRAG: drag word cards onto the two ends so each pair balances (6 pairs) Â·\nTileBuilder: \"The elephant is + big\" / \"The ant is + small.\"",
+                                                                                    "consolidation":  "Consolidation - \"Ang Baliktad nga Adlaw!\" (Opposite Day!): the map is all wrong - the sun is out at\nnight, the fiesta is sad, Turtle is winning a sprint against a sleeping... wait, that one is right! Fix 4\nscenes by tapping the opposite that repairs each; the trick \"already-correct\" scene rewards careful\nreading.",
+                                                                                    "reward":  "Reward: sticker \"Word Power 1\" Â· Teaser: a red flower and a yellow banana."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g3_u5_l2",
+                                                             "gradeLevel":  3,
+                                                             "unitNumber":  5,
+                                                             "lessonNumber":  2,
+                                                             "title":  "Describing Words (colors + size/shape)",
+                                                             "flow":  [
+                                                                          "story",
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "New (6): red Â· yellow Â· green Â· long Â· short Â· round\n\nPresentation: describing words SLIDE IN FRONT of nouns the child knows: \"banana â†’ yellow\nbanana!\" All six across known nouns: red flower Â· yellow banana Â· green tree Â· long river Â· short\npencil Â· round plate.",
+                                                             "examples":  [
+                                                                              {
+                                                                                  "hiligaynon":  "New (6): red Â· yellow Â· green Â· long Â· short Â· round",
+                                                                                  "english":  null,
+                                                                                  "imageAsset":  null,
+                                                                                  "audioAsset":  null
+                                                                              }
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "\"Tap the red flower!\" (vs yellow flower)",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "\"Tap the red flower!\" (vs yellow flower)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q2",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "\"Tap the round plate!\" (vs long table)",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "\"Tap the round plate!\" (vs long table)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q3",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "TWO-ATTRIBUTE (the real skill - both words must be processed): \"Tap the long yellow banana!\" (choices: long-green banana / short-yellow banana / long-yellow banana)",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "TWO-ATTRIBUTE (the real skill - both words must be processed): \"Tap the long yellow banana!\" (choices: long-green banana / short-yellow banana / long-yellow banana)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q4",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "TWO-ATTRIBUTE: \"Tap the small red flower!\" (big-red / small-yellow / small-red)",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "TWO-ATTRIBUTE: \"Tap the small red flower!\" (big-red / small-yellow / small-red)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q5",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "CATEGORY: \"Which things are green?\"",
+                                                                                   "choices":  [
+                                                                                                   "tap 2 of 4"
+                                                                                               ],
+                                                                                   "answer":  "tap 2 of 4",
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "CATEGORY: \"Which things are green?\" â†’ tap 2 of 4 (tree, guide!)"
+                                                                               },
+                                                                               {
+                                                                                   "id":  "q6",
+                                                                                   "type":  "tapChoice",
+                                                                                   "question":  "\"Tap the short pencil!\" (vs long pencil)",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "\"Tap the short pencil!\" (vs long pencil)"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "new":  "New (6): red Â· yellow Â· green Â· long Â· short Â· round",
+                                                                                    "warm-up":  "Warm-up: 2 opposite-pair trials.",
+                                                                                    "presentation":  "Presentation: describing words SLIDE IN FRONT of nouns the child knows: \"banana â†’ yellow\nbanana!\" All six across known nouns: red flower Â· yellow banana Â· green tree Â· long river Â· short\npencil Â· round plate.",
+                                                                                    "receptive_trials":  "Receptive trials (6):\n1. \"Tap the red flower!\" (vs yellow flower)\n2. \"Tap the round plate!\" (vs long table)\n3. TWO-ATTRIBUTE (the real skill - both words must be processed): \"Tap the long yellow\nbanana!\" (choices: long-green banana / short-yellow banana / long-yellow banana)\n4. TWO-ATTRIBUTE: \"Tap the small red flower!\" (big-red / small-yellow / small-red)\n5. CATEGORY: \"Which things are green?\" â†’ tap 2 of 4 (tree, guide!)\n6. \"Tap the short pencil!\" (vs long pencil)",
+                                                                                    "productive":  "Productive: DESCRIBE-IT builder: TileBuilder noun phrases \"red + flower\", \"long + river\", each voiced\nback Â· I-SPY VOICE GAME: Tudlo Guide: \"I spy something green and it can HOP...\" â†’ the child taps it (it\u0027s\nTudlo Guide! - the app\u0027s best joke about itself) + 2 more rounds on map scenes.",
+                                                                                    "consolidation":  "Consolidation - \"Kolor sa Merkado!\": the vendor\u0027s orders use two describers each: \"Palihog - one\nsmall red flower!... one long yellow banana!... one round plate!... one green mango!\" 4 fetch items.",
+                                                                                    "reward":  "Reward: sticker \"Word Power 2\" Â· I-SPY joins the map as a free-play game (rotating rounds - the app\u0027s\nfinal voluntary-review surface) Â· Teaser: a mystery word wearing a question mark."
+                                                                                }
+                                                         },
+                                                         {
+                                                             "id":  "g3_u5_l3",
+                                                             "gradeLevel":  3,
+                                                             "unitNumber":  5,
+                                                             "lessonNumber":  3,
+                                                             "title":  "Context Clues + THE GRADE 3 / APP CAPSTONE",
+                                                             "flow":  [
+                                                                          "story",
+                                                                          "lesson",
+                                                                          "example",
+                                                                          "shortQuiz"
+                                                                      ],
+                                                             "story":  null,
+                                                             "lesson":  "CONTEXT CLUES (the graduation skill): Tudlo Guide meets 4 sentences, each with one unknown word; the\nsurrounding sentence gives the meaning away. Pattern per item: READ â†’ GUESS from 3 picture\nchoices â†’ the CLUE WORDS light up â†’ confirm. FULL TEXTS:\n1. \"Bantay is very gutom - he eats and eats and eats!\" â†’ gutom = ? â†’ hungry (clues: \"eats and\neats\")\n2. \"The night is very madulom - Tudlo Guide cannot see!\" â†’ dark (clue: \"cannot see\")\n3. \"Lola\u0027s soup is mainit - be careful, do not touch!\" â†’ hot (clues: \"careful... do not touch\")\n4. \"Juan is kapoy - he ran twenty laps! He wants to sleep.\" â†’ tired (clues: \"ran... wants to\nsleep\")\n(Design note: the mystery words are HILIGAYNON words embedded in English sentences - the child\ndecodes meaning from ENGLISH context, then Tudlo Guide reveals the English word. This flips the app\u0027s usual\ndirection and mirrors real bilingual reading. If validators prefer invented words instead, swap them in\n- the mechanic is unchanged.)\nTudlo Guide then says the line that is the whole app in one sentence: \"Kon indi mo kilala ang word - BASAHA\nANG PALIBOT NIYA!\" (If you don\u0027t know the word - read around it!)\nTHE GRADE 3 / APP CAPSTONE - \"Ang Graduation ni Tudlo Guide!\" A final SHORT story (8 sentences -\nattention-span capped) told in stops across the whole map, with ~14 embedded items sampling\nevery Grade 3 skill. FULL STORY TEXT:\nâ— Page 1: \"Today is a big day. Tudlo Guide graduates!\" â†’ 2 number items: \"How many friends come?\"\n(count 12) Â· \"How much are the flowers?\" (price tag: 15 pesos)\nâ— Page 2: \"First, the friends make the plaza pretty. Ana brings long green leaves. Juan brings\nround red lanterns.\" â†’ 2 describing taps + 1 sequence item (first/next/then cards)\nâ— Page 3: \"But the sky is dark! What happens next?\" â†’ 1 prediction (rain!) â†’ \"Teacher says:\n\u0027To the school!\u0027\" â†’ 1 WH + evidence tap: \"Why do they move?\" â†’ tap the clue sentence\nâ— Page 4: \"Lolo tells one last riddle. Lola reads one small poem.\" â†’ 1 riddle (Grade 2 pouch,\nscheduler-picked) + 1 rhyme-completion\nâ— Page 5: \"Tudlo Guide says: \u0027Salamat - THANK YOU, my friends!\u0027 Everyone is happy - not sad!\" â†’ 1\nopposite tap + 1 context-clue word + 1 main-idea card (\"Friends help each other\" - just right!)\nâ— FINALE: the child voice-reads the last line aloud: \"Goodbye, and thank you!\" (record â†’\nplayback â†’ the whole map cheers)\nFirst-attempt data here = the terminal assessment; with the Grade 1 and Grade 2 capstones you now\nhave THREE comparable instruments charting the entire learning arc (the spine of your evaluation\nchapter).",
+                                                             "examples":  [
+                                                                              {
+                                                                                  "hiligaynon":  "- the mechanic is unchanged.)",
+                                                                                  "english":  null,
+                                                                                  "imageAsset":  null,
+                                                                                  "audioAsset":  null
+                                                                              }
+                                                                          ],
+                                                             "shortQuiz":  [
+                                                                               {
+                                                                                   "id":  "q1",
+                                                                                   "type":  "activity",
+                                                                                   "question":  "Complete the activity for this lesson.",
+                                                                                   "choices":  [
+
+                                                                                               ],
+                                                                                   "answer":  null,
+                                                                                   "audioAsset":  null,
+                                                                                   "imageAsset":  null,
+                                                                                   "raw":  "CONTEXT CLUES (the graduation skill): Tudlo Guide meets 4 sentences, each with one unknown word; the\nsurrounding sentence gives the meaning away. Pattern per item: READ â†’ GUESS from 3 picture\nchoices â†’ the CLUE WORDS light up â†’ confirm. FULL TEXTS:\n1. \"Bantay is very gutom - he eats and eats and eats!\" â†’ gutom = ? â†’ hungry (clues: \"eats and\neats\")\n2. \"The night is very madulom - Tudlo Guide cannot see!\" â†’ dark (clue: \"cannot see\")\n3. \"Lola\u0027s soup is mainit - be careful, do not touch!\" â†’ hot (clu"
+                                                                               }
+                                                                           ],
+                                                             "voiceSupported":  true,
+                                                             "uiRules":  {
+                                                                             "scrollable":  true,
+                                                                             "noNextButton":  true,
+                                                                             "checkButtonPerQuiz":  true,
+                                                                             "tappableOnly":  true,
+                                                                             "noTypedTranslation":  true
+                                                                         },
+                                                             "sourceSections":  {
+                                                                                    "overview":  "CONTEXT CLUES (the graduation skill): Tudlo Guide meets 4 sentences, each with one unknown word; the\nsurrounding sentence gives the meaning away. Pattern per item: READ â†’ GUESS from 3 picture\nchoices â†’ the CLUE WORDS light up â†’ confirm. FULL TEXTS:\n1. \"Bantay is very gutom - he eats and eats and eats!\" â†’ gutom = ? â†’ hungry (clues: \"eats and\neats\")\n2. \"The night is very madulom - Tudlo Guide cannot see!\" â†’ dark (clue: \"cannot see\")\n3. \"Lola\u0027s soup is mainit - be careful, do not touch!\" â†’ hot (clues: \"careful... do not touch\")\n4. \"Juan is kapoy - he ran twenty laps! He wants to sleep.\" â†’ tired (clues: \"ran... wants to\nsleep\")\n(Design note: the mystery words are HILIGAYNON words embedded in English sentences - the child\ndecodes meaning from ENGLISH context, then Tudlo Guide reveals the English word. This flips the app\u0027s usual\ndirection and mirrors real bilingual reading. If validators prefer invented words instead, swap them in\n- the mechanic is unchanged.)\nTudlo Guide then says the line that is the whole app in one sentence: \"Kon indi mo kilala ang word - BASAHA\nANG PALIBOT NIYA!\" (If you don\u0027t know the word - read around it!)\nTHE GRADE 3 / APP CAPSTONE - \"Ang Graduation ni Tudlo Guide!\" A final SHORT story (8 sentences -\nattention-span capped) told in stops across the whole map, with ~14 embedded items sampling\nevery Grade 3 skill. FULL STORY TEXT:\nâ— Page 1: \"Today is a big day. Tudlo Guide graduates!\" â†’ 2 number items: \"How many friends come?\"\n(count 12) Â· \"How much are the flowers?\" (price tag: 15 pesos)\nâ— Page 2: \"First, the friends make the plaza pretty. Ana brings long green leaves. Juan brings\nround red lanterns.\" â†’ 2 describing taps + 1 sequence item (first/next/then cards)\nâ— Page 3: \"But the sky is dark! What happens next?\" â†’ 1 prediction (rain!) â†’ \"Teacher says:\n\u0027To the school!\u0027\" â†’ 1 WH + evidence tap: \"Why do they move?\" â†’ tap the clue sentence\nâ— Page 4: \"Lolo tells one last riddle. Lola reads one small poem.\" â†’ 1 riddle (Grade 2 pouch,\nscheduler-picked) + 1 rhyme-completion\nâ— Page 5: \"Tudlo Guide says: \u0027Salamat - THANK YOU, my friends!\u0027 Everyone is happy - not sad!\" â†’ 1\nopposite tap + 1 context-clue word + 1 main-idea card (\"Friends help each other\" - just right!)\nâ— FINALE: the child voice-reads the last line aloud: \"Goodbye, and thank you!\" (record â†’\nplayback â†’ the whole map cheers)\nFirst-attempt data here = the terminal assessment; with the Grade 1 and Grade 2 capstones you now\nhave THREE comparable instruments charting the entire learning arc (the spine of your evaluation\nchapter).",
+                                                                                    "reward":  "Reward: GRADE 3 TROPHY Â· cap-and-gown KOKA hops across a full-map fiesta Â· the Storybook Shelf\nfills Â· permanent free-play: every place, person, animal, book, song, poem, riddle, and I-spy round\nstays open - the app\u0027s afterlife as a review world.\nG3 MASTER WORD \u0026 SKILL LIST\nGRADE 3 MASTER WORD \u0026 SKILL LIST\n# Item English Type Unit\n1 Pila? How many? question frame 1\n2 Pila ang bili? How much? question frame 1\n3 onse-bainte* eleven-twenty numbers 1\n4 pesos pesos noun 1\n5 amo monkey noun 3\n6 bao turtle noun 3\n7 - banana tree noun 3\n8 - share verb 3\n9 subay ant noun 3\n10 apan grasshopper noun 3\n11 obra work verb 3\n12 - save verb 3\n13 koneho rabbit noun 3\n14 - race noun/verb 3\n15 dasig fast adjective 3, 5\n16 hinay slow adjective 3, 5\n17 dako / gamay big / small opposites 5\n18 malipayon / masubo happy / sad opposites 5\n19 mainit / mabugnaw hot / cold opposites 5\n20 adlaw / gab-i day / night opposites 5\n21 daan / bag-o old / new opposites 5\n22 pula red color 5\n23 dalag yellow color 5\n24 berde / lunhaw green color 5\n25 malaba / malip-ot long / short adjectives 5\n26 tipulon round adjective 5\n27 first / next / then / last - signal words 4\n28 today / tomorrow - time words 2"
+                                                                                }
+                                                         }
+                                                     ]
+                                     }
+                                 ],
+                       "lessonCount":  15
+                   }
+               ]
+}
