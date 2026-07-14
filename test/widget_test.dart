@@ -5,6 +5,7 @@ import 'package:tudloapp/core/data/app_data.dart';
 import 'package:tudloapp/core/models/grade_level.dart';
 import 'package:tudloapp/data/dictionary/dictionary_data.dart';
 import 'package:tudloapp/data/lesson_bank/lesson_bank.dart';
+import 'package:tudloapp/features/dictionary/screens/dictionary_page.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -44,6 +45,30 @@ void main() {
 
     expect(DictionaryData.entries, hasLength(963));
     expect(DictionaryData.meaningFor('abogado'), contains('lawyer'));
+  });
+
+  test('dictionary index follows the section nearest the top', () {
+    expect(
+      activeDictionarySection(const [
+        MapEntry('A', 80),
+        MapEntry('B', 180),
+        MapEntry('C', 280),
+      ]),
+      'B',
+    );
+  });
+
+  test('dictionary index scale tapers symmetrically', () {
+    expect(dictionaryIndexScale(10, 10), 1.55);
+    expect(dictionaryIndexScale(9, 10), dictionaryIndexScale(11, 10));
+    expect(
+      dictionaryIndexScale(9, 10),
+      greaterThan(dictionaryIndexScale(8, 10)),
+    );
+    expect(
+      dictionaryIndexScale(8, 10),
+      greaterThan(dictionaryIndexScale(7, 10)),
+    );
   });
 
   test('referenced image assets exist with exact path casing', () async {

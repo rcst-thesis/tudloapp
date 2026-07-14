@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:tudloapp/core/data/app_data.dart';
 import 'package:tudloapp/features/dictionary/screens/dictionary_page.dart';
@@ -82,6 +84,43 @@ class AppShellState extends State<AppShell> {
               left: 16,
               child: SafeArea(child: TudloLanguageToggle()),
             ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: 210,
+            child: IgnorePointer(
+              child: ClipRect(
+                child: ShaderMask(
+                  blendMode: BlendMode.dstIn,
+                  shaderCallback: (bounds) => const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Colors.transparent, Colors.black],
+                    stops: [.42, 1],
+                  ).createShader(bounds),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 14, sigmaY: 14),
+                    blendMode: BlendMode.src,
+                    child: const DecoratedBox(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.transparent,
+                            Color(0x18FFFFFF),
+                            Color(0x48FFFFFF),
+                          ],
+                          stops: [.42, .72, 1],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
           // Floating navbar stays above the current page instead of being part
           // of each screen, so tab styling is consistent everywhere.
           Positioned(

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:tudloapp/core/theme/app_theme.dart';
 
@@ -24,37 +26,60 @@ class TudloBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-      height: 104,
+    const radius = BorderRadius.all(Radius.circular(40));
+    return DecoratedBox(
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: .50),
-        borderRadius: BorderRadius.circular(40),
-        border: Border.all(color: Colors.white.withValues(alpha: .58)),
+        borderRadius: radius,
         boxShadow: [
           BoxShadow(
-            color: TudloColors.forest.withValues(alpha: 0.12),
-            blurRadius: 34,
-            offset: const Offset(0, 16),
+            color: Colors.black.withValues(alpha: .16),
+            blurRadius: 30,
+            offset: const Offset(0, 14),
           ),
           BoxShadow(
-            color: TudloColors.brightGreen.withValues(alpha: 0.07),
-            blurRadius: 18,
-            offset: const Offset(0, 7),
+            color: Colors.white.withValues(alpha: .38),
+            blurRadius: 10,
+            offset: const Offset(0, -2),
           ),
         ],
       ),
-      child: Row(
-        children: List.generate(iconAssets.length, (index) {
-          final isSelected = selectedIndex == index;
-          return Expanded(
-            child: _BottomNavItem(
-              asset: iconAssets[index],
-              selected: isSelected,
-              onTap: () => onTap(index),
+      child: ClipRRect(
+        borderRadius: radius,
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 22, sigmaY: 22),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+            height: 104,
+            decoration: BoxDecoration(
+              borderRadius: radius,
+              border: Border.all(
+                color: Colors.white.withValues(alpha: .62),
+                width: 1.4,
+              ),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Colors.white.withValues(alpha: .52),
+                  Colors.white.withValues(alpha: .25),
+                  TudloColors.brightGreen.withValues(alpha: .10),
+                ],
+              ),
             ),
-          );
-        }),
+            child: Row(
+              children: List.generate(iconAssets.length, (index) {
+                final isSelected = selectedIndex == index;
+                return Expanded(
+                  child: _BottomNavItem(
+                    asset: iconAssets[index],
+                    selected: isSelected,
+                    onTap: () => onTap(index),
+                  ),
+                );
+              }),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -102,8 +127,21 @@ class _BottomNavItemState extends State<_BottomNavItem> {
           curve: Curves.easeOut,
           height: 84,
           decoration: BoxDecoration(
-            color: Colors.transparent,
+            color: widget.selected
+                ? Colors.white.withValues(alpha: .24)
+                : Colors.transparent,
             borderRadius: BorderRadius.circular(30),
+            border: widget.selected
+                ? Border.all(color: Colors.white.withValues(alpha: .46))
+                : null,
+            boxShadow: widget.selected
+                ? [
+                    BoxShadow(
+                      color: Colors.white.withValues(alpha: .20),
+                      blurRadius: 12,
+                    ),
+                  ]
+                : null,
           ),
           child: Center(
             child: Image.asset(
