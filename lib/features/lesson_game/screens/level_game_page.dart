@@ -9,6 +9,7 @@ import 'package:tudloapp/core/state/app_state.dart';
 import 'package:tudloapp/core/theme/app_theme.dart';
 import 'package:tudloapp/core/widgets/language_toggle.dart';
 import 'package:tudloapp/core/widgets/mascot_widget.dart';
+import 'package:tudloapp/data/dictionary/dictionary_data.dart';
 import 'package:tudloapp/data/lesson_bank/lesson_bank.dart';
 import 'package:tudloapp/core/widgets/word_tooltip.dart';
 import 'package:tudloapp/features/energy/widgets/energy_indicator.dart';
@@ -47,12 +48,13 @@ class _LevelGamePageState extends State<LevelGamePage> {
   @override
   void initState() {
     super.initState();
-    _contentFuture = LessonBank.loadLevelContentForLevel(widget.level).then((
-      content,
-    ) {
+    _contentFuture = () async {
+      final contentFuture = LessonBank.loadLevelContentForLevel(widget.level);
+      await DictionaryData.initialize();
+      final content = await contentFuture;
       questions = content.quizItems.map(_questionFromQuizItem).toList();
       return content;
-    });
+    }();
     _levelStartedAt = DateTime.now();
   }
 
@@ -1622,7 +1624,10 @@ class _LevelQuizCardState extends State<_LevelQuizCard> {
     final hiligaynonMatch = hiligaynonMatches[left];
     if (hiligaynonMatch != null) return hiligaynonMatch;
 
-    return LessonBank.terms.firstWhere((term) => term.hil == left).eng;
+    final index = question.leftItems.indexOf(left);
+    return index >= 0 && index < question.rightItems.length
+        ? question.rightItems[index]
+        : left;
   }
 
   void _clearWrongMatch() {

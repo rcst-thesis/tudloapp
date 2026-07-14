@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tudloapp/core/data/app_data.dart';
 import 'package:tudloapp/core/theme/app_theme.dart';
+import 'package:tudloapp/data/dictionary/dictionary_data.dart';
 import 'package:tudloapp/data/lesson_bank/lesson_bank.dart';
 import 'package:tudloapp/features/lesson_game/screens/level_game_page.dart';
 
@@ -23,6 +24,7 @@ class _LessonIntroPageState extends State<LessonIntroPage> {
   void initState() {
     super.initState();
     _contentFuture = LessonBank.loadLevelContentForLevel(widget.level);
+    unawaited(DictionaryData.initialize());
   }
 
   int get _localLessonNumber => ((widget.level - 1) % AppData.unitLevels) + 1;

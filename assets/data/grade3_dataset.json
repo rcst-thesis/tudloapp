@@ -24,81 +24,60 @@
                   "category": "Gamita Ini",
                   "hiligaynon": "estasyon",
                   "english": "balantayan sang salakyan",
-                  "note": "Didto kita makitaay sa estasyon sang bus pakadto sa Iloilo.",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Didto kita makitaay sa estasyon sang bus pakadto sa Iloilo."
                 },
                 {
                   "category": "Gamita Ini",
                   "hiligaynon": "establisyemento",
                   "english": "dalagku nga mga edipisyo ukon \"building\"",
-                  "note": "Madamo nga mga establisyemento komersyal ang makita sa dalanon sang isa ka syudad.",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Madamo nga mga establisyemento komersyal ang makita sa dalanon sang isa ka syudad."
                 },
                 {
                   "category": "Halimbawa",
                   "hiligaynon": "ginpaandar",
                   "english": "ginpadalagan",
-                  "note": "Ginpaandar ni tatay ang iya pangpasahero nga dyip.",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ginpaandar ni tatay ang iya pangpasahero nga dyip."
                 },
                 {
                   "category": "Halimbawa",
                   "hiligaynon": "nagapatuka",
                   "english": "nagapakaon sang manok ukon pispis",
-                  "note": "Nagapatuka anay sang manok ang akon magulang nga lalaki antes magsulod sa trabaho.",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Nagapatuka anay sang manok ang akon magulang nga lalaki antes magsulod sa trabaho."
                 },
                 {
                   "category": "Halimbawa",
                   "hiligaynon": "Kriiing! Kriiing! Kriing!",
-                  "english": "Kriiing! Kriiing! Kriing!",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Kriiing! Kriiing! Kriing!"
                 },
                 {
                   "category": "Halimbawa",
                   "hiligaynon": "Ngiyaw... ngiyaw... ngiyaw...",
                   "english": "Ngiyaw... ngiyaw... ngiyaw...",
-                  "note": "Ngiyaw... ngiyaw... ngiyaw... paangga sang iya kuring kay Ken.",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngiyaw... ngiyaw... ngiyaw... paangga sang iya kuring kay Ken."
                 },
                 {
                   "category": "Halimbawa",
                   "hiligaynon": "Brum! Brum! Brum!",
                   "english": "Brum! Brum! Brum!",
-                  "note": "Brum! Brum! Brum! Pinaandar na sang iya amay ang tricycle agud idul-ong si Ken sa eskwelahan.",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Brum! Brum! Brum! Pinaandar na sang iya amay ang tricycle agud idul-ong si Ken sa eskwelahan."
                 },
                 {
                   "category": "Halimbawa",
                   "hiligaynon": "kuring",
                   "english": "kuring",
-                  "note": "Gilayon naligo kag nagkaon si Ken. Nagpalapit gilayon ang iya ginasagud nga kuring.",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Gilayon naligo kag nagkaon si Ken. Nagpalapit gilayon ang iya ginasagud nga kuring."
                 },
                 {
                   "category": "Halimbawa",
                   "hiligaynon": "tricycle",
                   "english": "tricycle",
-                  "note": "Brum! Brum! Brum! Pinaandar na sang iya amay ang tricycle agud idul-ong si Ken sa eskwelahan.",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Brum! Brum! Brum! Pinaandar na sang iya amay ang tricycle agud idul-ong si Ken sa eskwelahan."
                 },
                 {
                   "category": "Halimbawa",
                   "hiligaynon": "Kasilingan",
                   "english": "Neighbor",
-                  "note": "Mabuot kag mabinuligon ang amon mga kasilingan.",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Mabuot kag mabinuligon ang amon mga kasilingan."
                 }
               ],
               "shortQuiz": [
@@ -112,12 +91,7 @@
                     "Katawhan",
                     "Hinabo"
                   ],
-                  "answer": "Pangalan nga pang-isip",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Pangalan nga pang-isip"
                 },
                 {
                   "id": "g3-station",
@@ -129,12 +103,7 @@
                     "talamnan sang ulutanon",
                     "bandehado nga kan-on"
                   ],
-                  "answer": "balantayan sang salakyan",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "balantayan sang salakyan"
                 },
                 {
                   "id": "g3-establishment",
@@ -146,12 +115,7 @@
                     "ulutanon sa talamnan",
                     "pinirito nga isda"
                   ],
-                  "answer": "dalagku nga mga edipisyo ukon building",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "dalagku nga mga edipisyo ukon building"
                 },
                 {
                   "id": "g3-why-early",
@@ -163,21 +127,12 @@
                     "Magbakal sila sa merkado.",
                     "Magpaninlo sila sang barangay."
                   ],
-                  "answer": "Makadto sila sa lugar sang tatay ni Rina.",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Makadto sila sa lugar sang tatay ni Rina."
                 },
                 {
                   "id": "g3-word-match",
                   "type": "matching",
                   "question": "Ipares ang tinaga kag kahulugan.",
-                  "choices": [],
-                  "answer": "",
-                  "audioAsset": null,
-                  "imageAsset": null,
                   "leftItems": [
                     "estasyon",
                     "establisyemento",
@@ -207,40 +162,31 @@
               "title": "Count Nouns and Mass Nouns",
               "storyTitle": "Sa Merkado sang Pamilya",
               "story": "Nag-upod si Rina sa iya nanay sa merkado. Nagbakal sila sang tatlo ka mansanas, duha ka libro, bugas, tubig, kag asukar para sa ila panimalay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit1/lesson2/story.png",
               "lesson": "Ang count noun amo ang pangalan sang butang nga maisip naton, pareho sang mansanas kag libro. Ang mass noun amo ang pangalan sang butang nga indi dali maisip isa-isa, pareho sang tubig, bugas, kag asukar.",
               "examples": [
                 {
                   "category": "Count Noun",
                   "hiligaynon": "mansanas",
                   "english": "apple",
-                  "note": "isa, duha, tatlo ka mansanas",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa, duha, tatlo ka mansanas"
                 },
                 {
                   "category": "Count Noun",
                   "hiligaynon": "libro",
                   "english": "book",
-                  "note": "isa ka libro",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa ka libro"
                 },
                 {
                   "category": "Mass Noun",
                   "hiligaynon": "tubig",
                   "english": "water",
-                  "note": "isa ka baso nga tubig",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa ka baso nga tubig"
                 },
                 {
                   "category": "Mass Noun",
                   "hiligaynon": "bugas",
                   "english": "rice",
-                  "note": "isa ka kilo nga bugas",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa ka kilo nga bugas"
                 }
               ],
               "shortQuiz": [
@@ -254,12 +200,7 @@
                     "kinahanglan tandan",
                     "binalaybay"
                   ],
-                  "answer": "maayo nga halimbawa ukon ehemplo",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "maayo nga halimbawa ukon ehemplo"
                 },
                 {
                   "id": "masako-choice",
@@ -271,12 +212,7 @@
                     "kinahanglan tandan",
                     "binalaybay"
                   ],
-                  "answer": "madamo sing ginaobra",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "madamo sing ginaobra"
                 },
                 {
                   "id": "pahanumdum-choice",
@@ -288,12 +224,7 @@
                     "madamo sing ginaobra",
                     "binalaybay"
                   ],
-                  "answer": "kinahanglan tandan",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "kinahanglan tandan"
                 },
                 {
                   "id": "binalaybay-choice",
@@ -305,12 +236,7 @@
                     "madamo sing ginaobra",
                     "kinahanglan tandan"
                   ],
-                  "answer": "binalaybay",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "binalaybay"
                 }
               ]
             },
@@ -322,56 +248,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit1/lesson3/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -385,12 +298,7 @@
                     "Ngalan",
                     "Lugar nga ginapuy-an"
                   ],
-                  "answer": "numero sang tuig halin sang pagkabun-ag.",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "numero sang tuig halin sang pagkabun-ag."
                 },
                 {
                   "id": "nalipay-choice",
@@ -402,12 +310,7 @@
                     "Ngalan",
                     "Lugar nga ginapuy-an"
                   ],
-                  "answer": "nasadyahan",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "nasadyahan"
                 },
                 {
                   "id": "Ngalan-choice",
@@ -419,12 +322,7 @@
                     "nasadyahan",
                     "Lugar nga ginapuy-an"
                   ],
-                  "answer": "Ngalan",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Ngalan"
                 },
                 {
                   "id": "Lugar nga ginapuy-an-choice",
@@ -436,12 +334,7 @@
                     "nasadyahan",
                     "Ngalan"
                   ],
-                  "answer": "Lugar nga ginapuy-an",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Lugar nga ginapuy-an"
                 }
               ]
             },
@@ -453,56 +346,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit1/lesson4/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -516,12 +396,7 @@
                     "Maayong aga",
                     "Babay"
                   ],
-                  "answer": "hulot",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "hulot"
                 },
                 {
                   "id": "tukturuok-choice",
@@ -533,12 +408,7 @@
                     "Maayong aga",
                     "Babay"
                   ],
-                  "answer": "huni sang manok",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "huni sang manok"
                 },
                 {
                   "id": "Maayong aga-choice",
@@ -550,12 +420,7 @@
                     "huni sang manok",
                     "Babay"
                   ],
-                  "answer": "Maayong aga",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Maayong aga"
                 },
                 {
                   "id": "Babay-choice",
@@ -567,12 +432,7 @@
                     "huni sang manok",
                     "Maayong aga"
                   ],
-                  "answer": "Babay",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Babay"
                 }
               ]
             },
@@ -584,56 +444,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit1/lesson5/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -647,12 +494,7 @@
                     "Common noun",
                     "Child"
                   ],
-                  "answer": "mahimo bala ako makaagi",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "mahimo bala ako makaagi"
                 },
                 {
                   "id": "Pat-od nga pangalan-choice",
@@ -664,12 +506,7 @@
                     "Common noun",
                     "Child"
                   ],
-                  "answer": "Proper noun",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Proper noun"
                 },
                 {
                   "id": "Kinaandan nga pangalan-choice",
@@ -681,12 +518,7 @@
                     "Proper noun",
                     "Child"
                   ],
-                  "answer": "Common noun",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Common noun"
                 },
                 {
                   "id": "Rina-choice",
@@ -698,12 +530,7 @@
                     "Proper noun",
                     "Common noun"
                   ],
-                  "answer": "Child",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Child"
                 }
               ]
             },
@@ -715,56 +542,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit1/lesson6/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -778,12 +592,7 @@
                     "Teacher",
                     "About to cry"
                   ],
-                  "answer": "Mother",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Mother"
                 },
                 {
                   "id": "Mayor Basilio-choice",
@@ -795,12 +604,7 @@
                     "Teacher",
                     "About to cry"
                   ],
-                  "answer": "Mayor",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Mayor"
                 },
                 {
                   "id": "Manunudlo-choice",
@@ -812,12 +616,7 @@
                     "Mayor",
                     "About to cry"
                   ],
-                  "answer": "Teacher",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Teacher"
                 },
                 {
                   "id": "Nagalumawlumaw-choice",
@@ -829,12 +628,7 @@
                     "Mayor",
                     "Teacher"
                   ],
-                  "answer": "About to cry",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "About to cry"
                 }
               ]
             }
@@ -852,96 +646,51 @@
               "title": "Leksyon 1: Mga Pangalan nga Maisip (Count Noun)",
               "storyTitle": "Isipon Mo!",
               "story": "Wala klase sanday Rina apang aga pa sia ginpukaw ni Nanay Rowena. Nakahanda na ang pamahaw sa lamesa. May tatlo ka pinirito nga itlog, anum ka pinirito nga isda, walo ka bilog nga saging kag isa ka bandehado nga kan-on. Nakahanda naman ang tatlo ka pinggan, tatlo ka baso, tatlo ka kutsara, kag tatlo ka tinidor. Tanan ini ginhanda ni Nanay Rowena.\n\n\"Nay, ngaa aga pa kita mamahaw? Wala man ako klase subong. Bakasyon namon sang tatlo ka adlaw siling ni Mam Espinosa,\" ang pamangkot ni Rina sa iya iloy nga may pagkatingala.\n\n\"Aga pa kita mahalin. Makadto kita sa lugar nanday Tatay ninyo Tatay. Duha kita ka adlaw didto.\"\n\n\"Yehey! Makita ko naman liwat si Lola Ensang. Mamupo naman kami sang mga tanum niya nga ulutanon sa iya talamnan,\" masadya nga hambal ni Rina sa iya iloy.\n\nWala magdugay, nakahimos na ang bilog nga pamilya. Nagsakay sila sa bus pakadto sa banwa. May ara 20 ka bus sa estasyon.\n\nSamtang sakay sa nagadalagan nga bus, ginalantaw ni Rina ang nagkalain-lain nga butang nga ila maagyan. Una, may mataas nga establisyemento sia nga nakita. Madamo man sia sang nakita nga mga salakyan nga nagadalagan sa dalan. Dugaydugay, mga mataas na nga mga puno ang makita niya.\n\nSang magdulog na ang bus, nagyuhom si Rina dayon kay nakita niya ang pananum sang iya Lola Ensang. Nagbisa sia dayon sa iya lola kag naglisensya na sa iya amay kag iloy nga makadto sa talamnan.\n\nMalipayon si Rina sa paglantaw sang pananum ni Lola Ensang. Napulo ka luto nga kamatis, pito ka talong, lima ka kalubay, napulo'g duha ka amargoso kag siam ka kalabasa ang naisip ni Rina. Nagpalapit si Lola Ensang sa iya nga may dala nga basket! Nakayuhum si Rina.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit2/lesson1/story.png",
               "lesson": "Pila ang pinirito nga itlog? Pila ang isda? Pila ka bilog ang saging?\n\nPila ka ulutanon ang naisip ni Rina?\n\nBasaha.\n\nang luto nga kamatis ang mga prutas si Rina sanday Lola Ensang kag Nanay Rowena tatlo ka adlaw\n\nAno ang tawag sa mga pareho sini nga pangalan?\n\nAng mga ini ginatawag nga pangalan nga pang-isip.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "estasyon",
-                  "english": "balantayan sang salakyan",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "balantayan sang salakyan"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "establisyemento",
-                  "english": "dalagku nga mga edipisyo ukon building",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "dalagku nga mga edipisyo ukon building"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "pinirito nga itlog",
-                  "english": "fried egg",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "fried egg"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "pinirito nga isda",
-                  "english": "fried fish",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "fried fish"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "saging",
-                  "english": "banana",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "banana"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "bus",
-                  "english": "bus",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "bus"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "kamatis",
-                  "english": "tomato",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "tomato"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "talong",
-                  "english": "eggplant",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "eggplant"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "kalubay",
-                  "english": "squash vine",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "squash vine"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "amargoso",
-                  "english": "bitter melon",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "bitter melon"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "kalabasa",
-                  "english": "squash",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "squash"
                 }
               ],
               "shortQuiz": [
@@ -955,12 +704,7 @@
                     "Jeepney",
                     "Boat"
                   ],
-                  "answer": "Where is Jaro Plaza?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Where is Jaro Plaza?"
                 },
                 {
                   "id": "Ano nga jeep sakyan ko?-choice",
@@ -972,12 +716,7 @@
                     "Jeepney",
                     "Boat"
                   ],
-                  "answer": "What jeepney should I take?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "What jeepney should I take?"
                 },
                 {
                   "id": "Jeep-choice",
@@ -989,12 +728,7 @@
                     "What jeepney should I take?",
                     "Boat"
                   ],
-                  "answer": "Jeepney",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Jeepney"
                 },
                 {
                   "id": "Bangka-choice",
@@ -1006,12 +740,7 @@
                     "What jeepney should I take?",
                     "Jeepney"
                   ],
-                  "answer": "Boat",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Boat"
                 }
               ]
             },
@@ -1023,40 +752,31 @@
               "title": "Count Nouns and Mass Nouns",
               "storyTitle": "Sa Merkado sang Pamilya",
               "story": "Nag-upod si Rina sa iya nanay sa merkado. Nagbakal sila sang tatlo ka mansanas, duha ka libro, bugas, tubig, kag asukar para sa ila panimalay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit2/lesson2/story.png",
               "lesson": "Ang count noun amo ang pangalan sang butang nga maisip naton, pareho sang mansanas kag libro. Ang mass noun amo ang pangalan sang butang nga indi dali maisip isa-isa, pareho sang tubig, bugas, kag asukar.",
               "examples": [
                 {
                   "category": "Count Noun",
                   "hiligaynon": "mansanas",
                   "english": "apple",
-                  "note": "isa, duha, tatlo ka mansanas",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa, duha, tatlo ka mansanas"
                 },
                 {
                   "category": "Count Noun",
                   "hiligaynon": "libro",
                   "english": "book",
-                  "note": "isa ka libro",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa ka libro"
                 },
                 {
                   "category": "Mass Noun",
                   "hiligaynon": "tubig",
                   "english": "water",
-                  "note": "isa ka baso nga tubig",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa ka baso nga tubig"
                 },
                 {
                   "category": "Mass Noun",
                   "hiligaynon": "bugas",
                   "english": "rice",
-                  "note": "isa ka kilo nga bugas",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa ka kilo nga bugas"
                 }
               ],
               "shortQuiz": [
@@ -1070,12 +790,7 @@
                     "How much are the mangoes?",
                     "Mango"
                   ],
-                  "answer": "Airplane",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Airplane"
                 },
                 {
                   "id": "Traysikad-choice",
@@ -1087,12 +802,7 @@
                     "How much are the mangoes?",
                     "Mango"
                   ],
-                  "answer": "Pedicab",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Pedicab"
                 },
                 {
                   "id": "Tagpila ang mangga?-choice",
@@ -1104,12 +814,7 @@
                     "Pedicab",
                     "Mango"
                   ],
-                  "answer": "How much are the mangoes?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "How much are the mangoes?"
                 },
                 {
                   "id": "Mangga-choice",
@@ -1121,12 +826,7 @@
                     "Pedicab",
                     "How much are the mangoes?"
                   ],
-                  "answer": "Mango",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Mango"
                 }
               ]
             },
@@ -1138,56 +838,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit2/lesson3/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -1201,12 +888,7 @@
                     "Where is the terminal?",
                     "Terminal"
                   ],
-                  "answer": "Where is the market?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Where is the market?"
                 },
                 {
                   "id": "Merkado-choice",
@@ -1218,12 +900,7 @@
                     "Where is the terminal?",
                     "Terminal"
                   ],
-                  "answer": "Market",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Market"
                 },
                 {
                   "id": "Diin ang terminal?-choice",
@@ -1235,12 +912,7 @@
                     "Market",
                     "Terminal"
                   ],
-                  "answer": "Where is the terminal?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Where is the terminal?"
                 },
                 {
                   "id": "Terminal-choice",
@@ -1252,12 +924,7 @@
                     "Market",
                     "Where is the terminal?"
                   ],
-                  "answer": "Terminal",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Terminal"
                 }
               ]
             },
@@ -1269,56 +936,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit2/lesson4/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -1332,12 +986,7 @@
                     "Fare",
                     "Please stop here"
                   ],
-                  "answer": "Is this going to CPU?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Is this going to CPU?"
                 },
                 {
                   "id": "Pila ang plete?-choice",
@@ -1349,12 +998,7 @@
                     "Fare",
                     "Please stop here"
                   ],
-                  "answer": "How much is the fare?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "How much is the fare?"
                 },
                 {
                   "id": "Plete-choice",
@@ -1366,12 +1010,7 @@
                     "How much is the fare?",
                     "Please stop here"
                   ],
-                  "answer": "Fare",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Fare"
                 },
                 {
                   "id": "Lugar lang-choice",
@@ -1383,12 +1022,7 @@
                     "How much is the fare?",
                     "Fare"
                   ],
-                  "answer": "Please stop here",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Please stop here"
                 }
               ]
             },
@@ -1400,56 +1034,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit2/lesson5/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -1463,12 +1084,7 @@
                     "Is there a nearby store?",
                     "Store"
                   ],
-                  "answer": "I will buy this",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I will buy this"
                 },
                 {
                   "id": "Mahal ini?-choice",
@@ -1480,12 +1096,7 @@
                     "Is there a nearby store?",
                     "Store"
                   ],
-                  "answer": "Is this expensive?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Is this expensive?"
                 },
                 {
                   "id": "May lapit nga tindahan?-choice",
@@ -1497,12 +1108,7 @@
                     "Is this expensive?",
                     "Store"
                   ],
-                  "answer": "Is there a nearby store?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Is there a nearby store?"
                 },
                 {
                   "id": "Tindahan-choice",
@@ -1514,12 +1120,7 @@
                     "Is this expensive?",
                     "Is there a nearby store?"
                   ],
-                  "answer": "Store",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Store"
                 }
               ]
             },
@@ -1531,56 +1132,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit2/lesson6/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -1594,12 +1182,7 @@
                     "Help me please",
                     "Where is Jaro Plaza?"
                   ],
-                  "answer": "Where is the restroom?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Where is the restroom?"
                 },
                 {
                   "id": "Pwede mo ako buligan?-choice",
@@ -1611,12 +1194,7 @@
                     "Help me please",
                     "Where is Jaro Plaza?"
                   ],
-                  "answer": "Can you help me?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Can you help me?"
                 },
                 {
                   "id": "Buligi ako palihog-choice",
@@ -1628,12 +1206,7 @@
                     "Can you help me?",
                     "Where is Jaro Plaza?"
                   ],
-                  "answer": "Help me please",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Help me please"
                 },
                 {
                   "id": "Diin ang Jaro Plaza?-choice",
@@ -1645,12 +1218,7 @@
                     "Can you help me?",
                     "Help me please"
                   ],
-                  "answer": "Where is Jaro Plaza?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Where is Jaro Plaza?"
                 }
               ]
             }
@@ -1668,96 +1236,51 @@
               "title": "Leksyon 1: Mga Pangalan nga Maisip (Count Noun)",
               "storyTitle": "Isipon Mo!",
               "story": "Wala klase sanday Rina apang aga pa sia ginpukaw ni Nanay Rowena. Nakahanda na ang pamahaw sa lamesa. May tatlo ka pinirito nga itlog, anum ka pinirito nga isda, walo ka bilog nga saging kag isa ka bandehado nga kan-on. Nakahanda naman ang tatlo ka pinggan, tatlo ka baso, tatlo ka kutsara, kag tatlo ka tinidor. Tanan ini ginhanda ni Nanay Rowena.\n\n\"Nay, ngaa aga pa kita mamahaw? Wala man ako klase subong. Bakasyon namon sang tatlo ka adlaw siling ni Mam Espinosa,\" ang pamangkot ni Rina sa iya iloy nga may pagkatingala.\n\n\"Aga pa kita mahalin. Makadto kita sa lugar nanday Tatay ninyo Tatay. Duha kita ka adlaw didto.\"\n\n\"Yehey! Makita ko naman liwat si Lola Ensang. Mamupo naman kami sang mga tanum niya nga ulutanon sa iya talamnan,\" masadya nga hambal ni Rina sa iya iloy.\n\nWala magdugay, nakahimos na ang bilog nga pamilya. Nagsakay sila sa bus pakadto sa banwa. May ara 20 ka bus sa estasyon.\n\nSamtang sakay sa nagadalagan nga bus, ginalantaw ni Rina ang nagkalain-lain nga butang nga ila maagyan. Una, may mataas nga establisyemento sia nga nakita. Madamo man sia sang nakita nga mga salakyan nga nagadalagan sa dalan. Dugaydugay, mga mataas na nga mga puno ang makita niya.\n\nSang magdulog na ang bus, nagyuhom si Rina dayon kay nakita niya ang pananum sang iya Lola Ensang. Nagbisa sia dayon sa iya lola kag naglisensya na sa iya amay kag iloy nga makadto sa talamnan.\n\nMalipayon si Rina sa paglantaw sang pananum ni Lola Ensang. Napulo ka luto nga kamatis, pito ka talong, lima ka kalubay, napulo'g duha ka amargoso kag siam ka kalabasa ang naisip ni Rina. Nagpalapit si Lola Ensang sa iya nga may dala nga basket! Nakayuhum si Rina.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit3/lesson1/story.png",
               "lesson": "Pila ang pinirito nga itlog? Pila ang isda? Pila ka bilog ang saging?\n\nPila ka ulutanon ang naisip ni Rina?\n\nBasaha.\n\nang luto nga kamatis ang mga prutas si Rina sanday Lola Ensang kag Nanay Rowena tatlo ka adlaw\n\nAno ang tawag sa mga pareho sini nga pangalan?\n\nAng mga ini ginatawag nga pangalan nga pang-isip.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "estasyon",
-                  "english": "balantayan sang salakyan",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "balantayan sang salakyan"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "establisyemento",
-                  "english": "dalagku nga mga edipisyo ukon building",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "dalagku nga mga edipisyo ukon building"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "pinirito nga itlog",
-                  "english": "fried egg",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "fried egg"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "pinirito nga isda",
-                  "english": "fried fish",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "fried fish"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "saging",
-                  "english": "banana",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "banana"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "bus",
-                  "english": "bus",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "bus"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "kamatis",
-                  "english": "tomato",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "tomato"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "talong",
-                  "english": "eggplant",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "eggplant"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "kalubay",
-                  "english": "squash vine",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "squash vine"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "amargoso",
-                  "english": "bitter melon",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "bitter melon"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "kalabasa",
-                  "english": "squash",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "squash"
                 }
               ],
               "shortQuiz": [
@@ -1771,12 +1294,7 @@
                     "Let's go",
                     "Go"
                   ],
-                  "answer": "Have you heard what happened at school?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Have you heard what happened at school?"
                 },
                 {
                   "id": "Ginahulat ta ka-choice",
@@ -1788,12 +1306,7 @@
                     "Let's go",
                     "Go"
                   ],
-                  "answer": "I'm waiting for you",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I'm waiting for you"
                 },
                 {
                   "id": "Kadto na ta-choice",
@@ -1805,12 +1318,7 @@
                     "I'm waiting for you",
                     "Go"
                   ],
-                  "answer": "Let's go",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Let's go"
                 },
                 {
                   "id": "Kadto-choice",
@@ -1822,12 +1330,7 @@
                     "I'm waiting for you",
                     "Let's go"
                   ],
-                  "answer": "Go",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Go"
                 }
               ]
             },
@@ -1839,40 +1342,31 @@
               "title": "Count Nouns and Mass Nouns",
               "storyTitle": "Sa Merkado sang Pamilya",
               "story": "Nag-upod si Rina sa iya nanay sa merkado. Nagbakal sila sang tatlo ka mansanas, duha ka libro, bugas, tubig, kag asukar para sa ila panimalay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit3/lesson2/story.png",
               "lesson": "Ang count noun amo ang pangalan sang butang nga maisip naton, pareho sang mansanas kag libro. Ang mass noun amo ang pangalan sang butang nga indi dali maisip isa-isa, pareho sang tubig, bugas, kag asukar.",
               "examples": [
                 {
                   "category": "Count Noun",
                   "hiligaynon": "mansanas",
                   "english": "apple",
-                  "note": "isa, duha, tatlo ka mansanas",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa, duha, tatlo ka mansanas"
                 },
                 {
                   "category": "Count Noun",
                   "hiligaynon": "libro",
                   "english": "book",
-                  "note": "isa ka libro",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa ka libro"
                 },
                 {
                   "category": "Mass Noun",
                   "hiligaynon": "tubig",
                   "english": "water",
-                  "note": "isa ka baso nga tubig",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa ka baso nga tubig"
                 },
                 {
                   "category": "Mass Noun",
                   "hiligaynon": "bugas",
                   "english": "rice",
-                  "note": "isa ka kilo nga bugas",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa ka kilo nga bugas"
                 }
               ],
               "shortQuiz": [
@@ -1886,12 +1380,7 @@
                     "Are you coming?",
                     "Let's eat"
                   ],
-                  "answer": "I'm here",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I'm here"
                 },
                 {
                   "id": "Diin ka?-choice",
@@ -1903,12 +1392,7 @@
                     "Are you coming?",
                     "Let's eat"
                   ],
-                  "answer": "Where are you?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Where are you?"
                 },
                 {
                   "id": "Makadto ka?-choice",
@@ -1920,12 +1404,7 @@
                     "Where are you?",
                     "Let's eat"
                   ],
-                  "answer": "Are you coming?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Are you coming?"
                 },
                 {
                   "id": "Mangaon ta-choice",
@@ -1937,12 +1416,7 @@
                     "Where are you?",
                     "Are you coming?"
                   ],
-                  "answer": "Let's eat",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Let's eat"
                 }
               ]
             },
@@ -1954,56 +1428,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit3/lesson3/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -2017,12 +1478,7 @@
                     "Wait",
                     "That's funny"
                   ],
-                  "answer": "I'll go first",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I'll go first"
                 },
                 {
                   "id": "Hulata ko-choice",
@@ -2034,12 +1490,7 @@
                     "Wait",
                     "That's funny"
                   ],
-                  "answer": "Wait for me",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Wait for me"
                 },
                 {
                   "id": "Hulat-choice",
@@ -2051,12 +1502,7 @@
                     "Wait for me",
                     "That's funny"
                   ],
-                  "answer": "Wait",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Wait"
                 },
                 {
                   "id": "Katawa man na-choice",
@@ -2068,12 +1514,7 @@
                     "Wait for me",
                     "Wait"
                   ],
-                  "answer": "That's funny",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "That's funny"
                 }
               ]
             },
@@ -2085,56 +1526,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit3/lesson4/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -2148,12 +1576,7 @@
                     "Let's meet later",
                     "What are you doing?"
                   ],
-                  "answer": "Funny",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Funny"
                 },
                 {
                   "id": "Namiss ta ka-choice",
@@ -2165,12 +1588,7 @@
                     "Let's meet later",
                     "What are you doing?"
                   ],
-                  "answer": "I miss you",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I miss you"
                 },
                 {
                   "id": "Kitaay ta karon-choice",
@@ -2182,12 +1600,7 @@
                     "I miss you",
                     "What are you doing?"
                   ],
-                  "answer": "Let's meet later",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Let's meet later"
                 },
                 {
                   "id": "Ano ginahimo mo?-choice",
@@ -2199,12 +1612,7 @@
                     "I miss you",
                     "Let's meet later"
                   ],
-                  "answer": "What are you doing?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "What are you doing?"
                 }
               ]
             },
@@ -2216,56 +1624,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit3/lesson5/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -2279,12 +1674,7 @@
                     "Message me later",
                     "Message"
                   ],
-                  "answer": "I'm busy",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I'm busy"
                 },
                 {
                   "id": "Busy-choice",
@@ -2296,12 +1686,7 @@
                     "Message me later",
                     "Message"
                   ],
-                  "answer": "Busy",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Busy"
                 },
                 {
                   "id": "Chat-i ko karon-choice",
@@ -2313,12 +1698,7 @@
                     "Busy",
                     "Message"
                   ],
-                  "answer": "Message me later",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Message me later"
                 },
                 {
                   "id": "Chat-choice",
@@ -2330,12 +1710,7 @@
                     "Busy",
                     "Message me later"
                   ],
-                  "answer": "Message",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Message"
                 }
               ]
             },
@@ -2347,56 +1722,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit3/lesson6/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -2410,12 +1772,7 @@
                     "I'm waiting for you",
                     "Let's go"
                   ],
-                  "answer": "Message",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Message"
                 },
                 {
                   "id": "Nabatian mo ang natabo sa school?-choice",
@@ -2427,12 +1784,7 @@
                     "I'm waiting for you",
                     "Let's go"
                   ],
-                  "answer": "Have you heard what happened at school?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Have you heard what happened at school?"
                 },
                 {
                   "id": "Ginahulat ta ka-choice",
@@ -2444,12 +1796,7 @@
                     "Have you heard what happened at school?",
                     "Let's go"
                   ],
-                  "answer": "I'm waiting for you",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I'm waiting for you"
                 },
                 {
                   "id": "Kadto na ta-choice",
@@ -2461,12 +1808,7 @@
                     "Have you heard what happened at school?",
                     "I'm waiting for you"
                   ],
-                  "answer": "Let's go",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Let's go"
                 }
               ]
             }
@@ -2484,96 +1826,51 @@
               "title": "Leksyon 1: Mga Pangalan nga Maisip (Count Noun)",
               "storyTitle": "Isipon Mo!",
               "story": "Wala klase sanday Rina apang aga pa sia ginpukaw ni Nanay Rowena. Nakahanda na ang pamahaw sa lamesa. May tatlo ka pinirito nga itlog, anum ka pinirito nga isda, walo ka bilog nga saging kag isa ka bandehado nga kan-on. Nakahanda naman ang tatlo ka pinggan, tatlo ka baso, tatlo ka kutsara, kag tatlo ka tinidor. Tanan ini ginhanda ni Nanay Rowena.\n\n\"Nay, ngaa aga pa kita mamahaw? Wala man ako klase subong. Bakasyon namon sang tatlo ka adlaw siling ni Mam Espinosa,\" ang pamangkot ni Rina sa iya iloy nga may pagkatingala.\n\n\"Aga pa kita mahalin. Makadto kita sa lugar nanday Tatay ninyo Tatay. Duha kita ka adlaw didto.\"\n\n\"Yehey! Makita ko naman liwat si Lola Ensang. Mamupo naman kami sang mga tanum niya nga ulutanon sa iya talamnan,\" masadya nga hambal ni Rina sa iya iloy.\n\nWala magdugay, nakahimos na ang bilog nga pamilya. Nagsakay sila sa bus pakadto sa banwa. May ara 20 ka bus sa estasyon.\n\nSamtang sakay sa nagadalagan nga bus, ginalantaw ni Rina ang nagkalain-lain nga butang nga ila maagyan. Una, may mataas nga establisyemento sia nga nakita. Madamo man sia sang nakita nga mga salakyan nga nagadalagan sa dalan. Dugaydugay, mga mataas na nga mga puno ang makita niya.\n\nSang magdulog na ang bus, nagyuhom si Rina dayon kay nakita niya ang pananum sang iya Lola Ensang. Nagbisa sia dayon sa iya lola kag naglisensya na sa iya amay kag iloy nga makadto sa talamnan.\n\nMalipayon si Rina sa paglantaw sang pananum ni Lola Ensang. Napulo ka luto nga kamatis, pito ka talong, lima ka kalubay, napulo'g duha ka amargoso kag siam ka kalabasa ang naisip ni Rina. Nagpalapit si Lola Ensang sa iya nga may dala nga basket! Nakayuhum si Rina.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit4/lesson1/story.png",
               "lesson": "Pila ang pinirito nga itlog? Pila ang isda? Pila ka bilog ang saging?\n\nPila ka ulutanon ang naisip ni Rina?\n\nBasaha.\n\nang luto nga kamatis ang mga prutas si Rina sanday Lola Ensang kag Nanay Rowena tatlo ka adlaw\n\nAno ang tawag sa mga pareho sini nga pangalan?\n\nAng mga ini ginatawag nga pangalan nga pang-isip.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "estasyon",
-                  "english": "balantayan sang salakyan",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "balantayan sang salakyan"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "establisyemento",
-                  "english": "dalagku nga mga edipisyo ukon building",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "dalagku nga mga edipisyo ukon building"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "pinirito nga itlog",
-                  "english": "fried egg",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "fried egg"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "pinirito nga isda",
-                  "english": "fried fish",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "fried fish"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "saging",
-                  "english": "banana",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "banana"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "bus",
-                  "english": "bus",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "bus"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "kamatis",
-                  "english": "tomato",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "tomato"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "talong",
-                  "english": "eggplant",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "eggplant"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "kalubay",
-                  "english": "squash vine",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "squash vine"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "amargoso",
-                  "english": "bitter melon",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "bitter melon"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "kalabasa",
-                  "english": "squash",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "squash"
                 }
               ],
               "shortQuiz": [
@@ -2587,12 +1884,7 @@
                     "Sibling",
                     "Grandmother"
                   ],
-                  "answer": "Mother",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Mother"
                 },
                 {
                   "id": "Tatay-choice",
@@ -2604,12 +1896,7 @@
                     "Sibling",
                     "Grandmother"
                   ],
-                  "answer": "Father",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Father"
                 },
                 {
                   "id": "Utod-choice",
@@ -2621,12 +1908,7 @@
                     "Father",
                     "Grandmother"
                   ],
-                  "answer": "Sibling",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Sibling"
                 },
                 {
                   "id": "Lola-choice",
@@ -2638,12 +1920,7 @@
                     "Father",
                     "Sibling"
                   ],
-                  "answer": "Grandmother",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Grandmother"
                 }
               ]
             },
@@ -2655,40 +1932,31 @@
               "title": "Count Nouns and Mass Nouns",
               "storyTitle": "Sa Merkado sang Pamilya",
               "story": "Nag-upod si Rina sa iya nanay sa merkado. Nagbakal sila sang tatlo ka mansanas, duha ka libro, bugas, tubig, kag asukar para sa ila panimalay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit4/lesson2/story.png",
               "lesson": "Ang count noun amo ang pangalan sang butang nga maisip naton, pareho sang mansanas kag libro. Ang mass noun amo ang pangalan sang butang nga indi dali maisip isa-isa, pareho sang tubig, bugas, kag asukar.",
               "examples": [
                 {
                   "category": "Count Noun",
                   "hiligaynon": "mansanas",
                   "english": "apple",
-                  "note": "isa, duha, tatlo ka mansanas",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa, duha, tatlo ka mansanas"
                 },
                 {
                   "category": "Count Noun",
                   "hiligaynon": "libro",
                   "english": "book",
-                  "note": "isa ka libro",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa ka libro"
                 },
                 {
                   "category": "Mass Noun",
                   "hiligaynon": "tubig",
                   "english": "water",
-                  "note": "isa ka baso nga tubig",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa ka baso nga tubig"
                 },
                 {
                   "category": "Mass Noun",
                   "hiligaynon": "bugas",
                   "english": "rice",
-                  "note": "isa ka kilo nga bugas",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa ka kilo nga bugas"
                 }
               ],
               "shortQuiz": [
@@ -2702,12 +1970,7 @@
                     "Where is mother?",
                     "Father is cooking"
                   ],
-                  "answer": "Grandfather",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Grandfather"
                 },
                 {
                   "id": "Palangga ko ang akon pamilya-choice",
@@ -2719,12 +1982,7 @@
                     "Where is mother?",
                     "Father is cooking"
                   ],
-                  "answer": "I love my family",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I love my family"
                 },
                 {
                   "id": "Diin si nanay?-choice",
@@ -2736,12 +1994,7 @@
                     "I love my family",
                     "Father is cooking"
                   ],
-                  "answer": "Where is mother?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Where is mother?"
                 },
                 {
                   "id": "Nagaluto si tatay-choice",
@@ -2753,12 +2006,7 @@
                     "I love my family",
                     "Where is mother?"
                   ],
-                  "answer": "Father is cooking",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Father is cooking"
                 }
               ]
             },
@@ -2770,56 +2018,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit4/lesson3/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -2833,12 +2068,7 @@
                     "Let's eat together",
                     "Take care"
                   ],
-                  "answer": "My sibling is sleeping",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "My sibling is sleeping"
                 },
                 {
                   "id": "Buotan si lola-choice",
@@ -2850,12 +2080,7 @@
                     "Let's eat together",
                     "Take care"
                   ],
-                  "answer": "Grandmother is kind",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Grandmother is kind"
                 },
                 {
                   "id": "Mangaon ta tanan-choice",
@@ -2867,12 +2092,7 @@
                     "Grandmother is kind",
                     "Take care"
                   ],
-                  "answer": "Let's eat together",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Let's eat together"
                 },
                 {
                   "id": "Halong-choice",
@@ -2884,12 +2104,7 @@
                     "Grandmother is kind",
                     "Let's eat together"
                   ],
-                  "answer": "Take care",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Take care"
                 }
               ]
             },
@@ -2901,56 +2116,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit4/lesson4/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -2964,12 +2166,7 @@
                     "Help your sibling",
                     "Mother"
                   ],
-                  "answer": "I miss my family",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I miss my family"
                 },
                 {
                   "id": "Malipayon ang amon balay-choice",
@@ -2981,12 +2178,7 @@
                     "Help your sibling",
                     "Mother"
                   ],
-                  "answer": "Our house is happy",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Our house is happy"
                 },
                 {
                   "id": "Buligi ang imo utod-choice",
@@ -2998,12 +2190,7 @@
                     "Our house is happy",
                     "Mother"
                   ],
-                  "answer": "Help your sibling",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Help your sibling"
                 },
                 {
                   "id": "Nanay-choice",
@@ -3015,12 +2202,7 @@
                     "Our house is happy",
                     "Help your sibling"
                   ],
-                  "answer": "Mother",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Mother"
                 }
               ]
             },
@@ -3032,56 +2214,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit4/lesson5/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -3095,12 +2264,7 @@
                     "Father",
                     "Sibling"
                   ],
-                  "answer": "Help your sibling",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Help your sibling"
                 },
                 {
                   "id": "Nanay-choice",
@@ -3112,12 +2276,7 @@
                     "Father",
                     "Sibling"
                   ],
-                  "answer": "Mother",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Mother"
                 },
                 {
                   "id": "Tatay-choice",
@@ -3129,12 +2288,7 @@
                     "Mother",
                     "Sibling"
                   ],
-                  "answer": "Father",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Father"
                 },
                 {
                   "id": "Utod-choice",
@@ -3146,12 +2300,7 @@
                     "Mother",
                     "Father"
                   ],
-                  "answer": "Sibling",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Sibling"
                 }
               ]
             },
@@ -3163,56 +2312,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit4/lesson6/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -3226,12 +2362,7 @@
                     "Father",
                     "Sibling"
                   ],
-                  "answer": "Help your sibling",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Help your sibling"
                 },
                 {
                   "id": "Nanay-choice",
@@ -3243,12 +2374,7 @@
                     "Father",
                     "Sibling"
                   ],
-                  "answer": "Mother",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Mother"
                 },
                 {
                   "id": "Tatay-choice",
@@ -3260,12 +2386,7 @@
                     "Mother",
                     "Sibling"
                   ],
-                  "answer": "Father",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Father"
                 },
                 {
                   "id": "Utod-choice",
@@ -3277,12 +2398,7 @@
                     "Mother",
                     "Father"
                   ],
-                  "answer": "Sibling",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Sibling"
                 }
               ]
             }
@@ -3300,96 +2416,51 @@
               "title": "Leksyon 1: Mga Pangalan nga Maisip (Count Noun)",
               "storyTitle": "Isipon Mo!",
               "story": "Wala klase sanday Rina apang aga pa sia ginpukaw ni Nanay Rowena. Nakahanda na ang pamahaw sa lamesa. May tatlo ka pinirito nga itlog, anum ka pinirito nga isda, walo ka bilog nga saging kag isa ka bandehado nga kan-on. Nakahanda naman ang tatlo ka pinggan, tatlo ka baso, tatlo ka kutsara, kag tatlo ka tinidor. Tanan ini ginhanda ni Nanay Rowena.\n\n\"Nay, ngaa aga pa kita mamahaw? Wala man ako klase subong. Bakasyon namon sang tatlo ka adlaw siling ni Mam Espinosa,\" ang pamangkot ni Rina sa iya iloy nga may pagkatingala.\n\n\"Aga pa kita mahalin. Makadto kita sa lugar nanday Tatay ninyo Tatay. Duha kita ka adlaw didto.\"\n\n\"Yehey! Makita ko naman liwat si Lola Ensang. Mamupo naman kami sang mga tanum niya nga ulutanon sa iya talamnan,\" masadya nga hambal ni Rina sa iya iloy.\n\nWala magdugay, nakahimos na ang bilog nga pamilya. Nagsakay sila sa bus pakadto sa banwa. May ara 20 ka bus sa estasyon.\n\nSamtang sakay sa nagadalagan nga bus, ginalantaw ni Rina ang nagkalain-lain nga butang nga ila maagyan. Una, may mataas nga establisyemento sia nga nakita. Madamo man sia sang nakita nga mga salakyan nga nagadalagan sa dalan. Dugaydugay, mga mataas na nga mga puno ang makita niya.\n\nSang magdulog na ang bus, nagyuhom si Rina dayon kay nakita niya ang pananum sang iya Lola Ensang. Nagbisa sia dayon sa iya lola kag naglisensya na sa iya amay kag iloy nga makadto sa talamnan.\n\nMalipayon si Rina sa paglantaw sang pananum ni Lola Ensang. Napulo ka luto nga kamatis, pito ka talong, lima ka kalubay, napulo'g duha ka amargoso kag siam ka kalabasa ang naisip ni Rina. Nagpalapit si Lola Ensang sa iya nga may dala nga basket! Nakayuhum si Rina.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit5/lesson1/story.png",
               "lesson": "Pila ang pinirito nga itlog? Pila ang isda? Pila ka bilog ang saging?\n\nPila ka ulutanon ang naisip ni Rina?\n\nBasaha.\n\nang luto nga kamatis ang mga prutas si Rina sanday Lola Ensang kag Nanay Rowena tatlo ka adlaw\n\nAno ang tawag sa mga pareho sini nga pangalan?\n\nAng mga ini ginatawag nga pangalan nga pang-isip.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "estasyon",
-                  "english": "balantayan sang salakyan",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "balantayan sang salakyan"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "establisyemento",
-                  "english": "dalagku nga mga edipisyo ukon building",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "dalagku nga mga edipisyo ukon building"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "pinirito nga itlog",
-                  "english": "fried egg",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "fried egg"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "pinirito nga isda",
-                  "english": "fried fish",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "fried fish"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "saging",
-                  "english": "banana",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "banana"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "bus",
-                  "english": "bus",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "bus"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "kamatis",
-                  "english": "tomato",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "tomato"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "talong",
-                  "english": "eggplant",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "eggplant"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "kalubay",
-                  "english": "squash vine",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "squash vine"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "amargoso",
-                  "english": "bitter melon",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "bitter melon"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "kalabasa",
-                  "english": "squash",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "squash"
                 }
               ],
               "shortQuiz": [
@@ -3403,12 +2474,7 @@
                     "I am eating",
                     "I am reading"
                   ],
-                  "answer": "I woke up in the morning.",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I woke up in the morning."
                 },
                 {
                   "id": "Gina lagas ako sang ido.-choice",
@@ -3420,12 +2486,7 @@
                     "I am eating",
                     "I am reading"
                   ],
-                  "answer": "I am being chased by a dog.",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am being chased by a dog."
                 },
                 {
                   "id": "Nagakaon ako-choice",
@@ -3437,12 +2498,7 @@
                     "I am being chased by a dog.",
                     "I am reading"
                   ],
-                  "answer": "I am eating",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am eating"
                 },
                 {
                   "id": "Nagabasa ako-choice",
@@ -3454,12 +2510,7 @@
                     "I am being chased by a dog.",
                     "I am eating"
                   ],
-                  "answer": "I am reading",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am reading"
                 }
               ]
             },
@@ -3471,40 +2522,31 @@
               "title": "Count Nouns and Mass Nouns",
               "storyTitle": "Sa Merkado sang Pamilya",
               "story": "Nag-upod si Rina sa iya nanay sa merkado. Nagbakal sila sang tatlo ka mansanas, duha ka libro, bugas, tubig, kag asukar para sa ila panimalay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit5/lesson2/story.png",
               "lesson": "Ang count noun amo ang pangalan sang butang nga maisip naton, pareho sang mansanas kag libro. Ang mass noun amo ang pangalan sang butang nga indi dali maisip isa-isa, pareho sang tubig, bugas, kag asukar.",
               "examples": [
                 {
                   "category": "Count Noun",
                   "hiligaynon": "mansanas",
                   "english": "apple",
-                  "note": "isa, duha, tatlo ka mansanas",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa, duha, tatlo ka mansanas"
                 },
                 {
                   "category": "Count Noun",
                   "hiligaynon": "libro",
                   "english": "book",
-                  "note": "isa ka libro",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa ka libro"
                 },
                 {
                   "category": "Mass Noun",
                   "hiligaynon": "tubig",
                   "english": "water",
-                  "note": "isa ka baso nga tubig",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa ka baso nga tubig"
                 },
                 {
                   "category": "Mass Noun",
                   "hiligaynon": "bugas",
                   "english": "rice",
-                  "note": "isa ka kilo nga bugas",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "isa ka kilo nga bugas"
                 }
               ],
               "shortQuiz": [
@@ -3518,12 +2560,7 @@
                     "I am drinking water",
                     "Water"
                   ],
-                  "answer": "Read",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Read"
                 },
                 {
                   "id": "Nagakadto ako sa eskwelahan-choice",
@@ -3535,12 +2572,7 @@
                     "I am drinking water",
                     "Water"
                   ],
-                  "answer": "I am going to school",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am going to school"
                 },
                 {
                   "id": "Nagainom ako sang tubig-choice",
@@ -3552,12 +2584,7 @@
                     "I am going to school",
                     "Water"
                   ],
-                  "answer": "I am drinking water",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am drinking water"
                 },
                 {
                   "id": "Tubig-choice",
@@ -3569,12 +2596,7 @@
                     "I am going to school",
                     "I am drinking water"
                   ],
-                  "answer": "Water",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Water"
                 }
               ]
             },
@@ -3586,56 +2608,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit5/lesson3/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -3649,12 +2658,7 @@
                     "I am washing clothes",
                     "I am cleaning the house"
                   ],
-                  "answer": "I am sleeping",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am sleeping"
                 },
                 {
                   "id": "Nagatuon ako-choice",
@@ -3666,12 +2670,7 @@
                     "I am washing clothes",
                     "I am cleaning the house"
                   ],
-                  "answer": "I am studying",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am studying"
                 },
                 {
                   "id": "Nagapanglaba ako-choice",
@@ -3683,12 +2682,7 @@
                     "I am studying",
                     "I am cleaning the house"
                   ],
-                  "answer": "I am washing clothes",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am washing clothes"
                 },
                 {
                   "id": "Nagatinlo ako sang balay-choice",
@@ -3700,12 +2694,7 @@
                     "I am studying",
                     "I am washing clothes"
                   ],
-                  "answer": "I am cleaning the house",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am cleaning the house"
                 }
               ]
             },
@@ -3717,56 +2706,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit5/lesson4/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -3780,12 +2756,7 @@
                     "I have a book",
                     "Book"
                   ],
-                  "answer": "I woke up early",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I woke up early"
                 },
                 {
                   "id": "Mapauli ako-choice",
@@ -3797,12 +2768,7 @@
                     "I have a book",
                     "Book"
                   ],
-                  "answer": "I will go home",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I will go home"
                 },
                 {
                   "id": "May libro ako-choice",
@@ -3814,12 +2780,7 @@
                     "I will go home",
                     "Book"
                   ],
-                  "answer": "I have a book",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I have a book"
                 },
                 {
                   "id": "Libro-choice",
@@ -3831,12 +2792,7 @@
                     "I will go home",
                     "I have a book"
                   ],
-                  "answer": "Book",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Book"
                 }
               ]
             },
@@ -3848,56 +2804,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit5/lesson5/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -3911,12 +2854,7 @@
                     "Bird",
                     "Fish"
                   ],
-                  "answer": "Dog",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Dog"
                 },
                 {
                   "id": "Kuring-choice",
@@ -3928,12 +2866,7 @@
                     "Bird",
                     "Fish"
                   ],
-                  "answer": "Cat",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Cat"
                 },
                 {
                   "id": "Pispis-choice",
@@ -3945,12 +2878,7 @@
                     "Cat",
                     "Fish"
                   ],
-                  "answer": "Bird",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Bird"
                 },
                 {
                   "id": "Isda-choice",
@@ -3962,12 +2890,7 @@
                     "Cat",
                     "Bird"
                   ],
-                  "answer": "Fish",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Fish"
                 }
               ]
             },
@@ -3979,56 +2902,43 @@
               "title": "Ako kag ang Akon Pamilya",
               "storyTitle": "Dalayawon nga Bulig",
               "story": "Si Rina isa ka bata nga masinulundon sa iya pamilya. Upod sang iya mga kaeskwela, nagtinlo sila sang dalan, nagtubo sang mga bulak, kag nagbulig sa pagpaninlo sang ila barangay.",
-              "storyImageAsset": "assets/images/level_game/Grade3/unit5/lesson6/story.png",
               "lesson": "Ang pangalan, ukon noun, amo ang ngalan sang tawo, lugar, sapat, butang, kag hitabo. Sa istorya, ginatan-aw man naton ang katawhan, halamtangan, kag hinabo.",
               "examples": [
                 {
                   "category": "Tawo",
                   "hiligaynon": "Rina",
                   "english": "child",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Tawo",
                   "hiligaynon": "Nanay Rowena",
                   "english": "mother",
-                  "note": "Pat-od nga pangalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga pangalan"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Iloilo River",
                   "english": "river",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Lugar",
                   "hiligaynon": "Plaza Libertad",
                   "english": "park",
-                  "note": "Ngalan sang lugar",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngalan sang lugar"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "bata",
                   "english": "child",
-                  "note": "Tanan nga bata",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga bata"
                 },
                 {
                   "category": "Kinaandan nga Pangalan",
                   "hiligaynon": "suba",
                   "english": "river",
-                  "note": "Tanan nga suba",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Tanan nga suba"
                 }
               ],
               "shortQuiz": [
@@ -4042,12 +2952,7 @@
                     "I am hungry",
                     "I am happy"
                   ],
-                  "answer": "I need water",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I need water"
                 },
                 {
                   "id": "Kapoy ako-choice",
@@ -4059,12 +2964,7 @@
                     "I am hungry",
                     "I am happy"
                   ],
-                  "answer": "I am tired",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am tired"
                 },
                 {
                   "id": "Gutom ako-choice",
@@ -4076,12 +2976,7 @@
                     "I am tired",
                     "I am happy"
                   ],
-                  "answer": "I am hungry",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am hungry"
                 },
                 {
                   "id": "Nalipay ako-choice",
@@ -4093,12 +2988,7 @@
                     "I am tired",
                     "I am hungry"
                   ],
-                  "answer": "I am happy",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am happy"
                 }
               ]
             }

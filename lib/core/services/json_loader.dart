@@ -1,15 +1,17 @@
 import 'dart:convert';
-import 'dart:isolate';
-import 'package:flutter/services.dart' show AssetBundle, rootBundle;
 import 'dart:typed_data';
+
+import 'package:flutter/foundation.dart' show compute;
+import 'package:flutter/services.dart' show AssetBundle, rootBundle;
+
+dynamic _decodeJson(Uint8List bytes) => jsonDecode(utf8.decode(bytes));
 
 /// Type definition for standard JSON factory constructors.
 typedef JsonFactory<T> = T Function(Map<String, dynamic> json);
 
 /// A performant, generic utility for asynchronously loading and parsing JSON assets.
 ///
-/// Designed to mitigate main-thread jank when dealing with large JSON payloads (>10MB)
-/// by delegating both byte-to-string (UTF-8) decoding and JSON serialization to a spawned [Isolate].
+/// Decodes JSON with Flutter's platform-aware background compute helper.
 class JsonLoader {
   // Prevent instantiation of this utility class.
   JsonLoader._();
@@ -84,15 +86,14 @@ class JsonLoader {
       final activeBundle = bundle ?? rootBundle;
       final ByteData byteData = await activeBundle.load(path);
 
-      return await Isolate.run(() {
-        final uint8List = byteData.buffer.asUint8List(
+      return compute(
+        _decodeJson,
+        byteData.buffer.asUint8List(
           byteData.offsetInBytes,
           byteData.lengthInBytes,
-        );
-
-        final String jsonString = utf8.decode(uint8List);
-        return jsonDecode(jsonString);
-      });
+        ),
+        debugLabel: 'decode $path',
+      );
     } catch (e) {
       throw Exception('Failed to load or parse asset at $path. Error: $e');
     }

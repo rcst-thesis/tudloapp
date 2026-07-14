@@ -4,7 +4,6 @@ import 'package:tudloapp/core/data/app_data.dart';
 import 'package:tudloapp/core/state/app_state.dart';
 import 'package:tudloapp/core/theme/app_theme.dart';
 import 'package:tudloapp/data/dictionary/dictionary_data.dart';
-import 'package:tudloapp/data/lesson_bank/lesson_bank.dart';
 import 'package:tudloapp/features/lesson_game/screens/level_game_page.dart';
 import 'package:tudloapp/features/profile/screens/profile_selection_screen.dart';
 import 'package:tudloapp/features/streak/helpers/streak_helper.dart';
@@ -665,9 +664,6 @@ class _FavoritesCard extends StatelessWidget {
   }
 
   String _favoriteMeaningFor(String word) {
-    for (final term in LessonBank.terms) {
-      if (term.hil.toLowerCase() == word.toLowerCase()) return term.eng;
-    }
     final dictionaryMeaning = DictionaryData.meaningFor(word);
     if (dictionaryMeaning.isEmpty) return '';
     return dictionaryMeaning[0].toUpperCase() + dictionaryMeaning.substring(1);

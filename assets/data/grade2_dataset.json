@@ -15,74 +15,54 @@
               "unitNumber": 1,
               "lessonNumber": 1,
               "title": "Leksyon 1: Pangalan",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Ang pangalan nagatuhoy sa ngalan sang tawo, butang, lugar, sapat kag hitabo.",
               "examples": [
                 {
                   "category": "Gamita Ini",
                   "hiligaynon": "Kasilingan",
                   "english": "mga tawo nga nagaistar sa tupad sang aton balay",
-                  "note": "Mabuot kag mabinuligon ang amon mga kasilingan.",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Mabuot kag mabinuligon ang amon mga kasilingan."
                 },
                 {
                   "category": "Halimbawa",
                   "hiligaynon": "ginpaandar",
                   "english": "ginpadalagan",
-                  "note": "Ginpaandar ni tatay ang iya pangpasahero nga dyip.",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ginpaandar ni tatay ang iya pangpasahero nga dyip."
                 },
                 {
                   "category": "Halimbawa",
                   "hiligaynon": "nagapatuka",
                   "english": "nagapakaon sang manok ukon pispis",
-                  "note": "Nagapatuka anay sang manok ang akon magulang nga lalaki antes magsulod sa trabaho.",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Nagapatuka anay sang manok ang akon magulang nga lalaki antes magsulod sa trabaho."
                 },
                 {
                   "category": "Halimbawa",
                   "hiligaynon": "Kriiing! Kriiing! Kriing!",
-                  "english": "Kriiing! Kriiing! Kriing!",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Kriiing! Kriiing! Kriing!"
                 },
                 {
                   "category": "Halimbawa",
                   "hiligaynon": "Ngiyaw... ngiyaw... ngiyaw...",
                   "english": "Ngiyaw... ngiyaw... ngiyaw...",
-                  "note": "Ngiyaw... ngiyaw... ngiyaw... paangga sang iya kuring kay Ken.",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ngiyaw... ngiyaw... ngiyaw... paangga sang iya kuring kay Ken."
                 },
                 {
                   "category": "Halimbawa",
                   "hiligaynon": "Brum! Brum! Brum!",
                   "english": "Brum! Brum! Brum!",
-                  "note": "Brum! Brum! Brum! Pinaandar na sang iya amay ang tricycle agud idul-ong si Ken sa eskwelahan.",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Brum! Brum! Brum! Pinaandar na sang iya amay ang tricycle agud idul-ong si Ken sa eskwelahan."
                 },
                 {
                   "category": "Halimbawa",
                   "hiligaynon": "kuring",
                   "english": "kuring",
-                  "note": "Gilayon naligo kag nagkaon si Ken. Nagpalapit gilayon ang iya ginasagud nga kuring.",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Gilayon naligo kag nagkaon si Ken. Nagpalapit gilayon ang iya ginasagud nga kuring."
                 },
                 {
                   "category": "Halimbawa",
                   "hiligaynon": "tricycle",
                   "english": "tricycle",
-                  "note": "Brum! Brum! Brum! Pinaandar na sang iya amay ang tricycle agud idul-ong si Ken sa eskwelahan.",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Brum! Brum! Brum! Pinaandar na sang iya amay ang tricycle agud idul-ong si Ken sa eskwelahan."
                 }
               ],
               "shortQuiz": [
@@ -96,12 +76,7 @@
                     "Buluthuan",
                     "Barangay"
                   ],
-                  "answer": "Pangalan",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Pangalan"
                 },
                 {
                   "id": "g2-story-child",
@@ -113,12 +88,7 @@
                     "Mayor Basilio",
                     "Gg. Ramos"
                   ],
-                  "answer": "Rina",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Rina"
                 },
                 {
                   "id": "g2-project",
@@ -130,12 +100,7 @@
                     "Adlaw sang Kahilwayan",
                     "Lakbay Aral"
                   ],
-                  "answer": "Matinlo kag Berde nga Barangay",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Matinlo kag Berde nga Barangay"
                 },
                 {
                   "id": "g2-neighbor",
@@ -147,21 +112,12 @@
                     "kuring",
                     "bulak"
                   ],
-                  "answer": "kasilingan",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "kasilingan"
                 },
                 {
                   "id": "g2-category-match",
                   "type": "matching",
                   "question": "Ipares ang grupo sang pangalan kag kahulugan.",
-                  "choices": [],
-                  "answer": "",
-                  "audioAsset": null,
-                  "imageAsset": null,
                   "leftItems": [
                     "Tawo",
                     "Butang",
@@ -189,50 +145,37 @@
               "unitNumber": 1,
               "lessonNumber": 2,
               "title": "Leksyon 2: Pat-od kag Kinaandan nga Pangalan sang Tawo",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Ang pangalan nga ginagamit agud itudlo ang pat-od nga pangalan ginatawag nga pat-od nga pangalan. Nagauumpisa ini sa daku nga letra. Ang pangalan nga kinaandan nagapatuhoy sa ordinaryo nga ngalan sang tawo, butang, ukon hitabo. Nagauumpisa ini sa gamay nga letra.",
               "examples": [
                 {
                   "category": "Pat-od",
                   "hiligaynon": "Rina",
                   "english": "Child",
-                  "note": "Pat-od nga ngalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga ngalan"
                 },
                 {
                   "category": "Pat-od",
                   "hiligaynon": "Nanay Rowena",
                   "english": "Mother",
-                  "note": "Pat-od nga ngalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga ngalan"
                 },
                 {
                   "category": "Pat-od",
                   "hiligaynon": "Mayor Basilio",
                   "english": "Mayor",
-                  "note": "Pat-od nga ngalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Pat-od nga ngalan"
                 },
                 {
                   "category": "Kinaandan",
                   "hiligaynon": "bata",
                   "english": "Child",
-                  "note": "Ordinaryo nga ngalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ordinaryo nga ngalan"
                 },
                 {
                   "category": "Kinaandan",
                   "hiligaynon": "manunudlo",
                   "english": "Teacher",
-                  "note": "Ordinaryo nga ngalan",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "note": "Ordinaryo nga ngalan"
                 }
               ],
               "shortQuiz": [
@@ -246,12 +189,7 @@
                     "kinahanglan tandan",
                     "binalaybay"
                   ],
-                  "answer": "maayo nga halimbawa ukon ehemplo",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "maayo nga halimbawa ukon ehemplo"
                 },
                 {
                   "id": "masako-choice",
@@ -263,12 +201,7 @@
                     "kinahanglan tandan",
                     "binalaybay"
                   ],
-                  "answer": "madamo sing ginaobra",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "madamo sing ginaobra"
                 },
                 {
                   "id": "pahanumdum-choice",
@@ -280,12 +213,7 @@
                     "madamo sing ginaobra",
                     "binalaybay"
                   ],
-                  "answer": "kinahanglan tandan",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "kinahanglan tandan"
                 },
                 {
                   "id": "binalaybay-choice",
@@ -297,12 +225,7 @@
                     "madamo sing ginaobra",
                     "kinahanglan tandan"
                   ],
-                  "answer": "binalaybay",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "binalaybay"
                 }
               ]
             },
@@ -312,42 +235,23 @@
               "unitNumber": 1,
               "lessonNumber": 3,
               "title": "Mga Ginakawilihan Ko",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "edad",
-                  "english": "numero sang tuig halin sang pagkabun-ag.",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "numero sang tuig halin sang pagkabun-ag."
                 },
                 {
-                  "category": "",
                   "hiligaynon": "nalipay",
-                  "english": "nasadyahan",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "nasadyahan"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Ngalan",
-                  "english": "Ngalan",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Ngalan"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Lugar nga ginapuy-an",
-                  "english": "Lugar nga ginapuy-an",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Lugar nga ginapuy-an"
                 }
               ],
               "shortQuiz": [
@@ -361,12 +265,7 @@
                     "Ngalan",
                     "Lugar nga ginapuy-an"
                   ],
-                  "answer": "numero sang tuig halin sang pagkabun-ag.",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "numero sang tuig halin sang pagkabun-ag."
                 },
                 {
                   "id": "nalipay-choice",
@@ -378,12 +277,7 @@
                     "Ngalan",
                     "Lugar nga ginapuy-an"
                   ],
-                  "answer": "nasadyahan",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "nasadyahan"
                 },
                 {
                   "id": "Ngalan-choice",
@@ -395,12 +289,7 @@
                     "nasadyahan",
                     "Lugar nga ginapuy-an"
                   ],
-                  "answer": "Ngalan",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Ngalan"
                 },
                 {
                   "id": "Lugar nga ginapuy-an-choice",
@@ -412,12 +301,7 @@
                     "nasadyahan",
                     "Ngalan"
                   ],
-                  "answer": "Lugar nga ginapuy-an",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Lugar nga ginapuy-an"
                 }
               ]
             },
@@ -427,42 +311,23 @@
               "unitNumber": 1,
               "lessonNumber": 4,
               "title": "Mga Ginakawilihan Ko",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "kwarto",
-                  "english": "hulot",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "hulot"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "tukturuok",
-                  "english": "huni sang manok",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "huni sang manok"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Maayong aga",
-                  "english": "Maayong aga",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Maayong aga"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Babay",
-                  "english": "Babay",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Babay"
                 }
               ],
               "shortQuiz": [
@@ -476,12 +341,7 @@
                     "Maayong aga",
                     "Babay"
                   ],
-                  "answer": "hulot",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "hulot"
                 },
                 {
                   "id": "tukturuok-choice",
@@ -493,12 +353,7 @@
                     "Maayong aga",
                     "Babay"
                   ],
-                  "answer": "huni sang manok",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "huni sang manok"
                 },
                 {
                   "id": "Maayong aga-choice",
@@ -510,12 +365,7 @@
                     "huni sang manok",
                     "Babay"
                   ],
-                  "answer": "Maayong aga",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Maayong aga"
                 },
                 {
                   "id": "Babay-choice",
@@ -527,12 +377,7 @@
                     "huni sang manok",
                     "Maayong aga"
                   ],
-                  "answer": "Babay",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Babay"
                 }
               ]
             },
@@ -542,42 +387,23 @@
               "unitNumber": 1,
               "lessonNumber": 5,
               "title": "Mga Ginakawilihan Ko",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "mahimo bala ako makaagi",
-                  "english": "mahimo bala ako makaagi",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "mahimo bala ako makaagi"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Pat-od nga pangalan",
-                  "english": "Proper noun",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Proper noun"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Kinaandan nga pangalan",
-                  "english": "Common noun",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Common noun"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Rina",
-                  "english": "Child",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Child"
                 }
               ],
               "shortQuiz": [
@@ -591,12 +417,7 @@
                     "Common noun",
                     "Child"
                   ],
-                  "answer": "mahimo bala ako makaagi",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "mahimo bala ako makaagi"
                 },
                 {
                   "id": "Pat-od nga pangalan-choice",
@@ -608,12 +429,7 @@
                     "Common noun",
                     "Child"
                   ],
-                  "answer": "Proper noun",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Proper noun"
                 },
                 {
                   "id": "Kinaandan nga pangalan-choice",
@@ -625,12 +441,7 @@
                     "Proper noun",
                     "Child"
                   ],
-                  "answer": "Common noun",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Common noun"
                 },
                 {
                   "id": "Rina-choice",
@@ -642,12 +453,7 @@
                     "Proper noun",
                     "Common noun"
                   ],
-                  "answer": "Child",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Child"
                 }
               ]
             },
@@ -657,42 +463,23 @@
               "unitNumber": 1,
               "lessonNumber": 6,
               "title": "Mga Ginakawilihan Ko",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Nanay Rowena",
-                  "english": "Mother",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Mother"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Mayor Basilio",
-                  "english": "Mayor",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Mayor"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Manunudlo",
-                  "english": "Teacher",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Teacher"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Nagalumawlumaw",
-                  "english": "About to cry",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "About to cry"
                 }
               ],
               "shortQuiz": [
@@ -706,12 +493,7 @@
                     "Teacher",
                     "About to cry"
                   ],
-                  "answer": "Mother",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Mother"
                 },
                 {
                   "id": "Mayor Basilio-choice",
@@ -723,12 +505,7 @@
                     "Teacher",
                     "About to cry"
                   ],
-                  "answer": "Mayor",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Mayor"
                 },
                 {
                   "id": "Manunudlo-choice",
@@ -740,12 +517,7 @@
                     "Mayor",
                     "About to cry"
                   ],
-                  "answer": "Teacher",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Teacher"
                 },
                 {
                   "id": "Nagalumawlumaw-choice",
@@ -757,12 +529,7 @@
                     "Mayor",
                     "Teacher"
                   ],
-                  "answer": "About to cry",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "About to cry"
                 }
               ]
             }
@@ -778,42 +545,23 @@
               "unitNumber": 2,
               "lessonNumber": 1,
               "title": "Talk to Locals",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Diin ang Jaro Plaza?",
-                  "english": "Where is Jaro Plaza?",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Where is Jaro Plaza?"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Ano nga jeep sakyan ko?",
-                  "english": "What jeepney should I take?",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "What jeepney should I take?"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Jeep",
-                  "english": "Jeepney",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Jeepney"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Bangka",
-                  "english": "Boat",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Boat"
                 }
               ],
               "shortQuiz": [
@@ -827,12 +575,7 @@
                     "Jeepney",
                     "Boat"
                   ],
-                  "answer": "Where is Jaro Plaza?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Where is Jaro Plaza?"
                 },
                 {
                   "id": "Ano nga jeep sakyan ko?-choice",
@@ -844,12 +587,7 @@
                     "Jeepney",
                     "Boat"
                   ],
-                  "answer": "What jeepney should I take?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "What jeepney should I take?"
                 },
                 {
                   "id": "Jeep-choice",
@@ -861,12 +599,7 @@
                     "What jeepney should I take?",
                     "Boat"
                   ],
-                  "answer": "Jeepney",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Jeepney"
                 },
                 {
                   "id": "Bangka-choice",
@@ -878,12 +611,7 @@
                     "What jeepney should I take?",
                     "Jeepney"
                   ],
-                  "answer": "Boat",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Boat"
                 }
               ]
             },
@@ -893,42 +621,23 @@
               "unitNumber": 2,
               "lessonNumber": 2,
               "title": "Talk to Locals",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Eroplano",
-                  "english": "Airplane",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Airplane"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Traysikad",
-                  "english": "Pedicab",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Pedicab"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Tagpila ang mangga?",
-                  "english": "How much are the mangoes?",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "How much are the mangoes?"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Mangga",
-                  "english": "Mango",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Mango"
                 }
               ],
               "shortQuiz": [
@@ -942,12 +651,7 @@
                     "How much are the mangoes?",
                     "Mango"
                   ],
-                  "answer": "Airplane",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Airplane"
                 },
                 {
                   "id": "Traysikad-choice",
@@ -959,12 +663,7 @@
                     "How much are the mangoes?",
                     "Mango"
                   ],
-                  "answer": "Pedicab",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Pedicab"
                 },
                 {
                   "id": "Tagpila ang mangga?-choice",
@@ -976,12 +675,7 @@
                     "Pedicab",
                     "Mango"
                   ],
-                  "answer": "How much are the mangoes?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "How much are the mangoes?"
                 },
                 {
                   "id": "Mangga-choice",
@@ -993,12 +687,7 @@
                     "Pedicab",
                     "How much are the mangoes?"
                   ],
-                  "answer": "Mango",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Mango"
                 }
               ]
             },
@@ -1008,42 +697,23 @@
               "unitNumber": 2,
               "lessonNumber": 3,
               "title": "Talk to Locals",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Diin ang merkado?",
-                  "english": "Where is the market?",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Where is the market?"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Merkado",
-                  "english": "Market",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Market"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Diin ang terminal?",
-                  "english": "Where is the terminal?",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Where is the terminal?"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Terminal",
-                  "english": "Terminal",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Terminal"
                 }
               ],
               "shortQuiz": [
@@ -1057,12 +727,7 @@
                     "Where is the terminal?",
                     "Terminal"
                   ],
-                  "answer": "Where is the market?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Where is the market?"
                 },
                 {
                   "id": "Merkado-choice",
@@ -1074,12 +739,7 @@
                     "Where is the terminal?",
                     "Terminal"
                   ],
-                  "answer": "Market",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Market"
                 },
                 {
                   "id": "Diin ang terminal?-choice",
@@ -1091,12 +751,7 @@
                     "Market",
                     "Terminal"
                   ],
-                  "answer": "Where is the terminal?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Where is the terminal?"
                 },
                 {
                   "id": "Terminal-choice",
@@ -1108,12 +763,7 @@
                     "Market",
                     "Where is the terminal?"
                   ],
-                  "answer": "Terminal",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Terminal"
                 }
               ]
             },
@@ -1123,42 +773,23 @@
               "unitNumber": 2,
               "lessonNumber": 4,
               "title": "Talk to Locals",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Pakadto ini sa CPU?",
-                  "english": "Is this going to CPU?",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Is this going to CPU?"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Pila ang plete?",
-                  "english": "How much is the fare?",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "How much is the fare?"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Plete",
-                  "english": "Fare",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Fare"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Lugar lang",
-                  "english": "Please stop here",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Please stop here"
                 }
               ],
               "shortQuiz": [
@@ -1172,12 +803,7 @@
                     "Fare",
                     "Please stop here"
                   ],
-                  "answer": "Is this going to CPU?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Is this going to CPU?"
                 },
                 {
                   "id": "Pila ang plete?-choice",
@@ -1189,12 +815,7 @@
                     "Fare",
                     "Please stop here"
                   ],
-                  "answer": "How much is the fare?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "How much is the fare?"
                 },
                 {
                   "id": "Plete-choice",
@@ -1206,12 +827,7 @@
                     "How much is the fare?",
                     "Please stop here"
                   ],
-                  "answer": "Fare",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Fare"
                 },
                 {
                   "id": "Lugar lang-choice",
@@ -1223,12 +839,7 @@
                     "How much is the fare?",
                     "Fare"
                   ],
-                  "answer": "Please stop here",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Please stop here"
                 }
               ]
             },
@@ -1238,42 +849,23 @@
               "unitNumber": 2,
               "lessonNumber": 5,
               "title": "Talk to Locals",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Mabakal ako sini",
-                  "english": "I will buy this",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I will buy this"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Mahal ini?",
-                  "english": "Is this expensive?",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Is this expensive?"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "May lapit nga tindahan?",
-                  "english": "Is there a nearby store?",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Is there a nearby store?"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Tindahan",
-                  "english": "Store",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Store"
                 }
               ],
               "shortQuiz": [
@@ -1287,12 +879,7 @@
                     "Is there a nearby store?",
                     "Store"
                   ],
-                  "answer": "I will buy this",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I will buy this"
                 },
                 {
                   "id": "Mahal ini?-choice",
@@ -1304,12 +891,7 @@
                     "Is there a nearby store?",
                     "Store"
                   ],
-                  "answer": "Is this expensive?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Is this expensive?"
                 },
                 {
                   "id": "May lapit nga tindahan?-choice",
@@ -1321,12 +903,7 @@
                     "Is this expensive?",
                     "Store"
                   ],
-                  "answer": "Is there a nearby store?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Is there a nearby store?"
                 },
                 {
                   "id": "Tindahan-choice",
@@ -1338,12 +915,7 @@
                     "Is this expensive?",
                     "Is there a nearby store?"
                   ],
-                  "answer": "Store",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Store"
                 }
               ]
             },
@@ -1353,42 +925,23 @@
               "unitNumber": 2,
               "lessonNumber": 6,
               "title": "Talk to Locals",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Diin ang CR?",
-                  "english": "Where is the restroom?",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Where is the restroom?"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Pwede mo ako buligan?",
-                  "english": "Can you help me?",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Can you help me?"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Buligi ako palihog",
-                  "english": "Help me please",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Help me please"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Diin ang Jaro Plaza?",
-                  "english": "Where is Jaro Plaza?",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Where is Jaro Plaza?"
                 }
               ],
               "shortQuiz": [
@@ -1402,12 +955,7 @@
                     "Help me please",
                     "Where is Jaro Plaza?"
                   ],
-                  "answer": "Where is the restroom?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Where is the restroom?"
                 },
                 {
                   "id": "Pwede mo ako buligan?-choice",
@@ -1419,12 +967,7 @@
                     "Help me please",
                     "Where is Jaro Plaza?"
                   ],
-                  "answer": "Can you help me?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Can you help me?"
                 },
                 {
                   "id": "Buligi ako palihog-choice",
@@ -1436,12 +979,7 @@
                     "Can you help me?",
                     "Where is Jaro Plaza?"
                   ],
-                  "answer": "Help me please",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Help me please"
                 },
                 {
                   "id": "Diin ang Jaro Plaza?-choice",
@@ -1453,12 +991,7 @@
                     "Can you help me?",
                     "Help me please"
                   ],
-                  "answer": "Where is Jaro Plaza?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Where is Jaro Plaza?"
                 }
               ]
             }
@@ -1474,42 +1007,23 @@
               "unitNumber": 3,
               "lessonNumber": 1,
               "title": "Conversation with Friends",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Nabatian mo ang natabo sa school?",
-                  "english": "Have you heard what happened at school?",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Have you heard what happened at school?"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Ginahulat ta ka",
-                  "english": "I'm waiting for you",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I'm waiting for you"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Kadto na ta",
-                  "english": "Let's go",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Let's go"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Kadto",
-                  "english": "Go",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Go"
                 }
               ],
               "shortQuiz": [
@@ -1523,12 +1037,7 @@
                     "Let's go",
                     "Go"
                   ],
-                  "answer": "Have you heard what happened at school?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Have you heard what happened at school?"
                 },
                 {
                   "id": "Ginahulat ta ka-choice",
@@ -1540,12 +1049,7 @@
                     "Let's go",
                     "Go"
                   ],
-                  "answer": "I'm waiting for you",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I'm waiting for you"
                 },
                 {
                   "id": "Kadto na ta-choice",
@@ -1557,12 +1061,7 @@
                     "I'm waiting for you",
                     "Go"
                   ],
-                  "answer": "Let's go",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Let's go"
                 },
                 {
                   "id": "Kadto-choice",
@@ -1574,12 +1073,7 @@
                     "I'm waiting for you",
                     "Let's go"
                   ],
-                  "answer": "Go",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Go"
                 }
               ]
             },
@@ -1589,42 +1083,23 @@
               "unitNumber": 3,
               "lessonNumber": 2,
               "title": "Conversation with Friends",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Ari na ko",
-                  "english": "I'm here",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I'm here"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Diin ka?",
-                  "english": "Where are you?",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Where are you?"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Makadto ka?",
-                  "english": "Are you coming?",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Are you coming?"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Mangaon ta",
-                  "english": "Let's eat",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Let's eat"
                 }
               ],
               "shortQuiz": [
@@ -1638,12 +1113,7 @@
                     "Are you coming?",
                     "Let's eat"
                   ],
-                  "answer": "I'm here",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I'm here"
                 },
                 {
                   "id": "Diin ka?-choice",
@@ -1655,12 +1125,7 @@
                     "Are you coming?",
                     "Let's eat"
                   ],
-                  "answer": "Where are you?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Where are you?"
                 },
                 {
                   "id": "Makadto ka?-choice",
@@ -1672,12 +1137,7 @@
                     "Where are you?",
                     "Let's eat"
                   ],
-                  "answer": "Are you coming?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Are you coming?"
                 },
                 {
                   "id": "Mangaon ta-choice",
@@ -1689,12 +1149,7 @@
                     "Where are you?",
                     "Are you coming?"
                   ],
-                  "answer": "Let's eat",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Let's eat"
                 }
               ]
             },
@@ -1704,42 +1159,23 @@
               "unitNumber": 3,
               "lessonNumber": 3,
               "title": "Conversation with Friends",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Mauna ako",
-                  "english": "I'll go first",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I'll go first"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Hulata ko",
-                  "english": "Wait for me",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Wait for me"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Hulat",
-                  "english": "Wait",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Wait"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Katawa man na",
-                  "english": "That's funny",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "That's funny"
                 }
               ],
               "shortQuiz": [
@@ -1753,12 +1189,7 @@
                     "Wait",
                     "That's funny"
                   ],
-                  "answer": "I'll go first",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I'll go first"
                 },
                 {
                   "id": "Hulata ko-choice",
@@ -1770,12 +1201,7 @@
                     "Wait",
                     "That's funny"
                   ],
-                  "answer": "Wait for me",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Wait for me"
                 },
                 {
                   "id": "Hulat-choice",
@@ -1787,12 +1213,7 @@
                     "Wait for me",
                     "That's funny"
                   ],
-                  "answer": "Wait",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Wait"
                 },
                 {
                   "id": "Katawa man na-choice",
@@ -1804,12 +1225,7 @@
                     "Wait for me",
                     "Wait"
                   ],
-                  "answer": "That's funny",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "That's funny"
                 }
               ]
             },
@@ -1819,42 +1235,23 @@
               "unitNumber": 3,
               "lessonNumber": 4,
               "title": "Conversation with Friends",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Katawa",
-                  "english": "Funny",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Funny"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Namiss ta ka",
-                  "english": "I miss you",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I miss you"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Kitaay ta karon",
-                  "english": "Let's meet later",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Let's meet later"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Ano ginahimo mo?",
-                  "english": "What are you doing?",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "What are you doing?"
                 }
               ],
               "shortQuiz": [
@@ -1868,12 +1265,7 @@
                     "Let's meet later",
                     "What are you doing?"
                   ],
-                  "answer": "Funny",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Funny"
                 },
                 {
                   "id": "Namiss ta ka-choice",
@@ -1885,12 +1277,7 @@
                     "Let's meet later",
                     "What are you doing?"
                   ],
-                  "answer": "I miss you",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I miss you"
                 },
                 {
                   "id": "Kitaay ta karon-choice",
@@ -1902,12 +1289,7 @@
                     "I miss you",
                     "What are you doing?"
                   ],
-                  "answer": "Let's meet later",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Let's meet later"
                 },
                 {
                   "id": "Ano ginahimo mo?-choice",
@@ -1919,12 +1301,7 @@
                     "I miss you",
                     "Let's meet later"
                   ],
-                  "answer": "What are you doing?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "What are you doing?"
                 }
               ]
             },
@@ -1934,42 +1311,23 @@
               "unitNumber": 3,
               "lessonNumber": 5,
               "title": "Conversation with Friends",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Busy ako",
-                  "english": "I'm busy",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I'm busy"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Busy",
-                  "english": "Busy",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Busy"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Chat-i ko karon",
-                  "english": "Message me later",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Message me later"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Chat",
-                  "english": "Message",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Message"
                 }
               ],
               "shortQuiz": [
@@ -1983,12 +1341,7 @@
                     "Message me later",
                     "Message"
                   ],
-                  "answer": "I'm busy",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I'm busy"
                 },
                 {
                   "id": "Busy-choice",
@@ -2000,12 +1353,7 @@
                     "Message me later",
                     "Message"
                   ],
-                  "answer": "Busy",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Busy"
                 },
                 {
                   "id": "Chat-i ko karon-choice",
@@ -2017,12 +1365,7 @@
                     "Busy",
                     "Message"
                   ],
-                  "answer": "Message me later",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Message me later"
                 },
                 {
                   "id": "Chat-choice",
@@ -2034,12 +1377,7 @@
                     "Busy",
                     "Message me later"
                   ],
-                  "answer": "Message",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Message"
                 }
               ]
             },
@@ -2049,42 +1387,23 @@
               "unitNumber": 3,
               "lessonNumber": 6,
               "title": "Conversation with Friends",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Chat",
-                  "english": "Message",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Message"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Nabatian mo ang natabo sa school?",
-                  "english": "Have you heard what happened at school?",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Have you heard what happened at school?"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Ginahulat ta ka",
-                  "english": "I'm waiting for you",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I'm waiting for you"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Kadto na ta",
-                  "english": "Let's go",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Let's go"
                 }
               ],
               "shortQuiz": [
@@ -2098,12 +1417,7 @@
                     "I'm waiting for you",
                     "Let's go"
                   ],
-                  "answer": "Message",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Message"
                 },
                 {
                   "id": "Nabatian mo ang natabo sa school?-choice",
@@ -2115,12 +1429,7 @@
                     "I'm waiting for you",
                     "Let's go"
                   ],
-                  "answer": "Have you heard what happened at school?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Have you heard what happened at school?"
                 },
                 {
                   "id": "Ginahulat ta ka-choice",
@@ -2132,12 +1441,7 @@
                     "Have you heard what happened at school?",
                     "Let's go"
                   ],
-                  "answer": "I'm waiting for you",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I'm waiting for you"
                 },
                 {
                   "id": "Kadto na ta-choice",
@@ -2149,12 +1453,7 @@
                     "Have you heard what happened at school?",
                     "I'm waiting for you"
                   ],
-                  "answer": "Let's go",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Let's go"
                 }
               ]
             }
@@ -2170,42 +1469,23 @@
               "unitNumber": 4,
               "lessonNumber": 1,
               "title": "Family is Love",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Nanay",
-                  "english": "Mother",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Mother"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Tatay",
-                  "english": "Father",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Father"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Utod",
-                  "english": "Sibling",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Sibling"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Lola",
-                  "english": "Grandmother",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Grandmother"
                 }
               ],
               "shortQuiz": [
@@ -2219,12 +1499,7 @@
                     "Sibling",
                     "Grandmother"
                   ],
-                  "answer": "Mother",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Mother"
                 },
                 {
                   "id": "Tatay-choice",
@@ -2236,12 +1511,7 @@
                     "Sibling",
                     "Grandmother"
                   ],
-                  "answer": "Father",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Father"
                 },
                 {
                   "id": "Utod-choice",
@@ -2253,12 +1523,7 @@
                     "Father",
                     "Grandmother"
                   ],
-                  "answer": "Sibling",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Sibling"
                 },
                 {
                   "id": "Lola-choice",
@@ -2270,12 +1535,7 @@
                     "Father",
                     "Sibling"
                   ],
-                  "answer": "Grandmother",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Grandmother"
                 }
               ]
             },
@@ -2285,42 +1545,23 @@
               "unitNumber": 4,
               "lessonNumber": 2,
               "title": "Family is Love",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Lolo",
-                  "english": "Grandfather",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Grandfather"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Palangga ko ang akon pamilya",
-                  "english": "I love my family",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I love my family"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Diin si nanay?",
-                  "english": "Where is mother?",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Where is mother?"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Nagaluto si tatay",
-                  "english": "Father is cooking",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Father is cooking"
                 }
               ],
               "shortQuiz": [
@@ -2334,12 +1575,7 @@
                     "Where is mother?",
                     "Father is cooking"
                   ],
-                  "answer": "Grandfather",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Grandfather"
                 },
                 {
                   "id": "Palangga ko ang akon pamilya-choice",
@@ -2351,12 +1587,7 @@
                     "Where is mother?",
                     "Father is cooking"
                   ],
-                  "answer": "I love my family",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I love my family"
                 },
                 {
                   "id": "Diin si nanay?-choice",
@@ -2368,12 +1599,7 @@
                     "I love my family",
                     "Father is cooking"
                   ],
-                  "answer": "Where is mother?",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Where is mother?"
                 },
                 {
                   "id": "Nagaluto si tatay-choice",
@@ -2385,12 +1611,7 @@
                     "I love my family",
                     "Where is mother?"
                   ],
-                  "answer": "Father is cooking",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Father is cooking"
                 }
               ]
             },
@@ -2400,42 +1621,23 @@
               "unitNumber": 4,
               "lessonNumber": 3,
               "title": "Family is Love",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Nagakatulog ang akon utod",
-                  "english": "My sibling is sleeping",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "My sibling is sleeping"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Buotan si lola",
-                  "english": "Grandmother is kind",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Grandmother is kind"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Mangaon ta tanan",
-                  "english": "Let's eat together",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Let's eat together"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Halong",
-                  "english": "Take care",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Take care"
                 }
               ],
               "shortQuiz": [
@@ -2449,12 +1651,7 @@
                     "Let's eat together",
                     "Take care"
                   ],
-                  "answer": "My sibling is sleeping",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "My sibling is sleeping"
                 },
                 {
                   "id": "Buotan si lola-choice",
@@ -2466,12 +1663,7 @@
                     "Let's eat together",
                     "Take care"
                   ],
-                  "answer": "Grandmother is kind",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Grandmother is kind"
                 },
                 {
                   "id": "Mangaon ta tanan-choice",
@@ -2483,12 +1675,7 @@
                     "Grandmother is kind",
                     "Take care"
                   ],
-                  "answer": "Let's eat together",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Let's eat together"
                 },
                 {
                   "id": "Halong-choice",
@@ -2500,12 +1687,7 @@
                     "Grandmother is kind",
                     "Let's eat together"
                   ],
-                  "answer": "Take care",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Take care"
                 }
               ]
             },
@@ -2515,42 +1697,23 @@
               "unitNumber": 4,
               "lessonNumber": 4,
               "title": "Family is Love",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Namiss ko ang akon pamilya",
-                  "english": "I miss my family",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I miss my family"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Malipayon ang amon balay",
-                  "english": "Our house is happy",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Our house is happy"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Buligi ang imo utod",
-                  "english": "Help your sibling",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Help your sibling"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Nanay",
-                  "english": "Mother",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Mother"
                 }
               ],
               "shortQuiz": [
@@ -2564,12 +1727,7 @@
                     "Help your sibling",
                     "Mother"
                   ],
-                  "answer": "I miss my family",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I miss my family"
                 },
                 {
                   "id": "Malipayon ang amon balay-choice",
@@ -2581,12 +1739,7 @@
                     "Help your sibling",
                     "Mother"
                   ],
-                  "answer": "Our house is happy",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Our house is happy"
                 },
                 {
                   "id": "Buligi ang imo utod-choice",
@@ -2598,12 +1751,7 @@
                     "Our house is happy",
                     "Mother"
                   ],
-                  "answer": "Help your sibling",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Help your sibling"
                 },
                 {
                   "id": "Nanay-choice",
@@ -2615,12 +1763,7 @@
                     "Our house is happy",
                     "Help your sibling"
                   ],
-                  "answer": "Mother",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Mother"
                 }
               ]
             },
@@ -2630,42 +1773,23 @@
               "unitNumber": 4,
               "lessonNumber": 5,
               "title": "Family is Love",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Buligi ang imo utod",
-                  "english": "Help your sibling",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Help your sibling"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Nanay",
-                  "english": "Mother",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Mother"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Tatay",
-                  "english": "Father",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Father"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Utod",
-                  "english": "Sibling",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Sibling"
                 }
               ],
               "shortQuiz": [
@@ -2679,12 +1803,7 @@
                     "Father",
                     "Sibling"
                   ],
-                  "answer": "Help your sibling",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Help your sibling"
                 },
                 {
                   "id": "Nanay-choice",
@@ -2696,12 +1815,7 @@
                     "Father",
                     "Sibling"
                   ],
-                  "answer": "Mother",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Mother"
                 },
                 {
                   "id": "Tatay-choice",
@@ -2713,12 +1827,7 @@
                     "Mother",
                     "Sibling"
                   ],
-                  "answer": "Father",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Father"
                 },
                 {
                   "id": "Utod-choice",
@@ -2730,12 +1839,7 @@
                     "Mother",
                     "Father"
                   ],
-                  "answer": "Sibling",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Sibling"
                 }
               ]
             },
@@ -2745,42 +1849,23 @@
               "unitNumber": 4,
               "lessonNumber": 6,
               "title": "Family is Love",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Buligi ang imo utod",
-                  "english": "Help your sibling",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Help your sibling"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Nanay",
-                  "english": "Mother",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Mother"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Tatay",
-                  "english": "Father",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Father"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Utod",
-                  "english": "Sibling",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Sibling"
                 }
               ],
               "shortQuiz": [
@@ -2794,12 +1879,7 @@
                     "Father",
                     "Sibling"
                   ],
-                  "answer": "Help your sibling",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Help your sibling"
                 },
                 {
                   "id": "Nanay-choice",
@@ -2811,12 +1891,7 @@
                     "Father",
                     "Sibling"
                   ],
-                  "answer": "Mother",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Mother"
                 },
                 {
                   "id": "Tatay-choice",
@@ -2828,12 +1903,7 @@
                     "Mother",
                     "Sibling"
                   ],
-                  "answer": "Father",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Father"
                 },
                 {
                   "id": "Utod-choice",
@@ -2845,12 +1915,7 @@
                     "Mother",
                     "Father"
                   ],
-                  "answer": "Sibling",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Sibling"
                 }
               ]
             }
@@ -2866,42 +1931,23 @@
               "unitNumber": 5,
               "lessonNumber": 1,
               "title": "Daily Life",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Nagmata ako sang aga.",
-                  "english": "I woke up in the morning.",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I woke up in the morning."
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Gina lagas ako sang ido.",
-                  "english": "I am being chased by a dog.",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I am being chased by a dog."
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Nagakaon ako",
-                  "english": "I am eating",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I am eating"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Nagabasa ako",
-                  "english": "I am reading",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I am reading"
                 }
               ],
               "shortQuiz": [
@@ -2915,12 +1961,7 @@
                     "I am eating",
                     "I am reading"
                   ],
-                  "answer": "I woke up in the morning.",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I woke up in the morning."
                 },
                 {
                   "id": "Gina lagas ako sang ido.-choice",
@@ -2932,12 +1973,7 @@
                     "I am eating",
                     "I am reading"
                   ],
-                  "answer": "I am being chased by a dog.",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am being chased by a dog."
                 },
                 {
                   "id": "Nagakaon ako-choice",
@@ -2949,12 +1985,7 @@
                     "I am being chased by a dog.",
                     "I am reading"
                   ],
-                  "answer": "I am eating",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am eating"
                 },
                 {
                   "id": "Nagabasa ako-choice",
@@ -2966,12 +1997,7 @@
                     "I am being chased by a dog.",
                     "I am eating"
                   ],
-                  "answer": "I am reading",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am reading"
                 }
               ]
             },
@@ -2981,42 +2007,23 @@
               "unitNumber": 5,
               "lessonNumber": 2,
               "title": "Daily Life",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Basa",
-                  "english": "Read",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Read"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Nagakadto ako sa eskwelahan",
-                  "english": "I am going to school",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I am going to school"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Nagainom ako sang tubig",
-                  "english": "I am drinking water",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I am drinking water"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Tubig",
-                  "english": "Water",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Water"
                 }
               ],
               "shortQuiz": [
@@ -3030,12 +2037,7 @@
                     "I am drinking water",
                     "Water"
                   ],
-                  "answer": "Read",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Read"
                 },
                 {
                   "id": "Nagakadto ako sa eskwelahan-choice",
@@ -3047,12 +2049,7 @@
                     "I am drinking water",
                     "Water"
                   ],
-                  "answer": "I am going to school",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am going to school"
                 },
                 {
                   "id": "Nagainom ako sang tubig-choice",
@@ -3064,12 +2061,7 @@
                     "I am going to school",
                     "Water"
                   ],
-                  "answer": "I am drinking water",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am drinking water"
                 },
                 {
                   "id": "Tubig-choice",
@@ -3081,12 +2073,7 @@
                     "I am going to school",
                     "I am drinking water"
                   ],
-                  "answer": "Water",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Water"
                 }
               ]
             },
@@ -3096,42 +2083,23 @@
               "unitNumber": 5,
               "lessonNumber": 3,
               "title": "Daily Life",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Nagakatulog ako",
-                  "english": "I am sleeping",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I am sleeping"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Nagatuon ako",
-                  "english": "I am studying",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I am studying"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Nagapanglaba ako",
-                  "english": "I am washing clothes",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I am washing clothes"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Nagatinlo ako sang balay",
-                  "english": "I am cleaning the house",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I am cleaning the house"
                 }
               ],
               "shortQuiz": [
@@ -3145,12 +2113,7 @@
                     "I am washing clothes",
                     "I am cleaning the house"
                   ],
-                  "answer": "I am sleeping",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am sleeping"
                 },
                 {
                   "id": "Nagatuon ako-choice",
@@ -3162,12 +2125,7 @@
                     "I am washing clothes",
                     "I am cleaning the house"
                   ],
-                  "answer": "I am studying",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am studying"
                 },
                 {
                   "id": "Nagapanglaba ako-choice",
@@ -3179,12 +2137,7 @@
                     "I am studying",
                     "I am cleaning the house"
                   ],
-                  "answer": "I am washing clothes",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am washing clothes"
                 },
                 {
                   "id": "Nagatinlo ako sang balay-choice",
@@ -3196,12 +2149,7 @@
                     "I am studying",
                     "I am washing clothes"
                   ],
-                  "answer": "I am cleaning the house",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am cleaning the house"
                 }
               ]
             },
@@ -3211,42 +2159,23 @@
               "unitNumber": 5,
               "lessonNumber": 4,
               "title": "Daily Life",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Aga ako nagbugtaw",
-                  "english": "I woke up early",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I woke up early"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Mapauli ako",
-                  "english": "I will go home",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I will go home"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "May libro ako",
-                  "english": "I have a book",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I have a book"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Libro",
-                  "english": "Book",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Book"
                 }
               ],
               "shortQuiz": [
@@ -3260,12 +2189,7 @@
                     "I have a book",
                     "Book"
                   ],
-                  "answer": "I woke up early",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I woke up early"
                 },
                 {
                   "id": "Mapauli ako-choice",
@@ -3277,12 +2201,7 @@
                     "I have a book",
                     "Book"
                   ],
-                  "answer": "I will go home",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I will go home"
                 },
                 {
                   "id": "May libro ako-choice",
@@ -3294,12 +2213,7 @@
                     "I will go home",
                     "Book"
                   ],
-                  "answer": "I have a book",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I have a book"
                 },
                 {
                   "id": "Libro-choice",
@@ -3311,12 +2225,7 @@
                     "I will go home",
                     "I have a book"
                   ],
-                  "answer": "Book",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Book"
                 }
               ]
             },
@@ -3326,42 +2235,23 @@
               "unitNumber": 5,
               "lessonNumber": 5,
               "title": "Daily Life",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Ido",
-                  "english": "Dog",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Dog"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Kuring",
-                  "english": "Cat",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Cat"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Pispis",
-                  "english": "Bird",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Bird"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Isda",
-                  "english": "Fish",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "Fish"
                 }
               ],
               "shortQuiz": [
@@ -3375,12 +2265,7 @@
                     "Bird",
                     "Fish"
                   ],
-                  "answer": "Dog",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Dog"
                 },
                 {
                   "id": "Kuring-choice",
@@ -3392,12 +2277,7 @@
                     "Bird",
                     "Fish"
                   ],
-                  "answer": "Cat",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Cat"
                 },
                 {
                   "id": "Pispis-choice",
@@ -3409,12 +2289,7 @@
                     "Cat",
                     "Fish"
                   ],
-                  "answer": "Bird",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Bird"
                 },
                 {
                   "id": "Isda-choice",
@@ -3426,12 +2301,7 @@
                     "Cat",
                     "Bird"
                   ],
-                  "answer": "Fish",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "Fish"
                 }
               ]
             },
@@ -3441,42 +2311,23 @@
               "unitNumber": 5,
               "lessonNumber": 6,
               "title": "Daily Life",
-              "storyTitle": null,
-              "story": null,
-              "storyImageAsset": null,
               "lesson": "Practice the meaning and sentence pattern together. Read the examples first, then answer each quiz item by checking the concept, translation, and word order.",
               "examples": [
                 {
-                  "category": "",
                   "hiligaynon": "Kinahanglan ko sang tubig",
-                  "english": "I need water",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I need water"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Kapoy ako",
-                  "english": "I am tired",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I am tired"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Gutom ako",
-                  "english": "I am hungry",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I am hungry"
                 },
                 {
-                  "category": "",
                   "hiligaynon": "Nalipay ako",
-                  "english": "I am happy",
-                  "note": "",
-                  "imageAsset": null,
-                  "audioAsset": null
+                  "english": "I am happy"
                 }
               ],
               "shortQuiz": [
@@ -3490,12 +2341,7 @@
                     "I am hungry",
                     "I am happy"
                   ],
-                  "answer": "I need water",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I need water"
                 },
                 {
                   "id": "Kapoy ako-choice",
@@ -3507,12 +2353,7 @@
                     "I am hungry",
                     "I am happy"
                   ],
-                  "answer": "I am tired",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am tired"
                 },
                 {
                   "id": "Gutom ako-choice",
@@ -3524,12 +2365,7 @@
                     "I am tired",
                     "I am happy"
                   ],
-                  "answer": "I am hungry",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am hungry"
                 },
                 {
                   "id": "Nalipay ako-choice",
@@ -3541,12 +2377,7 @@
                     "I am tired",
                     "I am hungry"
                   ],
-                  "answer": "I am happy",
-                  "audioAsset": null,
-                  "imageAsset": null,
-                  "leftItems": [],
-                  "rightItems": [],
-                  "pairs": {}
+                  "answer": "I am happy"
                 }
               ]
             }

@@ -3,13 +3,11 @@ import 'package:tudloapp/core/constants/app_strings.dart';
 import 'package:tudloapp/core/data/app_data.dart';
 import 'package:tudloapp/core/state/app_state.dart';
 import 'package:tudloapp/core/theme/app_theme.dart';
-import 'package:tudloapp/data/dictionary/dictionary_data.dart';
 import 'package:tudloapp/features/profile/screens/profile_selection_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppData.initialize();
-  await DictionaryData.initialize();
   runApp(const TudloApp());
 }
 

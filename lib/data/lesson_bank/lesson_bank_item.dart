@@ -1,78 +1,3 @@
-import 'package:tudloapp/core/models/grade_level.dart';
-
-class GradeLessonDataset {
-  final GradeLevel gradeLevel;
-  final int maxTermGrade;
-  final String storyTemplate;
-  final String lessonTemplate;
-
-  const GradeLessonDataset({
-    required this.gradeLevel,
-    required this.maxTermGrade,
-    required this.storyTemplate,
-    required this.lessonTemplate,
-  });
-
-  bool includes(LessonTerm term) => term.gradeLevel <= maxTermGrade;
-}
-
-/// Source-aligned lesson record for textbook-style content.
-///
-/// These records preserve the extracted lesson sections so they can be moved
-/// into JSON, CSV, a database, or a richer lesson player without losing source
-/// text that does not fit the quiz-oriented [LessonTerm] model.
-class GradeLessonSource {
-  final String unitTitle;
-  final int lessonNumber;
-  final String lessonTitle;
-  final List<String> katuyuan;
-  final List<String> nakahibaloKaSini;
-  final List<String> pasanyugaIni;
-  final List<String> pamatiITulukaBasaha;
-  final List<String> readingText;
-  final List<String> istoryahanNaton;
-  final List<String> paminsaraIni;
-  final List<String> masaranganKoIni;
-  final List<GradeLessonActivity> activities;
-  final String sourceNote;
-
-  const GradeLessonSource({
-    required this.unitTitle,
-    required this.lessonNumber,
-    required this.lessonTitle,
-    this.katuyuan = const ['[not provided]'],
-    this.nakahibaloKaSini = const ['[not provided]'],
-    this.pasanyugaIni = const ['[not provided]'],
-    this.pamatiITulukaBasaha = const ['[not provided]'],
-    this.readingText = const ['[not provided]'],
-    this.istoryahanNaton = const ['[not provided]'],
-    this.paminsaraIni = const ['[not provided]'],
-    this.masaranganKoIni = const ['[not provided]'],
-    this.activities = const [],
-    this.sourceNote = '',
-  });
-}
-
-class GradeLessonActivity {
-  final String activityType;
-  final List<String> questions;
-  final List<String> choices;
-  final String correctAnswer;
-  final String imageDescription;
-  final List<String> updatedAssetPhotoFilenames;
-  final String audioVoiceTextScript;
-
-  const GradeLessonActivity({
-    required this.activityType,
-    this.questions = const ['[not provided]'],
-    this.choices = const ['[not provided]'],
-    this.correctAnswer = '[not provided]',
-    this.imageDescription = '[not provided]',
-    this.updatedAssetPhotoFilenames = const ['[not provided]'],
-    this.audioVoiceTextScript = '[not provided]',
-  });
-}
-
 enum QuestionType {
   translationChoice,
   arrangeWords,
@@ -251,18 +176,6 @@ class LessonExample {
   });
 }
 
-class LessonConceptCard {
-  final String title;
-  final String hiligaynon;
-  final String english;
-
-  const LessonConceptCard({
-    required this.title,
-    required this.hiligaynon,
-    required this.english,
-  });
-}
-
 class LevelContent {
   final String id;
   final int gradeLevel;
@@ -332,7 +245,6 @@ class LessonLevelContent {
   final String storyTitle;
   final String story;
   final String shortLesson;
-  final List<LessonConceptCard> concepts;
   final List<LessonExample> examples;
 
   const LessonLevelContent({
@@ -340,7 +252,6 @@ class LessonLevelContent {
     required this.storyTitle,
     required this.story,
     required this.shortLesson,
-    this.concepts = const [],
     required this.examples,
   });
 }

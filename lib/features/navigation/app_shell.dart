@@ -6,6 +6,7 @@ import 'package:tudloapp/features/home_map/screens/home_map_page.dart';
 import 'package:tudloapp/features/profile/screens/profile_page.dart';
 import 'package:tudloapp/features/navigation/bottom_nav_bar.dart';
 import 'package:tudloapp/core/widgets/language_toggle.dart';
+import 'package:tudloapp/data/dictionary/dictionary_data.dart';
 
 /// Main app container after onboarding.
 ///
@@ -23,17 +24,20 @@ class AppShell extends StatefulWidget {
 
 class AppShellState extends State<AppShell> {
   late int _selectedIndex;
+  Future<void>? _dictionaryFuture;
 
   @override
   void initState() {
     super.initState();
     _selectedIndex = widget.initialIndex;
+    if (_selectedIndex != 0) _dictionaryFuture = DictionaryData.initialize();
   }
 
   void switchTo(int index) {
     // Called by the bottom navigation bar.
     setState(() {
       if (index != 0) AppData.mapHelpDone = true;
+      if (index != 0) _dictionaryFuture ??= DictionaryData.initialize();
       _selectedIndex = index;
     });
   }
@@ -53,10 +57,25 @@ class AppShellState extends State<AppShell> {
       const ProfilePage(),
     ];
 
+    final page = _selectedIndex == 0
+        ? pages.first
+        : FutureBuilder<void>(
+            future: _dictionaryFuture,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState != ConnectionState.done) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (snapshot.hasError) {
+                return const Center(child: Text('Unable to load content.'));
+              }
+              return pages[_selectedIndex];
+            },
+          );
+
     return Scaffold(
       body: Stack(
         children: [
-          pages[_selectedIndex],
+          page,
           if (_selectedIndex == 0 || _selectedIndex == 3)
             const Positioned(
               top: 12,

@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
+import 'package:tudloapp/core/data/content_repository.dart';
 import 'package:tudloapp/data/dictionary/dictionary_item.dart';
 
 export 'package:tudloapp/data/dictionary/dictionary_item.dart';
@@ -8,15 +6,16 @@ export 'package:tudloapp/data/dictionary/dictionary_item.dart';
 /// JSON-backed lookup data for Dictionary, Translation, and word tooltips.
 ///
 /// The data is bundled from `assets/data/ilonggo_dictionary_dataset.json`.
-/// Call [initialize] during app startup before dictionary lookups are used.
+/// [initialize] loads it once, on first use.
 class DictionaryData {
+  static final _repository = ContentRepository();
   static const _jsonDatasetAsset =
       'assets/data/ilonggo_dictionary_dataset.json';
 
   static List<DictionaryEntry> entries = const [];
   static Map<String, String> hiligaynonToEnglish = const {};
   static Map<String, String> englishToHiligaynon = const {};
-  static bool _initialized = false;
+  static Future<void>? _initialization;
 
   /// Small phrase support for the Translation page. Full lesson sentences
   /// should remain in LessonBank instead of becoming dictionary entries.
@@ -32,10 +31,10 @@ class DictionaryData {
     'can you help me': 'pwede mo ako buligan',
   };
 
-  static Future<void> initialize() async {
-    if (_initialized) return;
-    final raw = await rootBundle.loadString(_jsonDatasetAsset);
-    final data = jsonDecode(raw) as Map<String, dynamic>;
+  static Future<void> initialize() => _initialization ??= _load();
+
+  static Future<void> _load() async {
+    final data = await _repository.loadMap(_jsonDatasetAsset);
     final abbreviations = _abbreviationMap(data['abbreviations']);
     final parsedEntries = <DictionaryEntry>[
       for (final item in _jsonList(data['dictionary']))
@@ -58,7 +57,6 @@ class DictionaryData {
         for (final meaning in _englishMeanings(entry.english))
           _normalize(meaning): entry.hiligaynon,
     };
-    _initialized = true;
   }
 
   static String meaningFor(String value) {

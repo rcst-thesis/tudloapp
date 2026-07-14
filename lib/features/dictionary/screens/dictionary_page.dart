@@ -17,21 +17,35 @@ class DictionaryPage extends StatefulWidget {
 }
 
 class _DictionaryPageState extends State<DictionaryPage> {
+  static const _pageSize = 80;
   final TextEditingController _searchController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   final Map<String, GlobalKey> _letterKeys = {};
   _DictionaryMode _mode = _DictionaryMode.englishToHiligaynon;
   String _query = '';
+  int _visibleCount = _pageSize;
 
   @override
   void initState() {
     super.initState();
+    _scrollController.addListener(_loadMore);
     _searchController.addListener(() {
-      setState(
-        () =>
-            _query = DictionaryData.normalizeForSearch(_searchController.text),
-      );
+      setState(() {
+        _query = DictionaryData.normalizeForSearch(_searchController.text);
+        _visibleCount = _pageSize;
+        _letterKeys.clear();
+      });
     });
+  }
+
+  void _loadMore() {
+    if (!_scrollController.hasClients ||
+        _scrollController.position.extentAfter > 600) {
+      return;
+    }
+    final total = _filteredTerms.length;
+    if (_visibleCount >= total) return;
+    setState(() => _visibleCount = (_visibleCount + _pageSize).clamp(0, total));
   }
 
   @override
@@ -63,11 +77,15 @@ class _DictionaryPageState extends State<DictionaryPage> {
   }
 
   List<_DictionarySection> get _sections {
+    return _sectionsFor(_filteredTerms.take(_visibleCount));
+  }
+
+  List<_DictionarySection> _sectionsFor(Iterable<DictionaryEntry> terms) {
     // Group the filtered results by first letter based on the selected
     // language mode. English mode groups by English; Hiligaynon mode groups by
     // Hiligaynon.
     final grouped = <String, List<DictionaryEntry>>{};
-    for (final entry in _filteredTerms) {
+    for (final entry in terms) {
       final word = _englishMode ? entry.english : entry.hiligaynon;
       final normalizedWord = DictionaryData.normalizeForSearch(word);
       final letter = normalizedWord.isEmpty
@@ -90,7 +108,10 @@ class _DictionaryPageState extends State<DictionaryPage> {
     // The A-Z index scrolls to the requested section. If that letter is not in
     // the current filtered results, it jumps to the nearest next available
     // section, or the last section as a fallback.
-    final sectionLetters = _sections.map((section) => section.letter).toList();
+    final allSections = _sectionsFor(_filteredTerms);
+    final sectionLetters = allSections
+        .map((section) => section.letter)
+        .toList();
     if (sectionLetters.isEmpty) return;
 
     final targetLetter = sectionLetters.contains(letter)
@@ -99,7 +120,21 @@ class _DictionaryPageState extends State<DictionaryPage> {
             (sectionLetter) => sectionLetter.compareTo(letter) > 0,
             orElse: () => sectionLetters.last,
           );
-    final key = _letterKeys[targetLetter];
+    final needed = allSections
+        .takeWhile((section) => section.letter.compareTo(targetLetter) <= 0)
+        .fold<int>(0, (count, section) => count + section.terms.length);
+    if (needed > _visibleCount) {
+      setState(() => _visibleCount = needed);
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) => _scrollToLetter(targetLetter),
+      );
+      return;
+    }
+    _scrollToLetter(targetLetter);
+  }
+
+  void _scrollToLetter(String letter) {
+    final key = _letterKeys[letter];
     final context = key?.currentContext;
     if (context == null) return;
     Scrollable.ensureVisible(
@@ -130,7 +165,11 @@ class _DictionaryPageState extends State<DictionaryPage> {
                 sliver: SliverToBoxAdapter(
                   child: _ModeSwitch(
                     mode: _mode,
-                    onChanged: (mode) => setState(() => _mode = mode),
+                    onChanged: (mode) => setState(() {
+                      _mode = mode;
+                      _visibleCount = _pageSize;
+                      _letterKeys.clear();
+                    }),
                   ),
                 ),
               ),
