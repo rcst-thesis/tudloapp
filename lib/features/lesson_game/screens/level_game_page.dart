@@ -1838,7 +1838,7 @@ class _LevelIntroHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localLevel = ((level - 1) % AppData.unitLevels) + 1;
+    final localLevel = AppData.lessonNumberForLevel(level);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -2477,7 +2477,7 @@ class _RewardBanner extends StatelessWidget {
             left: 0,
             right: 0,
             child: Text(
-              'LEKSIYON ${((level - 1) % AppData.unitLevels) + 1}',
+              'LEKSIYON ${AppData.lessonNumberForLevel(level)}',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,

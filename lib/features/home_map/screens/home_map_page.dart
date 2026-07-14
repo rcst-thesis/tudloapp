@@ -134,7 +134,7 @@ class _HomeMapPageState extends State<HomeMapPage> {
     final mapHeight =
         _topPad +
         (AppData.maxLevel - 1) * _levelGap +
-        ((AppData.maxLevel - 1) ~/ AppData.unitLevels) * _unitMessageGap +
+        (AppData.units.length - 1) * _unitMessageGap +
         40 +
         _bottomPad;
     final username = AppStateScope.of(context).displayUsername;
@@ -1300,9 +1300,8 @@ class _MapUnitStyle {
   ];
 
   static Color colorForLevel(int level) {
-    final unitIndex = ((level - 1) ~/ AppData.unitLevels).clamp(
-      0,
-      _unitColors.length - 1,
+    final unitIndex = AppData.units.indexWhere(
+      (unit) => level >= unit.startLevel && level <= unit.endLevel,
     );
     return _unitColors[unitIndex];
   }
@@ -1953,7 +1952,7 @@ class _LevelPositionedButtonState extends State<_LevelPositionedButton>
 }
 
 int _localLevelNumber(int globalLevel) {
-  return ((globalLevel - 1) % AppData.unitLevels) + 1;
+  return AppData.lessonNumberForLevel(globalLevel);
 }
 
 class _FloatingStarCluster extends StatefulWidget {
@@ -2143,7 +2142,9 @@ class _RoadGeometry {
     final y =
         topPad +
         (level - 1) * levelGap +
-        ((level - 1) ~/ AppData.unitLevels) * unitMessageGap;
+        AppData.units.where((unit) => unit.startLevel <= level).length *
+            unitMessageGap -
+        unitMessageGap;
     return Offset(xForLevel(level.toDouble()), y);
   }
 

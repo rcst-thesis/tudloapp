@@ -8,23 +8,15 @@ export 'package:tudloapp/data/lesson_bank/lesson_bank_item.dart';
 /// Lazy, JSON-backed lesson content.
 class LessonBank {
   static final _repository = ContentRepository();
-  static const _assets = {
-    GradeLevel.grade1: 'assets/data/grade1_dataset.json',
-    GradeLevel.grade2: 'assets/data/grade2_dataset.json',
-    GradeLevel.grade3: 'assets/data/grade3_dataset.json',
-  };
+  static const _asset = 'assets/data/tudlo_updated_lesson_dataset.json';
 
   static Future<LevelContent> loadLevelContentForLevel(int level) async {
-    final data = await _repository.loadMap(
-      _assets[AppData.selectedGradeLevel]!,
-    );
+    final data = await _repository.loadMap(_asset);
     return _levelContentFromJson(data, level);
   }
 
   static Future<List<LevelContent>> loadAllLevelContentForActiveGrade() async {
-    final data = await _repository.loadMap(
-      _assets[AppData.selectedGradeLevel]!,
-    );
+    final data = await _repository.loadMap(_asset);
     return [
       for (var level = 1; level <= AppData.maxLevel; level++)
         _levelContentFromJson(data, level),
@@ -59,27 +51,33 @@ class LessonBank {
   }
 
   static String lessonTitleForLevel(int level) =>
-      'Leksyon ${((level - 1) % AppData.unitLevels) + 1}';
+      'Leksyon ${AppData.lessonNumberForLevel(level)}';
 
-  static int unitForLevel(int level) =>
-      (((level - 1) ~/ AppData.unitLevels) + 1).clamp(1, AppData.units.length);
+  static int unitForLevel(int level) => AppData.unitForLevel(level).number;
 
   static LevelContent _levelContentFromJson(
     Map<String, dynamic> data,
     int level,
   ) {
     final grade = AppData.selectedGradeLevel.number;
-    final unit = unitForLevel(level);
-    final lesson = ((level - 1) % AppData.unitLevels) + 1;
     final gradeData = _jsonList(data['grades'])
         .cast<Map<String, dynamic>>()
         .firstWhere((item) => item['gradeLevel'] == grade);
-    final unitData = _jsonList(gradeData['units'])
-        .cast<Map<String, dynamic>>()
-        .firstWhere((item) => item['unitNumber'] == unit);
-    final lessonData = _jsonList(unitData['lessons'])
-        .cast<Map<String, dynamic>>()
-        .firstWhere((item) => item['lessonNumber'] == lesson);
+    final lessons = [
+      for (final unit in _jsonList(
+        gradeData['units'],
+      ).cast<Map<String, dynamic>>())
+        ..._jsonList(unit['lessons']).cast<Map<String, dynamic>>(),
+    ];
+    if (level < 1 || level > lessons.length) {
+      throw RangeError.range(level, 1, lessons.length, 'level');
+    }
+    final lessonData = lessons[level - 1];
+    final unit = _integer(lessonData['unitNumber'], unitForLevel(level));
+    final lesson = _integer(
+      lessonData['lessonNumber'],
+      AppData.lessonNumberForLevel(level),
+    );
 
     return LevelContent(
       id: _string(lessonData['id'], 'g${grade}_u${unit}_l$lesson'),
@@ -123,7 +121,8 @@ class LessonBank {
       data['pairs'],
     ).map((key, value) => MapEntry(key, '$value'));
     final choices = _jsonList(data['choices']).map((item) => '$item').toList();
-    final answer = _string(data['answer'], choices.firstOrNull ?? '');
+    if (choices.isEmpty) choices.add('Tapos');
+    final answer = _string(data['answer'], choices.first);
     return QuizItem(
       id: _string(data['id'], 'g${grade}_u${unit}_l${lesson}_quiz'),
       type: _quizType(_string(data['type'], 'multipleChoice'), pairs),
@@ -170,4 +169,7 @@ class LessonBank {
     final text = value?.toString().trim();
     return text == null || text.isEmpty || text == 'null' ? null : text;
   }
+
+  static int _integer(Object? value, int fallback) =>
+      value is int ? value : int.tryParse('$value') ?? fallback;
 }

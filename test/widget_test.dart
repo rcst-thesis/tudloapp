@@ -3,26 +3,47 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tudloapp/core/data/app_data.dart';
 import 'package:tudloapp/core/models/grade_level.dart';
+import 'package:tudloapp/data/dictionary/dictionary_data.dart';
 import 'package:tudloapp/data/lesson_bank/lesson_bank.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   test('every level loads playable JSON content', () async {
+    const expectedCounts = {1: 25, 2: 15, 3: 15};
     for (final grade in GradeLevel.values) {
       AppData.selectedGradeLevel = grade;
       final contents = await LessonBank.loadAllLevelContentForActiveGrade();
 
-      expect(contents, hasLength(AppData.maxLevel));
+      expect(contents, hasLength(expectedCounts[grade.number]));
+      expect(
+        contents.map((content) => content.id).toSet(),
+        hasLength(contents.length),
+      );
       for (var index = 0; index < contents.length; index++) {
         final content = contents[index];
         final level = index + 1;
         expect(content.gradeLevel, grade.number);
         expect(content.unitNumber, LessonBank.unitForLevel(level));
-        expect(content.lessonNumber, ((level - 1) % AppData.unitLevels) + 1);
+        expect(content.lessonNumber, AppData.lessonNumberForLevel(level));
         expect(content.quizItems, isNotEmpty);
+        expect(
+          content.quizItems.every((quiz) => quiz.choices.isNotEmpty),
+          isTrue,
+        );
+        expect(
+          content.quizItems.every((quiz) => quiz.answer.isNotEmpty),
+          isTrue,
+        );
       }
     }
+  });
+
+  test('dictionary loads the formatted JSON asset', () async {
+    await DictionaryData.initialize();
+
+    expect(DictionaryData.entries, hasLength(963));
+    expect(DictionaryData.meaningFor('abogado'), contains('lawyer'));
   });
 
   test('referenced image assets exist with exact path casing', () async {

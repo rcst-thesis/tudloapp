@@ -27,7 +27,7 @@ class _LessonIntroPageState extends State<LessonIntroPage> {
     unawaited(DictionaryData.initialize());
   }
 
-  int get _localLessonNumber => ((widget.level - 1) % AppData.unitLevels) + 1;
+  int get _localLessonNumber => AppData.lessonNumberForLevel(widget.level);
 
   void _openLessonGame() {
     Navigator.pushReplacement(

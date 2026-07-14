@@ -11,8 +11,7 @@ class AppData {
   static bool translateHelpDone = false;
   static bool mapHelpDone = false;
 
-  static const int maxLevel = 36;
-  static const unitLevels = 6;
+  static int get maxLevel => units.last.endLevel;
 
   /// Duolingo-style energy rules.
   ///
@@ -46,25 +45,65 @@ class AppData {
 
   static const Map<GradeLevel, List<AppUnit>> _unitsByGrade = {
     GradeLevel.grade1: [
-      AppUnit(number: 1, startLevel: 1, title: 'ALPHABETO KAG NUMERO'),
-      AppUnit(number: 2, startLevel: 7, title: 'MIYEMBRO SANG PAMILYA'),
-      AppUnit(number: 3, startLevel: 13, title: 'MGA COMMUNITY'),
-      AppUnit(number: 4, startLevel: 19, title: 'MGA SAPAT SA PALIBOT'),
-      AppUnit(number: 5, startLevel: 25, title: 'MGA LUGAR SA PALIBOT'),
+      AppUnit(
+        number: 1,
+        startLevel: 1,
+        lessonCount: 9,
+        title: 'ALPHABETO KAG NUMERO',
+      ),
+      AppUnit(
+        number: 2,
+        startLevel: 10,
+        lessonCount: 4,
+        title: 'MIYEMBRO SANG PAMILYA',
+      ),
+      AppUnit(
+        number: 3,
+        startLevel: 14,
+        lessonCount: 4,
+        title: 'MGA COMMUNITY',
+      ),
+      AppUnit(
+        number: 4,
+        startLevel: 18,
+        lessonCount: 4,
+        title: 'MGA SAPAT SA PALIBOT',
+      ),
+      AppUnit(
+        number: 5,
+        startLevel: 22,
+        lessonCount: 4,
+        title: 'MGA LUGAR SA PALIBOT',
+      ),
     ],
     GradeLevel.grade2: [
-      AppUnit(number: 1, startLevel: 1, title: 'PAGPAKILALA'),
-      AppUnit(number: 2, startLevel: 7, title: 'GREETINGS AND POLITE'),
-      AppUnit(number: 3, startLevel: 13, title: 'PANGALAN'),
-      AppUnit(number: 4, startLevel: 19, title: 'SONGS AND RIDDLES'),
-      AppUnit(number: 5, startLevel: 25, title: 'POEMS'),
+      AppUnit(number: 1, startLevel: 1, lessonCount: 3, title: 'PAGPAKILALA'),
+      AppUnit(
+        number: 2,
+        startLevel: 4,
+        lessonCount: 3,
+        title: 'GREETINGS AND POLITE',
+      ),
+      AppUnit(number: 3, startLevel: 7, lessonCount: 3, title: 'PANGALAN'),
+      AppUnit(
+        number: 4,
+        startLevel: 10,
+        lessonCount: 3,
+        title: 'SONGS AND RIDDLES',
+      ),
+      AppUnit(number: 5, startLevel: 13, lessonCount: 3, title: 'POEMS'),
     ],
     GradeLevel.grade3: [
-      AppUnit(number: 1, startLevel: 1, title: 'NUMBERS'),
-      AppUnit(number: 2, startLevel: 7, title: 'STORIES'),
-      AppUnit(number: 3, startLevel: 13, title: 'FABLES'),
-      AppUnit(number: 4, startLevel: 19, title: 'STORY DETECTIVES'),
-      AppUnit(number: 5, startLevel: 25, title: 'WORD POWER'),
+      AppUnit(number: 1, startLevel: 1, lessonCount: 3, title: 'NUMBERS'),
+      AppUnit(number: 2, startLevel: 4, lessonCount: 3, title: 'STORIES'),
+      AppUnit(number: 3, startLevel: 7, lessonCount: 3, title: 'FABLES'),
+      AppUnit(
+        number: 4,
+        startLevel: 10,
+        lessonCount: 3,
+        title: 'STORY DETECTIVES',
+      ),
+      AppUnit(number: 5, startLevel: 13, lessonCount: 3, title: 'WORD POWER'),
     ],
   };
 
@@ -204,7 +243,7 @@ class AppData {
   }
 
   static bool isUnitStartLevel(int level) {
-    return level >= 1 && level <= maxLevel && (level - 1) % unitLevels == 0;
+    return units.any((unit) => unit.startLevel == level);
   }
 
   static bool isLevelUnlocked(int level) {
@@ -212,8 +251,7 @@ class AppData {
     if (isUnitStartLevel(level)) return true;
     if (completedLevels.contains(level)) return true;
     final previousLevel = level - 1;
-    final sameUnit =
-        (previousLevel - 1) ~/ unitLevels == (level - 1) ~/ unitLevels;
+    final sameUnit = unitForLevel(previousLevel) == unitForLevel(level);
     return sameUnit && completedLevels.contains(previousLevel);
   }
 
@@ -223,6 +261,15 @@ class AppData {
 
   static AppUnit unitForNumber(int number) {
     return units.firstWhere((unit) => unit.number == number);
+  }
+
+  static AppUnit unitForLevel(int level) => units.firstWhere(
+    (unit) => level >= unit.startLevel && level <= unit.endLevel,
+  );
+
+  static int lessonNumberForLevel(int level) {
+    final unit = unitForLevel(level);
+    return level - unit.startLevel + 1;
   }
 
   /// Converts a lesson score into 0-3 stars and keeps the best result.
@@ -246,13 +293,15 @@ class AppData {
 class AppUnit {
   final int number;
   final int startLevel;
+  final int lessonCount;
   final String title;
 
   const AppUnit({
     required this.number,
     required this.startLevel,
+    required this.lessonCount,
     required this.title,
   });
 
-  int get endLevel => startLevel + AppData.unitLevels - 1;
+  int get endLevel => startLevel + lessonCount - 1;
 }

@@ -734,9 +734,9 @@ class _ProgressSectionState extends State<_ProgressSection> {
 
   @override
   Widget build(BuildContext context) {
-    // The progress card starts with three units and expands to all six when
+    // The progress card starts with three units and expands to all units when
     // the user taps "View all".
-    final units = List.generate(6, (index) => index + 1);
+    final units = AppData.units.map((unit) => unit.number).toList();
     final visibleUnits = expanded ? units : units.take(3).toList();
 
     return Column(
@@ -861,15 +861,14 @@ class _UnitProgressTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Completed levels are counted by global level ID, grouped into visible
-    // units of five levels each.
-    final start = (unit - 1) * 5 + 1;
-    final end = start + 4;
+    final appUnit = AppData.unitForNumber(unit);
+    final start = appUnit.startLevel;
+    final end = appUnit.endLevel;
     final count = AppData.completedLevels
         .where((level) => level >= start && level <= end)
         .length;
-    final progress = count / AppData.unitLevels;
-    final playLevel = start + count.clamp(0, AppData.unitLevels - 1);
+    final progress = count / appUnit.lessonCount;
+    final playLevel = start + count.clamp(0, appUnit.lessonCount - 1);
 
     return Container(
       padding: const EdgeInsets.all(14),
@@ -905,8 +904,8 @@ class _UnitProgressTile extends StatelessWidget {
                 Text(
                   _profileText(
                     context,
-                    hil: '$count sa ${AppData.unitLevels} ka leksiyon natapos',
-                    en: '$count of ${AppData.unitLevels} leksiyon done',
+                    hil: '$count sa ${appUnit.lessonCount} ka leksiyon natapos',
+                    en: '$count of ${appUnit.lessonCount} leksiyon done',
                   ),
                   style: GoogleFonts.nunito(
                     color: TudloColors.muted,
