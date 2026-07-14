@@ -1631,7 +1631,10 @@ class _LevelQuizCardState extends State<_LevelQuizCard> {
     final hiligaynonMatch = hiligaynonMatches[left];
     if (hiligaynonMatch != null) return hiligaynonMatch;
 
-    return LessonBank.terms.firstWhere((term) => term.hil == left).eng;
+    final index = question.leftItems.indexOf(left);
+    return index >= 0 && index < question.rightItems.length
+        ? question.rightItems[index]
+        : left;
   }
 
   void _clearWrongMatch() {

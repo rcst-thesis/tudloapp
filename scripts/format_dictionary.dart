@@ -9,7 +9,7 @@ void main() async {
   final outFile = File('assets/data/ilonggo-dictionary-formatted.json');
 
   if (!await rawFile.exists()) {
-    print('Error: ilonggo_dictionary_dataset.json not found.');
+    stderr.writeln('Error: ilonggo_dictionary_dataset.json not found.');
     return;
   }
 
@@ -193,5 +193,5 @@ void main() async {
   await outFile.writeAsString(
     const JsonEncoder.withIndent('  ').convert(output),
   );
-  print('Done. ${grouped.length} entries written.');
+  stdout.writeln('Done. ${grouped.length} entries written.');
 }
