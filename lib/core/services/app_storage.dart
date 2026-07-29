@@ -71,6 +71,30 @@ class AppStorage {
     ]);
   }
 
+  static Future<Map<String, bool>> readTranslationSettings() async {
+    final p = await _prefs;
+    return {
+      'profanityFilterEnabled':
+          p.getBool('${_prefix}profanityFilterEnabled') ?? true,
+      'dictionaryFallbackEnabled':
+          p.getBool('${_prefix}dictionaryFallbackEnabled') ?? true,
+    };
+  }
+
+  static Future<void> writeTranslationSettings({
+    required bool profanityFilterEnabled,
+    required bool dictionaryFallbackEnabled,
+  }) async {
+    final p = await _prefs;
+    await Future.wait([
+      p.setBool('${_prefix}profanityFilterEnabled', profanityFilterEnabled),
+      p.setBool(
+        '${_prefix}dictionaryFallbackEnabled',
+        dictionaryFallbackEnabled,
+      ),
+    ]);
+  }
+
   static Future<void> writeAppState({
     required String username,
     required String ageRange,
