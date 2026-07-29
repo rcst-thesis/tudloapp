@@ -65,9 +65,13 @@ void main() {
     expect(field.controller?.text, 'maayong aga');
     expect(find.text('good morning'), findsOneWidget);
 
-    await tester.enterText(find.byType(TextField), 'maayong hapon');
+    await tester.enterText(find.byType(TextField), 'ari ako sa balay');
     await tester.pump();
-    expect(find.text('good afternoon'), findsOneWidget);
+    expect(find.text('I am at home'), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField), 'Ako, balay!');
+    await tester.pump();
+    expect(find.text('I, house; home!'), findsOneWidget);
   });
 
   testWidgets('debounces NMT and ignores stale results', (tester) async {

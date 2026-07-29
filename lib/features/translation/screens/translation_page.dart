@@ -86,7 +86,7 @@ class _TranslationPageState extends State<TranslationPage> {
     final dictionaryTranslation =
         _englishInput || inputBlocked || !AppData.dictionaryFallbackEnabled
         ? ''
-        : DictionaryData.meaningFor(input);
+        : DictionaryData.translateFallback(input, fromEnglish: false);
     if (inputBlocked) {
       bottomController.text = ChildSafetyFilter.blockedMessage;
     } else if (!_englishInput && !AppData.dictionaryFallbackEnabled) {
@@ -144,7 +144,10 @@ class _TranslationPageState extends State<TranslationPage> {
         } catch (_) {
           if (!_isCurrent(request.text, request.requestId)) continue;
           final fallback = AppData.dictionaryFallbackEnabled
-              ? DictionaryData.meaningFor(request.text)
+              ? DictionaryData.translateFallback(
+                  request.text,
+                  fromEnglish: true,
+                )
               : '';
           setState(() {
             bottomController.text = _filteredOutput(fallback);

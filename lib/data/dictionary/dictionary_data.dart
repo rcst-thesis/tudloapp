@@ -28,6 +28,7 @@ class DictionaryData {
     'good afternoon': 'maayong hapon',
     'good evening': 'maayong gab-i',
     'thank you': 'salamat',
+    'ari ako sa balay': 'I am at home',
     'pwede mo ako buligan': 'can you help me',
     'can you help me': 'pwede mo ako buligan',
   };
@@ -69,6 +70,36 @@ class DictionaryData {
         englishToHiligaynon[normalized] ??
         phraseTranslations[normalized] ??
         '';
+  }
+
+  static String translateFallback(String value, {required bool fromEnglish}) {
+    final normalized = _normalize(value);
+    if (normalized.isEmpty) return '';
+    final dictionary = fromEnglish ? englishToHiligaynon : hiligaynonToEnglish;
+    final exact = phraseTranslations[normalized] ?? dictionary[normalized];
+    if (exact != null) return _matchCase(exact, value);
+
+    // ponytail: word-by-word fallback; replace with reverse NMT when bundled.
+    final translated = value.splitMapJoin(
+      RegExp(r'\S+'),
+      onMatch: (match) {
+        final part = match.group(0)!;
+        final prefix = RegExp(r'^[^\w]+').firstMatch(part)?.group(0) ?? '';
+        final suffix = RegExp(r'[^\w]+$').firstMatch(part)?.group(0) ?? '';
+        if (prefix.length + suffix.length >= part.length) return part;
+        final core = part.substring(prefix.length, part.length - suffix.length);
+        final replacement = dictionary[_normalize(core)];
+        if (replacement == null) return part;
+        return '$prefix${_matchCase(replacement, core)}$suffix';
+      },
+    );
+    return translated == value ? '' : translated;
+  }
+
+  static String _matchCase(String translation, String source) {
+    return source.isNotEmpty && source[0].toUpperCase() == source[0]
+        ? translation[0].toUpperCase() + translation.substring(1)
+        : translation;
   }
 
   static String normalizeForSearch(String value) => _normalize(value);
