@@ -199,6 +199,16 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> setProfanityFilterEnabled(bool enabled) async {
+    await AppData.setProfanityFilterEnabled(enabled);
+    notifyListeners();
+  }
+
+  Future<void> setDictionaryFallbackEnabled(bool enabled) async {
+    await AppData.setDictionaryFallbackEnabled(enabled);
+    notifyListeners();
+  }
+
   Future<void> saveActiveProfileProgress() async {
     final profile = activeProfile;
     if (profile == null) return;

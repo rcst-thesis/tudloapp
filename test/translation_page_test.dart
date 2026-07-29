@@ -17,6 +17,8 @@ void main() {
 
   setUp(() {
     AppData.translateHelpDone = true;
+    AppData.profanityFilterEnabledNotifier.value = true;
+    AppData.dictionaryFallbackEnabledNotifier.value = true;
   });
 
   testWidgets('uses the model for known phrases', (tester) async {
@@ -154,6 +156,46 @@ void main() {
     await tester.pump();
     expect(find.text(ChildSafetyFilter.blockedMessage), findsOneWidget);
     expect(find.text('yawa'), findsNothing);
+  });
+
+  testWidgets('allows unsafe text when the profanity filter is off', (
+    tester,
+  ) async {
+    AppData.profanityFilterEnabledNotifier.value = false;
+    await tester.pumpWidget(
+      MaterialApp(home: TranslationPage(translateEnglish: (_) async => 'yawa')),
+    );
+    await tester.pump();
+
+    await tester.enterText(find.byType(TextField), 'f@ck!');
+    await tester.pump(const Duration(milliseconds: 451));
+    await tester.pump();
+
+    expect(find.text('yawa'), findsOneWidget);
+    expect(find.text(ChildSafetyFilter.blockedMessage), findsNothing);
+  });
+
+  testWidgets('uses dictionary fallback only when enabled', (tester) async {
+    Future<String> failModel(String _) => Future.error('offline');
+    await tester.pumpWidget(
+      MaterialApp(home: TranslationPage(translateEnglish: failModel)),
+    );
+    await tester.pump();
+
+    await tester.enterText(find.byType(TextField), 'good morning');
+    await tester.pump(const Duration(milliseconds: 451));
+    await tester.pump();
+    expect(find.text('maayong aga'), findsOneWidget);
+
+    AppData.dictionaryFallbackEnabledNotifier.value = false;
+    await tester.enterText(find.byType(TextField), 'good afternoon');
+    await tester.pump(const Duration(milliseconds: 451));
+    await tester.pump();
+    expect(find.text('maayong hapon'), findsNothing);
+    expect(
+      find.text('Offline translation unavailable. Try again.'),
+      findsOneWidget,
+    );
   });
 
   test('matches unsafe whole words without blocking safe substrings', () {

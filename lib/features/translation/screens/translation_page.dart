@@ -46,6 +46,8 @@ class _TranslationPageState extends State<TranslationPage> {
   NmtTranslationService? _nmtService;
   late final Future<String> Function(String) _translateEnglish;
 
+  bool get _filterReady => !AppData.profanityFilterEnabled || _safetyReady;
+
   @override
   void initState() {
     super.initState();
@@ -73,26 +75,38 @@ class _TranslationPageState extends State<TranslationPage> {
   }
 
   void _onInputChanged() {
-    if (_isUpdating || !_safetyReady) return;
+    if (_isUpdating || !_filterReady) return;
 
     final input = topController.text;
     final requestId = ++_requestId;
     _translationDebounce?.cancel();
     _pendingRequest = null;
-    final inputBlocked = ChildSafetyFilter.isUnsafe(input);
-    final dictionaryTranslation = _englishInput || inputBlocked
+    final inputBlocked =
+        AppData.profanityFilterEnabled && ChildSafetyFilter.isUnsafe(input);
+    final dictionaryTranslation =
+        _englishInput || inputBlocked || !AppData.dictionaryFallbackEnabled
         ? ''
         : DictionaryData.meaningFor(input);
-    bottomController.text = inputBlocked
-        ? ChildSafetyFilter.blockedMessage
-        : dictionaryTranslation.isEmpty && input.trim().isNotEmpty
-        ? 'Translation not found yet.'
-        : dictionaryTranslation;
+    if (inputBlocked) {
+      bottomController.text = ChildSafetyFilter.blockedMessage;
+    } else if (!_englishInput && !AppData.dictionaryFallbackEnabled) {
+      bottomController.clear();
+    } else {
+      bottomController.text =
+          dictionaryTranslation.isEmpty && input.trim().isNotEmpty
+          ? 'Translation not found yet.'
+          : _filteredOutput(dictionaryTranslation);
+    }
 
     setState(() {
       _inputBlocked = inputBlocked;
       _isTranslating = false;
-      _translationError = null;
+      _translationError =
+          !_englishInput &&
+              input.trim().isNotEmpty &&
+              !AppData.dictionaryFallbackEnabled
+          ? 'Dictionary fallback is disabled in Settings.'
+          : null;
       if (input.trim().isNotEmpty && !AppData.translateHelpDone) {
         showHelpOverlay = false;
         AppData.translateHelpDone = true;
@@ -124,16 +138,19 @@ class _TranslationPageState extends State<TranslationPage> {
             throw StateError('The model returned an empty translation.');
           }
           setState(() {
-            bottomController.text = ChildSafetyFilter.isUnsafe(translation)
-                ? ChildSafetyFilter.blockedMessage
-                : translation;
+            bottomController.text = _filteredOutput(translation);
             _translationError = null;
           });
         } catch (_) {
           if (!_isCurrent(request.text, request.requestId)) continue;
+          final fallback = AppData.dictionaryFallbackEnabled
+              ? DictionaryData.meaningFor(request.text)
+              : '';
           setState(() {
-            bottomController.clear();
-            _translationError = 'Offline translation unavailable. Try again.';
+            bottomController.text = _filteredOutput(fallback);
+            _translationError = fallback.isEmpty
+                ? 'Offline translation unavailable. Try again.'
+                : null;
           });
         } finally {
           if (_isCurrent(request.text, request.requestId)) {
@@ -146,6 +163,14 @@ class _TranslationPageState extends State<TranslationPage> {
     }
   }
 
+  String _filteredOutput(String value) {
+    return AppData.profanityFilterEnabled &&
+            value.isNotEmpty &&
+            ChildSafetyFilter.isUnsafe(value)
+        ? ChildSafetyFilter.blockedMessage
+        : value;
+  }
+
   bool _isCurrent(String text, int requestId) {
     return !_disposed &&
         mounted &&
@@ -155,7 +180,7 @@ class _TranslationPageState extends State<TranslationPage> {
   }
 
   void _swapLanguages() {
-    if (!_safetyReady || _inputBlocked) return;
+    if (!_filterReady || _inputBlocked) return;
     _translationDebounce?.cancel();
     _pendingRequest = null;
     _requestId++;
@@ -237,7 +262,7 @@ class _TranslationPageState extends State<TranslationPage> {
                                 ? 'Type English'
                                 : 'Type Hiligaynon',
                             readOnly: false,
-                            inputEnabled: _safetyReady,
+                            inputEnabled: _filterReady,
                             safeActions: !_inputBlocked,
                             onClear: topController.clear,
                           ),
@@ -245,7 +270,7 @@ class _TranslationPageState extends State<TranslationPage> {
                           Center(
                             child: IconButton.filled(
                               tooltip: 'Swap languages',
-                              onPressed: _safetyReady && !_inputBlocked
+                              onPressed: _filterReady && !_inputBlocked
                                   ? _swapLanguages
                                   : null,
                               icon: const Icon(Icons.swap_vert_rounded),
@@ -272,7 +297,7 @@ class _TranslationPageState extends State<TranslationPage> {
                               setState(() => bottomController.clear());
                             },
                           ),
-                          if (!_safetyReady || _isTranslating)
+                          if (!_filterReady || _isTranslating)
                             const Padding(
                               padding: EdgeInsets.only(top: 12),
                               child: LinearProgressIndicator(),

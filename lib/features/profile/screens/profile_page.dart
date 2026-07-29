@@ -546,6 +546,7 @@ class _AudioSettingsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final audio = AppAudioService.instance;
+    final appState = AppStateScope.of(context);
     return Container(
       padding: const EdgeInsets.fromLTRB(18, 16, 18, 10),
       decoration: BoxDecoration(
@@ -571,7 +572,7 @@ class _AudioSettingsCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4),
-          _AudioSwitchTile(
+          _SettingsSwitchTile(
             icon: Icons.touch_app_rounded,
             label: _profileText(
               context,
@@ -581,7 +582,7 @@ class _AudioSettingsCard extends StatelessWidget {
             listenable: audio.soundEffectsEnabledNotifier,
             onChanged: audio.setSoundEffectsEnabled,
           ),
-          _AudioSwitchTile(
+          _SettingsSwitchTile(
             icon: Icons.music_note_rounded,
             label: _profileText(
               context,
@@ -591,11 +592,41 @@ class _AudioSettingsCard extends StatelessWidget {
             listenable: audio.musicEnabledNotifier,
             onChanged: audio.setMusicEnabled,
           ),
-          _AudioSwitchTile(
+          _SettingsSwitchTile(
             icon: Icons.record_voice_over_rounded,
             label: _profileText(context, hil: 'Voice-over', en: 'Voice-over'),
             listenable: audio.voiceOverEnabledNotifier,
             onChanged: audio.setVoiceOverEnabled,
+          ),
+          const Divider(),
+          Text(
+            _profileText(context, hil: 'Translation', en: 'Translation'),
+            style: GoogleFonts.nunito(
+              color: TudloColors.forest,
+              fontSize: 21,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          const SizedBox(height: 4),
+          _SettingsSwitchTile(
+            icon: Icons.shield_rounded,
+            label: _profileText(
+              context,
+              hil: 'Profanity filter',
+              en: 'Profanity filter',
+            ),
+            listenable: AppData.profanityFilterEnabledNotifier,
+            onChanged: appState.setProfanityFilterEnabled,
+          ),
+          _SettingsSwitchTile(
+            icon: Icons.menu_book_rounded,
+            label: _profileText(
+              context,
+              hil: 'Dictionary fallback',
+              en: 'Dictionary fallback',
+            ),
+            listenable: AppData.dictionaryFallbackEnabledNotifier,
+            onChanged: appState.setDictionaryFallbackEnabled,
           ),
         ],
       ),
@@ -603,13 +634,13 @@ class _AudioSettingsCard extends StatelessWidget {
   }
 }
 
-class _AudioSwitchTile extends StatelessWidget {
+class _SettingsSwitchTile extends StatelessWidget {
   final IconData icon;
   final String label;
   final ValueListenable<bool> listenable;
   final Future<void> Function(bool enabled) onChanged;
 
-  const _AudioSwitchTile({
+  const _SettingsSwitchTile({
     required this.icon,
     required this.label,
     required this.listenable,

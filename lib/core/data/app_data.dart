@@ -39,6 +39,14 @@ class AppData {
   static int unlockedLevel = 1;
   static bool developerMode = false;
   static int dailyWordDemoOffset = 0;
+  static final ValueNotifier<bool> profanityFilterEnabledNotifier =
+      ValueNotifier<bool>(true);
+  static final ValueNotifier<bool> dictionaryFallbackEnabledNotifier =
+      ValueNotifier<bool>(true);
+  static bool get profanityFilterEnabled =>
+      profanityFilterEnabledNotifier.value;
+  static bool get dictionaryFallbackEnabled =>
+      dictionaryFallbackEnabledNotifier.value;
   static GradeLevel selectedGradeLevel = GradeLevel.grade1;
   static final Map<int, int> levelStars = {};
   static final Map<String, LessonScoreStats> lessonScores = {};
@@ -119,6 +127,11 @@ class AppData {
     final devValues = await AppStorage.readDeveloperSettings();
     developerMode = devValues['developerMode'] == true;
     dailyWordDemoOffset = (devValues['dailyWordDemoOffset'] as int?) ?? 0;
+    final translationValues = await AppStorage.readTranslationSettings();
+    profanityFilterEnabledNotifier.value =
+        translationValues['profanityFilterEnabled'] ?? true;
+    dictionaryFallbackEnabledNotifier.value =
+        translationValues['dictionaryFallbackEnabled'] ?? true;
 
     final values = await EnergyStorage.read();
     currentEnergy =
@@ -150,6 +163,23 @@ class AppData {
       dailyWordDemoOffset: dailyWordDemoOffset,
     );
     energyRevision.value++;
+  }
+
+  static Future<void> setProfanityFilterEnabled(bool enabled) async {
+    profanityFilterEnabledNotifier.value = enabled;
+    await _saveTranslationSettings();
+  }
+
+  static Future<void> setDictionaryFallbackEnabled(bool enabled) async {
+    dictionaryFallbackEnabledNotifier.value = enabled;
+    await _saveTranslationSettings();
+  }
+
+  static Future<void> _saveTranslationSettings() {
+    return AppStorage.writeTranslationSettings(
+      profanityFilterEnabled: profanityFilterEnabled,
+      dictionaryFallbackEnabled: dictionaryFallbackEnabled,
+    );
   }
 
   static DateTime dailyWordNow() {
