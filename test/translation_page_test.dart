@@ -3,13 +3,17 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tudloapp/core/data/app_data.dart';
+import 'package:tudloapp/data/dictionary/dictionary_data.dart';
 import 'package:tudloapp/features/translation/screens/translation_page.dart';
 import 'package:tudloapp/features/translation/services/child_safety_filter.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  setUpAll(ChildSafetyFilter.initialize);
+  setUpAll(() async {
+    await DictionaryData.initialize();
+    await ChildSafetyFilter.initialize();
+  });
 
   setUp(() {
     AppData.translateHelpDone = true;
@@ -35,7 +39,33 @@ void main() {
 
     expect(requests, ['good morning']);
     expect(find.text('maayong aga'), findsOneWidget);
-    expect(find.byIcon(Icons.swap_vert_rounded), findsNothing);
+    expect(find.byIcon(Icons.swap_vert_rounded), findsOneWidget);
+  });
+
+  testWidgets('swaps the translated text into Hiligaynon input', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: TranslationPage(translateEnglish: (_) async => 'maayong aga'),
+      ),
+    );
+    await tester.pump();
+
+    await tester.enterText(find.byType(TextField), 'good morning');
+    await tester.pump(const Duration(milliseconds: 451));
+    await tester.pump();
+    await tester.tap(find.byTooltip('Swap languages'));
+    await tester.pump();
+
+    final field = tester.widget<TextField>(find.byType(TextField));
+    expect(field.decoration?.hintText, 'Type Hiligaynon');
+    expect(field.controller?.text, 'maayong aga');
+    expect(find.text('good morning'), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField), 'maayong hapon');
+    await tester.pump();
+    expect(find.text('good afternoon'), findsOneWidget);
   });
 
   testWidgets('debounces NMT and ignores stale results', (tester) async {

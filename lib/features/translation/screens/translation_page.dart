@@ -9,6 +9,7 @@ import 'package:tudloapp/core/theme/app_theme.dart';
 import 'package:tudloapp/core/widgets/dialogue_assets.dart';
 import 'package:tudloapp/core/widgets/language_toggle.dart';
 import 'package:tudloapp/core/widgets/mascot_widget.dart';
+import 'package:tudloapp/data/dictionary/dictionary_data.dart';
 import 'package:tudloapp/features/translation/services/child_safety_filter.dart';
 import 'package:tudloapp/features/translation/services/nmt_translation_service.dart';
 
@@ -30,6 +31,8 @@ class _TranslationPageState extends State<TranslationPage> {
   final TextEditingController topController = TextEditingController();
   final TextEditingController bottomController = TextEditingController();
 
+  bool _englishInput = true;
+  bool _isUpdating = false;
   bool showHelpOverlay = !AppData.translateHelpDone;
   bool _isTranslating = false;
   bool _nmtRunning = false;
@@ -70,16 +73,21 @@ class _TranslationPageState extends State<TranslationPage> {
   }
 
   void _onInputChanged() {
-    if (!_safetyReady) return;
+    if (_isUpdating || !_safetyReady) return;
 
     final input = topController.text;
     final requestId = ++_requestId;
     _translationDebounce?.cancel();
     _pendingRequest = null;
     final inputBlocked = ChildSafetyFilter.isUnsafe(input);
+    final dictionaryTranslation = _englishInput || inputBlocked
+        ? ''
+        : DictionaryData.meaningFor(input);
     bottomController.text = inputBlocked
         ? ChildSafetyFilter.blockedMessage
-        : '';
+        : dictionaryTranslation.isEmpty && input.trim().isNotEmpty
+        ? 'Translation not found yet.'
+        : dictionaryTranslation;
 
     setState(() {
       _inputBlocked = inputBlocked;
@@ -91,7 +99,7 @@ class _TranslationPageState extends State<TranslationPage> {
       }
     });
 
-    if (!inputBlocked && input.trim().isNotEmpty) {
+    if (_englishInput && !inputBlocked && input.trim().isNotEmpty) {
       _translationDebounce = Timer(const Duration(milliseconds: 450), () {
         if (!_isCurrent(input, requestId)) return;
         _pendingRequest = (text: input, requestId: requestId);
@@ -141,8 +149,26 @@ class _TranslationPageState extends State<TranslationPage> {
   bool _isCurrent(String text, int requestId) {
     return !_disposed &&
         mounted &&
+        _englishInput &&
         requestId == _requestId &&
         topController.text == text;
+  }
+
+  void _swapLanguages() {
+    if (!_safetyReady || _inputBlocked) return;
+    _translationDebounce?.cancel();
+    _pendingRequest = null;
+    _requestId++;
+    setState(() {
+      _englishInput = !_englishInput;
+      _isTranslating = false;
+      _translationError = null;
+      final input = topController.text;
+      _isUpdating = true;
+      topController.text = bottomController.text;
+      bottomController.text = input;
+      _isUpdating = false;
+    });
   }
 
   @override
@@ -205,19 +231,40 @@ class _TranslationPageState extends State<TranslationPage> {
                           ),
                           SizedBox(height: availableWidth >= 700 ? 46 : 38),
                           _TranslationLanguageCard(
-                            language: 'English',
+                            language: _englishInput ? 'English' : 'Hiligaynon',
                             controller: topController,
-                            hint: 'Type English',
+                            hint: _englishInput
+                                ? 'Type English'
+                                : 'Type Hiligaynon',
                             readOnly: false,
                             inputEnabled: _safetyReady,
                             safeActions: !_inputBlocked,
                             onClear: topController.clear,
                           ),
-                          SizedBox(height: availableWidth >= 700 ? 36 : 28),
+                          SizedBox(height: availableWidth >= 700 ? 18 : 14),
+                          Center(
+                            child: IconButton.filled(
+                              tooltip: 'Swap languages',
+                              onPressed: _safetyReady && !_inputBlocked
+                                  ? _swapLanguages
+                                  : null,
+                              icon: const Icon(Icons.swap_vert_rounded),
+                              style: IconButton.styleFrom(
+                                backgroundColor: TudloColors.forest,
+                                foregroundColor: Colors.white,
+                                disabledBackgroundColor: TudloColors.line,
+                                minimumSize: const Size.square(56),
+                                iconSize: 38,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: availableWidth >= 700 ? 18 : 14),
                           _TranslationLanguageCard(
-                            language: 'Hiligaynon',
+                            language: _englishInput ? 'Hiligaynon' : 'English',
                             controller: bottomController,
-                            hint: 'Hiligaynon translation',
+                            hint: _englishInput
+                                ? 'Hiligaynon translation'
+                                : 'English translation',
                             readOnly: true,
                             inputEnabled: true,
                             safeActions: true,
