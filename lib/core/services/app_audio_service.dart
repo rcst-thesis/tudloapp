@@ -5,17 +5,19 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppAudioService {
-  AppAudioService._();
+  AppAudioService();
 
-  static final AppAudioService instance = AppAudioService._();
+  static final AppAudioService instance = AppAudioService();
 
-  static const tap = 'audio/effects/tap.mp3';
-  static const correct = 'audio/effects/correct.mp3';
-  static const wrong = 'audio/effects/wrong.mp3';
-  static const syllableTap = 'audio/effects/syllable_tap.mp3';
-  static const lessonUnlock = 'audio/effects/lesson_unlock.mp3';
-  static const lessonComplete = 'audio/effects/lesson_complete.mp3';
-  static const star = 'audio/effects/star.mp3';
+  // Effects are short .wav clips: uncompressed so they decode instantly and
+  // can run through the platform's low-latency (SoundPool-style) player.
+  static const tap = 'audio/effects/tap.wav';
+  static const correct = 'audio/effects/correct.wav';
+  static const wrong = 'audio/effects/wrong.wav';
+  static const syllableTap = 'audio/effects/syllable_tap.wav';
+  static const lessonUnlock = 'audio/effects/lesson_unlock.wav';
+  static const lessonComplete = 'audio/effects/lesson_complete.wav';
+  static const star = 'audio/effects/star.wav';
   static const _initialAssets = [
     tap,
     correct,
@@ -30,7 +32,11 @@ class AppAudioService {
   static const _musicKey = 'audio.musicEnabled';
   static const _voiceOverKey = 'audio.voiceOverEnabled';
 
-  final AudioPlayer _effectPlayer = AudioPlayer();
+  /// One preloaded low-latency player per effect, keyed by [idOf], so
+  /// play() is instant and at most one clip is audible at a time.
+  final Map<String, AudioPlayer> _effectPlayers = {};
+  final Map<String, StreamSubscription<void>> _effectSubs = {};
+  String? _currentId;
   final AudioPlayer _backgroundPlayer = AudioPlayer();
   final AudioPlayer _voicePlayer = AudioPlayer();
   final ValueNotifier<bool> soundEffectsEnabledNotifier = ValueNotifier<bool>(
@@ -40,7 +46,6 @@ class AppAudioService {
   final ValueNotifier<bool> voiceOverEnabledNotifier = ValueNotifier<bool>(
     true,
   );
-
   DateTime _lastEffectAt = DateTime.fromMillisecondsSinceEpoch(0);
   String? _currentBackgroundTrack;
   double _backgroundVolume = .18;
@@ -51,6 +56,20 @@ class AppAudioService {
   bool get musicEnabled => musicEnabledNotifier.value;
   bool get voiceOverEnabled => voiceOverEnabledNotifier.value;
 
+  /// All loaded effect controllers, keyed by id.
+  Map<String, AudioPlayer> get controllers => Map.unmodifiable(_effectPlayers);
+
+  /// Id of the effect currently playing, or null.
+  String? get currentId => _currentId;
+
+  /// id = file name without extension, lower-cased.
+  /// "assets/audio/effects/Tap.WAV" -> "tap"
+  static String idOf(String path) {
+    final name = path.split(RegExp(r'[/\\]')).last;
+    final dot = name.lastIndexOf('.');
+    return (dot == -1 ? name : name.substring(0, dot)).toLowerCase();
+  }
+
   Future<void> initialize() async {
     if (_initialized) return;
     _initialized = true;
@@ -59,9 +78,83 @@ class AppAudioService {
     musicEnabledNotifier.value = prefs.getBool(_musicKey) ?? true;
     voiceOverEnabledNotifier.value = prefs.getBool(_voiceOverKey) ?? true;
     try {
-      await AudioCache.instance.loadAll(_initialAssets);
+      await loadAudio(_initialAssets);
     } catch (_) {
       // Missing optional audio must not block app startup.
+    }
+  }
+
+  /// Loads (and fully buffers) the given asset paths. Accepts .wav (played
+  /// through the low-latency player) and .mp3 (regular media player).
+  /// Returns {id: controller} for everything that is loaded.
+  Future<Map<String, AudioPlayer>> loadAudio(List<String> files) async {
+    for (final path in files) {
+      final ext = path.split('.').last.toLowerCase();
+      if (ext != 'wav' && ext != 'mp3') {
+        throw ArgumentError('Unsupported audio format: $path');
+      }
+    }
+    await Future.wait(files.map(_loadEffect));
+    return controllers;
+  }
+
+  Future<AudioPlayer?> _loadEffect(String path) async {
+    final id = idOf(path);
+    final existing = _effectPlayers[id];
+    if (existing != null) return existing;
+
+    final assetPath = path.startsWith('assets/') ? path.substring(7) : path;
+    final isWav = path.toLowerCase().endsWith('.wav');
+    final player = AudioPlayer(playerId: 'fx:$id');
+    try {
+      await player.setPlayerMode(
+        isWav ? PlayerMode.lowLatency : PlayerMode.mediaPlayer,
+      );
+      await player.setReleaseMode(ReleaseMode.stop);
+      await player.setSource(AssetSource(assetPath)); // decode + buffer now
+    } catch (_) {
+      await player.dispose();
+      return null;
+    }
+    _effectPlayers[id] = player;
+    // Clear the "currently playing" slot when a clip ends on its own.
+    _effectSubs[id] = player.onPlayerComplete.listen((_) {
+      if (_currentId == id) _currentId = null;
+    });
+    return player;
+  }
+
+  /// Stops whatever effect is playing and starts [id] from the beginning.
+  /// [id] may also be an asset path; it is normalised with [idOf].
+  Future<void> play(String id, {double volume = 1}) async {
+    final key = idOf(id);
+    final player = _effectPlayers[key];
+    if (player == null) throw ArgumentError('Audio not loaded: $id');
+
+    final previous = _currentId;
+    if (previous != null && previous != key) await stop(previous);
+
+    _currentId = key;
+    // Low-latency mode has no seek: stop() rewinds without releasing the
+    // buffered source, so resume() restarts from the top immediately.
+    await player.stop();
+    await player.setVolume(volume.clamp(0, 1).toDouble());
+    await player.resume();
+  }
+
+  /// Stops [id] as soon as possible, ready for the next play.
+  Future<void> stop(String id) async {
+    final key = idOf(id);
+    final player = _effectPlayers[key];
+    if (player == null) return;
+    await player.stop();
+    if (_currentId == key) _currentId = null;
+  }
+
+  /// Stops every loaded effect.
+  Future<void> stopAll() async {
+    for (final id in _effectPlayers.keys.toList()) {
+      await stop(id);
     }
   }
 
@@ -93,9 +186,10 @@ class AppAudioService {
     _lastEffectAt = now;
 
     try {
-      await _effectPlayer.stop();
-      await _effectPlayer.setVolume(volume.clamp(0, 1).toDouble());
-      await _effectPlayer.play(AssetSource(assetPath));
+      if (!_effectPlayers.containsKey(idOf(assetPath))) {
+        if (await _loadEffect(assetPath) == null) return;
+      }
+      await play(assetPath, volume: volume);
     } catch (_) {
       // Placeholder or missing audio must never interrupt learning.
     }
@@ -180,7 +274,7 @@ class AppAudioService {
     soundEffectsEnabledNotifier.value = enabled;
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_soundEffectsKey, enabled);
-    if (!enabled) await _effectPlayer.stop();
+    if (!enabled) await stopAll();
   }
 
   Future<void> setMusicEnabled(bool enabled) async {
@@ -203,7 +297,15 @@ class AppAudioService {
   }
 
   Future<void> dispose() async {
-    await _effectPlayer.dispose();
+    for (final sub in _effectSubs.values) {
+      await sub.cancel();
+    }
+    for (final player in _effectPlayers.values) {
+      await player.dispose();
+    }
+    _effectSubs.clear();
+    _effectPlayers.clear();
+    _currentId = null;
     await _backgroundPlayer.dispose();
     await _voicePlayer.dispose();
   }

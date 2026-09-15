@@ -46,6 +46,7 @@ dependencies:
   safe_text: ^2.1.6
 
 dev_dependencies:
+  audioplayers_platform_interface: ^7.1.1
   flutter_test:
     sdk: flutter
 
