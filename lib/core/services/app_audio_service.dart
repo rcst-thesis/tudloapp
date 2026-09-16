@@ -35,6 +35,20 @@ class AppAudioService {
   /// One preloaded low-latency player per effect, keyed by [idOf], so
   /// play() is instant and at most one clip is audible at a time.
   final Map<String, AudioPlayer> _effectPlayers = {};
+
+  /// Effects never take audio focus: requesting it on every tap costs a
+  /// system round-trip and can duck the background music player.
+  static final _effectContext = AudioContext(
+    android: const AudioContextAndroid(
+      contentType: AndroidContentType.sonification,
+      usageType: AndroidUsageType.game,
+      audioFocus: AndroidAudioFocus.none,
+    ),
+    iOS: AudioContextIOS(
+      category: AVAudioSessionCategory.ambient,
+      options: const {AVAudioSessionOptions.mixWithOthers},
+    ),
+  );
   final Map<String, StreamSubscription<void>> _effectSubs = {};
   String? _currentId;
   final AudioPlayer _backgroundPlayer = AudioPlayer();
@@ -111,6 +125,7 @@ class AppAudioService {
         isWav ? PlayerMode.lowLatency : PlayerMode.mediaPlayer,
       );
       await player.setReleaseMode(ReleaseMode.stop);
+      await player.setAudioContext(_effectContext);
       await player.setSource(AssetSource(assetPath)); // decode + buffer now
     } catch (_) {
       await player.dispose();
