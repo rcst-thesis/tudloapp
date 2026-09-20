@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rive/rive.dart' as rive;
 import 'package:tudloapp/core/constants/app_strings.dart';
 import 'package:tudloapp/core/data/app_data.dart';
@@ -9,6 +10,11 @@ import 'package:tudloapp/features/splash/screens/splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // The whole UI is laid out for portrait; ignore device rotation.
+  await SystemChrome.setPreferredOrientations(const [
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   await rive.RiveNative.init();
   await AppData.initialize();
   await AppAudioService.instance.initialize();

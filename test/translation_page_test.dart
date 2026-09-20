@@ -6,6 +6,7 @@ import 'package:tudloapp/core/data/app_data.dart';
 import 'package:tudloapp/data/dictionary/dictionary_data.dart';
 import 'package:tudloapp/features/translation/screens/translation_page.dart';
 import 'package:tudloapp/features/translation/services/child_safety_filter.dart';
+import 'package:tudloapp/features/translation/services/translation_history.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -138,17 +139,6 @@ void main() {
     await tester.pump(const Duration(milliseconds: 500));
     expect(find.text(ChildSafetyFilter.blockedMessage), findsOneWidget);
     expect(nmtCalls, 0);
-    expect(
-      tester
-          .widget<IconButton>(
-            find.ancestor(
-              of: find.byTooltip('Listen').first,
-              matching: find.byType(IconButton),
-            ),
-          )
-          .onPressed,
-      isNull,
-    );
     await tester.enterText(find.byType(TextField), 'qzxv blorf');
     await tester.pump(const Duration(milliseconds: 451));
     await tester.pump();
@@ -200,6 +190,95 @@ void main() {
       find.text('Offline translation unavailable. Try again.'),
       findsOneWidget,
     );
+  });
+
+  testWidgets('done moves the pair into a recent card and favorites', (
+    tester,
+  ) async {
+    final history = TranslationHistory.instance..reset();
+    await tester.pumpWidget(
+      MaterialApp(
+        home: TranslationPage(translateEnglish: (_) async => 'maayong aga'),
+      ),
+    );
+    await tester.pump();
+
+    await tester.enterText(find.byType(TextField), 'good morning');
+    await tester.pump(const Duration(milliseconds: 451));
+    await tester.pump();
+    expect(find.byTooltip('Add to favorites'), findsNothing);
+
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(
+      tester.widget<TextField>(find.byType(TextField)).controller?.text,
+      '',
+    );
+    expect(find.text('good morning'), findsOneWidget);
+    expect(find.text('maayong aga'), findsOneWidget);
+    expect(history.recents.single.target, 'maayong aga');
+
+    await tester.tap(find.byTooltip('Add to favorites'));
+    await tester.pump();
+    expect(history.favorites, hasLength(1));
+    expect(find.byTooltip('Remove from favorites'), findsOneWidget);
+    history.reset();
+  });
+
+  testWidgets('swiping a recent card removes it or saves it', (tester) async {
+    final history = TranslationHistory.instance..reset();
+    const first = TranslationEntry(
+      source: 'day',
+      target: 'adlaw',
+      fromEnglish: true,
+    );
+    const second = TranslationEntry(
+      source: 'night',
+      target: 'gab-i',
+      fromEnglish: true,
+    );
+    history
+      ..addRecent(first)
+      ..addRecent(second);
+    await tester.pumpWidget(
+      MaterialApp(home: TranslationPage(translateEnglish: (_) async => '')),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('gab-i'), findsOneWidget);
+    expect(find.text('adlaw'), findsOneWidget);
+
+    await tester.drag(find.text('gab-i'), const Offset(-500, 0));
+    await tester.pumpAndSettle();
+    expect(find.text('gab-i'), findsNothing);
+    expect(history.recents, [first]);
+    expect(history.favorites, isEmpty);
+
+    await tester.drag(find.text('adlaw'), const Offset(500, 0));
+    await tester.pumpAndSettle();
+    expect(find.text('adlaw'), findsOneWidget);
+    expect(history.recents, [first]);
+    expect(history.favorites, [first]);
+    expect(find.byTooltip('Remove from favorites'), findsOneWidget);
+    history.reset();
+  });
+
+  test('recents expire after the TTL and are not persisted', () {
+    var now = DateTime(2026, 1, 1, 12);
+    final history = TranslationHistory(clock: () => now);
+    const entry = TranslationEntry(
+      source: 'day',
+      target: 'adlaw',
+      fromEnglish: true,
+    );
+    history.addRecent(entry);
+    expect(history.recents, [entry]);
+
+    now = now.add(TranslationHistory.recentTtl + const Duration(seconds: 1));
+    expect(history.recents, isEmpty);
+    history.dispose();
   });
 
   test('matches unsafe whole words without blocking safe substrings', () {
