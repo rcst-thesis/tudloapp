@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" role="img" aria-label="Bantay happy">
+  <defs><linearGradient id="f" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fffef8"/><stop offset="1" stop-color="#f1e3cd"/></linearGradient><filter id="d"><feDropShadow dy="5" stdDeviation="5" flood-opacity=".2"/></filter></defs>
+  <g stroke="#56311f" stroke-width="6" stroke-linejoin="round">
+    <path fill="#8c4c27" d="M90 172C27 134 49 62 111 70l56 42zM330 172c63-38 41-110-21-102l-56 42z"/>
+    <path fill="url(#f)" d="M210 51c86 0 137 61 121 135-10 48-48 80-121 80S99 234 89 186C73 112 124 51 210 51z"/>
+    <path fill="#8c4c27" d="M108 120q30-68 98-68-17 57-71 86zM312 120q-30-68-98-68 17 57 71 86z"/>
+    <path fill="none" d="M139 158q18 20 36 0M245 158q18 20 36 0" stroke-linecap="round"/>
+    <ellipse fill="#34221b" cx="210" cy="191" rx="25" ry="18"/>
+    <path fill="#ef4d56" d="M165 216q45 52 90 0-8 66-45 66t-45-66z"/><ellipse fill="#ff8a91" cx="210" cy="259" rx="24" ry="15" stroke="none"/>
+    <path fill="url(#f)" d="M118 252q92-36 184 0l31 102-72 14-21-66-8 85h-44l-8-85-21 66-72-14z"/>
+    <path fill="none" d="M289 272q83-38 80 31-2 43-46 29" stroke="#8c4c27" stroke-width="20" stroke-linecap="round"/>
+    <path fill="#e9443f" d="M126 246q84 31 168 0l8 26q-92 34-184 0z"/>
+    <circle fill="#ffd34f" cx="210" cy="279" r="20"/>
+  </g>
+  <g fill="#ffd43b"><path d="M71 91l8 18 20 2-15 13 5 20-18-10-18 10 5-20-15-13 20-2z"/><path d="M348 73l6 14 16 2-12 10 4 16-14-8-14 8 4-16-12-10 16-2z"/></g>
+</svg>

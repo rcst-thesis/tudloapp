@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="142" viewBox="0 0 380 142" role="img" aria-label="Magpabilin button">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#78DF1D"/><stop offset="1" stop-color="#4EBB14"/></linearGradient>
+    <filter id="s" x="-10%" y="-30%" width="120%" height="180%"><feDropShadow dx="0" dy="8" stdDeviation="5" flood-color="#315423" flood-opacity=".34"/></filter>
+  </defs>
+  <g filter="url(#s)">
+    <path d="M49 15 C115 10 262 11 330 17 C351 19 364 34 363 57 L360 94 C358 115 344 126 322 127 C247 130 125 129 54 125 C31 124 18 111 18 90 L19 50 C20 30 31 17 49 15Z" fill="url(#g)" stroke="#3D7C23" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M45 31 C121 25 264 26 334 32" fill="none" stroke="#B9F477" stroke-width="7" stroke-linecap="round" opacity=".75"/>
+    <text x="190" y="89" text-anchor="middle" fill="#FFFDF2" font-family="Fredoka, 'Arial Rounded MT Bold', 'Trebuchet MS', sans-serif" font-size="42" font-weight="800">Magpabilin</text>
+  </g>
+</svg>

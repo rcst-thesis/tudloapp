@@ -244,7 +244,8 @@ class AppAudioService {
         await sub.cancel();
       }
     } catch (_) {
-      rethrow;
+      // Browsers can reject autoplay before a user gesture; audio should never
+      // blank or block the lesson UI.
     }
   }
 

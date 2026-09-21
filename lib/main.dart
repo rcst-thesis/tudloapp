@@ -15,7 +15,13 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  await rive.RiveNative.init();
+  try {
+    await rive.RiveNative.init();
+  } catch (error, stackTrace) {
+    debugPrint('Rive startup failed; continuing with mascot fallback.');
+    debugPrint('$error');
+    debugPrint('$stackTrace');
+  }
   await AppData.initialize();
   await AppAudioService.instance.initialize();
   runApp(const TudloApp());

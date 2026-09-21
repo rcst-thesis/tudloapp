@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#FFF48B"/><stop offset=".52" stop-color="#FFD83D"/><stop offset="1" stop-color="#F7A719"/></linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#FF685E"/><stop offset="1" stop-color="#D92435"/></linearGradient>
+  </defs>
+  <g>
+    <path d="M104 397 39 475l91 5 35 82 135-91-196-74Z" fill="url(#red)" stroke="#B91F32" stroke-width="9" stroke-linejoin="round"/>
+    <path d="m496 397 65 78-91 5-35 82-135-91 196-74Z" fill="url(#red)" stroke="#B91F32" stroke-width="9" stroke-linejoin="round"/>
+    <path d="m300 39 68 102 120-21-17 122 90 82-93 80 13 124-119-25-62 106-62-106-119 25 13-124-93-80 90-82-17-122 120 21L300 39Z" fill="url(#gold)" stroke="#F29B14" stroke-width="13" stroke-linejoin="round"/>
+    <circle cx="300" cy="306" r="173" fill="#FFFBE5" stroke="#FFFFFF" stroke-width="11"/>
+    <circle cx="300" cy="306" r="153" fill="#FFE85C" stroke="#F3B51E" stroke-width="8"/>
+    <path d="M175 367c61 31 189 31 250 0v91c-72 34-178 34-250 0v-91Z" fill="url(#red)" stroke="#B91F32" stroke-width="8"/>
+    <path d="M300 112 320 153l45 6-33 31 8 45-40-21-40 21 8-45-33-31 45-6 20-41Z" fill="#FFFDF0" stroke="#F6B81D" stroke-width="7" stroke-linejoin="round"/>
+    <text x="300" y="288" text-anchor="middle" fill="#0A4A97" font-family="Arial Rounded MT Bold, Nunito, sans-serif" font-size="63" font-weight="900" stroke="#FFFFFF" stroke-width="13" paint-order="stroke">NUMBER</text>
+    <text x="300" y="352" text-anchor="middle" fill="#0A4A97" font-family="Arial Rounded MT Bold, Nunito, sans-serif" font-size="62" font-weight="900" stroke="#FFFFFF" stroke-width="13" paint-order="stroke">EXPLORER</text>
+    <circle cx="236" cy="413" r="12" fill="#FFD94D"/><circle cx="364" cy="413" r="12" fill="#FFD94D"/>
+    <path d="m300 394 11 22 25 4-18 17 4 25-22-12-22 12 4-25-18-17 25-4 11-22Z" fill="#FFF7A0"/>
+  </g>
+</svg>

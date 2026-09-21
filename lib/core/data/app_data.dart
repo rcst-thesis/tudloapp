@@ -48,7 +48,10 @@ class AppData {
   static bool get dictionaryFallbackEnabled =>
       dictionaryFallbackEnabledNotifier.value;
   static GradeLevel selectedGradeLevel = GradeLevel.grade1;
+  static int? activeLessonLevel;
+  static int? lessonDashboardFocusLevel;
   static final Map<int, int> levelStars = {};
+  static final Map<int, String> lessonStickers = {};
   static final Map<String, LessonScoreStats> lessonScores = {};
   static final Set<int> completedLevels = {};
 
@@ -206,6 +209,7 @@ class AppData {
     streakDays = profile.streakDays;
     lastDailyStreakDate = profile.lastDailyStreakDate;
     selectedGradeLevel = profile.parsedGrade;
+    lessonDashboardFocusLevel = null;
     mapHelpDone = profile.mapHelpDone;
     unlockedLevel = profile.unlockedLevel.clamp(1, maxLevel);
     currentEnergy = profile.currentEnergy.clamp(0, maxEnergy).toInt();
@@ -213,6 +217,9 @@ class AppData {
     levelStars
       ..clear()
       ..addAll(profile.levelStars);
+    lessonStickers
+      ..clear()
+      ..addAll(profile.lessonStickers);
     lessonScores
       ..clear()
       ..addAll(profile.lessonScores);
@@ -229,6 +236,7 @@ class AppData {
       lastDailyStreakDate: lastDailyStreakDate,
       currentEnergy: currentEnergy,
       levelStars: Map<int, int>.from(levelStars),
+      lessonStickers: Map<int, String>.from(lessonStickers),
       lessonScores: Map<String, LessonScoreStats>.from(lessonScores),
       completedLevels: Set<int>.from(completedLevels),
       mapHelpDone: mapHelpDone,
@@ -239,9 +247,11 @@ class AppData {
     streakDays = 0;
     lastDailyStreakDate = null;
     unlockedLevel = 1;
+    lessonDashboardFocusLevel = null;
     currentEnergy = maxEnergy;
     _lastEnergyAt = DateTime.now();
     levelStars.clear();
+    lessonStickers.clear();
     lessonScores.clear();
     completedLevels.clear();
     mapHelpDone = false;
@@ -356,13 +366,32 @@ class AppData {
     return lessonNumberForLevel(level) == 1;
   }
 
+  static bool isProductionLessonAvailable(int level) {
+    if (level < 1 || level > maxLevel) return false;
+    final unit = unitForLevel(level);
+    final lesson = lessonNumberForLevel(level);
+    return switch ((selectedGradeLevel, unit.number, lesson)) {
+      (GradeLevel.grade1, 1, 1) ||
+      (GradeLevel.grade1, 1, 7) ||
+      (GradeLevel.grade1, 2, 1) ||
+      (GradeLevel.grade1, 2, 4) ||
+      (GradeLevel.grade2, 1, 1) ||
+      (GradeLevel.grade2, 1, 2) ||
+      (GradeLevel.grade2, 2, 1) ||
+      (GradeLevel.grade2, 2, 2) ||
+      (GradeLevel.grade3, 1, 1) ||
+      (GradeLevel.grade3, 1, 3) ||
+      (GradeLevel.grade3, 2, 1) ||
+      (GradeLevel.grade3, 2, 2) => true,
+      _ => false,
+    };
+  }
+
   static bool isLevelUnlocked(int level) {
     if (level < 1 || level > maxLevel) return false;
+    if (!isProductionLessonAvailable(level)) return false;
     if (developerMode) return true;
-    final lessonNumber = lessonNumberForLevel(level);
-    if (lessonNumber == 1) return true;
-    if (completedLevels.contains(level)) return true;
-    return completedLevels.contains(level - 1);
+    return true;
   }
 
   static String lessonIdForLevel(int level) {
@@ -384,7 +413,9 @@ class AppData {
   static int get firstUnlockedIncompleteLevel {
     for (final unit in units) {
       for (var level = unit.startLevel; level <= unit.endLevel; level++) {
-        if (isLevelUnlocked(level) && !completedLevels.contains(level)) {
+        if (isProductionLessonAvailable(level) &&
+            isLevelUnlocked(level) &&
+            !completedLevels.contains(level)) {
           return level;
         }
       }

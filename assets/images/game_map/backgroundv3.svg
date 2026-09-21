@@ -1,0 +1,111 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="942" height="1674" viewBox="0 0 942 1674" role="img" aria-labelledby="title desc">
+  <title id="title">Tudlo Grade 1 soft cartoon forest background</title>
+  <desc id="desc">Portrait mobile background with a pale sky, rounded forest canopy, distant hills, soft bushes, flowers and a winding path. No interface, text, or characters.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#BFEAFF"/>
+      <stop offset="0.48" stop-color="#E8F8E8"/>
+      <stop offset="1" stop-color="#D6EDAE"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#BEE987"/>
+      <stop offset="1" stop-color="#88CB62"/>
+    </linearGradient>
+    <linearGradient id="path" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F7E7AF"/>
+      <stop offset="1" stop-color="#E9CA82"/>
+    </linearGradient>
+    <linearGradient id="trunk" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9B633F"/>
+      <stop offset="0.52" stop-color="#C78650"/>
+      <stop offset="1" stop-color="#865335"/>
+    </linearGradient>
+    
+  </defs>
+
+  <!-- calm base -->
+  <rect width="942" height="1674" fill="url(#sky)"/>
+  <circle cx="750" cy="136" r="78" fill="#FFF3A7" opacity=".75"/>
+  <g fill="#FFFFFF" opacity=".9">
+    <circle cx="455" cy="132" r="37"/><circle cx="500" cy="114" r="52"/><circle cx="552" cy="135" r="38"/><rect x="440" y="132" width="130" height="38" rx="19"/>
+    <circle cx="84" cy="188" r="28"/><circle cx="119" cy="173" r="40"/><circle cx="158" cy="190" r="27"/><rect x="72" y="187" width="106" height="29" rx="15"/>
+  </g>
+
+  <!-- distant hills -->
+  <path d="M0 414 Q125 250 252 405 Q365 226 492 404 Q615 264 744 410 Q845 300 942 404 V635 H0Z" fill="#75B888"/>
+  <path d="M0 481 Q120 359 232 472 Q355 333 466 474 Q594 351 706 477 Q825 371 942 468 V680 H0Z" fill="#91C98C"/>
+  <path d="M0 596 Q170 493 332 584 Q500 474 666 589 Q816 491 942 575 V760 H0Z" fill="#A7D694"/>
+  <path d="M0 660 Q205 565 417 649 Q640 554 942 655 V1674 H0Z" fill="url(#ground)"/>
+
+  <!-- pale winding path, kept behind interface -->
+  <path d="M438 1674 C455 1515 579 1436 532 1289 C486 1145 395 1068 430 930 C455 829 535 750 515 650 L630 650 C653 783 569 865 562 955 C551 1084 658 1156 661 1293 C665 1478 574 1555 588 1674Z" fill="url(#path)" opacity=".82"/>
+  <path d="M488 1640 C523 1524 599 1450 579 1328" fill="none" stroke="#D7B76F" stroke-width="8" stroke-linecap="round" opacity=".24"/>
+
+  <!-- simplified tree trunks framing the screen -->
+  <path d="M0 0 H188 C179 127 191 238 156 346 C135 411 124 540 137 726 C151 917 119 1091 87 1248 H0Z" fill="url(#trunk)"/>
+  <path d="M942 0 H763 C776 142 754 248 792 363 C817 440 815 563 799 739 C781 938 817 1100 854 1262 H942Z" fill="url(#trunk)"/>
+  <g fill="none" stroke="#74462F" stroke-width="12" stroke-linecap="round" opacity=".28">
+    <path d="M95 35 Q56 210 94 391 T72 760"/><path d="M144 18 Q122 160 149 278"/>
+    <path d="M851 38 Q886 223 848 391 T876 765"/><path d="M797 25 Q826 173 798 304"/>
+  </g>
+
+  <!-- upper rounded canopy -->
+  <g>
+    <g fill="#2F8F55"><circle cx="12" cy="32" r="116"/><circle cx="96" cy="50" r="100"/><circle cx="184" cy="21" r="112"/><circle cx="270" cy="3" r="91"/></g>
+    <g fill="#56A949"><circle cx="61" cy="8" r="72"/><circle cx="146" cy="1" r="74"/><circle cx="238" cy="26" r="67"/><circle cx="330" cy="0" r="75"/></g>
+    <g fill="#86C744"><circle cx="291" cy="2" r="91"/><circle cx="379" cy="0" r="68"/><circle cx="445" cy="4" r="55"/></g>
+    <g fill="#2C8650"><circle cx="930" cy="34" r="123"/><circle cx="842" cy="37" r="100"/><circle cx="752" cy="8" r="102"/><circle cx="677" cy="0" r="76"/></g>
+    <g fill="#59A947"><circle cx="880" cy="0" r="75"/><circle cx="795" cy="0" r="80"/><circle cx="705" cy="14" r="70"/><circle cx="614" cy="0" r="70"/></g>
+    <g fill="#8BCB47"><circle cx="652" cy="0" r="75"/><circle cx="575" cy="0" r="59"/><circle cx="516" cy="0" r="48"/></g>
+  </g>
+
+  <!-- distant vertical forest rhythm -->
+  <g opacity=".22" fill="#3C8A62">
+    <rect x="180" y="512" width="26" height="472" rx="13"/><rect x="239" y="477" width="18" height="520" rx="9"/>
+    <rect x="687" y="486" width="21" height="498" rx="11"/><rect x="733" y="527" width="28" height="448" rx="14"/>
+  </g>
+
+  <!-- soft center clearing for UI readability -->
+  <rect x="122" y="340" width="698" height="1100" rx="300" fill="#E8F6D5" opacity=".18"/>
+
+  <!-- layered bushes along side edges -->
+  <g fill="#2F8F59">
+    <circle cx="-5" cy="590" r="92"/><circle cx="64" cy="626" r="78"/><circle cx="14" cy="739" r="104"/><circle cx="70" cy="822" r="84"/>
+    <circle cx="948" cy="603" r="100"/><circle cx="881" cy="648" r="76"/><circle cx="944" cy="752" r="108"/><circle cx="876" cy="844" r="85"/>
+  </g>
+  <g fill="#58AE54">
+    <circle cx="-9" cy="796" r="91"/><circle cx="75" cy="752" r="62"/><circle cx="18" cy="938" r="107"/><circle cx="91" cy="995" r="76"/>
+    <circle cx="951" cy="817" r="96"/><circle cx="873" cy="764" r="61"/><circle cx="943" cy="956" r="108"/><circle cx="865" cy="1011" r="75"/>
+  </g>
+  <g fill="#83C94E">
+    <circle cx="14" cy="1040" r="102"/><circle cx="94" cy="1090" r="70"/><circle cx="949" cy="1060" r="107"/><circle cx="858" cy="1108" r="67"/>
+  </g>
+
+  <!-- foreground leaf clusters -->
+  <g fill="#237D53">
+    <ellipse cx="44" cy="1320" rx="55" ry="130" transform="rotate(-24 44 1320)"/><ellipse cx="106" cy="1360" rx="52" ry="112" transform="rotate(22 106 1360)"/>
+    <ellipse cx="900" cy="1317" rx="55" ry="130" transform="rotate(24 900 1317)"/><ellipse cx="836" cy="1361" rx="51" ry="112" transform="rotate(-22 836 1361)"/>
+  </g>
+  <g fill="#46A856">
+    <ellipse cx="19" cy="1480" rx="72" ry="143" transform="rotate(-22 19 1480)"/><ellipse cx="105" cy="1501" rx="67" ry="126" transform="rotate(28 105 1501)"/>
+    <ellipse cx="921" cy="1478" rx="73" ry="143" transform="rotate(22 921 1478)"/><ellipse cx="838" cy="1505" rx="66" ry="126" transform="rotate(-28 838 1505)"/>
+  </g>
+  <g fill="#6ABD4F">
+    <circle cx="17" cy="1590" r="118"/><circle cx="120" cy="1626" r="105"/><circle cx="925" cy="1592" r="120"/><circle cx="818" cy="1628" r="105"/>
+  </g>
+
+  <!-- friendly flowers -->
+  <g>
+    <g transform="translate(102 1190)"><circle r="13" fill="#FFD64B"/><g fill="#FFF5D1"><circle cy="-24" r="15"/><circle cx="23" cy="-7" r="15"/><circle cx="14" cy="19" r="15"/><circle cx="-14" cy="19" r="15"/><circle cx="-23" cy="-7" r="15"/></g><circle r="10" fill="#F2B63E"/></g>
+    <g transform="translate(848 1238)"><circle r="13" fill="#FFD64B"/><g fill="#FF92B6"><circle cy="-24" r="15"/><circle cx="23" cy="-7" r="15"/><circle cx="14" cy="19" r="15"/><circle cx="-14" cy="19" r="15"/><circle cx="-23" cy="-7" r="15"/></g><circle r="10" fill="#F6C63E"/></g>
+    <g transform="translate(82 1530) scale(.8)"><circle r="13" fill="#FFD64B"/><g fill="#FF8EB2"><circle cy="-24" r="15"/><circle cx="23" cy="-7" r="15"/><circle cx="14" cy="19" r="15"/><circle cx="-14" cy="19" r="15"/><circle cx="-23" cy="-7" r="15"/></g><circle r="10" fill="#F6C63E"/></g>
+    <g transform="translate(868 1510) scale(.85)"><circle r="13" fill="#FFD64B"/><g fill="#FFF5D1"><circle cy="-24" r="15"/><circle cx="23" cy="-7" r="15"/><circle cx="14" cy="19" r="15"/><circle cx="-14" cy="19" r="15"/><circle cx="-23" cy="-7" r="15"/></g><circle r="10" fill="#F2B63E"/></g>
+  </g>
+
+  <!-- subtle grass marks -->
+  <g fill="none" stroke="#66B94D" stroke-width="8" stroke-linecap="round" opacity=".7">
+    <path d="M181 1195 q-8-22-22-33 M181 1195 q7-27 23-41 M749 1161 q-8-22-21-35 M749 1161 q8-27 26-41"/>
+    <path d="M264 1547 q-8-23-22-35 M264 1547 q8-28 24-40 M690 1494 q-8-24-22-35 M690 1494 q8-27 24-40"/>
+  </g>
+</svg>
+

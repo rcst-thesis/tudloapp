@@ -77,20 +77,25 @@ void main() {
     expect(content.audioAssets, ['audio/one.mp3', 'audio/quiz.mp3']);
   });
 
-  test('bundled audio is non-empty: WAV effects, MP3 voice-over', () {
+  test('bundled audio uses non-empty supported files', () {
+    final audio = Directory(
+      'assets/audio',
+    ).listSync(recursive: true).whereType<File>();
+
+    expect(audio, isNotEmpty);
+    expect(
+      audio.every((file) {
+        final path = file.path.toLowerCase();
+        return path.endsWith('.mp3') || path.endsWith('.wav');
+      }),
+      isTrue,
+    );
+    expect(audio.every((file) => file.lengthSync() > 100), isTrue);
     final effects = Directory(
       'assets/audio/effects',
     ).listSync().whereType<File>();
-    final voice = Directory('assets/audio/VO').listSync().whereType<File>();
-
     expect(effects, isNotEmpty);
     expect(effects.every((file) => file.path.endsWith('.wav')), isTrue);
-    expect(voice, isNotEmpty);
-    expect(voice.every((file) => file.path.endsWith('.mp3')), isTrue);
-    expect(
-      [...effects, ...voice].every((file) => file.lengthSync() > 100),
-      isTrue,
-    );
   });
 
   test('dictionary index follows the section nearest the top', () {

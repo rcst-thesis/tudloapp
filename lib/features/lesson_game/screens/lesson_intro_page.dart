@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tudloapp/core/data/app_data.dart';
 import 'package:tudloapp/core/services/app_audio_service.dart';
@@ -642,46 +643,22 @@ class _AnimatedLessonIntroContentState
     int lessonNumber,
   ) {
     const grade2 = 'assets/images/level_game';
-    const school = _IntroLetterItem(
-      label: 'school',
-      asset: '$grade2/school-entrance.png',
+    const classroomWithAna = _IntroLetterItem(
+      label: 'Ana',
+      asset:
+          'assets/images/level_game/grade2/backgrounds/Tudlo_Classroom_Background_With_Ana.svg',
       icon: Icons.school_rounded,
       color: TudloColors.blue,
+      large: true,
       pictureOnly: true,
     );
-    const juan = _IntroLetterItem(
-      label: 'Juan',
-      asset: 'assets/images/level_game/people/boy-juan.png',
-      icon: Icons.face_rounded,
-      color: TudloColors.green,
-      pictureOnly: true,
-    );
-    const ana = _IntroLetterItem(
-      label: 'Ana',
-      asset: 'assets/images/level_game/people/girl-ana.png',
-      icon: Icons.face_rounded,
-      color: TudloColors.coral,
-      pictureOnly: true,
-    );
-    const cake = _IntroLetterItem(
-      label: 'keyk',
-      asset: '$grade2/cake.png',
+    const birthdayAnaCake = _IntroLetterItem(
+      label: 'kaadlawan',
+      asset:
+          'assets/images/level_game/grade2/backgrounds/Tudlo_Birthday_Background_Ana_Holding_Cake.svg',
       icon: Icons.cake_rounded,
       color: TudloColors.coral,
-      pictureOnly: true,
-    );
-    const balloons = _IntroLetterItem(
-      label: 'lobo',
-      asset: '$grade2/ballons.png',
-      icon: Icons.celebration_rounded,
-      color: TudloColors.gold,
-      pictureOnly: true,
-    );
-    const birthdayParty = _IntroLetterItem(
-      label: 'kaadlawan',
-      asset: '$grade2/birthday-party.png',
-      icon: Icons.celebration_rounded,
-      color: TudloColors.coral,
+      large: true,
       pictureOnly: true,
     );
     const family = _IntroLetterItem(
@@ -791,8 +768,8 @@ class _AnimatedLessonIntroContentState
     );
 
     return switch ((unitNumber, lessonNumber)) {
-      (1, 1) => const [school, juan, ana],
-      (1, 2) => const [birthdayParty, cake, balloons],
+      (1, 1) => const [classroomWithAna],
+      (1, 2) => const [birthdayAnaCake],
       (1, 3) => const [family],
       (2, 1) => const [
         _IntroLetterItem(
@@ -1144,8 +1121,19 @@ class _IntroPictureArt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (item.asset != null) {
+      final asset = item.asset!;
+      if (asset.toLowerCase().endsWith('.svg')) {
+        return SvgPicture.asset(
+          asset,
+          width: size,
+          height: size,
+          fit: BoxFit.contain,
+          alignment: Alignment.center,
+          placeholderBuilder: (_) => _IntroIconArt(item: item, size: size),
+        );
+      }
       return Image.asset(
-        item.asset!,
+        asset,
         width: size,
         height: size,
         fit: BoxFit.contain,

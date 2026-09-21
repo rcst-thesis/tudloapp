@@ -4,9 +4,11 @@ class AppStrings {
 
   static const appName = 'Tudlo';
 
+  static const navHome = 'Home';
   static const navMap = 'Map';
   static const navTranslate = 'Translate';
   static const navDaily = 'Daily';
+  static const navLessons = 'Lessons';
   static const navDictionary = 'Dictionary';
   static const navProfile = 'Profile';
 }

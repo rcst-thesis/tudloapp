@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tudloapp/core/data/app_data.dart';
 import 'package:tudloapp/core/services/app_audio_service.dart';
@@ -44,7 +45,7 @@ class _ProfilePageState extends State<ProfilePage> {
     final activeProfile = appState.activeProfile;
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 37, 125, 24),
+      backgroundColor: TudloColors.meadow,
       body: Stack(
         children: [
           const Positioned.fill(child: _ProfileBackground()),
@@ -698,8 +699,8 @@ class _MainProfileCard extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          width: 166,
-          height: 166,
+          width: 204,
+          height: 204,
           child: Stack(
             clipBehavior: Clip.none,
             children: [
@@ -708,9 +709,9 @@ class _MainProfileCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(999),
                   onTap: onAvatarTap,
                   child: Container(
-                    width: 150,
-                    height: 150,
-                    padding: const EdgeInsets.all(8),
+                    width: 184,
+                    height: 184,
+                    padding: const EdgeInsets.all(9),
                     decoration: BoxDecoration(
                       color: TudloColors.softGreen,
                       shape: BoxShape.circle,
@@ -737,7 +738,7 @@ class _MainProfileCard extends StatelessWidget {
                               child: Icon(
                                 Icons.person_rounded,
                                 color: TudloColors.green,
-                                size: 74,
+                                size: 90,
                               ),
                             ),
                           );
@@ -748,8 +749,8 @@ class _MainProfileCard extends StatelessWidget {
                 ),
               ),
               Positioned(
-                right: 8,
-                bottom: 8,
+                right: 4,
+                bottom: 4,
                 child: IconButton.filled(
                   tooltip: _profileText(
                     context,
@@ -761,15 +762,15 @@ class _MainProfileCard extends StatelessWidget {
                     backgroundColor: TudloColors.gold,
                     foregroundColor: TudloColors.forest,
                     side: const BorderSide(color: Colors.white, width: 4),
-                    minimumSize: const Size(52, 52),
+                    minimumSize: const Size(58, 58),
                   ),
-                  icon: const Icon(Icons.edit_rounded, size: 28),
+                  icon: const Icon(Icons.edit_rounded, size: 30),
                 ),
               ),
             ],
           ),
         ),
-        const SizedBox(height: 14),
+        const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -814,8 +815,8 @@ class _MainProfileCard extends StatelessWidget {
         Text(
           _profileText(
             context,
-            hil: 'Grado $gradeNumber • ${_formatDate(joinedOn)}',
-            en: '$gradeLabel • ${_formatDate(joinedOn)}',
+            hil: 'Grado $gradeNumber | ${_formatDate(joinedOn)}',
+            en: '$gradeLabel | ${_formatDate(joinedOn)}',
           ),
           textAlign: TextAlign.center,
           style: GoogleFonts.nunito(
@@ -1649,7 +1650,13 @@ class _ProfileBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(painter: _ProfileBackgroundPainter());
+    return SvgPicture.asset(
+      'assets/images/game_map/backgroundv3.svg',
+      fit: BoxFit.cover,
+      alignment: Alignment.center,
+      placeholderBuilder: (_) =>
+          const CustomPaint(painter: _ProfileBackgroundPainter()),
+    );
   }
 }
 
