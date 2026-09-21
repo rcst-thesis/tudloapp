@@ -1,0 +1,30 @@
+# GPTree Local Config
+version: 3
+# Whether to use .gitignore
+useGitIgnore: true
+# File types to include (e.g., .py,.js)
+includeFileTypes: *
+# File types to exclude when includeFileTypes is '*'
+excludeFileTypes: 
+# Output file name
+outputFile: gptree_output.txt
+# Whether to save the output file at all
+saveOutputFile: true
+# Whether to output the file locally or relative to the project directory
+outputFileLocally: true
+# Whether to copy the output to the clipboard
+copyToClipboard: false
+# Whether to use safe mode (prevent overly large files from being combined)
+safeMode: true
+# Whether to store the files chosen in the config file (--save, -s)
+storeFilesChosen: true
+# Whether to include line numbers in the output (--line-numbers, -n)
+lineNumbers: false
+# Whether to show ignored files in the directory tree
+showIgnoredInTree: false
+# Whether to show only default ignored files in the directory tree while still respecting gitignore
+showDefaultIgnoredInTree: false
+# Previously selected files (when using the -s or --save flag previously)
+previousFiles: lib/features/onboarding/screens/age_range_screen.dart,lib/features/onboarding/screens/knowledge_level_screen.dart,lib/features/onboarding/screens/mascot_screen.dart,lib/features/onboarding/screens/username_screen.dart,lib/features/onboarding/widgets/scaffold_card.dart,lib/features/evaluation/screens/evaluation_intro_screen.dart,lib/features/evaluation/screens/evaluation_test_screen.dart
+# Excluded directories (when using the -s or --save flag previously or edited in UI)
+excludeDirs: 

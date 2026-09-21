@@ -1,0 +1,5059 @@
+{
+  "dataset_name": "Ilonggo-English Dictionary",
+  "source_file": "Ilonggo_Dictionary (1).xlsx",
+  "language": "Ilonggo / Hiligaynon",
+  "metadata": {
+    "dictionary_entry_count": 893,
+    "verb_appendix_count": 102,
+    "notes": "Converted from the uploaded Excel dictionary file. Keys are Dart/Flutter-friendly snake_case."
+  },
+  "abbreviations": [
+    {
+      "code": "N",
+      "meaning": "Noun"
+    },
+    {
+      "code": "V",
+      "meaning": "Verb"
+    },
+    {
+      "code": "ADV",
+      "meaning": "Adverb"
+    },
+    {
+      "code": "ADJ",
+      "meaning": "Adjective"
+    },
+    {
+      "code": "P",
+      "meaning": "Pronoun"
+    },
+    {
+      "code": "C",
+      "meaning": "Conjunction/Connector"
+    },
+    {
+      "code": "Q",
+      "meaning": "Question Word"
+    },
+    {
+      "code": "PA",
+      "meaning": "Particle"
+    },
+    {
+      "code": "EX",
+      "meaning": "Expression"
+    },
+    {
+      "code": "PP",
+      "meaning": "Preposition"
+    },
+    {
+      "code": "PV",
+      "meaning": "Pseudo Verb"
+    },
+    {
+      "code": "A-F",
+      "meaning": "Actor Focus"
+    },
+    {
+      "code": "L-F",
+      "meaning": "Locative Focus"
+    },
+    {
+      "code": "I-F",
+      "meaning": "Instrumental Focus"
+    },
+    {
+      "code": "B-F",
+      "meaning": "Benefactive Focus"
+    },
+    {
+      "code": "IMP",
+      "meaning": "Imperative"
+    },
+    {
+      "code": "INF",
+      "meaning": "Infinitive"
+    }
+  ],
+  "dictionary": [
+    {
+      "ilonggo_word": "abogado",
+      "part_of_speech": "N",
+      "english_definition": "lawyer"
+    },
+    {
+      "ilonggo_word": "abot (2)",
+      "part_of_speech": "N",
+      "english_definition": "arrival"
+    },
+    {
+      "ilonggo_word": "Abril",
+      "part_of_speech": "N",
+      "english_definition": "April"
+    },
+    {
+      "ilonggo_word": "adlaw",
+      "part_of_speech": "N",
+      "english_definition": "sun; day"
+    },
+    {
+      "ilonggo_word": "adlaw-adlaw",
+      "part_of_speech": "ADV",
+      "english_definition": "everyday"
+    },
+    {
+      "ilonggo_word": "adobo",
+      "part_of_speech": "N",
+      "english_definition": "meat cooked in vinegar, pepper, corn, soy sauce, garlic & etc."
+    },
+    {
+      "ilonggo_word": "aga",
+      "part_of_speech": "ADV",
+      "english_definition": "morning"
+    },
+    {
+      "ilonggo_word": "Agosto",
+      "part_of_speech": "N",
+      "english_definition": "August"
+    },
+    {
+      "ilonggo_word": "agtang",
+      "part_of_speech": "N",
+      "english_definition": "forehead"
+    },
+    {
+      "ilonggo_word": "aguy",
+      "part_of_speech": "EX",
+      "english_definition": "ouch"
+    },
+    {
+      "ilonggo_word": "ahos",
+      "part_of_speech": "N",
+      "english_definition": "garlic"
+    },
+    {
+      "ilonggo_word": "ako",
+      "part_of_speech": "P",
+      "english_definition": "I"
+    },
+    {
+      "ilonggo_word": "akon",
+      "part_of_speech": "P",
+      "english_definition": "my; mine"
+    },
+    {
+      "ilonggo_word": "algodon",
+      "part_of_speech": "N",
+      "english_definition": "cotton"
+    },
+    {
+      "ilonggo_word": "alimango",
+      "part_of_speech": "N",
+      "english_definition": "crab"
+    },
+    {
+      "ilonggo_word": "alimasag",
+      "part_of_speech": "N",
+      "english_definition": "a species of crab; a crab with spreckled shell"
+    },
+    {
+      "ilonggo_word": "amargoso",
+      "part_of_speech": "N",
+      "english_definition": "bitter melon"
+    },
+    {
+      "ilonggo_word": "amay",
+      "part_of_speech": "N",
+      "english_definition": "father"
+    },
+    {
+      "ilonggo_word": "ambut",
+      "part_of_speech": "EX",
+      "english_definition": "I don't know"
+    },
+    {
+      "ilonggo_word": "Amerikano",
+      "part_of_speech": "N",
+      "english_definition": "American (person)"
+    },
+    {
+      "ilonggo_word": "amigo",
+      "part_of_speech": "N",
+      "english_definition": "friend; buddy"
+    },
+    {
+      "ilonggo_word": "amimiluk",
+      "part_of_speech": "N",
+      "english_definition": "eyelash(es)"
+    },
+    {
+      "ilonggo_word": "aminhan",
+      "part_of_speech": "N",
+      "english_definition": "north"
+    },
+    {
+      "ilonggo_word": "amon",
+      "part_of_speech": "P",
+      "english_definition": "our; ours (exclusive)"
+    },
+    {
+      "ilonggo_word": "anay",
+      "part_of_speech": "PA",
+      "english_definition": "first; before anything else"
+    },
+    {
+      "ilonggo_word": "andam",
+      "part_of_speech": "V",
+      "english_definition": "take care; careful (IMP)"
+    },
+    {
+      "ilonggo_word": "ang",
+      "part_of_speech": null,
+      "english_definition": "singular subject marker for non-personal names"
+    },
+    {
+      "ilonggo_word": "ani",
+      "part_of_speech": "N",
+      "english_definition": "harvest; produce"
+    },
+    {
+      "ilonggo_word": "ano",
+      "part_of_speech": "Q",
+      "english_definition": "what"
+    },
+    {
+      "ilonggo_word": "anum",
+      "part_of_speech": "ADJ",
+      "english_definition": "six"
+    },
+    {
+      "ilonggo_word": "anyos",
+      "part_of_speech": "N",
+      "english_definition": "years"
+    },
+    {
+      "ilonggo_word": "apat",
+      "part_of_speech": "ADJ",
+      "english_definition": "four (kwatro)"
+    },
+    {
+      "ilonggo_word": "apelyido",
+      "part_of_speech": "N",
+      "english_definition": "last name; surname"
+    },
+    {
+      "ilonggo_word": "apo",
+      "part_of_speech": "N",
+      "english_definition": "grandchild"
+    },
+    {
+      "ilonggo_word": "ara dira",
+      "part_of_speech": "EX",
+      "english_definition": "(in) there, location"
+    },
+    {
+      "ilonggo_word": "ara diri",
+      "part_of_speech": "EX",
+      "english_definition": "it is here"
+    },
+    {
+      "ilonggo_word": "Arabyano",
+      "part_of_speech": "N",
+      "english_definition": "Arabian (person/s); Arabian language"
+    },
+    {
+      "ilonggo_word": "aranghita",
+      "part_of_speech": "N",
+      "english_definition": "orange"
+    },
+    {
+      "ilonggo_word": "aritus",
+      "part_of_speech": "N",
+      "english_definition": "earring/s"
+    },
+    {
+      "ilonggo_word": "arroz caldo",
+      "part_of_speech": "N",
+      "english_definition": "porridge cooked with spring onions, ginger and chicken"
+    },
+    {
+      "ilonggo_word": "artista",
+      "part_of_speech": "N",
+      "english_definition": "artist; actor/actress; performer"
+    },
+    {
+      "ilonggo_word": "asawa",
+      "part_of_speech": "N",
+      "english_definition": "wife; husband"
+    },
+    {
+      "ilonggo_word": "asin",
+      "part_of_speech": "N",
+      "english_definition": "salt"
+    },
+    {
+      "ilonggo_word": "asul",
+      "part_of_speech": "ADJ",
+      "english_definition": "blue"
+    },
+    {
+      "ilonggo_word": "atis",
+      "part_of_speech": "N",
+      "english_definition": "sugar apple; custard apple"
+    },
+    {
+      "ilonggo_word": "ato",
+      "part_of_speech": "P",
+      "english_definition": "that"
+    },
+    {
+      "ilonggo_word": "ato didto",
+      "part_of_speech": "EX",
+      "english_definition": "it's there (yonder)"
+    },
+    {
+      "ilonggo_word": "aton",
+      "part_of_speech": "P",
+      "english_definition": "our; ours (inclusive)"
+    },
+    {
+      "ilonggo_word": "atubangan",
+      "part_of_speech": "N",
+      "english_definition": "in front of; across the"
+    },
+    {
+      "ilonggo_word": "ayu",
+      "part_of_speech": "N",
+      "english_definition": "discount; bargain"
+    },
+    {
+      "ilonggo_word": "bâbâ",
+      "part_of_speech": "N",
+      "english_definition": "mouth"
+    },
+    {
+      "ilonggo_word": "babay",
+      "part_of_speech": "EX",
+      "english_definition": "goodbye"
+    },
+    {
+      "ilonggo_word": "babayi",
+      "part_of_speech": "N",
+      "english_definition": "female; girl"
+    },
+    {
+      "ilonggo_word": "baboy",
+      "part_of_speech": "N",
+      "english_definition": "pig; pork meat"
+    },
+    {
+      "ilonggo_word": "bagatnan",
+      "part_of_speech": "N",
+      "english_definition": "south"
+    },
+    {
+      "ilonggo_word": "bag-o",
+      "part_of_speech": "ADJ",
+      "english_definition": "new (as in objects); recent; unfamiliar"
+    },
+    {
+      "ilonggo_word": "bago (2)",
+      "part_of_speech": "C",
+      "english_definition": "before"
+    },
+    {
+      "ilonggo_word": "baka",
+      "part_of_speech": "N",
+      "english_definition": "cow; beef"
+    },
+    {
+      "ilonggo_word": "bakal",
+      "part_of_speech": "N",
+      "english_definition": "buy (IMP)"
+    },
+    {
+      "ilonggo_word": "balagay",
+      "part_of_speech": "N",
+      "english_definition": "winged beans"
+    },
+    {
+      "ilonggo_word": "balatong",
+      "part_of_speech": "N",
+      "english_definition": "string beans"
+    },
+    {
+      "ilonggo_word": "balay",
+      "part_of_speech": "N",
+      "english_definition": "house; home"
+    },
+    {
+      "ilonggo_word": "baligyaan",
+      "part_of_speech": "N",
+      "english_definition": "a place where one buys"
+    },
+    {
+      "ilonggo_word": "balik",
+      "part_of_speech": "V",
+      "english_definition": "return; go back (IMP)"
+    },
+    {
+      "ilonggo_word": "balikan",
+      "part_of_speech": "V",
+      "english_definition": "to go back (INF); go back (IMP)"
+    },
+    {
+      "ilonggo_word": "balikawang",
+      "part_of_speech": "N",
+      "english_definition": "hip/s"
+    },
+    {
+      "ilonggo_word": "balita",
+      "part_of_speech": "N",
+      "english_definition": "news"
+    },
+    {
+      "ilonggo_word": "balita (2)",
+      "part_of_speech": "N",
+      "english_definition": "bring/tell the news"
+    },
+    {
+      "ilonggo_word": "bana",
+      "part_of_speech": "N",
+      "english_definition": "husband"
+    },
+    {
+      "ilonggo_word": "banwa",
+      "part_of_speech": "N",
+      "english_definition": "town; nation"
+    },
+    {
+      "ilonggo_word": "banyo",
+      "part_of_speech": "N",
+      "english_definition": "bathroom; comfort room"
+    },
+    {
+      "ilonggo_word": "bapor",
+      "part_of_speech": "N",
+      "english_definition": "ship; freighter"
+    },
+    {
+      "ilonggo_word": "barangay",
+      "part_of_speech": "N",
+      "english_definition": "small community; village"
+    },
+    {
+      "ilonggo_word": "barato",
+      "part_of_speech": "ADJ",
+      "english_definition": "inexpensive"
+    },
+    {
+      "ilonggo_word": "barbero",
+      "part_of_speech": "N",
+      "english_definition": "barber"
+    },
+    {
+      "ilonggo_word": "baroto",
+      "part_of_speech": "N",
+      "english_definition": "boat; banca"
+    },
+    {
+      "ilonggo_word": "basà",
+      "part_of_speech": "ADJ",
+      "english_definition": "wet; soaked"
+    },
+    {
+      "ilonggo_word": "basî",
+      "part_of_speech": "PA",
+      "english_definition": "a particle which expresses uncertainty"
+    },
+    {
+      "ilonggo_word": "baso",
+      "part_of_speech": "N",
+      "english_definition": "drinking glass"
+    },
+    {
+      "ilonggo_word": "basta",
+      "part_of_speech": "EX",
+      "english_definition": "as long as"
+    },
+    {
+      "ilonggo_word": "batâ",
+      "part_of_speech": "N",
+      "english_definition": "child; baby"
+    },
+    {
+      "ilonggo_word": "batâ (2)",
+      "part_of_speech": "ADJ",
+      "english_definition": "young, as in person"
+    },
+    {
+      "ilonggo_word": "bata (4)",
+      "part_of_speech": "N",
+      "english_definition": "robe"
+    },
+    {
+      "ilonggo_word": "batiis",
+      "part_of_speech": "N",
+      "english_definition": "leg"
+    },
+    {
+      "ilonggo_word": "bato",
+      "part_of_speech": "N",
+      "english_definition": "rock; stone"
+    },
+    {
+      "ilonggo_word": "batyag",
+      "part_of_speech": "N",
+      "english_definition": "feeling; sense"
+    },
+    {
+      "ilonggo_word": "bayabas",
+      "part_of_speech": "N",
+      "english_definition": "guava"
+    },
+    {
+      "ilonggo_word": "bayaw",
+      "part_of_speech": "N",
+      "english_definition": "brother-in-law; sister-in-law"
+    },
+    {
+      "ilonggo_word": "bayaw (2)",
+      "part_of_speech": "V",
+      "english_definition": "elevate; lift"
+    },
+    {
+      "ilonggo_word": "bayû",
+      "part_of_speech": "N",
+      "english_definition": "woman's dress; clothing"
+    },
+    {
+      "ilonggo_word": "bayu (2)",
+      "part_of_speech": "V",
+      "english_definition": "box; maul; pound (IMP)"
+    },
+    {
+      "ilonggo_word": "berde",
+      "part_of_speech": "ADJ",
+      "english_definition": "green"
+    },
+    {
+      "ilonggo_word": "beses",
+      "part_of_speech": "N",
+      "english_definition": "frequency"
+    },
+    {
+      "ilonggo_word": "beynte",
+      "part_of_speech": "ADJ",
+      "english_definition": "twenty"
+    },
+    {
+      "ilonggo_word": "bibig",
+      "part_of_speech": "N",
+      "english_definition": "lip(s)"
+    },
+    {
+      "ilonggo_word": "bihon",
+      "part_of_speech": "N",
+      "english_definition": "rice noodles"
+    },
+    {
+      "ilonggo_word": "bili",
+      "part_of_speech": "N",
+      "english_definition": "price; cost"
+    },
+    {
+      "ilonggo_word": "bintana",
+      "part_of_speech": "N",
+      "english_definition": "window"
+    },
+    {
+      "ilonggo_word": "bisan",
+      "part_of_speech": "C",
+      "english_definition": "even"
+    },
+    {
+      "ilonggo_word": "bisan ano",
+      "part_of_speech": "N",
+      "english_definition": "anything; whatever"
+    },
+    {
+      "ilonggo_word": "bisita",
+      "part_of_speech": "N",
+      "english_definition": "visitor; guest"
+    },
+    {
+      "ilonggo_word": "bisitahon",
+      "part_of_speech": "V",
+      "english_definition": "will be visited by (D-F)"
+    },
+    {
+      "ilonggo_word": "biskwit",
+      "part_of_speech": "N",
+      "english_definition": "biscuit"
+    },
+    {
+      "ilonggo_word": "Biyernes",
+      "part_of_speech": "N",
+      "english_definition": "Friday"
+    },
+    {
+      "ilonggo_word": "botika",
+      "part_of_speech": "N",
+      "english_definition": "drugstore; pharmacy"
+    },
+    {
+      "ilonggo_word": "bubungan",
+      "part_of_speech": "N",
+      "english_definition": "roof (var. atup)"
+    },
+    {
+      "ilonggo_word": "buena mano",
+      "part_of_speech": "N",
+      "english_definition": "first customer"
+    },
+    {
+      "ilonggo_word": "bug-at",
+      "part_of_speech": "N",
+      "english_definition": "weight; heaviness"
+    },
+    {
+      "ilonggo_word": "bug-at (2)",
+      "part_of_speech": "ADJ",
+      "english_definition": "heavy"
+    },
+    {
+      "ilonggo_word": "bugas",
+      "part_of_speech": "N",
+      "english_definition": "uncooked rice"
+    },
+    {
+      "ilonggo_word": "bugkus",
+      "part_of_speech": "N",
+      "english_definition": "a bunch; a bundle"
+    },
+    {
+      "ilonggo_word": "bugtaw",
+      "part_of_speech": "V",
+      "english_definition": "wake up"
+    },
+    {
+      "ilonggo_word": "bugtaw (2)",
+      "part_of_speech": "ADJ",
+      "english_definition": "awake"
+    },
+    {
+      "ilonggo_word": "buhi",
+      "part_of_speech": "ADJ",
+      "english_definition": "alive"
+    },
+    {
+      "ilonggo_word": "buhi (2)",
+      "part_of_speech": "V",
+      "english_definition": "set free"
+    },
+    {
+      "ilonggo_word": "buhin",
+      "part_of_speech": "V",
+      "english_definition": "lessen; decrease"
+    },
+    {
+      "ilonggo_word": "buhok",
+      "part_of_speech": "N",
+      "english_definition": "hair"
+    },
+    {
+      "ilonggo_word": "bulak",
+      "part_of_speech": "N",
+      "english_definition": "flower; cotton fiber"
+    },
+    {
+      "ilonggo_word": "bulan",
+      "part_of_speech": "N",
+      "english_definition": "month; moon"
+    },
+    {
+      "ilonggo_word": "bulan-bulan",
+      "part_of_speech": "ADV",
+      "english_definition": "every month; monthly"
+    },
+    {
+      "ilonggo_word": "buli",
+      "part_of_speech": "N",
+      "english_definition": "buttocks"
+    },
+    {
+      "ilonggo_word": "búlig",
+      "part_of_speech": "V",
+      "english_definition": "help; aid; assistance"
+    },
+    {
+      "ilonggo_word": "bulig (2)",
+      "part_of_speech": "N",
+      "english_definition": "help; aid; assistance"
+    },
+    {
+      "ilonggo_word": "buligan",
+      "part_of_speech": "V",
+      "english_definition": "to help; to assist (INF)"
+    },
+    {
+      "ilonggo_word": "bulong",
+      "part_of_speech": "N",
+      "english_definition": "medicine; cure; treatment"
+    },
+    {
+      "ilonggo_word": "Bumbay",
+      "part_of_speech": "N",
+      "english_definition": "Indian (person/s); Indian language"
+    },
+    {
+      "ilonggo_word": "buol",
+      "part_of_speech": "N",
+      "english_definition": "heel"
+    },
+    {
+      "ilonggo_word": "busog",
+      "part_of_speech": "ADJ",
+      "english_definition": "full, as in a full stomach"
+    },
+    {
+      "ilonggo_word": "buwas",
+      "part_of_speech": "ADV",
+      "english_definition": "tomorrow; next day"
+    },
+    {
+      "ilonggo_word": "byahe",
+      "part_of_speech": "N",
+      "english_definition": "journey; trip; travel"
+    },
+    {
+      "ilonggo_word": "daan",
+      "part_of_speech": "ADJ",
+      "english_definition": "old, as in objects; worn-out; stale, as in bread"
+    },
+    {
+      "ilonggo_word": "dagat",
+      "part_of_speech": "N",
+      "english_definition": "sea; ocean"
+    },
+    {
+      "ilonggo_word": "dahon",
+      "part_of_speech": "N",
+      "english_definition": "leaf"
+    },
+    {
+      "ilonggo_word": "dala",
+      "part_of_speech": "N",
+      "english_definition": "package; load; things being carried"
+    },
+    {
+      "ilonggo_word": "dalaga",
+      "part_of_speech": "N",
+      "english_definition": "an unmarried woman"
+    },
+    {
+      "ilonggo_word": "dalan",
+      "part_of_speech": "N",
+      "english_definition": "street; road; path"
+    },
+    {
+      "ilonggo_word": "dali lang",
+      "part_of_speech": "EX",
+      "english_definition": "just a minute; wait"
+    },
+    {
+      "ilonggo_word": "dapa-dapa",
+      "part_of_speech": "N",
+      "english_definition": "sole of the feet"
+    },
+    {
+      "ilonggo_word": "daw sa",
+      "part_of_speech": "EX",
+      "english_definition": "as if; like; seem; similar to"
+    },
+    {
+      "ilonggo_word": "delargo",
+      "part_of_speech": "N",
+      "english_definition": "pants (long)"
+    },
+    {
+      "ilonggo_word": "dentista",
+      "part_of_speech": "N",
+      "english_definition": "dentist"
+    },
+    {
+      "ilonggo_word": "didto",
+      "part_of_speech": "P",
+      "english_definition": "over there, far from both speaker and listener"
+    },
+    {
+      "ilonggo_word": "diin",
+      "part_of_speech": "Q",
+      "english_definition": "where, used for asking location and direction"
+    },
+    {
+      "ilonggo_word": "diin (2)",
+      "part_of_speech": "C",
+      "english_definition": "which"
+    },
+    {
+      "ilonggo_word": "dila",
+      "part_of_speech": "N",
+      "english_definition": "tongue"
+    },
+    {
+      "ilonggo_word": "dingding",
+      "part_of_speech": "N",
+      "english_definition": "wall of building"
+    },
+    {
+      "ilonggo_word": "dira",
+      "part_of_speech": "P",
+      "english_definition": "there, near listener but far from the speaker"
+    },
+    {
+      "ilonggo_word": "diri",
+      "part_of_speech": "P",
+      "english_definition": "here (location)"
+    },
+    {
+      "ilonggo_word": "disi-otso",
+      "part_of_speech": "ADJ",
+      "english_definition": "eighteen"
+    },
+    {
+      "ilonggo_word": "disi-sais",
+      "part_of_speech": "ADJ",
+      "english_definition": "sixteen"
+    },
+    {
+      "ilonggo_word": "disi-syete",
+      "part_of_speech": "ADJ",
+      "english_definition": "seventeen"
+    },
+    {
+      "ilonggo_word": "disinwebe",
+      "part_of_speech": "ADJ",
+      "english_definition": "nineteen"
+    },
+    {
+      "ilonggo_word": "Disyembre",
+      "part_of_speech": "N",
+      "english_definition": "December"
+    },
+    {
+      "ilonggo_word": "Domingo",
+      "part_of_speech": "N",
+      "english_definition": "Sunday"
+    },
+    {
+      "ilonggo_word": "dos",
+      "part_of_speech": "ADJ",
+      "english_definition": "two"
+    },
+    {
+      "ilonggo_word": "dose",
+      "part_of_speech": "ADJ",
+      "english_definition": "twelve"
+    },
+    {
+      "ilonggo_word": "dosena",
+      "part_of_speech": "N",
+      "english_definition": "dozen"
+    },
+    {
+      "ilonggo_word": "drayber",
+      "part_of_speech": "N",
+      "english_definition": "driver"
+    },
+    {
+      "ilonggo_word": "dugâ",
+      "part_of_speech": "N",
+      "english_definition": "juice; extract"
+    },
+    {
+      "ilonggo_word": "dugay",
+      "part_of_speech": "ADJ",
+      "english_definition": "long, referring to length/span of time"
+    },
+    {
+      "ilonggo_word": "dughan",
+      "part_of_speech": "N",
+      "english_definition": "chest; bosom"
+    },
+    {
+      "ilonggo_word": "dugô",
+      "part_of_speech": "N",
+      "english_definition": "blood"
+    },
+    {
+      "ilonggo_word": "duha",
+      "part_of_speech": "ADJ",
+      "english_definition": "two"
+    },
+    {
+      "ilonggo_word": "dulsi",
+      "part_of_speech": "N",
+      "english_definition": "candy"
+    },
+    {
+      "ilonggo_word": "dulunggan",
+      "part_of_speech": "N",
+      "english_definition": "ear"
+    },
+    {
+      "ilonggo_word": "dutâ",
+      "part_of_speech": "N",
+      "english_definition": "soil; earth; land"
+    },
+    {
+      "ilonggo_word": "dyes",
+      "part_of_speech": "ADJ",
+      "english_definition": "ten"
+    },
+    {
+      "ilonggo_word": "dyip",
+      "part_of_speech": "N",
+      "english_definition": "jeepney"
+    },
+    {
+      "ilonggo_word": "dyutay",
+      "part_of_speech": "ADJ",
+      "english_definition": "small; little"
+    },
+    {
+      "ilonggo_word": "edad",
+      "part_of_speech": "N",
+      "english_definition": "age"
+    },
+    {
+      "ilonggo_word": "Enero",
+      "part_of_speech": "N",
+      "english_definition": "January"
+    },
+    {
+      "ilonggo_word": "eroplano",
+      "part_of_speech": "N",
+      "english_definition": "airplane"
+    },
+    {
+      "ilonggo_word": "eskinita",
+      "part_of_speech": "N",
+      "english_definition": "a narrow road or street; alley"
+    },
+    {
+      "ilonggo_word": "eskwelahan",
+      "part_of_speech": "N",
+      "english_definition": "school"
+    },
+    {
+      "ilonggo_word": "estasyon",
+      "part_of_speech": "N",
+      "english_definition": "terminal; bus; jeepney or train station"
+    },
+    {
+      "ilonggo_word": "estudyante",
+      "part_of_speech": "N",
+      "english_definition": "student; pupil"
+    },
+    {
+      "ilonggo_word": "gab-i",
+      "part_of_speech": "N",
+      "english_definition": "evening; night"
+    },
+    {
+      "ilonggo_word": "gabi",
+      "part_of_speech": "N",
+      "english_definition": "evening; night"
+    },
+    {
+      "ilonggo_word": "gali",
+      "part_of_speech": "PA",
+      "english_definition": "expression of mild surprise at new information"
+    },
+    {
+      "ilonggo_word": "galingin",
+      "part_of_speech": "V",
+      "english_definition": "feel/feeling dizzy (A-F)"
+    },
+    {
+      "ilonggo_word": "gani",
+      "part_of_speech": "PA",
+      "english_definition": "an emphatic particle"
+    },
+    {
+      "ilonggo_word": "gantang",
+      "part_of_speech": "N",
+      "english_definition": "ganta"
+    },
+    {
+      "ilonggo_word": "gatas",
+      "part_of_speech": "N",
+      "english_definition": "milk"
+    },
+    {
+      "ilonggo_word": "gatos",
+      "part_of_speech": "ADJ",
+      "english_definition": "hundred"
+    },
+    {
+      "ilonggo_word": "gid",
+      "part_of_speech": "PA",
+      "english_definition": "an intensifier meaning very"
+    },
+    {
+      "ilonggo_word": "gin-ihaw",
+      "part_of_speech": "V",
+      "english_definition": "was broiled (O-F)"
+    },
+    {
+      "ilonggo_word": "gina-istaran",
+      "part_of_speech": "V",
+      "english_definition": "is living in/at (L-F)"
+    },
+    {
+      "ilonggo_word": "gina-usar",
+      "part_of_speech": "V",
+      "english_definition": "is used; is being used (O-F)"
+    },
+    {
+      "ilonggo_word": "ginabis-ak",
+      "part_of_speech": "V",
+      "english_definition": "is split into two; is cleaved; is being split or broken"
+    },
+    {
+      "ilonggo_word": "ginagisa",
+      "part_of_speech": "V",
+      "english_definition": "is sauteed; is being sauteed (O-F)"
+    },
+    {
+      "ilonggo_word": "ginahigop",
+      "part_of_speech": "V",
+      "english_definition": "is sipped; being sipped (O-F)"
+    },
+    {
+      "ilonggo_word": "ginahimo",
+      "part_of_speech": "V",
+      "english_definition": "is being worked on; is being done (O-F)"
+    },
+    {
+      "ilonggo_word": "ginahiwa",
+      "part_of_speech": "V",
+      "english_definition": "is sliced; is cut; is being sliced; is being cut (O-F)"
+    },
+    {
+      "ilonggo_word": "ginahuluman",
+      "part_of_speech": "V",
+      "english_definition": "is soaked; is being soaked; is marinated (O-F)"
+    },
+    {
+      "ilonggo_word": "ginaihaw",
+      "part_of_speech": "V",
+      "english_definition": "is broiled/roasted, is being broiled/roasted (O-F)"
+    },
+    {
+      "ilonggo_word": "ginakaon",
+      "part_of_speech": "V",
+      "english_definition": "is eaten; is being eaten (O-F)"
+    },
+    {
+      "ilonggo_word": "ginakudkud",
+      "part_of_speech": "V",
+      "english_definition": "is scraped/grated; is being scraped/grated (O-F)"
+    },
+    {
+      "ilonggo_word": "ginalaga",
+      "part_of_speech": "V",
+      "english_definition": "is broiled; is being boiled (O-F)"
+    },
+    {
+      "ilonggo_word": "ginaling",
+      "part_of_speech": "N",
+      "english_definition": "ground meat"
+    },
+    {
+      "ilonggo_word": "ginalitson",
+      "part_of_speech": "V",
+      "english_definition": "is roasted; is being roasted (O-F)"
+    },
+    {
+      "ilonggo_word": "ginaluto",
+      "part_of_speech": "V",
+      "english_definition": "is cooked; is being cooked (O-F)"
+    },
+    {
+      "ilonggo_word": "ginapamala",
+      "part_of_speech": "V",
+      "english_definition": "is being dried, causative (O-F)"
+    },
+    {
+      "ilonggo_word": "ginapangita",
+      "part_of_speech": "V",
+      "english_definition": "is looked for; is searched for, is being looked for (O-F)"
+    },
+    {
+      "ilonggo_word": "ginapanitan",
+      "part_of_speech": "V",
+      "english_definition": "is peeled, being peeled (O-F)"
+    },
+    {
+      "ilonggo_word": "ginaprito",
+      "part_of_speech": "V",
+      "english_definition": "is deep-fried; is being deep-fried (O-F)"
+    },
+    {
+      "ilonggo_word": "ginasupsop",
+      "part_of_speech": "V",
+      "english_definition": "is sipped; is being sipped (O-F)"
+    },
+    {
+      "ilonggo_word": "ginataan",
+      "part_of_speech": "N",
+      "english_definition": "a native delicacy made up of sticky rice balls, banana, coconut milk, etc."
+    },
+    {
+      "ilonggo_word": "ginatadtad",
+      "part_of_speech": "V",
+      "english_definition": "is chopped; is being chopped to pieces (O-F)"
+    },
+    {
+      "ilonggo_word": "ginatunga",
+      "part_of_speech": "V",
+      "english_definition": "is cut/divided, is being cut/divided (O-F)"
+    },
+    {
+      "ilonggo_word": "ginauhaw",
+      "part_of_speech": "V",
+      "english_definition": "is thirsty (A-F)"
+    },
+    {
+      "ilonggo_word": "gingisa",
+      "part_of_speech": "V",
+      "english_definition": "was sauteed (O-F)"
+    },
+    {
+      "ilonggo_word": "ginhambal",
+      "part_of_speech": "V",
+      "english_definition": "was said (O-F)"
+    },
+    {
+      "ilonggo_word": "ginhatag",
+      "part_of_speech": "V",
+      "english_definition": "was given (O-F)"
+    },
+    {
+      "ilonggo_word": "ginhuluman",
+      "part_of_speech": "V",
+      "english_definition": "was soaked; was marinated (O-F)"
+    },
+    {
+      "ilonggo_word": "ginikanan",
+      "part_of_speech": "N",
+      "english_definition": "parent(s)"
+    },
+    {
+      "ilonggo_word": "ginkuha",
+      "part_of_speech": "N",
+      "english_definition": "was taken (O-F)"
+    },
+    {
+      "ilonggo_word": "ginlaga",
+      "part_of_speech": "V",
+      "english_definition": "was broiled (O-F)"
+    },
+    {
+      "ilonggo_word": "ginlitson",
+      "part_of_speech": "V",
+      "english_definition": "was roasted (O-F)"
+    },
+    {
+      "ilonggo_word": "ginpamala",
+      "part_of_speech": "V",
+      "english_definition": "was made to dry, causative (O-F)"
+    },
+    {
+      "ilonggo_word": "ginprito",
+      "part_of_speech": "V",
+      "english_definition": "was deep-fried (O-F)"
+    },
+    {
+      "ilonggo_word": "gintapos",
+      "part_of_speech": "V",
+      "english_definition": "was finished (O-F)"
+    },
+    {
+      "ilonggo_word": "ginuo",
+      "part_of_speech": "N",
+      "english_definition": "sir; mister"
+    },
+    {
+      "ilonggo_word": "Greko",
+      "part_of_speech": "N",
+      "english_definition": "Greek"
+    },
+    {
+      "ilonggo_word": "gubâ",
+      "part_of_speech": "ADJ",
+      "english_definition": "destroyed; broken"
+    },
+    {
+      "ilonggo_word": "gusto",
+      "part_of_speech": "PV",
+      "english_definition": "want; like; desire"
+    },
+    {
+      "ilonggo_word": "gutom",
+      "part_of_speech": "ADJ",
+      "english_definition": "hungry"
+    },
+    {
+      "ilonggo_word": "gutom (2)",
+      "part_of_speech": "N",
+      "english_definition": "hunger"
+    },
+    {
+      "ilonggo_word": "gutuk",
+      "part_of_speech": "ADJ",
+      "english_definition": "tight, as in clothes"
+    },
+    {
+      "ilonggo_word": "gutuk (2)",
+      "part_of_speech": "ADJ",
+      "english_definition": "crowded"
+    },
+    {
+      "ilonggo_word": "gwâ",
+      "part_of_speech": "ADJ",
+      "english_definition": "outside; out"
+    },
+    {
+      "ilonggo_word": "gwapa",
+      "part_of_speech": "ADJ",
+      "english_definition": "beautiful; pretty"
+    },
+    {
+      "ilonggo_word": "habon",
+      "part_of_speech": "N",
+      "english_definition": "soap; detergent"
+    },
+    {
+      "ilonggo_word": "habon nga panglaba",
+      "part_of_speech": "N",
+      "english_definition": "detergent; laundry soap"
+    },
+    {
+      "ilonggo_word": "hagdan",
+      "part_of_speech": "N",
+      "english_definition": "stairs; ladder"
+    },
+    {
+      "ilonggo_word": "hal-o",
+      "part_of_speech": "N",
+      "english_definition": "pestle"
+    },
+    {
+      "ilonggo_word": "halimbawa",
+      "part_of_speech": "N",
+      "english_definition": "example"
+    },
+    {
+      "ilonggo_word": "halos",
+      "part_of_speech": "ADV",
+      "english_definition": "almost; somewhat"
+    },
+    {
+      "ilonggo_word": "hambal",
+      "part_of_speech": "N",
+      "english_definition": "word/s"
+    },
+    {
+      "ilonggo_word": "hambalon",
+      "part_of_speech": "V",
+      "english_definition": "will be said (O-F)"
+    },
+    {
+      "ilonggo_word": "hangin",
+      "part_of_speech": "N",
+      "english_definition": "air; wind"
+    },
+    {
+      "ilonggo_word": "hapon",
+      "part_of_speech": "N",
+      "english_definition": "afternoon"
+    },
+    {
+      "ilonggo_word": "Hapon (2)",
+      "part_of_speech": "N",
+      "english_definition": "Japan; its people/language"
+    },
+    {
+      "ilonggo_word": "hardinero",
+      "part_of_speech": "N",
+      "english_definition": "gardener"
+    },
+    {
+      "ilonggo_word": "hasta",
+      "part_of_speech": "N",
+      "english_definition": "until; up to"
+    },
+    {
+      "ilonggo_word": "hatag",
+      "part_of_speech": "N",
+      "english_definition": "gift; donation"
+    },
+    {
+      "ilonggo_word": "hatagan",
+      "part_of_speech": "V",
+      "english_definition": "to give someone (INF); give someone (IMP)"
+    },
+    {
+      "ilonggo_word": "hawak",
+      "part_of_speech": "N",
+      "english_definition": "waist"
+    },
+    {
+      "ilonggo_word": "hayu",
+      "part_of_speech": "N",
+      "english_definition": "nickname; pet name"
+    },
+    {
+      "ilonggo_word": "hepe",
+      "part_of_speech": "N",
+      "english_definition": "chief of police"
+    },
+    {
+      "ilonggo_word": "hilamon",
+      "part_of_speech": "N",
+      "english_definition": "grass; weed"
+    },
+    {
+      "ilonggo_word": "hilanat",
+      "part_of_speech": "V",
+      "english_definition": "fever"
+    },
+    {
+      "ilonggo_word": "hilaw",
+      "part_of_speech": "ADJ",
+      "english_definition": "raw; unripe; uncooked"
+    },
+    {
+      "ilonggo_word": "himuon",
+      "part_of_speech": "V",
+      "english_definition": "will be done (O-F)"
+    },
+    {
+      "ilonggo_word": "hinablos",
+      "part_of_speech": "N",
+      "english_definition": "nephew or niece"
+    },
+    {
+      "ilonggo_word": "hinay",
+      "part_of_speech": "ADV",
+      "english_definition": "slowly; slow-down"
+    },
+    {
+      "ilonggo_word": "hita",
+      "part_of_speech": "N",
+      "english_definition": "thigh"
+    },
+    {
+      "ilonggo_word": "hiwa",
+      "part_of_speech": "N",
+      "english_definition": "sliced piece; chunk"
+    },
+    {
+      "ilonggo_word": "hiwaon",
+      "part_of_speech": "V",
+      "english_definition": "cut; to cut (IMP)"
+    },
+    {
+      "ilonggo_word": "Hudeyu",
+      "part_of_speech": "N",
+      "english_definition": "Jew"
+    },
+    {
+      "ilonggo_word": "Hulyo",
+      "part_of_speech": "N",
+      "english_definition": "July"
+    },
+    {
+      "ilonggo_word": "huna-huna",
+      "part_of_speech": "N",
+      "english_definition": "thoughts; ideas; opinion"
+    },
+    {
+      "ilonggo_word": "Hunyo",
+      "part_of_speech": "N",
+      "english_definition": "June"
+    },
+    {
+      "ilonggo_word": "huwes",
+      "part_of_speech": "N",
+      "english_definition": "judge"
+    },
+    {
+      "ilonggo_word": "Hwebes",
+      "part_of_speech": "N",
+      "english_definition": "Thursday"
+    },
+    {
+      "ilonggo_word": "ibabaw",
+      "part_of_speech": "ADV",
+      "english_definition": "on top of; on the surface"
+    },
+    {
+      "ilonggo_word": "iban",
+      "part_of_speech": "N",
+      "english_definition": "others; some other"
+    },
+    {
+      "ilonggo_word": "idalum",
+      "part_of_speech": "ADV",
+      "english_definition": "below; down; underneath; at the bottom"
+    },
+    {
+      "ilonggo_word": "idu",
+      "part_of_speech": "N",
+      "english_definition": "dog"
+    },
+    {
+      "ilonggo_word": "ihatag",
+      "part_of_speech": "V",
+      "english_definition": "will be given (O-F)"
+    },
+    {
+      "ilonggo_word": "ihaw",
+      "part_of_speech": "V",
+      "english_definition": "grill; roast"
+    },
+    {
+      "ilonggo_word": "ika-anum",
+      "part_of_speech": "ADJ",
+      "english_definition": "sixth"
+    },
+    {
+      "ilonggo_word": "ika-apat",
+      "part_of_speech": "ADJ",
+      "english_definition": "fourth"
+    },
+    {
+      "ilonggo_word": "ika-siyam",
+      "part_of_speech": "ADJ",
+      "english_definition": "ninth"
+    },
+    {
+      "ilonggo_word": "ikaduha",
+      "part_of_speech": "ADJ",
+      "english_definition": "second"
+    },
+    {
+      "ilonggo_word": "ikalima",
+      "part_of_speech": "ADJ",
+      "english_definition": "fifth"
+    },
+    {
+      "ilonggo_word": "ikanapulo",
+      "part_of_speech": "ADJ",
+      "english_definition": "tenth"
+    },
+    {
+      "ilonggo_word": "ikapito",
+      "part_of_speech": "ADJ",
+      "english_definition": "seventh"
+    },
+    {
+      "ilonggo_word": "ikatlo",
+      "part_of_speech": "ADJ",
+      "english_definition": "third"
+    },
+    {
+      "ilonggo_word": "ikaw",
+      "part_of_speech": "P",
+      "english_definition": "you (singular)"
+    },
+    {
+      "ilonggo_word": "ikawalo",
+      "part_of_speech": "ADJ",
+      "english_definition": "eighth"
+    },
+    {
+      "ilonggo_word": "ila",
+      "part_of_speech": "P",
+      "english_definition": "their; theirs"
+    },
+    {
+      "ilonggo_word": "ilis",
+      "part_of_speech": "V",
+      "english_definition": "change one's clothes; replace; exchange"
+    },
+    {
+      "ilonggo_word": "ilong",
+      "part_of_speech": "N",
+      "english_definition": "nose"
+    },
+    {
+      "ilonggo_word": "iloy",
+      "part_of_speech": "N",
+      "english_definition": "mother"
+    },
+    {
+      "ilonggo_word": "iluk",
+      "part_of_speech": "N",
+      "english_definition": "armpit"
+    },
+    {
+      "ilonggo_word": "imo",
+      "part_of_speech": "P",
+      "english_definition": "your; yours (singular)"
+    },
+    {
+      "ilonggo_word": "ina",
+      "part_of_speech": "P",
+      "english_definition": "that, far from speaker but near the listener"
+    },
+    {
+      "ilonggo_word": "indi",
+      "part_of_speech": "EX",
+      "english_definition": "no; don't"
+    },
+    {
+      "ilonggo_word": "indi bale",
+      "part_of_speech": "EX",
+      "english_definition": "never mind; don't bother"
+    },
+    {
+      "ilonggo_word": "indi gusto",
+      "part_of_speech": "PV",
+      "english_definition": "hate"
+    },
+    {
+      "ilonggo_word": "Ingles",
+      "part_of_speech": "N",
+      "english_definition": "Englishman; English language"
+    },
+    {
+      "ilonggo_word": "inhinyero",
+      "part_of_speech": "N",
+      "english_definition": "engineer"
+    },
+    {
+      "ilonggo_word": "ini",
+      "part_of_speech": "P",
+      "english_definition": "this (near the speaker, subject set of demonstrative pronouns)"
+    },
+    {
+      "ilonggo_word": "inom",
+      "part_of_speech": "V",
+      "english_definition": "drink"
+    },
+    {
+      "ilonggo_word": "Intsik",
+      "part_of_speech": "N",
+      "english_definition": "Chinese (person/s); also language"
+    },
+    {
+      "ilonggo_word": "inumon",
+      "part_of_speech": "V",
+      "english_definition": "to drink (INF)"
+    },
+    {
+      "ilonggo_word": "inyo",
+      "part_of_speech": "P",
+      "english_definition": "your; yours (plural)"
+    },
+    {
+      "ilonggo_word": "ipahimo",
+      "part_of_speech": "V",
+      "english_definition": "to have something made, done by another (INF)"
+    },
+    {
+      "ilonggo_word": "ipakita",
+      "part_of_speech": "V",
+      "english_definition": "show something to someone (O-F)"
+    },
+    {
+      "ilonggo_word": "isa",
+      "part_of_speech": "ADJ",
+      "english_definition": "one"
+    },
+    {
+      "ilonggo_word": "isa ka gatos",
+      "part_of_speech": "ADJ",
+      "english_definition": "one hundred"
+    },
+    {
+      "ilonggo_word": "isda",
+      "part_of_speech": "N",
+      "english_definition": "fish"
+    },
+    {
+      "ilonggo_word": "Italyano",
+      "part_of_speech": "N",
+      "english_definition": "Italian (person/s); also language"
+    },
+    {
+      "ilonggo_word": "itum",
+      "part_of_speech": "ADJ",
+      "english_definition": "black"
+    },
+    {
+      "ilonggo_word": "iya",
+      "part_of_speech": "P",
+      "english_definition": "his; her; hers"
+    },
+    {
+      "ilonggo_word": "ka",
+      "part_of_speech": "P",
+      "english_definition": "you (singular)"
+    },
+    {
+      "ilonggo_word": "kabulig",
+      "part_of_speech": "N",
+      "english_definition": "helper"
+    },
+    {
+      "ilonggo_word": "kada",
+      "part_of_speech": "ADJ",
+      "english_definition": "ever; each"
+    },
+    {
+      "ilonggo_word": "kadakuun",
+      "part_of_speech": "B",
+      "english_definition": "size; bigness"
+    },
+    {
+      "ilonggo_word": "kadtoan",
+      "part_of_speech": "V",
+      "english_definition": "will go to"
+    },
+    {
+      "ilonggo_word": "kadugay",
+      "part_of_speech": "ADJ",
+      "english_definition": "long, as in time (used with the question word 'ano')"
+    },
+    {
+      "ilonggo_word": "kagab-i",
+      "part_of_speech": "ADV",
+      "english_definition": "last night"
+    },
+    {
+      "ilonggo_word": "kahampang",
+      "part_of_speech": "N",
+      "english_definition": "playmate"
+    },
+    {
+      "ilonggo_word": "kahapon",
+      "part_of_speech": "ADV",
+      "english_definition": "yesterday"
+    },
+    {
+      "ilonggo_word": "kahero",
+      "part_of_speech": "N",
+      "english_definition": "cashier"
+    },
+    {
+      "ilonggo_word": "kahibalo",
+      "part_of_speech": "PV",
+      "english_definition": "to be able to know how"
+    },
+    {
+      "ilonggo_word": "kaina",
+      "part_of_speech": "ADV",
+      "english_definition": "earlier; a little while ago"
+    },
+    {
+      "ilonggo_word": "kaingod",
+      "part_of_speech": "N",
+      "english_definition": "seatmate"
+    },
+    {
+      "ilonggo_word": "kainuman",
+      "part_of_speech": "N",
+      "english_definition": "drinking companion"
+    },
+    {
+      "ilonggo_word": "kakapoy",
+      "part_of_speech": "ADJ",
+      "english_definition": "tiring"
+    },
+    {
+      "ilonggo_word": "kakwarto",
+      "part_of_speech": "N",
+      "english_definition": "roommate"
+    },
+    {
+      "ilonggo_word": "kalabasa",
+      "part_of_speech": "N",
+      "english_definition": "squash; pumpkin"
+    },
+    {
+      "ilonggo_word": "kaladlawan",
+      "part_of_speech": "ADJ",
+      "english_definition": "funny"
+    },
+    {
+      "ilonggo_word": "kalaha",
+      "part_of_speech": "N",
+      "english_definition": "frying pan; wok"
+    },
+    {
+      "ilonggo_word": "kalamansi",
+      "part_of_speech": "N",
+      "english_definition": "lemon"
+    },
+    {
+      "ilonggo_word": "kalamay",
+      "part_of_speech": "N",
+      "english_definition": "sugar"
+    },
+    {
+      "ilonggo_word": "kalayo",
+      "part_of_speech": "ADJ",
+      "english_definition": "far (used with the question word 'ano')"
+    },
+    {
+      "ilonggo_word": "kaldero",
+      "part_of_speech": "N",
+      "english_definition": "kettle; aluminum pot"
+    },
+    {
+      "ilonggo_word": "kalesa",
+      "part_of_speech": "N",
+      "english_definition": "horse-drawn carriage"
+    },
+    {
+      "ilonggo_word": "kalibaynan",
+      "part_of_speech": "N",
+      "english_definition": "youngest child (Var. kamanghuran)"
+    },
+    {
+      "ilonggo_word": "kalo-oy",
+      "part_of_speech": "N",
+      "english_definition": "mercy; pity"
+    },
+    {
+      "ilonggo_word": "kalubay",
+      "part_of_speech": "N",
+      "english_definition": "gourd"
+    },
+    {
+      "ilonggo_word": "kalye",
+      "part_of_speech": "N",
+      "english_definition": "street; road"
+    },
+    {
+      "ilonggo_word": "kamagulangan",
+      "part_of_speech": "N",
+      "english_definition": "eldest child"
+    },
+    {
+      "ilonggo_word": "kamatis",
+      "part_of_speech": "N",
+      "english_definition": "tomato"
+    },
+    {
+      "ilonggo_word": "kambyo",
+      "part_of_speech": "N",
+      "english_definition": "change (as in money)"
+    },
+    {
+      "ilonggo_word": "kami",
+      "part_of_speech": "P",
+      "english_definition": "we (exclusive)"
+    },
+    {
+      "ilonggo_word": "kamo",
+      "part_of_speech": "P",
+      "english_definition": "you (plural)"
+    },
+    {
+      "ilonggo_word": "kamot",
+      "part_of_speech": "N",
+      "english_definition": "hand"
+    },
+    {
+      "ilonggo_word": "Kan-on",
+      "part_of_speech": "N",
+      "english_definition": "cooked rice"
+    },
+    {
+      "ilonggo_word": "kanday",
+      "part_of_speech": null,
+      "english_definition": "plural directional marker for personal names"
+    },
+    {
+      "ilonggo_word": "kanding",
+      "part_of_speech": "N",
+      "english_definition": "goat"
+    },
+    {
+      "ilonggo_word": "kanta",
+      "part_of_speech": "N",
+      "english_definition": "song"
+    },
+    {
+      "ilonggo_word": "kanto",
+      "part_of_speech": "N",
+      "english_definition": "corner"
+    },
+    {
+      "ilonggo_word": "kanugon",
+      "part_of_speech": "EX",
+      "english_definition": "it's a pity; its too bad; its such a waste"
+    },
+    {
+      "ilonggo_word": "kaon",
+      "part_of_speech": "V",
+      "english_definition": "eat"
+    },
+    {
+      "ilonggo_word": "kaonon",
+      "part_of_speech": "V",
+      "english_definition": "(to) eat (INF & IMP)"
+    },
+    {
+      "ilonggo_word": "kaopisina",
+      "part_of_speech": "N",
+      "english_definition": "officemate"
+    },
+    {
+      "ilonggo_word": "kape",
+      "part_of_speech": "N",
+      "english_definition": "coffee"
+    },
+    {
+      "ilonggo_word": "kapitan",
+      "part_of_speech": "N",
+      "english_definition": "captain"
+    },
+    {
+      "ilonggo_word": "kapsula",
+      "part_of_speech": "N",
+      "english_definition": "capsule"
+    },
+    {
+      "ilonggo_word": "karabaw",
+      "part_of_speech": "N",
+      "english_definition": "carabao"
+    },
+    {
+      "ilonggo_word": "kare-kare",
+      "part_of_speech": "N",
+      "english_definition": "ox-tail cooked with ground peanuts, stringbeans, etc."
+    },
+    {
+      "ilonggo_word": "karne",
+      "part_of_speech": "N",
+      "english_definition": "meat, in general"
+    },
+    {
+      "ilonggo_word": "karon",
+      "part_of_speech": "ADV",
+      "english_definition": "later; after a while; soon; later on"
+    },
+    {
+      "ilonggo_word": "karpintero",
+      "part_of_speech": "N",
+      "english_definition": "carpenter"
+    },
+    {
+      "ilonggo_word": "karsada",
+      "part_of_speech": "N",
+      "english_definition": "street; road"
+    },
+    {
+      "ilonggo_word": "kasera",
+      "part_of_speech": "N",
+      "english_definition": "boarder; person who pays room and board"
+    },
+    {
+      "ilonggo_word": "kasilingan",
+      "part_of_speech": "N",
+      "english_definition": "neighbor"
+    },
+    {
+      "ilonggo_word": "kasilyas",
+      "part_of_speech": "N",
+      "english_definition": "toilet"
+    },
+    {
+      "ilonggo_word": "kasiyaman",
+      "part_of_speech": "ADJ",
+      "english_definition": "ninth day of wake"
+    },
+    {
+      "ilonggo_word": "katlu-an",
+      "part_of_speech": "ADJ",
+      "english_definition": "third day of wake"
+    },
+    {
+      "ilonggo_word": "katorse",
+      "part_of_speech": "ADJ",
+      "english_definition": "fourteen"
+    },
+    {
+      "ilonggo_word": "katrabaho",
+      "part_of_speech": "N",
+      "english_definition": "officemate; co-worker"
+    },
+    {
+      "ilonggo_word": "katre",
+      "part_of_speech": "N",
+      "english_definition": "bed"
+    },
+    {
+      "ilonggo_word": "katsila",
+      "part_of_speech": "N",
+      "english_definition": "Spaniard; also language"
+    },
+    {
+      "ilonggo_word": "katumbal",
+      "part_of_speech": "N",
+      "english_definition": "pepper"
+    },
+    {
+      "ilonggo_word": "kauhaw",
+      "part_of_speech": "N",
+      "english_definition": "thirst"
+    },
+    {
+      "ilonggo_word": "kaupod",
+      "part_of_speech": "N",
+      "english_definition": "companion"
+    },
+    {
+      "ilonggo_word": "kay",
+      "part_of_speech": "C",
+      "english_definition": "because"
+    },
+    {
+      "ilonggo_word": "kay sin-o",
+      "part_of_speech": "Q",
+      "english_definition": "whose"
+    },
+    {
+      "ilonggo_word": "kaymito",
+      "part_of_speech": "N",
+      "english_definition": "star apple; custard apple"
+    },
+    {
+      "ilonggo_word": "kayumanggi",
+      "part_of_speech": "ADJ",
+      "english_definition": "dark brown in complexion; tan"
+    },
+    {
+      "ilonggo_word": "keso",
+      "part_of_speech": "N",
+      "english_definition": "cheese"
+    },
+    {
+      "ilonggo_word": "kilala",
+      "part_of_speech": "PV",
+      "english_definition": "to know someone"
+    },
+    {
+      "ilonggo_word": "kilay",
+      "part_of_speech": "N",
+      "english_definition": "eyebrow"
+    },
+    {
+      "ilonggo_word": "kilid",
+      "part_of_speech": "ADJ",
+      "english_definition": "at the side"
+    },
+    {
+      "ilonggo_word": "kilo",
+      "part_of_speech": "N",
+      "english_definition": "kilogram"
+    },
+    {
+      "ilonggo_word": "kilometro",
+      "part_of_speech": "N",
+      "english_definition": "kilometer"
+    },
+    {
+      "ilonggo_word": "kinahanglan",
+      "part_of_speech": "PV",
+      "english_definition": "need; have to"
+    },
+    {
+      "ilonggo_word": "kinse",
+      "part_of_speech": "ADJ",
+      "english_definition": "fifteen"
+    },
+    {
+      "ilonggo_word": "kita",
+      "part_of_speech": "P",
+      "english_definition": "we (inclusive)"
+    },
+    {
+      "ilonggo_word": "klase",
+      "part_of_speech": "N",
+      "english_definition": "kind; type; class (as in language class)"
+    },
+    {
+      "ilonggo_word": "klinika",
+      "part_of_speech": "N",
+      "english_definition": "clinic"
+    },
+    {
+      "ilonggo_word": "ko",
+      "part_of_speech": "P",
+      "english_definition": "by me; my"
+    },
+    {
+      "ilonggo_word": "kolehiyo",
+      "part_of_speech": "N",
+      "english_definition": "college"
+    },
+    {
+      "ilonggo_word": "kolintas",
+      "part_of_speech": "N",
+      "english_definition": "necklace"
+    },
+    {
+      "ilonggo_word": "kolor",
+      "part_of_speech": "N",
+      "english_definition": "color"
+    },
+    {
+      "ilonggo_word": "komidor",
+      "part_of_speech": "N",
+      "english_definition": "dining room"
+    },
+    {
+      "ilonggo_word": "kon",
+      "part_of_speech": "C",
+      "english_definition": "when; but may sometimes mean 'if'"
+    },
+    {
+      "ilonggo_word": "kon kis-a",
+      "part_of_speech": "ADV",
+      "english_definition": "sometimes"
+    },
+    {
+      "ilonggo_word": "konduktor",
+      "part_of_speech": "N",
+      "english_definition": "conductor"
+    },
+    {
+      "ilonggo_word": "konsehal",
+      "part_of_speech": "N",
+      "english_definition": "councilor"
+    },
+    {
+      "ilonggo_word": "kubrador",
+      "part_of_speech": "N",
+      "english_definition": "bill collector"
+    },
+    {
+      "ilonggo_word": "kuhâ",
+      "part_of_speech": "V",
+      "english_definition": "get; take something (IMP)"
+    },
+    {
+      "ilonggo_word": "kuhaon",
+      "part_of_speech": "V",
+      "english_definition": "remove (IMP); to remove (INF)"
+    },
+    {
+      "ilonggo_word": "kuko",
+      "part_of_speech": "N",
+      "english_definition": "fingernail; toenail"
+    },
+    {
+      "ilonggo_word": "kulang",
+      "part_of_speech": "ADJ",
+      "english_definition": "not enough; insufficient; less than"
+    },
+    {
+      "ilonggo_word": "kulang sa tulog",
+      "part_of_speech": "ADJ",
+      "english_definition": "lacking sleep"
+    },
+    {
+      "ilonggo_word": "kuno",
+      "part_of_speech": "PA",
+      "english_definition": "according to someone"
+    },
+    {
+      "ilonggo_word": "kuring",
+      "part_of_speech": "N",
+      "english_definition": "cat"
+    },
+    {
+      "ilonggo_word": "kurso",
+      "part_of_speech": "N",
+      "english_definition": "course (as in course taken in college)"
+    },
+    {
+      "ilonggo_word": "kusina",
+      "part_of_speech": "N",
+      "english_definition": "kitchen"
+    },
+    {
+      "ilonggo_word": "kutsara",
+      "part_of_speech": "N",
+      "english_definition": "spoon"
+    },
+    {
+      "ilonggo_word": "kutsilyo",
+      "part_of_speech": "N",
+      "english_definition": "knife"
+    },
+    {
+      "ilonggo_word": "kwarenta",
+      "part_of_speech": "ADJ",
+      "english_definition": "forty"
+    },
+    {
+      "ilonggo_word": "kwarta",
+      "part_of_speech": "N",
+      "english_definition": "money"
+    },
+    {
+      "ilonggo_word": "kwarto",
+      "part_of_speech": "N",
+      "english_definition": "room; bedroom"
+    },
+    {
+      "ilonggo_word": "laba",
+      "part_of_speech": "V",
+      "english_definition": "wash clothes"
+    },
+    {
+      "ilonggo_word": "lababo",
+      "part_of_speech": "N",
+      "english_definition": "sink"
+    },
+    {
+      "ilonggo_word": "labandera",
+      "part_of_speech": "N",
+      "english_definition": "laundry woman"
+    },
+    {
+      "ilonggo_word": "lakat",
+      "part_of_speech": "N",
+      "english_definition": "trip; business trip; walk"
+    },
+    {
+      "ilonggo_word": "lakat (2)",
+      "part_of_speech": "V",
+      "english_definition": "walk; go; leave (IMP)"
+    },
+    {
+      "ilonggo_word": "lakat diri",
+      "part_of_speech": "P",
+      "english_definition": "(you, singular/plural); walk here"
+    },
+    {
+      "ilonggo_word": "lalaki",
+      "part_of_speech": "N",
+      "english_definition": "male; man; boy"
+    },
+    {
+      "ilonggo_word": "lamesa",
+      "part_of_speech": "N",
+      "english_definition": "table"
+    },
+    {
+      "ilonggo_word": "lang",
+      "part_of_speech": "PA",
+      "english_definition": "a particle which means just or only"
+    },
+    {
+      "ilonggo_word": "langka",
+      "part_of_speech": "N",
+      "english_definition": "jackfruit"
+    },
+    {
+      "ilonggo_word": "lapis",
+      "part_of_speech": "N",
+      "english_definition": "pencil"
+    },
+    {
+      "ilonggo_word": "lata",
+      "part_of_speech": "ADJ",
+      "english_definition": "soggy; rotten"
+    },
+    {
+      "ilonggo_word": "lata (2)",
+      "part_of_speech": "N",
+      "english_definition": "tin; a tin can"
+    },
+    {
+      "ilonggo_word": "lawas",
+      "part_of_speech": "N",
+      "english_definition": "body"
+    },
+    {
+      "ilonggo_word": "letse",
+      "part_of_speech": "N",
+      "english_definition": "a unit of measure for rice or other grains"
+    },
+    {
+      "ilonggo_word": "libo",
+      "part_of_speech": "ADJ",
+      "english_definition": "thousand"
+    },
+    {
+      "ilonggo_word": "libro",
+      "part_of_speech": "N",
+      "english_definition": "book"
+    },
+    {
+      "ilonggo_word": "likô sa tuo",
+      "part_of_speech": "V",
+      "english_definition": "turn right (IMP)"
+    },
+    {
+      "ilonggo_word": "likô sa wala",
+      "part_of_speech": "V",
+      "english_definition": "turn left (IMP)"
+    },
+    {
+      "ilonggo_word": "likod",
+      "part_of_speech": "ADJ",
+      "english_definition": "back (as in body)"
+    },
+    {
+      "ilonggo_word": "lima",
+      "part_of_speech": "ADJ",
+      "english_definition": "five"
+    },
+    {
+      "ilonggo_word": "limpyo",
+      "part_of_speech": "ADJ",
+      "english_definition": "clean"
+    },
+    {
+      "ilonggo_word": "liog",
+      "part_of_speech": "N",
+      "english_definition": "neck"
+    },
+    {
+      "ilonggo_word": "litro",
+      "part_of_speech": "N",
+      "english_definition": "liter"
+    },
+    {
+      "ilonggo_word": "litson",
+      "part_of_speech": "N",
+      "english_definition": "roasted pig"
+    },
+    {
+      "ilonggo_word": "'iwat",
+      "part_of_speech": "V",
+      "english_definition": "again; repeat"
+    },
+    {
+      "ilonggo_word": "lola",
+      "part_of_speech": "N",
+      "english_definition": "grandmother"
+    },
+    {
+      "ilonggo_word": "lolo",
+      "part_of_speech": "N",
+      "english_definition": "grandfather"
+    },
+    {
+      "ilonggo_word": "longganisa",
+      "part_of_speech": "N",
+      "english_definition": "native sausage"
+    },
+    {
+      "ilonggo_word": "lubid",
+      "part_of_speech": "N",
+      "english_definition": "string"
+    },
+    {
+      "ilonggo_word": "lukus",
+      "part_of_speech": "N",
+      "english_definition": "squid"
+    },
+    {
+      "ilonggo_word": "lumpyâ",
+      "part_of_speech": "N",
+      "english_definition": "deep-fried spring rolls"
+    },
+    {
+      "ilonggo_word": "Lunes",
+      "part_of_speech": "N",
+      "english_definition": "Monday"
+    },
+    {
+      "ilonggo_word": "luto",
+      "part_of_speech": "N",
+      "english_definition": "cooked food; prepared food"
+    },
+    {
+      "ilonggo_word": "luy-a",
+      "part_of_speech": "N",
+      "english_definition": "ginger"
+    },
+    {
+      "ilonggo_word": "maaga",
+      "part_of_speech": "ADJ",
+      "english_definition": "early"
+    },
+    {
+      "ilonggo_word": "maagi",
+      "part_of_speech": "V",
+      "english_definition": "will pass by/through; will stop by"
+    },
+    {
+      "ilonggo_word": "maasin",
+      "part_of_speech": "ADJ",
+      "english_definition": "salty"
+    },
+    {
+      "ilonggo_word": "maaslum",
+      "part_of_speech": "ADJ",
+      "english_definition": "sour"
+    },
+    {
+      "ilonggo_word": "maayo",
+      "part_of_speech": "ADJ",
+      "english_definition": "fine; good; well"
+    },
+    {
+      "ilonggo_word": "mabahul",
+      "part_of_speech": "ADJ",
+      "english_definition": "rough; coarse as in texture"
+    },
+    {
+      "ilonggo_word": "mabalik",
+      "part_of_speech": "V",
+      "english_definition": "will return; will come back (A-F)"
+    },
+    {
+      "ilonggo_word": "mabilin",
+      "part_of_speech": "V",
+      "english_definition": "to leave something behind, stay behind (INF)"
+    },
+    {
+      "ilonggo_word": "mabug-at",
+      "part_of_speech": "ADJ",
+      "english_definition": "heavy"
+    },
+    {
+      "ilonggo_word": "mabulig",
+      "part_of_speech": "V",
+      "english_definition": "will help (A-F)"
+    },
+    {
+      "ilonggo_word": "mabuot",
+      "part_of_speech": "ADJ",
+      "english_definition": "kind; nice (referring to a person's character)"
+    },
+    {
+      "ilonggo_word": "madamû",
+      "part_of_speech": "ADJ",
+      "english_definition": "many; a lot; plenty"
+    },
+    {
+      "ilonggo_word": "madamul",
+      "part_of_speech": "ADJ",
+      "english_definition": "thick, as in clothes, paper, etc."
+    },
+    {
+      "ilonggo_word": "madre",
+      "part_of_speech": "N",
+      "english_definition": "nun"
+    },
+    {
+      "ilonggo_word": "madumduman",
+      "part_of_speech": "V",
+      "english_definition": "to be able to remember (INF)"
+    },
+    {
+      "ilonggo_word": "maestra",
+      "part_of_speech": "N",
+      "english_definition": "female teacher"
+    },
+    {
+      "ilonggo_word": "maestro",
+      "part_of_speech": "N",
+      "english_definition": "male teacher"
+    },
+    {
+      "ilonggo_word": "mag-agi",
+      "part_of_speech": "V",
+      "english_definition": "to pass by/through to stop by (INF, A-F)"
+    },
+    {
+      "ilonggo_word": "mag-ayu",
+      "part_of_speech": "V",
+      "english_definition": "to ask for a discount; to bargain (INF, A-F)"
+    },
+    {
+      "ilonggo_word": "mag-inom",
+      "part_of_speech": "V",
+      "english_definition": "to drink; to take in (INF, A-F)"
+    },
+    {
+      "ilonggo_word": "magpahuway",
+      "part_of_speech": "V",
+      "english_definition": "to rest (INF, A-F)"
+    },
+    {
+      "ilonggo_word": "magpamangkot",
+      "part_of_speech": "V",
+      "english_definition": "to ask a question (INF, A-F)"
+    },
+    {
+      "ilonggo_word": "magpasyar",
+      "part_of_speech": "V",
+      "english_definition": "to stroll; to take a walk (INF, A-F)"
+    },
+    {
+      "ilonggo_word": "magpatahi",
+      "part_of_speech": "V",
+      "english_definition": "to get/have someone sew something for another (A-F)"
+    },
+    {
+      "ilonggo_word": "magsakay",
+      "part_of_speech": "V",
+      "english_definition": "to ride (INF); ride (IMP)"
+    },
+    {
+      "ilonggo_word": "magsulat",
+      "part_of_speech": "V",
+      "english_definition": "to write (INF); write (IMP)"
+    },
+    {
+      "ilonggo_word": "magtanom",
+      "part_of_speech": "V",
+      "english_definition": "to plant (INF); plant (IMP)"
+    },
+    {
+      "ilonggo_word": "magtuon",
+      "part_of_speech": "V",
+      "english_definition": "to learn; to study (INF, A-F)"
+    },
+    {
+      "ilonggo_word": "mahabul",
+      "part_of_speech": "ADJ",
+      "english_definition": "dull, as in a dull knife"
+    },
+    {
+      "ilonggo_word": "mahal",
+      "part_of_speech": "ADJ",
+      "english_definition": "expensive; costly"
+    },
+    {
+      "ilonggo_word": "mahangin",
+      "part_of_speech": "ADJ",
+      "english_definition": "windy"
+    },
+    {
+      "ilonggo_word": "mahigku",
+      "part_of_speech": "ADJ",
+      "english_definition": "dirty"
+    },
+    {
+      "ilonggo_word": "mahining",
+      "part_of_speech": "ADJ",
+      "english_definition": "shiny; bright"
+    },
+    {
+      "ilonggo_word": "mahumok",
+      "part_of_speech": "ADJ",
+      "english_definition": "soft (texture)"
+    },
+    {
+      "ilonggo_word": "mahuya",
+      "part_of_speech": "V",
+      "english_definition": "to be shy; to be embarrassed; to be ashamed (INF, A-F)"
+    },
+    {
+      "ilonggo_word": "mainit",
+      "part_of_speech": "ADJ",
+      "english_definition": "hot; warm"
+    },
+    {
+      "ilonggo_word": "maintyendihan",
+      "part_of_speech": "V",
+      "english_definition": "will be able to understand (G-F)"
+    },
+    {
+      "ilonggo_word": "maistar",
+      "part_of_speech": "V",
+      "english_definition": "will live; will stay in a place (A-F)"
+    },
+    {
+      "ilonggo_word": "maka-istorya",
+      "part_of_speech": "V",
+      "english_definition": "will be able to talk to/with (A-F)"
+    },
+    {
+      "ilonggo_word": "makabalik",
+      "part_of_speech": "V",
+      "english_definition": "will be able to return (A-F)"
+    },
+    {
+      "ilonggo_word": "makabulig",
+      "part_of_speech": "V",
+      "english_definition": "will be able to help (A-F)"
+    },
+    {
+      "ilonggo_word": "makahang",
+      "part_of_speech": "ADJ",
+      "english_definition": "hot; spicy"
+    },
+    {
+      "ilonggo_word": "makaon",
+      "part_of_speech": "V",
+      "english_definition": "will eat (A-F)"
+    },
+    {
+      "ilonggo_word": "maki-istorya",
+      "part_of_speech": "V",
+      "english_definition": "to talk with/converse (INF, A-F); to talk with (IMP)"
+    },
+    {
+      "ilonggo_word": "makita",
+      "part_of_speech": "ADJ",
+      "english_definition": "will see; will be able to see; will be able to find (O-F)"
+    },
+    {
+      "ilonggo_word": "makitid",
+      "part_of_speech": "ADJ",
+      "english_definition": "narrow"
+    },
+    {
+      "ilonggo_word": "makuha",
+      "part_of_speech": "V",
+      "english_definition": "will get; will take (A-F)"
+    },
+    {
+      "ilonggo_word": "makusog",
+      "part_of_speech": "ADJ",
+      "english_definition": "strong; healthy; energetic"
+    },
+    {
+      "ilonggo_word": "malain",
+      "part_of_speech": "ADJ",
+      "english_definition": "bad; evil; awful"
+    },
+    {
+      "ilonggo_word": "malakat",
+      "part_of_speech": "V",
+      "english_definition": "will go; will walk; will leave (A-F)"
+    },
+    {
+      "ilonggo_word": "malamig",
+      "part_of_speech": "ADJ",
+      "english_definition": "cold (weather)"
+    },
+    {
+      "ilonggo_word": "malapad",
+      "part_of_speech": "ADJ",
+      "english_definition": "wide; broad"
+    },
+    {
+      "ilonggo_word": "malapit",
+      "part_of_speech": "ADJ",
+      "english_definition": "near; close; coming soon"
+    },
+    {
+      "ilonggo_word": "malapsi",
+      "part_of_speech": "ADJ",
+      "english_definition": "pale; pale-skinned; frail"
+    },
+    {
+      "ilonggo_word": "malapuyot",
+      "part_of_speech": "ADJ",
+      "english_definition": "thick (liquid)"
+    },
+    {
+      "ilonggo_word": "malas",
+      "part_of_speech": "ADJ",
+      "english_definition": "unfortunate; unlucky"
+    },
+    {
+      "ilonggo_word": "malas-ay",
+      "part_of_speech": "ADJ",
+      "english_definition": "bland; tasteless"
+    },
+    {
+      "ilonggo_word": "malasaw",
+      "part_of_speech": "ADJ",
+      "english_definition": "thin (liquid); watery"
+    },
+    {
+      "ilonggo_word": "maligo",
+      "part_of_speech": "V",
+      "english_definition": "will take a bath; take a bath (IMP, A-F)"
+    },
+    {
+      "ilonggo_word": "malip-ut",
+      "part_of_speech": "ADJ",
+      "english_definition": "short (length)"
+    },
+    {
+      "ilonggo_word": "maluya",
+      "part_of_speech": "ADJ",
+      "english_definition": "weak"
+    },
+    {
+      "ilonggo_word": "mamag-an",
+      "part_of_speech": "ADJ",
+      "english_definition": "cheerful"
+    },
+    {
+      "ilonggo_word": "man",
+      "part_of_speech": "PA",
+      "english_definition": "also; too"
+    },
+    {
+      "ilonggo_word": "man-ug",
+      "part_of_speech": "N",
+      "english_definition": "snake; serpent"
+    },
+    {
+      "ilonggo_word": "manamit",
+      "part_of_speech": "ADJ",
+      "english_definition": "delicious; (tastes) good"
+    },
+    {
+      "ilonggo_word": "manang",
+      "part_of_speech": "N",
+      "english_definition": "older sister; a term used to show respect to a lady older"
+    },
+    {
+      "ilonggo_word": "mangga",
+      "part_of_speech": "N",
+      "english_definition": "mango"
+    },
+    {
+      "ilonggo_word": "manghagad",
+      "part_of_speech": "V",
+      "english_definition": "(to) invite (INF)"
+    },
+    {
+      "ilonggo_word": "mangingisda",
+      "part_of_speech": "N",
+      "english_definition": "fisherman"
+    },
+    {
+      "ilonggo_word": "mangunguma",
+      "part_of_speech": "N",
+      "english_definition": "farmer"
+    },
+    {
+      "ilonggo_word": "mani",
+      "part_of_speech": "N",
+      "english_definition": "peanut"
+    },
+    {
+      "ilonggo_word": "maninay",
+      "part_of_speech": "N",
+      "english_definition": "godmother"
+    },
+    {
+      "ilonggo_word": "maninoy",
+      "part_of_speech": "N",
+      "english_definition": "godfather"
+    },
+    {
+      "ilonggo_word": "manipis",
+      "part_of_speech": "ADJ",
+      "english_definition": "thin (paper, clothes)"
+    },
+    {
+      "ilonggo_word": "maniwang",
+      "part_of_speech": "ADJ",
+      "english_definition": "thin; skinny"
+    },
+    {
+      "ilonggo_word": "manok",
+      "part_of_speech": "N",
+      "english_definition": "chicken"
+    },
+    {
+      "ilonggo_word": "manong",
+      "part_of_speech": "N",
+      "english_definition": "older brother"
+    },
+    {
+      "ilonggo_word": "mansanas",
+      "part_of_speech": "N",
+      "english_definition": "apple"
+    },
+    {
+      "ilonggo_word": "mantikâ",
+      "part_of_speech": "N",
+      "english_definition": "cooking oil; shortening"
+    },
+    {
+      "ilonggo_word": "mantikilya",
+      "part_of_speech": "N",
+      "english_definition": "butter"
+    },
+    {
+      "ilonggo_word": "manubu",
+      "part_of_speech": "ADJ",
+      "english_definition": "short (size or height)"
+    },
+    {
+      "ilonggo_word": "manug-kanta",
+      "part_of_speech": "N",
+      "english_definition": "singer"
+    },
+    {
+      "ilonggo_word": "mapait",
+      "part_of_speech": "ADJ",
+      "english_definition": "bitter"
+    },
+    {
+      "ilonggo_word": "mapauli",
+      "part_of_speech": "V",
+      "english_definition": "will go home; will go back to the house (A-F)"
+    },
+    {
+      "ilonggo_word": "mapinu",
+      "part_of_speech": "ADJ",
+      "english_definition": "smooth, as in texture"
+    },
+    {
+      "ilonggo_word": "mapunggan",
+      "part_of_speech": "V",
+      "english_definition": "will be able to stop someone/something from doing something"
+    },
+    {
+      "ilonggo_word": "Marso",
+      "part_of_speech": "N",
+      "english_definition": "March (as in month)"
+    },
+    {
+      "ilonggo_word": "Martes",
+      "part_of_speech": "N",
+      "english_definition": "Tuesday"
+    },
+    {
+      "ilonggo_word": "masabaw",
+      "part_of_speech": "ADJ",
+      "english_definition": "watery (food; plenty of soup, broth)"
+    },
+    {
+      "ilonggo_word": "masadya",
+      "part_of_speech": "ADJ",
+      "english_definition": "happy"
+    },
+    {
+      "ilonggo_word": "masakay",
+      "part_of_speech": "V",
+      "english_definition": "will ride; will get on a vehicle (A-F)"
+    },
+    {
+      "ilonggo_word": "masakit",
+      "part_of_speech": "ADJ",
+      "english_definition": "hurting; painful"
+    },
+    {
+      "ilonggo_word": "masarsa",
+      "part_of_speech": "ADJ",
+      "english_definition": "plenty of sauce"
+    },
+    {
+      "ilonggo_word": "masebo",
+      "part_of_speech": "ADJ",
+      "english_definition": "oily; greasy"
+    },
+    {
+      "ilonggo_word": "masilaw",
+      "part_of_speech": "ADJ",
+      "english_definition": "bright (color)"
+    },
+    {
+      "ilonggo_word": "maskin",
+      "part_of_speech": "C",
+      "english_definition": "even if; even though; as long as"
+    },
+    {
+      "ilonggo_word": "masulat",
+      "part_of_speech": "V",
+      "english_definition": "will write (A-F)"
+    },
+    {
+      "ilonggo_word": "masunod",
+      "part_of_speech": "ADJ",
+      "english_definition": "next; following"
+    },
+    {
+      "ilonggo_word": "masyado",
+      "part_of_speech": "ADV",
+      "english_definition": "too much; in excess"
+    },
+    {
+      "ilonggo_word": "mata",
+      "part_of_speech": "N",
+      "english_definition": "eye"
+    },
+    {
+      "ilonggo_word": "mataas",
+      "part_of_speech": "ADJ",
+      "english_definition": "tall; high"
+    },
+    {
+      "ilonggo_word": "matabo",
+      "part_of_speech": "V",
+      "english_definition": "to happen; to occur (INF)"
+    },
+    {
+      "ilonggo_word": "matalum",
+      "part_of_speech": "ADJ",
+      "english_definition": "sharp, as in a sharp knife/blade"
+    },
+    {
+      "ilonggo_word": "matam-is",
+      "part_of_speech": "ADJ",
+      "english_definition": "sweet"
+    },
+    {
+      "ilonggo_word": "matambok",
+      "part_of_speech": "ADJ",
+      "english_definition": "fat; stout"
+    },
+    {
+      "ilonggo_word": "matig-a",
+      "part_of_speech": "ADJ",
+      "english_definition": "hard"
+    },
+    {
+      "ilonggo_word": "matrabaho",
+      "part_of_speech": "V",
+      "english_definition": "will work (A-F)"
+    },
+    {
+      "ilonggo_word": "matulog",
+      "part_of_speech": "V",
+      "english_definition": "will sleep (A-F)"
+    },
+    {
+      "ilonggo_word": "matuod",
+      "part_of_speech": "ADJ",
+      "english_definition": "true; real"
+    },
+    {
+      "ilonggo_word": "mauna",
+      "part_of_speech": "V",
+      "english_definition": "will go ahead; will go first (A-F)"
+    },
+    {
+      "ilonggo_word": "may",
+      "part_of_speech": "V",
+      "english_definition": "there is/are; has/have"
+    },
+    {
+      "ilonggo_word": "Mayo",
+      "part_of_speech": "N",
+      "english_definition": "May (as in month)"
+    },
+    {
+      "ilonggo_word": "maysakit",
+      "part_of_speech": "N",
+      "english_definition": "a person who is sick/ill"
+    },
+    {
+      "ilonggo_word": "maysakit (2)",
+      "part_of_speech": "ADJ",
+      "english_definition": "sick; ill; indisposed"
+    },
+    {
+      "ilonggo_word": "medyas",
+      "part_of_speech": "N",
+      "english_definition": "socks; stocking"
+    },
+    {
+      "ilonggo_word": "mekaniko",
+      "part_of_speech": "N",
+      "english_definition": "mechanic"
+    },
+    {
+      "ilonggo_word": "meryenda",
+      "part_of_speech": "N",
+      "english_definition": "snacks"
+    },
+    {
+      "ilonggo_word": "metro",
+      "part_of_speech": "N",
+      "english_definition": "meter"
+    },
+    {
+      "ilonggo_word": "mga",
+      "part_of_speech": null,
+      "english_definition": "plural marker for non-personal nouns"
+    },
+    {
+      "ilonggo_word": "miki",
+      "part_of_speech": "N",
+      "english_definition": "egg noodles"
+    },
+    {
+      "ilonggo_word": "milya",
+      "part_of_speech": "N",
+      "english_definition": "mile"
+    },
+    {
+      "ilonggo_word": "milyon",
+      "part_of_speech": "N",
+      "english_definition": "million"
+    },
+    {
+      "ilonggo_word": "minuto",
+      "part_of_speech": "N",
+      "english_definition": "minutes"
+    },
+    {
+      "ilonggo_word": "misis",
+      "part_of_speech": "N",
+      "english_definition": "Mrs; madam"
+    },
+    {
+      "ilonggo_word": "mister",
+      "part_of_speech": "N",
+      "english_definition": "Mr."
+    },
+    {
+      "ilonggo_word": "mo",
+      "part_of_speech": "P",
+      "english_definition": "by you; your (singular)"
+    },
+    {
+      "ilonggo_word": "modista",
+      "part_of_speech": "N",
+      "english_definition": "dressmaker"
+    },
+    {
+      "ilonggo_word": "munggo",
+      "part_of_speech": "N",
+      "english_definition": "mung beans"
+    },
+    {
+      "ilonggo_word": "mustasa",
+      "part_of_speech": "N",
+      "english_definition": "mustard"
+    },
+    {
+      "ilonggo_word": "Myerkoles",
+      "part_of_speech": "N",
+      "english_definition": "Wednesday"
+    },
+    {
+      "ilonggo_word": "na",
+      "part_of_speech": "PA",
+      "english_definition": "a particle equivalent to the English 'already'"
+    },
+    {
+      "ilonggo_word": "nabatyagan",
+      "part_of_speech": "V",
+      "english_definition": "is being felt (O-F)"
+    },
+    {
+      "ilonggo_word": "naga-agi",
+      "part_of_speech": "V",
+      "english_definition": "pass(es) by; is passing by/through; stop(s) by"
+    },
+    {
+      "ilonggo_word": "nagadali",
+      "part_of_speech": "V",
+      "english_definition": "is hurrying (A-F)"
+    },
+    {
+      "ilonggo_word": "nagaginhawa",
+      "part_of_speech": "V",
+      "english_definition": "breathe(s); is breathing (A-F)"
+    },
+    {
+      "ilonggo_word": "nagahalin",
+      "part_of_speech": "V",
+      "english_definition": "leave(s); is leaving (A-F)"
+    },
+    {
+      "ilonggo_word": "nagainit",
+      "part_of_speech": "V",
+      "english_definition": "gets hot; is getting hot (A-F)"
+    },
+    {
+      "ilonggo_word": "nagaistar",
+      "part_of_speech": "V",
+      "english_definition": "is staying in/at; is residing in/at (A-F)"
+    },
+    {
+      "ilonggo_word": "nagapaligô",
+      "part_of_speech": "V",
+      "english_definition": "is taking a bath (A-F)"
+    },
+    {
+      "ilonggo_word": "nagatrabaho",
+      "part_of_speech": "V",
+      "english_definition": "is working (A-F)"
+    },
+    {
+      "ilonggo_word": "nagatulog",
+      "part_of_speech": "V",
+      "english_definition": "sleep(s); is sleeping (A-F)"
+    },
+    {
+      "ilonggo_word": "nagbaton",
+      "part_of_speech": "V",
+      "english_definition": "received something; accepts something (A-F)"
+    },
+    {
+      "ilonggo_word": "naghalin",
+      "part_of_speech": "V",
+      "english_definition": "came from; left (A-F)"
+    },
+    {
+      "ilonggo_word": "naghubag",
+      "part_of_speech": "V",
+      "english_definition": "is swollen (O-F)"
+    },
+    {
+      "ilonggo_word": "nagkuha",
+      "part_of_speech": "V",
+      "english_definition": "got; took (A-F)"
+    },
+    {
+      "ilonggo_word": "nagtuon",
+      "part_of_speech": "V",
+      "english_definition": "studied (A-F)"
+    },
+    {
+      "ilonggo_word": "nahiwâ",
+      "part_of_speech": "V",
+      "english_definition": "was (accidentally) cut by a sharp object (A-F)"
+    },
+    {
+      "ilonggo_word": "naintyendihan",
+      "part_of_speech": "V",
+      "english_definition": "is understood (O-F)"
+    },
+    {
+      "ilonggo_word": "nakaintyende",
+      "part_of_speech": "V",
+      "english_definition": "is able to understand (A-F)"
+    },
+    {
+      "ilonggo_word": "nakatibawas",
+      "part_of_speech": "V",
+      "english_definition": "is able to survive a difficult situation (A-F)"
+    },
+    {
+      "ilonggo_word": "nakon",
+      "part_of_speech": "P",
+      "english_definition": "my (after the noun)"
+    },
+    {
+      "ilonggo_word": "nalibugan",
+      "part_of_speech": "V",
+      "english_definition": "is confused (O-F)"
+    },
+    {
+      "ilonggo_word": "naligô",
+      "part_of_speech": "V",
+      "english_definition": "took a bath (A-F)"
+    },
+    {
+      "ilonggo_word": "nalipatan",
+      "part_of_speech": "V",
+      "english_definition": "was able to forget (O-F; D-F)"
+    },
+    {
+      "ilonggo_word": "naluyag",
+      "part_of_speech": "PV",
+      "english_definition": "love"
+    },
+    {
+      "ilonggo_word": "namon",
+      "part_of_speech": "P",
+      "english_definition": "by us; our (exclusive)"
+    },
+    {
+      "ilonggo_word": "nanday",
+      "part_of_speech": null,
+      "english_definition": "plural non-subject marker for personal names"
+    },
+    {
+      "ilonggo_word": "napilasan",
+      "part_of_speech": "V",
+      "english_definition": "was wounded (D-F)"
+    },
+    {
+      "ilonggo_word": "napulô",
+      "part_of_speech": "ADJ",
+      "english_definition": "ten"
+    },
+    {
+      "ilonggo_word": "nars",
+      "part_of_speech": "N",
+      "english_definition": "nurse"
+    },
+    {
+      "ilonggo_word": "nasamad",
+      "part_of_speech": "V",
+      "english_definition": "was hurt (O-F)"
+    },
+    {
+      "ilonggo_word": "natapos",
+      "part_of_speech": "V",
+      "english_definition": "finished; completed (O-F)"
+    },
+    {
+      "ilonggo_word": "natawo",
+      "part_of_speech": "V",
+      "english_definition": "was born (A-F)"
+    },
+    {
+      "ilonggo_word": "naton",
+      "part_of_speech": "P",
+      "english_definition": "by us; our (inclusive)"
+    },
+    {
+      "ilonggo_word": "natulog",
+      "part_of_speech": "V",
+      "english_definition": "slept (A-F)"
+    },
+    {
+      "ilonggo_word": "natun-an",
+      "part_of_speech": "V",
+      "english_definition": "was able to study; was able to learn (O-F)"
+    },
+    {
+      "ilonggo_word": "nawong",
+      "part_of_speech": "N",
+      "english_definition": "face; countenance"
+    },
+    {
+      "ilonggo_word": "nerbyos",
+      "part_of_speech": "N",
+      "english_definition": "fear; anxiety"
+    },
+    {
+      "ilonggo_word": "nga",
+      "part_of_speech": null,
+      "english_definition": "used as a linker between a modifier and a word modified"
+    },
+    {
+      "ilonggo_word": "ngaa",
+      "part_of_speech": "Q",
+      "english_definition": "why"
+    },
+    {
+      "ilonggo_word": "ngalan",
+      "part_of_speech": "N",
+      "english_definition": "name"
+    },
+    {
+      "ilonggo_word": "ngipon",
+      "part_of_speech": "N",
+      "english_definition": "tooth (also plural form)"
+    },
+    {
+      "ilonggo_word": "ngislo",
+      "part_of_speech": "N",
+      "english_definition": "gums"
+    },
+    {
+      "ilonggo_word": "ni",
+      "part_of_speech": null,
+      "english_definition": "non-subject marker for personal names (singular)"
+    },
+    {
+      "ilonggo_word": "nila",
+      "part_of_speech": "P",
+      "english_definition": "by them; their"
+    },
+    {
+      "ilonggo_word": "ninyo",
+      "part_of_speech": "P",
+      "english_definition": "by you; your (plural)"
+    },
+    {
+      "ilonggo_word": "niya",
+      "part_of_speech": "P",
+      "english_definition": "by him/her; his/her"
+    },
+    {
+      "ilonggo_word": "nobya",
+      "part_of_speech": "N",
+      "english_definition": "girlfriend; sweetheart; fiancee; bride"
+    },
+    {
+      "ilonggo_word": "Nobyembre",
+      "part_of_speech": "N",
+      "english_definition": "November"
+    },
+    {
+      "ilonggo_word": "nobyo",
+      "part_of_speech": "N",
+      "english_definition": "boyfriend; sweetheart; fiancee"
+    },
+    {
+      "ilonggo_word": "nubenta",
+      "part_of_speech": "ADJ",
+      "english_definition": "ninety"
+    },
+    {
+      "ilonggo_word": "obra",
+      "part_of_speech": "V",
+      "english_definition": "do; make"
+    },
+    {
+      "ilonggo_word": "Oktubre",
+      "part_of_speech": "N",
+      "english_definition": "October"
+    },
+    {
+      "ilonggo_word": "onse",
+      "part_of_speech": "ADJ",
+      "english_definition": "eleven"
+    },
+    {
+      "ilonggo_word": "oras",
+      "part_of_speech": "N",
+      "english_definition": "time; hour"
+    },
+    {
+      "ilonggo_word": "otsenta",
+      "part_of_speech": "ADJ",
+      "english_definition": "eighty"
+    },
+    {
+      "ilonggo_word": "pa",
+      "part_of_speech": "SP",
+      "english_definition": "still; yet"
+    },
+    {
+      "ilonggo_word": "paa",
+      "part_of_speech": "N",
+      "english_definition": "thigh"
+    },
+    {
+      "ilonggo_word": "paano",
+      "part_of_speech": "Q",
+      "english_definition": "how"
+    },
+    {
+      "ilonggo_word": "pabakal",
+      "part_of_speech": "V",
+      "english_definition": "have someone buy something for another (IMP)"
+    },
+    {
+      "ilonggo_word": "pagbaligya",
+      "part_of_speech": "V",
+      "english_definition": "sell (IMP)"
+    },
+    {
+      "ilonggo_word": "pagbaligya (2)",
+      "part_of_speech": "N",
+      "english_definition": "the act/manner of buying"
+    },
+    {
+      "ilonggo_word": "pagkakaon",
+      "part_of_speech": "V",
+      "english_definition": "has just eaten (recently concluded action)"
+    },
+    {
+      "ilonggo_word": "pagkaon",
+      "part_of_speech": "N",
+      "english_definition": "food; the act or manner of eating"
+    },
+    {
+      "ilonggo_word": "pagkatapos",
+      "part_of_speech": "C",
+      "english_definition": "after; and then"
+    },
+    {
+      "ilonggo_word": "pakadto",
+      "part_of_speech": "ADV",
+      "english_definition": "going to; towards"
+    },
+    {
+      "ilonggo_word": "paksiw",
+      "part_of_speech": "N",
+      "english_definition": "fish cooked with vinegar, ginger, onions and etc."
+    },
+    {
+      "ilonggo_word": "palad",
+      "part_of_speech": "N",
+      "english_definition": "palm of the hand; fate"
+    },
+    {
+      "ilonggo_word": "palda",
+      "part_of_speech": "N",
+      "english_definition": "skirt"
+    },
+    {
+      "ilonggo_word": "palihog liwat",
+      "part_of_speech": "EX",
+      "english_definition": "please repeat; please say/do it again"
+    },
+    {
+      "ilonggo_word": "pamahaw",
+      "part_of_speech": "N",
+      "english_definition": "breakfast"
+    },
+    {
+      "ilonggo_word": "pamangkot",
+      "part_of_speech": "V",
+      "english_definition": "ask a question"
+    },
+    {
+      "ilonggo_word": "pamangkot (2)",
+      "part_of_speech": "N",
+      "english_definition": "question"
+    },
+    {
+      "ilonggo_word": "pamilya",
+      "part_of_speech": "N",
+      "english_definition": "family"
+    },
+    {
+      "ilonggo_word": "panaderiya",
+      "part_of_speech": "N",
+      "english_definition": "bakery"
+    },
+    {
+      "ilonggo_word": "panahon",
+      "part_of_speech": "N",
+      "english_definition": "weather; season; climate"
+    },
+    {
+      "ilonggo_word": "panakot",
+      "part_of_speech": "N",
+      "english_definition": "ingredient"
+    },
+    {
+      "ilonggo_word": "panaog",
+      "part_of_speech": "V",
+      "english_definition": "go down (IMP)"
+    },
+    {
+      "ilonggo_word": "pandesal",
+      "part_of_speech": "N",
+      "english_definition": "bread roll"
+    },
+    {
+      "ilonggo_word": "pangabuhi",
+      "part_of_speech": "N",
+      "english_definition": "life"
+    },
+    {
+      "ilonggo_word": "pangayu",
+      "part_of_speech": "V",
+      "english_definition": "let me have"
+    },
+    {
+      "ilonggo_word": "pangita",
+      "part_of_speech": "V",
+      "english_definition": "look for; find"
+    },
+    {
+      "ilonggo_word": "panit",
+      "part_of_speech": "N",
+      "english_definition": "skin covering; peeling"
+    },
+    {
+      "ilonggo_word": "panitan",
+      "part_of_speech": "V",
+      "english_definition": "peel off (IMP); to peel off, to remove skin (INF)"
+    },
+    {
+      "ilonggo_word": "pansit",
+      "part_of_speech": "N",
+      "english_definition": "a noodle dish"
+    },
+    {
+      "ilonggo_word": "pantalan",
+      "part_of_speech": "N",
+      "english_definition": "port; dock; wharf"
+    },
+    {
+      "ilonggo_word": "pantalon",
+      "part_of_speech": "N",
+      "english_definition": "pants; trousers"
+    },
+    {
+      "ilonggo_word": "panyaga",
+      "part_of_speech": "N",
+      "english_definition": "lunch"
+    },
+    {
+      "ilonggo_word": "panyapon",
+      "part_of_speech": "N",
+      "english_definition": "supper"
+    },
+    {
+      "ilonggo_word": "papel",
+      "part_of_speech": "N",
+      "english_definition": "paper; role (in a play)"
+    },
+    {
+      "ilonggo_word": "para",
+      "part_of_speech": "EX",
+      "english_definition": "for; stop; as in stopping a vehicle to get off"
+    },
+    {
+      "ilonggo_word": "para sa",
+      "part_of_speech": "PP",
+      "english_definition": "for"
+    },
+    {
+      "ilonggo_word": "paryente",
+      "part_of_speech": "N",
+      "english_definition": "cousin; relative"
+    },
+    {
+      "ilonggo_word": "pasensiya",
+      "part_of_speech": "EX",
+      "english_definition": "an expression of apology; patience"
+    },
+    {
+      "ilonggo_word": "pasilyo",
+      "part_of_speech": "N",
+      "english_definition": "corridor; aisle"
+    },
+    {
+      "ilonggo_word": "pasta",
+      "part_of_speech": "N",
+      "english_definition": "paste; glue"
+    },
+    {
+      "ilonggo_word": "pasung",
+      "part_of_speech": "N",
+      "english_definition": "cavan"
+    },
+    {
+      "ilonggo_word": "pasyente",
+      "part_of_speech": "N",
+      "english_definition": "patient"
+    },
+    {
+      "ilonggo_word": "patahian",
+      "part_of_speech": "N",
+      "english_definition": "dress shop; modiste"
+    },
+    {
+      "ilonggo_word": "patani",
+      "part_of_speech": "N",
+      "english_definition": "pea pod"
+    },
+    {
+      "ilonggo_word": "patay",
+      "part_of_speech": "ADJ",
+      "english_definition": "dead"
+    },
+    {
+      "ilonggo_word": "patis",
+      "part_of_speech": "N",
+      "english_definition": "fish sauce"
+    },
+    {
+      "ilonggo_word": "pauli",
+      "part_of_speech": "V",
+      "english_definition": "go home (IMP, A-F)"
+    },
+    {
+      "ilonggo_word": "Pebrero",
+      "part_of_speech": "N",
+      "english_definition": "February"
+    },
+    {
+      "ilonggo_word": "pero",
+      "part_of_speech": "C",
+      "english_definition": "but"
+    },
+    {
+      "ilonggo_word": "petsa",
+      "part_of_speech": "N",
+      "english_definition": "date"
+    },
+    {
+      "ilonggo_word": "petsay",
+      "part_of_speech": "N",
+      "english_definition": "chinese cabbage"
+    },
+    {
+      "ilonggo_word": "pidaso",
+      "part_of_speech": "N",
+      "english_definition": "a piece"
+    },
+    {
+      "ilonggo_word": "pila",
+      "part_of_speech": "Q",
+      "english_definition": "how many; how much"
+    },
+    {
+      "ilonggo_word": "pilas",
+      "part_of_speech": "N",
+      "english_definition": "wound; bruise"
+    },
+    {
+      "ilonggo_word": "pili",
+      "part_of_speech": "N",
+      "english_definition": "choice"
+    },
+    {
+      "ilonggo_word": "Pilipino",
+      "part_of_speech": "N",
+      "english_definition": "Filipino (person/s)"
+    },
+    {
+      "ilonggo_word": "piliton",
+      "part_of_speech": "V",
+      "english_definition": "to force; to insist (O-F)"
+    },
+    {
+      "ilonggo_word": "pimyento",
+      "part_of_speech": "N",
+      "english_definition": "black pepper; peppercorn"
+    },
+    {
+      "ilonggo_word": "pinakadakû",
+      "part_of_speech": "ADJ",
+      "english_definition": "biggest; largest"
+    },
+    {
+      "ilonggo_word": "pinamakal",
+      "part_of_speech": "N",
+      "english_definition": "goods; items bought"
+    },
+    {
+      "ilonggo_word": "pinggan",
+      "part_of_speech": "N",
+      "english_definition": "plate"
+    },
+    {
+      "ilonggo_word": "Pinoy",
+      "part_of_speech": "N",
+      "english_definition": "slang for Filipino (person)"
+    },
+    {
+      "ilonggo_word": "pinya",
+      "part_of_speech": "N",
+      "english_definition": "pineapple"
+    },
+    {
+      "ilonggo_word": "pipino",
+      "part_of_speech": "N",
+      "english_definition": "cucumber"
+    },
+    {
+      "ilonggo_word": "pirme",
+      "part_of_speech": "ADV",
+      "english_definition": "always"
+    },
+    {
+      "ilonggo_word": "pisos",
+      "part_of_speech": "N",
+      "english_definition": "peso; one peso"
+    },
+    {
+      "ilonggo_word": "pista",
+      "part_of_speech": "N",
+      "english_definition": "fiesta; feast; a celebration"
+    },
+    {
+      "ilonggo_word": "pista-opisyal",
+      "part_of_speech": "N",
+      "english_definition": "official holiday"
+    },
+    {
+      "ilonggo_word": "pito",
+      "part_of_speech": "ADJ",
+      "english_definition": "seven"
+    },
+    {
+      "ilonggo_word": "pito (2)",
+      "part_of_speech": "N",
+      "english_definition": "whistle"
+    },
+    {
+      "ilonggo_word": "piye",
+      "part_of_speech": "N",
+      "english_definition": "foot (measurement)"
+    },
+    {
+      "ilonggo_word": "plato",
+      "part_of_speech": "N",
+      "english_definition": "dinner plate"
+    },
+    {
+      "ilonggo_word": "plete",
+      "part_of_speech": "N",
+      "english_definition": "fare"
+    },
+    {
+      "ilonggo_word": "pomada",
+      "part_of_speech": "N",
+      "english_definition": "pomade; gel"
+    },
+    {
+      "ilonggo_word": "posporo",
+      "part_of_speech": "N",
+      "english_definition": "match"
+    },
+    {
+      "ilonggo_word": "Pranses",
+      "part_of_speech": "N",
+      "english_definition": "French (person/s); also language"
+    },
+    {
+      "ilonggo_word": "presidente",
+      "part_of_speech": "N",
+      "english_definition": "president"
+    },
+    {
+      "ilonggo_word": "presko",
+      "part_of_speech": "ADJ",
+      "english_definition": "fresh (food and air)"
+    },
+    {
+      "ilonggo_word": "prito",
+      "part_of_speech": "N",
+      "english_definition": "any food that's deep-fried, especially fish"
+    },
+    {
+      "ilonggo_word": "proyekto",
+      "part_of_speech": "N",
+      "english_definition": "project"
+    },
+    {
+      "ilonggo_word": "prutas",
+      "part_of_speech": "N",
+      "english_definition": "fruits"
+    },
+    {
+      "ilonggo_word": "puede",
+      "part_of_speech": "N",
+      "english_definition": "can handle; can be"
+    },
+    {
+      "ilonggo_word": "pula",
+      "part_of_speech": "ADJ",
+      "english_definition": "red"
+    },
+    {
+      "ilonggo_word": "pulgada",
+      "part_of_speech": "N",
+      "english_definition": "inch"
+    },
+    {
+      "ilonggo_word": "pulis",
+      "part_of_speech": "N",
+      "english_definition": "policeman"
+    },
+    {
+      "ilonggo_word": "pulso",
+      "part_of_speech": "N",
+      "english_definition": "pulse"
+    },
+    {
+      "ilonggo_word": "pusô",
+      "part_of_speech": "N",
+      "english_definition": "heart; banana blossom"
+    },
+    {
+      "ilonggo_word": "pusod",
+      "part_of_speech": "N",
+      "english_definition": "belly-button; navel"
+    },
+    {
+      "ilonggo_word": "puti",
+      "part_of_speech": "ADJ",
+      "english_definition": "white"
+    },
+    {
+      "ilonggo_word": "putot",
+      "part_of_speech": "ADJ",
+      "english_definition": "short (persons)"
+    },
+    {
+      "ilonggo_word": "pwerta",
+      "part_of_speech": "N",
+      "english_definition": "door; gate"
+    },
+    {
+      "ilonggo_word": "pyer",
+      "part_of_speech": "N",
+      "english_definition": "wharf; dock; port; pier"
+    },
+    {
+      "ilonggo_word": "rabanos",
+      "part_of_speech": "N",
+      "english_definition": "radish"
+    },
+    {
+      "ilonggo_word": "repolyo",
+      "part_of_speech": "N",
+      "english_definition": "cabbage"
+    },
+    {
+      "ilonggo_word": "resibo",
+      "part_of_speech": "N",
+      "english_definition": "receipt"
+    },
+    {
+      "ilonggo_word": "sa",
+      "part_of_speech": null,
+      "english_definition": "place marker - in, an, on, at"
+    },
+    {
+      "ilonggo_word": "sa akon",
+      "part_of_speech": "P",
+      "english_definition": "to/from me"
+    },
+    {
+      "ilonggo_word": "sa amon",
+      "part_of_speech": "P",
+      "english_definition": "to/from us (exclusive)"
+    },
+    {
+      "ilonggo_word": "sa aton",
+      "part_of_speech": "P",
+      "english_definition": "to/from us (inclusive)"
+    },
+    {
+      "ilonggo_word": "sa ila",
+      "part_of_speech": "P",
+      "english_definition": "to/from them"
+    },
+    {
+      "ilonggo_word": "sa imo",
+      "part_of_speech": "P",
+      "english_definition": "to/from you (singular)"
+    },
+    {
+      "ilonggo_word": "sa inyo",
+      "part_of_speech": "P",
+      "english_definition": "to/from you (plural)"
+    },
+    {
+      "ilonggo_word": "sa iya",
+      "part_of_speech": "P",
+      "english_definition": "to/from him/her"
+    },
+    {
+      "ilonggo_word": "Sabado",
+      "part_of_speech": "N",
+      "english_definition": "Saturday"
+    },
+    {
+      "ilonggo_word": "sabaw",
+      "part_of_speech": "N",
+      "english_definition": "broth; soup"
+    },
+    {
+      "ilonggo_word": "sabor",
+      "part_of_speech": "N",
+      "english_definition": "taste"
+    },
+    {
+      "ilonggo_word": "sadto",
+      "part_of_speech": "ADV",
+      "english_definition": "before (past time)"
+    },
+    {
+      "ilonggo_word": "sag-ang",
+      "part_of_speech": "N",
+      "english_definition": "jaw; chin"
+    },
+    {
+      "ilonggo_word": "saging",
+      "part_of_speech": "N",
+      "english_definition": "banana"
+    },
+    {
+      "ilonggo_word": "sais",
+      "part_of_speech": "ADJ",
+      "english_definition": "six"
+    },
+    {
+      "ilonggo_word": "sakay",
+      "part_of_speech": "V",
+      "english_definition": "ride/get on a vehicle"
+    },
+    {
+      "ilonggo_word": "sakay (2)",
+      "part_of_speech": "N",
+      "english_definition": "passenger"
+    },
+    {
+      "ilonggo_word": "sakayan",
+      "part_of_speech": "N",
+      "english_definition": "a place to get transportation"
+    },
+    {
+      "ilonggo_word": "sakit",
+      "part_of_speech": "N",
+      "english_definition": "illness; pain; grief; sorrow"
+    },
+    {
+      "ilonggo_word": "sakyan",
+      "part_of_speech": "V",
+      "english_definition": "to ride (INF, L-F); ride (IMP)"
+    },
+    {
+      "ilonggo_word": "sala",
+      "part_of_speech": "N",
+      "english_definition": "living room; receiving room"
+    },
+    {
+      "ilonggo_word": "sala (2)",
+      "part_of_speech": "N",
+      "english_definition": "mistake; error; sin"
+    },
+    {
+      "ilonggo_word": "salakyan",
+      "part_of_speech": "N",
+      "english_definition": "vehicle; transportation"
+    },
+    {
+      "ilonggo_word": "salamat",
+      "part_of_speech": "EX",
+      "english_definition": "thanks; thank you"
+    },
+    {
+      "ilonggo_word": "salapi",
+      "part_of_speech": "N",
+      "english_definition": "fifty (fifty centavos)"
+    },
+    {
+      "ilonggo_word": "salug",
+      "part_of_speech": "N",
+      "english_definition": "floor"
+    },
+    {
+      "ilonggo_word": "san-o",
+      "part_of_speech": "Q",
+      "english_definition": "when"
+    },
+    {
+      "ilonggo_word": "sandiya",
+      "part_of_speech": "N",
+      "english_definition": "watermelon"
+    },
+    {
+      "ilonggo_word": "sang",
+      "part_of_speech": null,
+      "english_definition": "singular noun-subject marker for non-personal names"
+    },
+    {
+      "ilonggo_word": "santol",
+      "part_of_speech": "N",
+      "english_definition": "santol"
+    },
+    {
+      "ilonggo_word": "saot",
+      "part_of_speech": "N",
+      "english_definition": "dance"
+    },
+    {
+      "ilonggo_word": "sapatos",
+      "part_of_speech": "N",
+      "english_definition": "shoes"
+    },
+    {
+      "ilonggo_word": "sarangan",
+      "part_of_speech": "ADJ",
+      "english_definition": "competent; capable (focus on ability)"
+    },
+    {
+      "ilonggo_word": "sari-sari",
+      "part_of_speech": "ADJ",
+      "english_definition": "varied; different (colors)"
+    },
+    {
+      "ilonggo_word": "sarsa",
+      "part_of_speech": "N",
+      "english_definition": "sauce"
+    },
+    {
+      "ilonggo_word": "sekretarya",
+      "part_of_speech": "N",
+      "english_definition": "secretary"
+    },
+    {
+      "ilonggo_word": "semana",
+      "part_of_speech": "N",
+      "english_definition": "week"
+    },
+    {
+      "ilonggo_word": "senador",
+      "part_of_speech": "N",
+      "english_definition": "senator"
+    },
+    {
+      "ilonggo_word": "sentimetro",
+      "part_of_speech": "N",
+      "english_definition": "centimeter"
+    },
+    {
+      "ilonggo_word": "Septyembre",
+      "part_of_speech": "N",
+      "english_definition": "September"
+    },
+    {
+      "ilonggo_word": "serbesa",
+      "part_of_speech": "N",
+      "english_definition": "beer"
+    },
+    {
+      "ilonggo_word": "si",
+      "part_of_speech": null,
+      "english_definition": "subject marker for personal names (singular)"
+    },
+    {
+      "ilonggo_word": "sibuyas",
+      "part_of_speech": "N",
+      "english_definition": "onion"
+    },
+    {
+      "ilonggo_word": "sidlangan",
+      "part_of_speech": "N",
+      "english_definition": "east"
+    },
+    {
+      "ilonggo_word": "sigarilyo",
+      "part_of_speech": "N",
+      "english_definition": "cigarette"
+    },
+    {
+      "ilonggo_word": "sige",
+      "part_of_speech": "EX",
+      "english_definition": "okay; all right; go on"
+    },
+    {
+      "ilonggo_word": "siguro",
+      "part_of_speech": "PA",
+      "english_definition": "maybe; perhaps; probably"
+    },
+    {
+      "ilonggo_word": "siko",
+      "part_of_speech": "N",
+      "english_definition": "elbow"
+    },
+    {
+      "ilonggo_word": "sila",
+      "part_of_speech": "P",
+      "english_definition": "they"
+    },
+    {
+      "ilonggo_word": "simbahan",
+      "part_of_speech": "N",
+      "english_definition": "church"
+    },
+    {
+      "ilonggo_word": "sin-o",
+      "part_of_speech": "Q",
+      "english_definition": "who"
+    },
+    {
+      "ilonggo_word": "sina",
+      "part_of_speech": null,
+      "english_definition": "that (far from the speaker and near the listener)"
+    },
+    {
+      "ilonggo_word": "sinagon",
+      "part_of_speech": "ADJ",
+      "english_definition": "transparent"
+    },
+    {
+      "ilonggo_word": "sine",
+      "part_of_speech": "N",
+      "english_definition": "cinema; movie theater; movie film"
+    },
+    {
+      "ilonggo_word": "singkwenta",
+      "part_of_speech": "ADJ",
+      "english_definition": "fifty (pesos)"
+    },
+    {
+      "ilonggo_word": "singsing",
+      "part_of_speech": "N",
+      "english_definition": "ring"
+    },
+    {
+      "ilonggo_word": "sini",
+      "part_of_speech": "P",
+      "english_definition": "this (near the speaker)"
+    },
+    {
+      "ilonggo_word": "sinsilyo",
+      "part_of_speech": "N",
+      "english_definition": "loose change; coins"
+    },
+    {
+      "ilonggo_word": "sip-on",
+      "part_of_speech": "N",
+      "english_definition": "cold; runny nose"
+    },
+    {
+      "ilonggo_word": "sip-unon",
+      "part_of_speech": "V",
+      "english_definition": "will catch a cold (A-F)"
+    },
+    {
+      "ilonggo_word": "sipilyo",
+      "part_of_speech": "N",
+      "english_definition": "brush; toothbrush"
+    },
+    {
+      "ilonggo_word": "sisenta",
+      "part_of_speech": "ADJ",
+      "english_definition": "sixty"
+    },
+    {
+      "ilonggo_word": "sitenta",
+      "part_of_speech": "ADJ",
+      "english_definition": "seventy"
+    },
+    {
+      "ilonggo_word": "siya",
+      "part_of_speech": "N",
+      "english_definition": "chair"
+    },
+    {
+      "ilonggo_word": "siya (2)",
+      "part_of_speech": "P",
+      "english_definition": "he/she"
+    },
+    {
+      "ilonggo_word": "siyam",
+      "part_of_speech": "ADJ",
+      "english_definition": "nine"
+    },
+    {
+      "ilonggo_word": "sobra",
+      "part_of_speech": "ADJ",
+      "english_definition": "more than enough; excessive"
+    },
+    {
+      "ilonggo_word": "sobra (2)",
+      "part_of_speech": "N",
+      "english_definition": "left-over; balance"
+    },
+    {
+      "ilonggo_word": "soldado",
+      "part_of_speech": "N",
+      "english_definition": "soldier"
+    },
+    {
+      "ilonggo_word": "soltero",
+      "part_of_speech": "N",
+      "english_definition": "a bachelor"
+    },
+    {
+      "ilonggo_word": "sopas",
+      "part_of_speech": "N",
+      "english_definition": "soup"
+    },
+    {
+      "ilonggo_word": "suba",
+      "part_of_speech": "N",
+      "english_definition": "river"
+    },
+    {
+      "ilonggo_word": "subong",
+      "part_of_speech": "ADV",
+      "english_definition": "now; today"
+    },
+    {
+      "ilonggo_word": "sud-an",
+      "part_of_speech": "N",
+      "english_definition": "viand; any dish eaten with rice"
+    },
+    {
+      "ilonggo_word": "sugpo",
+      "part_of_speech": "N",
+      "english_definition": "prawn"
+    },
+    {
+      "ilonggo_word": "suka",
+      "part_of_speech": "N",
+      "english_definition": "vomit; spew"
+    },
+    {
+      "ilonggo_word": "suki",
+      "part_of_speech": "N",
+      "english_definition": "a customer of long standing; may also refer to the vendor"
+    },
+    {
+      "ilonggo_word": "sulat",
+      "part_of_speech": "N",
+      "english_definition": "letter"
+    },
+    {
+      "ilonggo_word": "sulod",
+      "part_of_speech": "ADJ",
+      "english_definition": "inside"
+    },
+    {
+      "ilonggo_word": "sulod (2)",
+      "part_of_speech": "V",
+      "english_definition": "enter; go inside (IMP)"
+    },
+    {
+      "ilonggo_word": "sus",
+      "part_of_speech": "EX",
+      "english_definition": "an expression of surprise, fear or dismay"
+    },
+    {
+      "ilonggo_word": "suso",
+      "part_of_speech": "N",
+      "english_definition": "breast/s"
+    },
+    {
+      "ilonggo_word": "swerte",
+      "part_of_speech": "N",
+      "english_definition": "luck; fortune"
+    },
+    {
+      "ilonggo_word": "tabletas",
+      "part_of_speech": "N",
+      "english_definition": "tablet; pill"
+    },
+    {
+      "ilonggo_word": "taga",
+      "part_of_speech": "PP",
+      "english_definition": "from (a place)"
+    },
+    {
+      "ilonggo_word": "taga-diin",
+      "part_of_speech": "Q",
+      "english_definition": "from where"
+    },
+    {
+      "ilonggo_word": "tago",
+      "part_of_speech": "V",
+      "english_definition": "hide; conceal (IMP)"
+    },
+    {
+      "ilonggo_word": "tahian",
+      "part_of_speech": "V",
+      "english_definition": "to sew something for another (INF, B-F)"
+    },
+    {
+      "ilonggo_word": "tahong",
+      "part_of_speech": "N",
+      "english_definition": "mussels"
+    },
+    {
+      "ilonggo_word": "takos",
+      "part_of_speech": "N",
+      "english_definition": "measurement"
+    },
+    {
+      "ilonggo_word": "talagsa",
+      "part_of_speech": "ADV",
+      "english_definition": "not often; rarely"
+    },
+    {
+      "ilonggo_word": "talong",
+      "part_of_speech": "N",
+      "english_definition": "eggplant"
+    },
+    {
+      "ilonggo_word": "tama",
+      "part_of_speech": "ADJ",
+      "english_definition": "correct; right"
+    },
+    {
+      "ilonggo_word": "tamad",
+      "part_of_speech": "ADJ",
+      "english_definition": "lazy"
+    },
+    {
+      "ilonggo_word": "tambo",
+      "part_of_speech": "N",
+      "english_definition": "bamboo shoots"
+    },
+    {
+      "ilonggo_word": "tambok",
+      "part_of_speech": "N",
+      "english_definition": "fat"
+    },
+    {
+      "ilonggo_word": "tan-awon",
+      "part_of_speech": "V",
+      "english_definition": "will look at (L-F; D-F)"
+    },
+    {
+      "ilonggo_word": "tanan",
+      "part_of_speech": "N",
+      "english_definition": "all; everyone; everything"
+    },
+    {
+      "ilonggo_word": "tangkugu",
+      "part_of_speech": "N",
+      "english_definition": "nape/back of the neck"
+    },
+    {
+      "ilonggo_word": "tani",
+      "part_of_speech": "PA",
+      "english_definition": "a particle which expresses optimism"
+    },
+    {
+      "ilonggo_word": "tanom",
+      "part_of_speech": "N",
+      "english_definition": "plant"
+    },
+    {
+      "ilonggo_word": "tapa",
+      "part_of_speech": "N",
+      "english_definition": "a meat dish marinated in soy sauce and pepper corn, etc."
+    },
+    {
+      "ilonggo_word": "tasa",
+      "part_of_speech": "N",
+      "english_definition": "drinking cup"
+    },
+    {
+      "ilonggo_word": "tatlo",
+      "part_of_speech": null,
+      "english_definition": "three"
+    },
+    {
+      "ilonggo_word": "tawag",
+      "part_of_speech": "N",
+      "english_definition": "a call (telephone call)"
+    },
+    {
+      "ilonggo_word": "tawo",
+      "part_of_speech": "N",
+      "english_definition": "person; individual"
+    },
+    {
+      "ilonggo_word": "terminal",
+      "part_of_speech": "N",
+      "english_definition": "terminal (bus, jeepney, etc.)"
+    },
+    {
+      "ilonggo_word": "tigulang",
+      "part_of_speech": "ADJ",
+      "english_definition": "old (people)"
+    },
+    {
+      "ilonggo_word": "tiil",
+      "part_of_speech": "N",
+      "english_definition": "foot; feet"
+    },
+    {
+      "ilonggo_word": "tiket",
+      "part_of_speech": "N",
+      "english_definition": "ticket"
+    },
+    {
+      "ilonggo_word": "tilawan",
+      "part_of_speech": "V",
+      "english_definition": "to try (something) (INF, O-F)"
+    },
+    {
+      "ilonggo_word": "tinapay",
+      "part_of_speech": "N",
+      "english_definition": "bread"
+    },
+    {
+      "ilonggo_word": "tindero",
+      "part_of_speech": "N",
+      "english_definition": "vendor; salesman"
+    },
+    {
+      "ilonggo_word": "tinedor",
+      "part_of_speech": "N",
+      "english_definition": "fork"
+    },
+    {
+      "ilonggo_word": "tiya",
+      "part_of_speech": "N",
+      "english_definition": "aunt; term used to show respect for older females"
+    },
+    {
+      "ilonggo_word": "tiyan",
+      "part_of_speech": "N",
+      "english_definition": "stomach; abdomen"
+    },
+    {
+      "ilonggo_word": "tiyo",
+      "part_of_speech": "N",
+      "english_definition": "uncle; term used to show respect for older male"
+    },
+    {
+      "ilonggo_word": "toyo",
+      "part_of_speech": "N",
+      "english_definition": "soy sauce"
+    },
+    {
+      "ilonggo_word": "trangka",
+      "part_of_speech": "N",
+      "english_definition": "lock; bar"
+    },
+    {
+      "ilonggo_word": "trangkaso",
+      "part_of_speech": "N",
+      "english_definition": "influenza"
+    },
+    {
+      "ilonggo_word": "traysikel",
+      "part_of_speech": "N",
+      "english_definition": "tricycle"
+    },
+    {
+      "ilonggo_word": "tren",
+      "part_of_speech": "N",
+      "english_definition": "train"
+    },
+    {
+      "ilonggo_word": "tres",
+      "part_of_speech": "ADJ",
+      "english_definition": "three"
+    },
+    {
+      "ilonggo_word": "trese",
+      "part_of_speech": "ADJ",
+      "english_definition": "thirteen"
+    },
+    {
+      "ilonggo_word": "tsa",
+      "part_of_speech": "N",
+      "english_definition": "tea"
+    },
+    {
+      "ilonggo_word": "tsinelas",
+      "part_of_speech": "N",
+      "english_definition": "slippers; flip-flops"
+    },
+    {
+      "ilonggo_word": "tsokolate",
+      "part_of_speech": "N",
+      "english_definition": "chocolate"
+    },
+    {
+      "ilonggo_word": "tubig",
+      "part_of_speech": "N",
+      "english_definition": "water"
+    },
+    {
+      "ilonggo_word": "tudlo",
+      "part_of_speech": "N",
+      "english_definition": "finger; toe"
+    },
+    {
+      "ilonggo_word": "tuhod",
+      "part_of_speech": "N",
+      "english_definition": "knee/s"
+    },
+    {
+      "ilonggo_word": "tuig",
+      "part_of_speech": "N",
+      "english_definition": "year"
+    },
+    {
+      "ilonggo_word": "tuig-tuig",
+      "part_of_speech": "ADV",
+      "english_definition": "every year; yearly"
+    },
+    {
+      "ilonggo_word": "tul-an",
+      "part_of_speech": "N",
+      "english_definition": "bones"
+    },
+    {
+      "ilonggo_word": "tulog",
+      "part_of_speech": "N",
+      "english_definition": "sleep"
+    },
+    {
+      "ilonggo_word": "tulugan",
+      "part_of_speech": "N",
+      "english_definition": "place where one sleeps"
+    },
+    {
+      "ilonggo_word": "tumpok",
+      "part_of_speech": "N",
+      "english_definition": "a heap; a pile (for tomatoes, garlic, etc.)"
+    },
+    {
+      "ilonggo_word": "tunaw",
+      "part_of_speech": "ADJ",
+      "english_definition": "melted"
+    },
+    {
+      "ilonggo_word": "tunga",
+      "part_of_speech": "ADJ",
+      "english_definition": "one-half; middle; center"
+    },
+    {
+      "ilonggo_word": "tunga sa gab-i",
+      "part_of_speech": "ADV",
+      "english_definition": "midnight"
+    },
+    {
+      "ilonggo_word": "tuo",
+      "part_of_speech": "ADJ",
+      "english_definition": "right side"
+    },
+    {
+      "ilonggo_word": "tuod",
+      "part_of_speech": "ADV",
+      "english_definition": "really; truly"
+    },
+    {
+      "ilonggo_word": "tusino",
+      "part_of_speech": "N",
+      "english_definition": "a meat dish marinated in soy sauce, sugar and spices"
+    },
+    {
+      "ilonggo_word": "tutunlan",
+      "part_of_speech": "N",
+      "english_definition": "throat"
+    },
+    {
+      "ilonggo_word": "tuway",
+      "part_of_speech": "N",
+      "english_definition": "clam"
+    },
+    {
+      "ilonggo_word": "tuyo",
+      "part_of_speech": "V",
+      "english_definition": "feel sleepy; be drowsy"
+    },
+    {
+      "ilonggo_word": "tyanggi",
+      "part_of_speech": "N",
+      "english_definition": "store, usually a variety store"
+    },
+    {
+      "ilonggo_word": "tyenda",
+      "part_of_speech": "N",
+      "english_definition": "market place"
+    },
+    {
+      "ilonggo_word": "ubo",
+      "part_of_speech": "N",
+      "english_definition": "cough"
+    },
+    {
+      "ilonggo_word": "ubod",
+      "part_of_speech": "N",
+      "english_definition": "coconut shoots"
+    },
+    {
+      "ilonggo_word": "udto",
+      "part_of_speech": "ADV",
+      "english_definition": "noon"
+    },
+    {
+      "ilonggo_word": "ugangan",
+      "part_of_speech": "N",
+      "english_definition": "mother/father-in-law"
+    },
+    {
+      "ilonggo_word": "ugat",
+      "part_of_speech": "N",
+      "english_definition": "vein"
+    },
+    {
+      "ilonggo_word": "uhaw",
+      "part_of_speech": "ADJ",
+      "english_definition": "thirsty"
+    },
+    {
+      "ilonggo_word": "ulang",
+      "part_of_speech": "N",
+      "english_definition": "shrimp"
+    },
+    {
+      "ilonggo_word": "ulihi",
+      "part_of_speech": "ADJ",
+      "english_definition": "late; last"
+    },
+    {
+      "ilonggo_word": "ulo",
+      "part_of_speech": "N",
+      "english_definition": "head"
+    },
+    {
+      "ilonggo_word": "uma",
+      "part_of_speech": "N",
+      "english_definition": "farm; fields"
+    },
+    {
+      "ilonggo_word": "umagad",
+      "part_of_speech": "N",
+      "english_definition": "daughter/son-in-law"
+    },
+    {
+      "ilonggo_word": "una",
+      "part_of_speech": "ADJ",
+      "english_definition": "first"
+    },
+    {
+      "ilonggo_word": "uno",
+      "part_of_speech": "ADJ",
+      "english_definition": "one"
+    },
+    {
+      "ilonggo_word": "unod",
+      "part_of_speech": "N",
+      "english_definition": "flesh; meat; contents"
+    },
+    {
+      "ilonggo_word": "utok",
+      "part_of_speech": "N",
+      "english_definition": "brain"
+    },
+    {
+      "ilonggo_word": "utud",
+      "part_of_speech": "V",
+      "english_definition": "sibling; brother; sister"
+    },
+    {
+      "ilonggo_word": "wala",
+      "part_of_speech": "ADJ",
+      "english_definition": "left side"
+    },
+    {
+      "ilonggo_word": "wala (2)",
+      "part_of_speech": "EX",
+      "english_definition": "none; no"
+    },
+    {
+      "ilonggo_word": "walo",
+      "part_of_speech": "ADJ",
+      "english_definition": "eight"
+    },
+    {
+      "ilonggo_word": "yarda",
+      "part_of_speech": "N",
+      "english_definition": "yard, as in measurement"
+    },
+    {
+      "ilonggo_word": "yelo",
+      "part_of_speech": "ADJ",
+      "english_definition": "yellow"
+    },
+    {
+      "ilonggo_word": "yelo (2)",
+      "part_of_speech": "N",
+      "english_definition": "ice"
+    }
+  ],
+  "verb_list": [
+    {
+      "letter_group": "A",
+      "ilonggo_verb": "abot",
+      "english_meaning": "arrive"
+    },
+    {
+      "letter_group": "A",
+      "ilonggo_verb": "agi",
+      "english_meaning": "pass by/through; stop by"
+    },
+    {
+      "letter_group": "A",
+      "ilonggo_verb": "andam",
+      "english_meaning": "be careful; take care"
+    },
+    {
+      "letter_group": "A",
+      "ilonggo_verb": "ayû",
+      "english_meaning": "ask for a discount; bargain"
+    },
+    {
+      "letter_group": "B",
+      "ilonggo_verb": "bakal",
+      "english_meaning": "buy"
+    },
+    {
+      "letter_group": "B",
+      "ilonggo_verb": "baligya",
+      "english_meaning": "sell"
+    },
+    {
+      "letter_group": "B",
+      "ilonggo_verb": "balik",
+      "english_meaning": "return; to go back"
+    },
+    {
+      "letter_group": "B",
+      "ilonggo_verb": "basa",
+      "english_meaning": "read"
+    },
+    {
+      "letter_group": "B",
+      "ilonggo_verb": "baton",
+      "english_meaning": "receive something; accept"
+    },
+    {
+      "letter_group": "B",
+      "ilonggo_verb": "batyag",
+      "english_meaning": "feel"
+    },
+    {
+      "letter_group": "B",
+      "ilonggo_verb": "bayaw",
+      "english_meaning": "elevate; to lift; to rise as at Roman Catholic Mass"
+    },
+    {
+      "letter_group": "B",
+      "ilonggo_verb": "bayu",
+      "english_meaning": "box; maul; pound"
+    },
+    {
+      "letter_group": "B",
+      "ilonggo_verb": "bilin",
+      "english_meaning": "leave something behind"
+    },
+    {
+      "letter_group": "B",
+      "ilonggo_verb": "bis-ak",
+      "english_meaning": "split into two; cleave"
+    },
+    {
+      "letter_group": "B",
+      "ilonggo_verb": "bisita",
+      "english_meaning": "visit"
+    },
+    {
+      "letter_group": "B",
+      "ilonggo_verb": "bugtaw",
+      "english_meaning": "wake up"
+    },
+    {
+      "letter_group": "B",
+      "ilonggo_verb": "buhi",
+      "english_meaning": "set free; alive"
+    },
+    {
+      "letter_group": "B",
+      "ilonggo_verb": "buhin",
+      "english_meaning": "lessen; decrease"
+    },
+    {
+      "letter_group": "B",
+      "ilonggo_verb": "bulig",
+      "english_meaning": "help; assist"
+    },
+    {
+      "letter_group": "B",
+      "ilonggo_verb": "byahe",
+      "english_meaning": "travel"
+    },
+    {
+      "letter_group": "D",
+      "ilonggo_verb": "dala",
+      "english_meaning": "bring; carry; transmit"
+    },
+    {
+      "letter_group": "D",
+      "ilonggo_verb": "dali",
+      "english_meaning": "hurry"
+    },
+    {
+      "letter_group": "D",
+      "ilonggo_verb": "diretso",
+      "english_meaning": "go straight"
+    },
+    {
+      "letter_group": "D",
+      "ilonggo_verb": "dumdum",
+      "english_meaning": "remember"
+    },
+    {
+      "letter_group": "G",
+      "ilonggo_verb": "galing",
+      "english_meaning": "grind"
+    },
+    {
+      "letter_group": "G",
+      "ilonggo_verb": "ginhawa",
+      "english_meaning": "breathe"
+    },
+    {
+      "letter_group": "G",
+      "ilonggo_verb": "gisa",
+      "english_meaning": "saute"
+    },
+    {
+      "letter_group": "H",
+      "ilonggo_verb": "hagad",
+      "english_meaning": "invite"
+    },
+    {
+      "letter_group": "H",
+      "ilonggo_verb": "halin",
+      "english_meaning": "come from some place; leave/depart; transfer to another place"
+    },
+    {
+      "letter_group": "H",
+      "ilonggo_verb": "halo",
+      "english_meaning": "mix; stir"
+    },
+    {
+      "letter_group": "H",
+      "ilonggo_verb": "hambal",
+      "english_meaning": "say; talk; tell; speak"
+    },
+    {
+      "letter_group": "H",
+      "ilonggo_verb": "hampang",
+      "english_meaning": "play"
+    },
+    {
+      "letter_group": "H",
+      "ilonggo_verb": "hatag",
+      "english_meaning": "give"
+    },
+    {
+      "letter_group": "H",
+      "ilonggo_verb": "higop",
+      "english_meaning": "sip"
+    },
+    {
+      "letter_group": "H",
+      "ilonggo_verb": "himo",
+      "english_meaning": "do; make"
+    },
+    {
+      "letter_group": "H",
+      "ilonggo_verb": "hiwa",
+      "english_meaning": "slice; carve; cut to pieces"
+    },
+    {
+      "letter_group": "H",
+      "ilonggo_verb": "hulat",
+      "english_meaning": "wait"
+    },
+    {
+      "letter_group": "H",
+      "ilonggo_verb": "hulom",
+      "english_meaning": "soak; to marinate"
+    },
+    {
+      "letter_group": "H",
+      "ilonggo_verb": "huna-huna",
+      "english_meaning": "think; consider"
+    },
+    {
+      "letter_group": "I",
+      "ilonggo_verb": "ihaw",
+      "english_meaning": "grill; roast"
+    },
+    {
+      "letter_group": "I",
+      "ilonggo_verb": "ilis",
+      "english_meaning": "change one's clothes; alter; replace; exchange"
+    },
+    {
+      "letter_group": "I",
+      "ilonggo_verb": "inom",
+      "english_meaning": "drink"
+    },
+    {
+      "letter_group": "I",
+      "ilonggo_verb": "intyende",
+      "english_meaning": "understand"
+    },
+    {
+      "letter_group": "I",
+      "ilonggo_verb": "istar",
+      "english_meaning": "live in/at"
+    },
+    {
+      "letter_group": "K",
+      "ilonggo_verb": "kadto",
+      "english_meaning": "go"
+    },
+    {
+      "letter_group": "K",
+      "ilonggo_verb": "kambyo",
+      "english_meaning": "exchange; swap"
+    },
+    {
+      "letter_group": "K",
+      "ilonggo_verb": "kanta",
+      "english_meaning": "sing"
+    },
+    {
+      "letter_group": "K",
+      "ilonggo_verb": "kaon",
+      "english_meaning": "eat"
+    },
+    {
+      "letter_group": "K",
+      "ilonggo_verb": "kita",
+      "english_meaning": "see"
+    },
+    {
+      "letter_group": "K",
+      "ilonggo_verb": "kudkud",
+      "english_meaning": "scrape; grate"
+    },
+    {
+      "letter_group": "K",
+      "ilonggo_verb": "kuha",
+      "english_meaning": "get; take something; remove"
+    },
+    {
+      "letter_group": "L",
+      "ilonggo_verb": "laba",
+      "english_meaning": "wash clothes"
+    },
+    {
+      "letter_group": "L",
+      "ilonggo_verb": "laga",
+      "english_meaning": "boil"
+    },
+    {
+      "letter_group": "L",
+      "ilonggo_verb": "lakat",
+      "english_meaning": "walk; go; leave"
+    },
+    {
+      "letter_group": "L",
+      "ilonggo_verb": "libog",
+      "english_meaning": "get confused"
+    },
+    {
+      "letter_group": "L",
+      "ilonggo_verb": "liko",
+      "english_meaning": "turn"
+    },
+    {
+      "letter_group": "L",
+      "ilonggo_verb": "limpyo",
+      "english_meaning": "clean"
+    },
+    {
+      "letter_group": "L",
+      "ilonggo_verb": "lipat",
+      "english_meaning": "forget"
+    },
+    {
+      "letter_group": "L",
+      "ilonggo_verb": "liwat",
+      "english_meaning": "repeat"
+    },
+    {
+      "letter_group": "L",
+      "ilonggo_verb": "luto",
+      "english_meaning": "cook"
+    },
+    {
+      "letter_group": "O",
+      "ilonggo_verb": "obra",
+      "english_meaning": "do; make; work"
+    },
+    {
+      "letter_group": "P",
+      "ilonggo_verb": "pahuway",
+      "english_meaning": "rest"
+    },
+    {
+      "letter_group": "P",
+      "ilonggo_verb": "pakita",
+      "english_meaning": "show"
+    },
+    {
+      "letter_group": "P",
+      "ilonggo_verb": "paligo",
+      "english_meaning": "take a bath"
+    },
+    {
+      "letter_group": "P",
+      "ilonggo_verb": "pamala",
+      "english_meaning": "dry"
+    },
+    {
+      "letter_group": "P",
+      "ilonggo_verb": "pamangkot",
+      "english_meaning": "ask a question"
+    },
+    {
+      "letter_group": "P",
+      "ilonggo_verb": "pamsayar",
+      "english_meaning": "stroll; take a walk"
+    },
+    {
+      "letter_group": "P",
+      "ilonggo_verb": "pana-og",
+      "english_meaning": "go down"
+    },
+    {
+      "letter_group": "P",
+      "ilonggo_verb": "pangayo",
+      "english_meaning": "ask"
+    },
+    {
+      "letter_group": "P",
+      "ilonggo_verb": "pangita",
+      "english_meaning": "look/search for"
+    },
+    {
+      "letter_group": "P",
+      "ilonggo_verb": "panit",
+      "english_meaning": "peel"
+    },
+    {
+      "letter_group": "P",
+      "ilonggo_verb": "pauli",
+      "english_meaning": "go home"
+    },
+    {
+      "letter_group": "P",
+      "ilonggo_verb": "pili",
+      "english_meaning": "choose"
+    },
+    {
+      "letter_group": "P",
+      "ilonggo_verb": "pilit",
+      "english_meaning": "force; insist"
+    },
+    {
+      "letter_group": "P",
+      "ilonggo_verb": "prito",
+      "english_meaning": "fry"
+    },
+    {
+      "letter_group": "P",
+      "ilonggo_verb": "punggan",
+      "english_meaning": "stop someone/something"
+    },
+    {
+      "letter_group": "S",
+      "ilonggo_verb": "sakay",
+      "english_meaning": "ride"
+    },
+    {
+      "letter_group": "S",
+      "ilonggo_verb": "sala",
+      "english_meaning": "strain"
+    },
+    {
+      "letter_group": "S",
+      "ilonggo_verb": "saot",
+      "english_meaning": "dance"
+    },
+    {
+      "letter_group": "S",
+      "ilonggo_verb": "suka",
+      "english_meaning": "vomit"
+    },
+    {
+      "letter_group": "S",
+      "ilonggo_verb": "sulat",
+      "english_meaning": "write"
+    },
+    {
+      "letter_group": "S",
+      "ilonggo_verb": "sulod",
+      "english_meaning": "go inside; enter"
+    },
+    {
+      "letter_group": "S",
+      "ilonggo_verb": "supsop",
+      "english_meaning": "sip"
+    },
+    {
+      "letter_group": "T",
+      "ilonggo_verb": "tadtad",
+      "english_meaning": "chop"
+    },
+    {
+      "letter_group": "T",
+      "ilonggo_verb": "tago",
+      "english_meaning": "hide; conceal"
+    },
+    {
+      "letter_group": "T",
+      "ilonggo_verb": "tahi",
+      "english_meaning": "sew"
+    },
+    {
+      "letter_group": "T",
+      "ilonggo_verb": "tan-aw",
+      "english_meaning": "look at"
+    },
+    {
+      "letter_group": "T",
+      "ilonggo_verb": "tanom",
+      "english_meaning": "plant"
+    },
+    {
+      "letter_group": "T",
+      "ilonggo_verb": "tapos",
+      "english_meaning": "finish"
+    },
+    {
+      "letter_group": "T",
+      "ilonggo_verb": "tawag",
+      "english_meaning": "call"
+    },
+    {
+      "letter_group": "T",
+      "ilonggo_verb": "tibawas",
+      "english_meaning": "survive"
+    },
+    {
+      "letter_group": "T",
+      "ilonggo_verb": "trabaho",
+      "english_meaning": "work"
+    },
+    {
+      "letter_group": "T",
+      "ilonggo_verb": "tulog",
+      "english_meaning": "sleep"
+    },
+    {
+      "letter_group": "T",
+      "ilonggo_verb": "tunaw",
+      "english_meaning": "melt"
+    },
+    {
+      "letter_group": "T",
+      "ilonggo_verb": "tunga",
+      "english_meaning": "divide; cut"
+    },
+    {
+      "letter_group": "T",
+      "ilonggo_verb": "tu-o",
+      "english_meaning": "believe/right (side/arm)"
+    },
+    {
+      "letter_group": "T",
+      "ilonggo_verb": "tu-on",
+      "english_meaning": "learn; study"
+    },
+    {
+      "letter_group": "T",
+      "ilonggo_verb": "tuyo",
+      "english_meaning": "feel sleepy"
+    },
+    {
+      "letter_group": "U",
+      "ilonggo_verb": "uhaw",
+      "english_meaning": "thirsty"
+    },
+    {
+      "letter_group": "U",
+      "ilonggo_verb": "uma",
+      "english_meaning": "farm"
+    },
+    {
+      "letter_group": "U",
+      "ilonggo_verb": "una",
+      "english_meaning": "go ahead; first"
+    },
+    {
+      "letter_group": "U",
+      "ilonggo_verb": "utod",
+      "english_meaning": "cut/break off; brother/sister"
+    }
+  ]
+}

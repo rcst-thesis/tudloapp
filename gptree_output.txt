@@ -1,0 +1,3360 @@
+# Project Directory Structure:
+.
+├── android/
+│   ├── .gradle/
+│   │   ├── 8.12/
+│   │   │   ├── checksums/
+│   │   │   │   ├── checksums.lock
+│   │   │   │   ├── md5-checksums.bin
+│   │   │   │   └── sha1-checksums.bin
+│   │   │   ├── executionHistory/
+│   │   │   │   ├── executionHistory.bin
+│   │   │   │   └── executionHistory.lock
+│   │   │   ├── expanded/
+│   │   │   ├── fileChanges/
+│   │   │   │   └── last-build.bin
+│   │   │   ├── fileHashes/
+│   │   │   │   ├── fileHashes.bin
+│   │   │   │   ├── fileHashes.lock
+│   │   │   │   └── resourceHashesCache.bin
+│   │   │   ├── vcsMetadata/
+│   │   │   └── gc.properties
+│   │   ├── buildOutputCleanup/
+│   │   │   ├── buildOutputCleanup.lock
+│   │   │   ├── cache.properties
+│   │   │   └── outputFiles.bin
+│   │   ├── noVersion/
+│   │   │   └── buildLogic.lock
+│   │   ├── vcs-1/
+│   │   │   └── gc.properties
+│   │   └── file-system.probe
+│   ├── .kotlin/
+│   │   └── sessions/
+│   ├── app/
+│   │   ├── src/
+│   │   │   ├── debug/
+│   │   │   │   └── AndroidManifest.xml
+│   │   │   ├── main/
+│   │   │   │   ├── java/
+│   │   │   │   │   └── io/
+│   │   │   │   │       └── flutter/
+│   │   │   │   │           └── plugins/
+│   │   │   │   │               └── GeneratedPluginRegistrant.java
+│   │   │   │   ├── kotlin/
+│   │   │   │   │   └── com/
+│   │   │   │   │       └── example/
+│   │   │   │   │           └── tudloapp/
+│   │   │   │   │               └── MainActivity.kt
+│   │   │   │   ├── res/
+│   │   │   │   │   ├── drawable/
+│   │   │   │   │   │   └── launch_background.xml
+│   │   │   │   │   ├── drawable-v21/
+│   │   │   │   │   │   └── launch_background.xml
+│   │   │   │   │   ├── mipmap-hdpi/
+│   │   │   │   │   │   └── ic_launcher.png
+│   │   │   │   │   ├── mipmap-mdpi/
+│   │   │   │   │   │   └── ic_launcher.png
+│   │   │   │   │   ├── mipmap-xhdpi/
+│   │   │   │   │   │   └── ic_launcher.png
+│   │   │   │   │   ├── mipmap-xxhdpi/
+│   │   │   │   │   │   └── ic_launcher.png
+│   │   │   │   │   ├── mipmap-xxxhdpi/
+│   │   │   │   │   │   └── ic_launcher.png
+│   │   │   │   │   ├── values/
+│   │   │   │   │   │   └── styles.xml
+│   │   │   │   │   └── values-night/
+│   │   │   │   │       └── styles.xml
+│   │   │   │   └── AndroidManifest.xml
+│   │   │   └── profile/
+│   │   │       └── AndroidManifest.xml
+│   │   └── build.gradle.kts
+│   ├── gradle/
+│   │   └── wrapper/
+│   │       ├── gradle-wrapper.jar
+│   │       └── gradle-wrapper.properties
+│   ├── build.gradle.kts
+│   ├── gradle.properties
+│   ├── gradlew
+│   ├── gradlew.bat
+│   ├── local.properties
+│   └── settings.gradle.kts
+├── assets/
+│   └── images/
+│       ├── game_map/
+│       │   ├── grass.png
+│       │   ├── mapheader.png
+│       │   ├── rock.png
+│       │   ├── tree1 (2).png
+│       │   ├── tree1.png
+│       │   └── tree2.png
+│       ├── level_game/
+│       │   ├── action/
+│       │   │   ├── dalagan.png
+│       │   │   ├── langoy.png
+│       │   │   ├── tindog.png
+│       │   │   └── tumbo.png
+│       │   ├── animal/
+│       │   │   ├── bird.png
+│       │   │   ├── cat.png
+│       │   │   ├── dog.png
+│       │   │   └── fish.png
+│       │   ├── fruits/
+│       │   │   ├── apple.png
+│       │   │   ├── banana.png
+│       │   │   ├── mango.png
+│       │   │   └── watermelon.png
+│       │   └── unit 1/
+│       │       ├── arrange-words/
+│       │       │   ├── It's-really-hot-today.png
+│       │       │   └── good-morning-how-are-you.png
+│       │       ├── complete_the_sentence/
+│       │       │   ├── Na-basa-bayo-ko-kay-nag-ulan-gulpi.png
+│       │       │   ├── ga-hulat-ako-sang-jeep.png
+│       │       │   ├── ga-pila-kami-para-mag-bayad.png
+│       │       │   ├── ga-pili-ako-sang-nami-nga-mansanas.png
+│       │       │   └── gina-lagas-ako-sang-ido.png
+│       │       └── image_choice/
+│       │           ├── people/
+│       │           │   ├── father.png
+│       │           │   ├── grandfather.png
+│       │           │   ├── grandmother.png
+│       │           │   └── mother.png
+│       │           └── transportation/
+│       │               ├── Bangka.png
+│       │               ├── Eroplano.png
+│       │               ├── Jeep.png
+│       │               └── Traysikad.png
+│       ├── pet/
+│       │   ├── full energy 20-30 energy.png
+│       │   ├── half energy - 10 to 14.png
+│       │   └── low energy - less than 10 energy.png
+│       ├── banner.png
+│       ├── button.png
+│       ├── evaluationbg.jpg
+│       ├── mascot1.png
+│       └── pond.jpeg
+├── lib/
+│   ├── core/
+│   │   ├── constants/
+│   │   │   └── app_strings.dart
+│   │   ├── data/
+│   │   │   └── app_data.dart
+│   │   ├── models/
+│   │   │   └── proficiency.dart
+│   │   ├── services/
+│   │   │   └── app_storage.dart
+│   │   ├── state/
+│   │   │   └── app_state.dart
+│   │   ├── theme/
+│   │   │   └── app_theme.dart
+│   │   └── widgets/
+│   │       ├── mascot_widget.dart
+│   │       └── word_tooltip.dart
+│   ├── data/
+│   │   ├── dictionary/
+│   │   │   ├── dictionary_data.dart
+│   │   │   └── dictionary_item.dart
+│   │   └── lesson_bank/
+│   │       ├── lesson_bank.dart
+│   │       └── lesson_bank_item.dart
+│   ├── features/
+│   │   ├── dictionary/
+│   │   │   └── screens/
+│   │   │       └── dictionary_page.dart
+│   │   ├── energy/
+│   │   │   ├── services/
+│   │   │   │   ├── energy_storage.dart
+│   │   │   │   ├── energy_storage_io.dart
+│   │   │   │   └── energy_storage_web.dart
+│   │   │   └── widgets/
+│   │   │       └── energy_indicator.dart
+│   │   ├── evaluation/
+│   │   │   └── screens/
+│   │   │       ├── evaluation_intro_screen.dart
+│   │   │       └── evaluation_test_screen.dart
+│   │   ├── home_map/
+│   │   │   └── screens/
+│   │   │       └── home_map_page.dart
+│   │   ├── lesson_game/
+│   │   │   └── screens/
+│   │   │       └── level_game_page.dart
+│   │   ├── navigation/
+│   │   │   ├── app_shell.dart
+│   │   │   └── bottom_nav_bar.dart
+│   │   ├── onboarding/
+│   │   │   ├── screens/
+│   │   │   │   ├── age_range_screen.dart
+│   │   │   │   ├── knowledge_level_screen.dart
+│   │   │   │   ├── mascot_screen.dart
+│   │   │   │   └── username_screen.dart
+│   │   │   └── widgets/
+│   │   │       └── scaffold_card.dart
+│   │   ├── pet/
+│   │   │   └── screens/
+│   │   │       └── pet_page.dart
+│   │   ├── profile/
+│   │   │   └── screens/
+│   │   │       └── profile_page.dart
+│   │   ├── streak/
+│   │   │   ├── helpers/
+│   │   │   │   └── streak_helper.dart
+│   │   │   └── models/
+│   │   │       └── streak_model.dart
+│   │   ├── test/
+│   │   │   └── screens/
+│   │   │       └── test_page.dart
+│   │   └── translation/
+│   │       └── screens/
+│   │           └── translation_page.dart
+│   └── main.dart
+├── test/
+│   └── widget_test.dart
+├── web/
+│   ├── icons/
+│   │   ├── Icon-192.png
+│   │   ├── Icon-512.png
+│   │   ├── Icon-maskable-192.png
+│   │   └── Icon-maskable-512.png
+│   ├── favicon.png
+│   ├── index.html
+│   └── manifest.json
+├── .metadata
+├── README.md
+├── analysis_options.yaml
+├── gptree_output.txt
+├── pubspec.lock
+└── pubspec.yaml
+
+# BEGIN FILE CONTENTS
+
+# File: lib/features/onboarding/screens/age_range_screen.dart
+
+import 'package:flutter/material.dart';
+import 'package:tudloapp/core/state/app_state.dart';
+import 'package:tudloapp/features/onboarding/widgets/scaffold_card.dart';
+import 'package:tudloapp/features/onboarding/screens/knowledge_level_screen.dart';
+
+/// Second onboarding screen.
+///
+/// The selected age range is stored for profile display and future
+/// personalization rules.
+class AgeRangeScreen extends StatefulWidget {
+  const AgeRangeScreen({super.key});
+
+  @override
+  State<AgeRangeScreen> createState() => _AgeRangeScreenState();
+}
+
+class _AgeRangeScreenState extends State<AgeRangeScreen> {
+  String selected = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return ScaffoldCard(
+      title: 'How old are you?',
+      subtitle: 'This helps us personalize your experience.',
+      bottomAction: SizedBox(
+        width: double.infinity,
+        height: 60,
+        child: ElevatedButton(
+          onPressed: selected.isEmpty
+              ? null
+              : () {
+                  // Continue button:
+                  // Save the selected age range, then direct the user to the
+                  // Knowledge Level screen.
+                  AppStateScope.of(context).setAgeRange(selected);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const KnowledgeLevelScreen(),
+                    ),
+                  );
+                },
+          child: const Text('Continue'),
+        ),
+      ),
+      child: Column(
+        children: [
+          _option('6 - 9 years old'),
+          const SizedBox(height: 12),
+          _option('10 - 13 years old'),
+          const SizedBox(height: 12),
+          _option('14+ years old'),
+        ],
+      ),
+    );
+  }
+
+  Widget _option(String text) {
+    final active = selected == text;
+
+    return GestureDetector(
+      onTap: () {
+        // Only one age option can be selected at a time.
+        setState(() {
+          selected = text;
+        });
+      },
+      child: AnimatedScale(
+        duration: const Duration(milliseconds: 140),
+        curve: Curves.easeOut,
+        scale: active ? 1.02 : 1,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          curve: Curves.easeOut,
+          width: double.infinity,
+          constraints: const BoxConstraints(minHeight: 72),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+          decoration: BoxDecoration(
+            color: active ? OnboardingColors.selected : OnboardingColors.panel,
+            borderRadius: BorderRadius.circular(28),
+            border: Border.all(
+              color: active ? OnboardingColors.green : OnboardingColors.border,
+              width: 2.5,
+            ),
+            boxShadow: active
+                ? [
+                    BoxShadow(
+                      color: OnboardingColors.green.withValues(alpha: .18),
+                      blurRadius: 18,
+                      offset: const Offset(0, 8),
+                    ),
+                  ]
+                : null,
+          ),
+          child: Row(
+            children: [
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 160),
+                width: 24,
+                height: 24,
+                decoration: BoxDecoration(
+                  color: active ? OnboardingColors.green : Colors.transparent,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: active
+                        ? OnboardingColors.green
+                        : OnboardingColors.border,
+                    width: 2,
+                  ),
+                ),
+                child: active
+                    ? const Icon(
+                        Icons.check_rounded,
+                        color: Colors.white,
+                        size: 16,
+                      )
+                    : null,
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Text(
+                  text,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: OnboardingColors.text,
+                    fontSize: 19,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 38),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+# File: lib/features/onboarding/screens/knowledge_level_screen.dart
+
+import 'package:flutter/material.dart';
+import 'package:tudloapp/core/models/proficiency.dart';
+import 'package:tudloapp/core/state/app_state.dart';
+import 'package:tudloapp/features/onboarding/widgets/scaffold_card.dart';
+import 'package:tudloapp/features/evaluation/screens/evaluation_intro_screen.dart';
+
+/// Third onboarding screen.
+///
+/// The visible text is friendly, while the app stores the hidden numeric
+/// knowledge level from `KnowledgeOption`.
+class KnowledgeLevelScreen extends StatefulWidget {
+  const KnowledgeLevelScreen({super.key});
+
+  @override
+  State<KnowledgeLevelScreen> createState() => _KnowledgeLevelScreenState();
+}
+
+class _KnowledgeLevelScreenState extends State<KnowledgeLevelScreen> {
+  KnowledgeOption? selected;
+
+  @override
+  Widget build(BuildContext context) {
+    return ScaffoldCard(
+      title: 'How much Hiligaynon do you know?',
+      subtitle: "We'll use this to guide your learning experience.",
+      bottomAction: SizedBox(
+        width: double.infinity,
+        height: 60,
+        child: ElevatedButton(
+          onPressed: selected == null
+              ? null
+              : () {
+                  // Continue button:
+                  // Save the selected knowledge option, then direct the user
+                  // to the Evaluation Intro screen before entering the app.
+                  AppStateScope.of(context).setKnowledgeOption(selected!);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const EvaluationIntroScreen(),
+                    ),
+                  );
+                },
+          child: const Text('Continue'),
+        ),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ...List.generate(knowledgeOptions.length, (index) {
+            final option = knowledgeOptions[index];
+            final active = selected == option;
+
+            return Padding(
+              padding: EdgeInsets.only(
+                bottom: index == knowledgeOptions.length - 1 ? 0 : 8,
+              ),
+              child: GestureDetector(
+                onTap: () {
+                  // Selecting a new option updates the active green outline.
+                  setState(() {
+                    selected = option;
+                  });
+                },
+                child: AnimatedScale(
+                  duration: const Duration(milliseconds: 140),
+                  curve: Curves.easeOut,
+                  scale: active ? 1.02 : 1,
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 180),
+                    curve: Curves.easeOut,
+                    constraints: const BoxConstraints(minHeight: 56),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 18,
+                      vertical: 11,
+                    ),
+                    decoration: BoxDecoration(
+                      color: active
+                          ? OnboardingColors.selected
+                          : OnboardingColors.panel,
+                      borderRadius: BorderRadius.circular(28),
+                      border: Border.all(
+                        color: active
+                            ? OnboardingColors.green
+                            : OnboardingColors.border,
+                        width: 2.5,
+                      ),
+                      boxShadow: active
+                          ? [
+                              BoxShadow(
+                                color: OnboardingColors.green.withValues(
+                                  alpha: .18,
+                                ),
+                                blurRadius: 18,
+                                offset: const Offset(0, 8),
+                              ),
+                            ]
+                          : null,
+                    ),
+                    child: Row(
+                      children: [
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 160),
+                          width: 24,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            color: active
+                                ? OnboardingColors.green
+                                : Colors.transparent,
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: active
+                                  ? OnboardingColors.green
+                                  : OnboardingColors.border,
+                              width: 2,
+                            ),
+                          ),
+                          child: active
+                              ? const Icon(
+                                  Icons.check_rounded,
+                                  color: Colors.white,
+                                  size: 16,
+                                )
+                              : null,
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            option.label,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              color: OnboardingColors.text,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 34),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }),
+        ],
+      ),
+    );
+  }
+}
+
+
+# File: lib/features/onboarding/screens/mascot_screen.dart
+
+import 'package:flutter/material.dart';
+import 'package:tudloapp/features/onboarding/screens/username_screen.dart';
+
+class MascotScreen extends StatefulWidget {
+  const MascotScreen({super.key});
+
+  @override
+  State<MascotScreen> createState() => _MascotScreenState();
+}
+
+class _MascotScreenState extends State<MascotScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 900),
+    );
+
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeIn));
+
+    _controller.forward();
+
+    Future.delayed(const Duration(milliseconds: 2300), () {
+      if (!mounted) return;
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const UsernameScreen()),
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFF0CC66A),
+      body: Center(
+        child: FadeTransition(
+          opacity: _fadeAnimation,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Tudlo',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 36,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 0,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Container(
+                width: 54,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+# File: lib/features/onboarding/screens/username_screen.dart
+
+import 'package:flutter/material.dart';
+import 'package:tudloapp/core/state/app_state.dart';
+import 'package:tudloapp/features/onboarding/widgets/scaffold_card.dart';
+import 'package:tudloapp/features/onboarding/screens/age_range_screen.dart';
+
+/// First onboarding screen.
+///
+/// This screen collects the name that appears later on the Home Map and
+/// Profile page.
+class UsernameScreen extends StatefulWidget {
+  const UsernameScreen({super.key});
+
+  @override
+  State<UsernameScreen> createState() => _UsernameScreenState();
+}
+
+class _UsernameScreenState extends State<UsernameScreen> {
+  final TextEditingController controller = TextEditingController();
+  final FocusNode focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    focusNode.addListener(() => setState(() {}));
+    controller.addListener(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    focusNode.dispose();
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Continue stays disabled until the user enters a non-empty name.
+    final hasName = controller.text.trim().isNotEmpty;
+
+    return ScaffoldCard(
+      title: 'What should we call you?',
+      subtitle: 'This helps personalize your experience.',
+      bottomAction: SizedBox(
+        width: double.infinity,
+        height: 60,
+        child: ElevatedButton(
+          onPressed: hasName
+              ? () {
+                  // Continue button:
+                  // Save the name in AppState, then direct the user to the
+                  // Age Range screen, which is the next onboarding step.
+                  AppStateScope.of(context).setUsername(controller.text.trim());
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const AgeRangeScreen()),
+                  );
+                }
+              : null,
+          child: const Text('Continue'),
+        ),
+      ),
+      child: Column(
+        children: [
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 180),
+            curve: Curves.easeOut,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: OnboardingColors.shadow,
+                  blurRadius: focusNode.hasFocus ? 18 : 0,
+                  offset: focusNode.hasFocus
+                      ? const Offset(0, 9)
+                      : const Offset(8, 8),
+                ),
+              ],
+            ),
+            child: TextField(
+              controller: controller,
+              focusNode: focusNode,
+              autofocus: true,
+              cursorColor: OnboardingColors.blue,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: OnboardingColors.text,
+                fontSize: 19,
+                fontWeight: FontWeight.w900,
+              ),
+              decoration: InputDecoration(
+                hintText: 'Type your name here...',
+                hintStyle: const TextStyle(
+                  color: OnboardingColors.muted,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                ),
+                filled: true,
+                fillColor: OnboardingColors.panel,
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 21,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(28),
+                  borderSide: const BorderSide(
+                    color: OnboardingColors.border,
+                    width: 2.5,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(28),
+                  borderSide: const BorderSide(
+                    color: OnboardingColors.border,
+                    width: 2.5,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(28),
+                  borderSide: const BorderSide(
+                    color: OnboardingColors.green,
+                    width: 3,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+# File: lib/features/onboarding/widgets/scaffold_card.dart
+
+import 'package:flutter/material.dart';
+import 'package:tudloapp/core/widgets/mascot_widget.dart';
+
+/// Shared color tokens for the three onboarding question screens.
+///
+/// Keeping the onboarding palette here makes Username, Age, and Knowledge
+/// Level screens feel like one consistent flow.
+class OnboardingColors {
+  static const bg = Colors.white;
+  static const panel = Colors.white;
+  static const panel2 = Color(0xFFF5FAF5);
+  static const border = Color(0xFFDCEBDE);
+  static const text = Color(0xFF25382A);
+  static const muted = Color(0xFF728173);
+  static const green = Color(0xFF08C66B);
+  static const blue = Color(0xFF08C66B);
+  static const selected = Color(0xFFE3F5EA);
+  static const shadow = Color(0x3308C66B);
+}
+
+/// Reusable layout for the Username, Age, and Knowledge Level onboarding pages.
+///
+/// It provides the progress bar, back button, mascot area, question text, and
+/// bottom Continue button space so each screen only supplies its own input.
+class ScaffoldCard extends StatefulWidget {
+  final String title;
+  final String subtitle;
+  final Widget child;
+  final Widget? bottomAction;
+
+  const ScaffoldCard({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.child,
+    this.bottomAction,
+  });
+
+  @override
+  State<ScaffoldCard> createState() => _ScaffoldCardState();
+}
+
+class _ScaffoldCardState extends State<ScaffoldCard>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _idleController;
+  late final Animation<double> _floatAnimation;
+
+  int get _step {
+    // The current screen title determines which segment of the progress bar is
+    // filled. This keeps the child screens simple.
+    if (widget.title.contains('call you') || widget.title.contains('call')) {
+      return 1;
+    }
+    if (widget.title.contains('old')) return 2;
+    return 3;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _idleController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2200),
+    )..repeat(reverse: true);
+    _floatAnimation = CurvedAnimation(
+      parent: _idleController,
+      curve: Curves.easeInOut,
+    );
+  }
+
+  @override
+  void dispose() {
+    _idleController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: OnboardingColors.bg,
+      body: Theme(
+        data: Theme.of(context).copyWith(
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: OnboardingColors.green,
+              foregroundColor: Colors.white,
+              disabledBackgroundColor: OnboardingColors.green.withValues(
+                alpha: .18,
+              ),
+              disabledForegroundColor: OnboardingColors.muted.withValues(
+                alpha: .45,
+              ),
+              elevation: 0,
+              shadowColor: Colors.transparent,
+              minimumSize: const Size(240, 60),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(22),
+              ),
+              textStyle: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 0,
+              ),
+            ),
+          ),
+        ),
+        child: DecoratedBox(
+          decoration: const BoxDecoration(color: OnboardingColors.bg),
+          child: SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                // Onboarding should not scroll. Spacing and mascot size shrink
+                // on shorter screens so the options and Continue button stay
+                // visible in one clean viewport.
+                final compact = constraints.maxHeight < 820;
+                final tiny = constraints.maxHeight < 720;
+                final mascotSize = tiny
+                    ? 76.0
+                    : compact
+                    ? 116.0
+                    : 148.0;
+                final topGap = tiny
+                    ? 8.0
+                    : compact
+                    ? 18.0
+                    : 30.0;
+                final mascotGap = tiny
+                    ? 12.0
+                    : compact
+                    ? 24.0
+                    : 42.0;
+                final titleGap = tiny
+                    ? 12.0
+                    : compact
+                    ? 24.0
+                    : 34.0;
+                final childGap = tiny
+                    ? 12.0
+                    : compact
+                    ? 26.0
+                    : 42.0;
+                final horizontalPadding = tiny ? 18.0 : 24.0;
+
+                return Padding(
+                  padding: EdgeInsets.fromLTRB(
+                    horizontalPadding,
+                    18,
+                    horizontalPadding,
+                    12,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _OnboardingTopBar(step: _step),
+                      SizedBox(height: topGap),
+                      const Text(
+                        'ABOUT YOU',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: OnboardingColors.muted,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 2.6,
+                        ),
+                      ),
+                      SizedBox(height: mascotGap),
+                      AnimatedBuilder(
+                        animation: _floatAnimation,
+                        builder: (context, child) {
+                          final lift = -5 * _floatAnimation.value;
+                          final scale = 1 + (_floatAnimation.value * .015);
+                          return Transform.translate(
+                            offset: Offset(0, lift),
+                            child: Transform.scale(scale: scale, child: child),
+                          );
+                        },
+                        child: TudloMascot(size: mascotSize),
+                      ),
+                      SizedBox(height: titleGap),
+                      Text(
+                        widget.title,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: OnboardingColors.text,
+                          fontSize: tiny ? 24 : 28,
+                          height: 1.12,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 0,
+                        ),
+                      ),
+                      if (widget.subtitle.isNotEmpty) ...[
+                        const SizedBox(height: 8),
+                        Text(
+                          widget.subtitle,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: OnboardingColors.muted,
+                            fontSize: tiny ? 15 : 18,
+                            height: 1.25,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                      SizedBox(height: childGap),
+                      Flexible(
+                        child: AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 260),
+                          child: widget.child,
+                        ),
+                      ),
+                      if (widget.bottomAction != null) ...[
+                        const SizedBox(height: 8),
+                        widget.bottomAction!,
+                      ],
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _OnboardingTopBar extends StatelessWidget {
+  final int step;
+
+  const _OnboardingTopBar({required this.step});
+
+  @override
+  Widget build(BuildContext context) {
+    // Back returns to the previous onboarding step. The three green segments
+    // show progress without using "Step 1 of 3" text.
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          width: 48,
+          height: 48,
+          child: IconButton(
+            // Back button:
+            // Goes to the previous onboarding screen when one exists.
+            onPressed: () => Navigator.maybePop(context),
+            icon: const Icon(Icons.chevron_left_rounded),
+            color: OnboardingColors.muted,
+            iconSize: 34,
+            style: IconButton.styleFrom(
+              backgroundColor: OnboardingColors.panel2,
+              disabledBackgroundColor: OnboardingColors.panel2,
+              shape: const CircleBorder(),
+              padding: EdgeInsets.zero,
+            ),
+          ),
+        ),
+        const SizedBox(width: 18),
+        Expanded(
+          child: Row(
+            children: List.generate(3, (index) {
+              final active = index < step;
+              return Expanded(
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 240),
+                  height: 12,
+                  margin: EdgeInsets.only(right: index == 2 ? 0 : 10),
+                  decoration: BoxDecoration(
+                    color: active
+                        ? OnboardingColors.green
+                        : OnboardingColors.selected,
+                    borderRadius: BorderRadius.circular(999),
+                  ),
+                ),
+              );
+            }),
+          ),
+        ),
+        const SizedBox(width: 10),
+      ],
+    );
+  }
+}
+
+
+# File: lib/features/evaluation/screens/evaluation_intro_screen.dart
+
+import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
+import 'package:tudloapp/core/state/app_state.dart';
+import 'package:tudloapp/core/theme/app_theme.dart';
+import 'package:tudloapp/core/widgets/mascot_widget.dart';
+import 'package:tudloapp/features/navigation/app_shell.dart';
+import 'package:tudloapp/features/evaluation/screens/evaluation_test_screen.dart';
+
+/// Intro screen before the evaluation test.
+///
+/// "Let's Go!" starts the placement evaluation. "Skip" sends the user straight
+/// to the Home Map using the default/easy dataset internally.
+class EvaluationIntroScreen extends StatefulWidget {
+  const EvaluationIntroScreen({super.key});
+
+  @override
+  State<EvaluationIntroScreen> createState() => _EvaluationIntroScreenState();
+}
+
+class _EvaluationIntroScreenState extends State<EvaluationIntroScreen>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _float;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2200),
+    )..repeat(reverse: true);
+    _float = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: TudloColors.softGreen,
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/evaluationbg.jpg',
+              fit: BoxFit.cover,
+              filterQuality: FilterQuality.high,
+              errorBuilder: (context, error, stackTrace) {
+                return const _EvaluationFallbackBackground();
+              },
+            ),
+          ),
+          Positioned.fill(
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.white.withValues(alpha: .10),
+                    TudloColors.softGreen.withValues(alpha: .18),
+                    TudloColors.paper.withValues(alpha: .62),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(24, 28, 24, 28),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Spacer(flex: 3),
+                  AnimatedBuilder(
+                    animation: _float,
+                    builder: (context, child) {
+                      final lift = -10 * _float.value;
+                      final scale = 1 + (_float.value * .026);
+                      return Transform.translate(
+                        offset: Offset(0, lift),
+                        child: Transform.scale(scale: scale, child: child),
+                      );
+                    },
+                    child: Center(
+                      child: SizedBox(
+                        width: 230,
+                        height: 220,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          clipBehavior: Clip.none,
+                          children: [
+                            AnimatedBuilder(
+                              animation: _float,
+                              builder: (context, child) {
+                                return Container(
+                                  width: 190 + (_float.value * 14),
+                                  height: 190 + (_float.value * 14),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    gradient: RadialGradient(
+                                      colors: [
+                                        Colors.white.withValues(alpha: .66),
+                                        Colors.white.withValues(alpha: .24),
+                                        Colors.white.withValues(alpha: 0),
+                                      ],
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.white.withValues(
+                                          alpha: .42,
+                                        ),
+                                        blurRadius: 42,
+                                        spreadRadius: 8,
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                            const _IntroSparkle(
+                              left: 26,
+                              top: 48,
+                              size: 18,
+                              delay: .1,
+                            ),
+                            const _IntroSparkle(
+                              left: 64,
+                              top: 30,
+                              size: 8,
+                              delay: .5,
+                            ),
+                            const _IntroSparkle(
+                              left: 186,
+                              top: 50,
+                              size: 15,
+                              delay: .8,
+                            ),
+                            const _IntroSparkle(
+                              left: 42,
+                              top: 156,
+                              size: 10,
+                              delay: .3,
+                            ),
+                            const _IntroSparkle(
+                              left: 180,
+                              top: 160,
+                              size: 11,
+                              delay: .6,
+                            ),
+                            const TudloMascot(size: 170),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  const Text(
+                    "Let's have a quick Tutorial",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: TudloColors.cloud,
+                      fontSize: 40,
+                      height: 1,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    "We'll begin with a quick skill check.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: TudloColors.cloud,
+                      fontSize: 16,
+                      height: 1.25,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  const Spacer(flex: 4),
+                  TextButton(
+                    onPressed: () {
+                      // Skip button:
+                      // This directs the user straight to the Home Map page.
+                      // Internally, it selects the easiest/default dataset,
+                      // but the learner never sees the dataset name.
+                      AppStateScope.of(context).skipEvaluation();
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const AppShell(initialIndex: 0),
+                        ),
+                        (route) => false,
+                      );
+                    },
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      textStyle: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    child: const Text('Skip'),
+                  ),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    height: 70,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Let's Go button:
+                        // This directs the user to the Evaluation Test screen.
+                        // The score from that test chooses the internal lesson
+                        // dataset used later by the Home Map.
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const EvaluationTestScreen(),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: TudloColors.green,
+                        foregroundColor: Colors.white,
+                        elevation: 0,
+                        shadowColor: Colors.transparent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(45),
+                        ),
+                        textStyle: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      child: const Text("Let's Go!"),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _EvaluationFallbackBackground extends StatelessWidget {
+  const _EvaluationFallbackBackground();
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(painter: _EvaluationFallbackPainter());
+  }
+}
+
+class _IntroSparkle extends StatefulWidget {
+  final double left;
+  final double top;
+  final double size;
+  final double delay;
+
+  const _IntroSparkle({
+    required this.left,
+    required this.top,
+    required this.size,
+    required this.delay,
+  });
+
+  @override
+  State<_IntroSparkle> createState() => _IntroSparkleState();
+}
+
+class _IntroSparkleState extends State<_IntroSparkle>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2400),
+    )..repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      left: widget.left,
+      top: widget.top,
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) {
+          final phase = (_controller.value + widget.delay) % 1;
+          final opacity = .28 + (math.sin(phase * math.pi) * .52);
+          final drift = math.sin(phase * math.pi * 2) * 2;
+          return Transform.translate(
+            offset: Offset(0, drift),
+            child: Transform.rotate(
+              angle: phase * math.pi * .18,
+              child: Icon(
+                Icons.auto_awesome_rounded,
+                size: widget.size,
+                color: Colors.white.withValues(alpha: opacity.clamp(.18, .80)),
+                shadows: [
+                  Shadow(
+                    color: Colors.white.withValues(alpha: .70),
+                    blurRadius: 14,
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _EvaluationFallbackPainter extends CustomPainter {
+  const _EvaluationFallbackPainter();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final sky = Paint()
+      ..shader = const LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [Color(0xFFD8FFF2), Color(0xFFEAFBF2), Color(0xFFBFF1A0)],
+      ).createShader(Offset.zero & size);
+    canvas.drawRect(Offset.zero & size, sky);
+
+    final hillPaint = Paint()..color = const Color(0xFFB7E982);
+    final hill = Path()
+      ..moveTo(0, size.height * .70)
+      ..quadraticBezierTo(
+        size.width * .28,
+        size.height * .62,
+        size.width * .55,
+        size.height * .71,
+      )
+      ..quadraticBezierTo(
+        size.width * .78,
+        size.height * .79,
+        size.width,
+        size.height * .68,
+      )
+      ..lineTo(size.width, size.height)
+      ..lineTo(0, size.height)
+      ..close();
+    canvas.drawPath(hill, hillPaint);
+
+    final cloudPaint = Paint()..color = Colors.white.withValues(alpha: .78);
+    for (final cloud in [
+      Offset(size.width * .12, size.height * .12),
+      Offset(size.width * .82, size.height * .16),
+      Offset(size.width * .18, size.height * .32),
+    ]) {
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromCenter(center: cloud, width: 98, height: 24),
+          const Radius.circular(999),
+        ),
+        cloudPaint,
+      );
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromCenter(
+            center: cloud.translate(34, 16),
+            width: 68,
+            height: 18,
+          ),
+          const Radius.circular(999),
+        ),
+        cloudPaint,
+      );
+    }
+
+    final flowerPaint = Paint()..color = Colors.white.withValues(alpha: .84);
+    final centerPaint = Paint()..color = TudloColors.gold;
+    for (final seed in [42.0, 120.0, 230.0, 316.0, 410.0]) {
+      final x = (math.sin(seed) * .5 + .5) * size.width;
+      final y = size.height * (.72 + ((seed % 18) / 100));
+      for (var i = 0; i < 5; i++) {
+        final angle = math.pi * 2 * i / 5;
+        canvas.drawCircle(
+          Offset(x + math.cos(angle) * 6, y + math.sin(angle) * 6),
+          4,
+          flowerPaint,
+        );
+      }
+      canvas.drawCircle(Offset(x, y), 3, centerPaint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+
+# File: lib/features/evaluation/screens/evaluation_test_screen.dart
+
+import 'dart:async';
+import 'dart:math' as math;
+import 'dart:ui' as ui;
+
+import 'package:flutter/material.dart';
+import 'package:tudloapp/core/state/app_state.dart';
+import 'package:tudloapp/core/theme/app_theme.dart';
+import 'package:tudloapp/core/widgets/mascot_widget.dart';
+import 'package:tudloapp/data/lesson_bank/lesson_bank.dart';
+import 'package:tudloapp/core/widgets/word_tooltip.dart';
+import 'package:tudloapp/features/navigation/app_shell.dart';
+
+/// Placement evaluation shown before the main Home Map.
+///
+/// Questions are randomly generated from the Lesson Bank. The final score is
+/// stored in AppState and mapped to an internal Home Map dataset.
+class EvaluationTestScreen extends StatefulWidget {
+  const EvaluationTestScreen({super.key});
+
+  @override
+  State<EvaluationTestScreen> createState() => _EvaluationTestScreenState();
+}
+
+class _EvaluationTestScreenState extends State<EvaluationTestScreen> {
+  // Generated once when the screen opens so the evaluation does not change
+  // while the user is answering.
+  late final List<LessonQuestion> questions =
+      LessonBank.tutorialEvaluationQuestions();
+  final Map<int, bool> _earnedPointByQuestion = {};
+  final TextEditingController typedAnswerController = TextEditingController();
+  int questionIndex = 0;
+  int score = 0;
+
+  String? selectedAnswer;
+  final List<String> builtWords = [];
+  String? selectedMatchLeft;
+  String? wrongMatchLeft;
+  String? wrongMatchRight;
+  String? newMatchLeft;
+  String? newMatchRight;
+  Timer? _wrongMatchClearTimer;
+  Timer? _matchedPulseTimer;
+  int wrongMatchAttempt = 0;
+  int matchPulseAttempt = 0;
+  int answerFeedbackAttempt = 0;
+  bool checked = false;
+  bool lastCorrect = false;
+  bool hadWrongMatchAttempt = false;
+  final Map<String, String> matches = {};
+
+  LessonQuestion get currentQuestion => questions[questionIndex];
+
+  bool get canContinue {
+    final q = currentQuestion;
+    if (checked) return true;
+    return switch (q.type) {
+      QuestionType.matching => matches.length == q.leftItems.length,
+      QuestionType.typedTranslation =>
+        typedAnswerController.text.trim().isNotEmpty,
+      QuestionType.arrangeWords || QuestionType.fillBlank =>
+        builtWords.length >= _answerWords(q.answer).length,
+      _ => selectedAnswer != null,
+    };
+  }
+
+  bool get isCorrect {
+    final q = currentQuestion;
+    if (q.type == QuestionType.matching) {
+      return !hadWrongMatchAttempt && _matchingCorrect(q);
+    }
+    if (q.type == QuestionType.typedTranslation) {
+      return _normalizeAnswer(typedAnswerController.text) ==
+          _normalizeAnswer(q.answer);
+    }
+    if (q.type == QuestionType.arrangeWords ||
+        q.type == QuestionType.fillBlank) {
+      return _normalizeAnswer(builtWords.join(' ')) ==
+          _normalizeAnswer(q.answer);
+    }
+    return selectedAnswer == q.answer;
+  }
+
+  @override
+  void dispose() {
+    _wrongMatchClearTimer?.cancel();
+    _matchedPulseTimer?.cancel();
+    typedAnswerController.dispose();
+    super.dispose();
+  }
+
+  void _nextQuestion() {
+    if (!checked) {
+      // First tap checks the answer and awards at most one point for the
+      // current question.
+      setState(() {
+        lastCorrect = isCorrect;
+        checked = true;
+        answerFeedbackAttempt++;
+        if (lastCorrect && _earnedPointByQuestion[questionIndex] != true) {
+          score++;
+          _earnedPointByQuestion[questionIndex] = true;
+        }
+      });
+      return;
+    }
+
+    if (questionIndex < questions.length - 1) {
+      setState(() {
+        questionIndex++;
+        _resetQuestionState();
+      });
+      return;
+    }
+
+    // After the last question, save the score so AppState can choose easy,
+    // medium, or hard lesson content internally.
+    AppStateScope.of(context).saveEvaluationScore(score);
+    showEvaluationResultDialog(context: context);
+  }
+
+  void _resetQuestionState() {
+    selectedAnswer = null;
+    selectedMatchLeft = null;
+    builtWords.clear();
+    typedAnswerController.clear();
+    _clearWrongMatch();
+    _clearMatchedPulse();
+    wrongMatchAttempt = 0;
+    matchPulseAttempt = 0;
+    answerFeedbackAttempt = 0;
+    checked = false;
+    lastCorrect = false;
+    hadWrongMatchAttempt = false;
+    matches.clear();
+  }
+
+  bool _matchingCorrect(LessonQuestion q) {
+    for (var index = 0; index < q.leftItems.length; index++) {
+      final left = q.leftItems[index];
+      final expected = LessonBank.terms
+          .firstWhere((term) => term.hil == left)
+          .eng;
+      if (matches[left] != expected) return false;
+    }
+    return true;
+  }
+
+  List<String> _answerWords(String answer) {
+    return answer
+        .replaceAll(RegExp(r'[.!?"]'), '')
+        .split(RegExp(r'\s+'))
+        .where((word) => word.isNotEmpty)
+        .toList();
+  }
+
+  String _normalizeAnswer(String value) {
+    return value
+        .toLowerCase()
+        .replaceAll(RegExp(r'[.!?"]'), '')
+        .replaceAll(RegExp(r'\s+'), ' ')
+        .trim();
+  }
+
+  void _selectMatchLeft(String left) {
+    if (checked || matches.containsKey(left)) return;
+    setState(() {
+      selectedMatchLeft = selectedMatchLeft == left ? null : left;
+      _clearWrongMatch();
+    });
+  }
+
+  void _selectMatchRight(String right) {
+    if (checked || selectedMatchLeft == null || matches.containsValue(right)) {
+      return;
+    }
+
+    final left = selectedMatchLeft!;
+    final expected = LessonBank.terms
+        .firstWhere((term) => term.hil == left)
+        .eng;
+    setState(() {
+      // Matching questions immediately store correct pairs. A wrong pair marks
+      // the whole matching question wrong for scoring.
+      if (expected == right) {
+        matches[left] = right;
+        _clearWrongMatch();
+        newMatchLeft = left;
+        newMatchRight = right;
+        matchPulseAttempt++;
+        _scheduleMatchedPulseClear(matchPulseAttempt);
+      } else {
+        hadWrongMatchAttempt = true;
+        wrongMatchLeft = left;
+        wrongMatchRight = right;
+        wrongMatchAttempt++;
+        _scheduleWrongMatchClear(wrongMatchAttempt);
+      }
+      selectedMatchLeft = null;
+    });
+  }
+
+  void _clearWrongMatch() {
+    _wrongMatchClearTimer?.cancel();
+    _wrongMatchClearTimer = null;
+    wrongMatchLeft = null;
+    wrongMatchRight = null;
+  }
+
+  void _scheduleWrongMatchClear(int attempt) {
+    _wrongMatchClearTimer?.cancel();
+    _wrongMatchClearTimer = Timer(const Duration(seconds: 1), () {
+      if (!mounted || attempt != wrongMatchAttempt) return;
+      setState(_clearWrongMatch);
+    });
+  }
+
+  void _clearMatchedPulse() {
+    _matchedPulseTimer?.cancel();
+    _matchedPulseTimer = null;
+    newMatchLeft = null;
+    newMatchRight = null;
+  }
+
+  void _scheduleMatchedPulseClear(int attempt) {
+    _matchedPulseTimer?.cancel();
+    _matchedPulseTimer = Timer(const Duration(milliseconds: 650), () {
+      if (!mounted || attempt != matchPulseAttempt) return;
+      setState(_clearMatchedPulse);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final progress = (questionIndex + 1) / questions.length;
+    final feedbackPhrase = _feedbackPhraseFor(currentQuestion);
+    final feedbackMeaning = _feedbackMeaningFor(currentQuestion);
+    final showMeaning = currentQuestion.type != QuestionType.matching;
+
+    return Scaffold(
+      backgroundColor: TudloColors.paper,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(18, 12, 18, 18),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(999),
+                      child: LinearProgressIndicator(
+                        value: progress,
+                        minHeight: 18,
+                        backgroundColor: TudloColors.line,
+                        color: TudloColors.green,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 14),
+                  Text(
+                    '${questionIndex + 1}/${questions.length}',
+                    style: const TextStyle(
+                      color: TudloColors.forest,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 26),
+              Align(
+                alignment: currentQuestion.type == QuestionType.fillBlank
+                    ? Alignment.centerLeft
+                    : Alignment.center,
+                child: Text(
+                  _titleFor(currentQuestion.type),
+                  textAlign: currentQuestion.type == QuestionType.fillBlank
+                      ? TextAlign.left
+                      : TextAlign.center,
+                  style: const TextStyle(
+                    color: TudloColors.ink,
+                    fontSize: 31,
+                    fontWeight: FontWeight.w900,
+                    height: 1.05,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 22),
+              Expanded(child: _exerciseArea(currentQuestion)),
+              if (checked) ...[
+                const SizedBox(height: 12),
+                _FeedbackBanner(
+                  correct: lastCorrect,
+                  phrase: feedbackPhrase,
+                  meaning: feedbackMeaning,
+                  showDetails: showMeaning,
+                ),
+              ],
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                height: 64,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: checked
+                        ? TudloColors.green
+                        : TudloColors.green,
+                    foregroundColor: Colors.white,
+                    disabledBackgroundColor: TudloColors.line,
+                    disabledForegroundColor: TudloColors.muted,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  onPressed: canContinue ? _nextQuestion : null,
+                  child: Text(
+                    checked
+                        ? (questionIndex == questions.length - 1
+                              ? 'FINISH'
+                              : 'CONTINUE')
+                        : 'CHECK',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  String _titleFor(QuestionType type) {
+    return switch (type) {
+      QuestionType.translationChoice => 'Choose the translation',
+      QuestionType.imageChoice => currentQuestion.prompt,
+      QuestionType.typedTranslation => 'Translate the sentence',
+      QuestionType.arrangeWords => 'Arrange the words',
+      QuestionType.matching => 'Match the words',
+      QuestionType.fillBlank => 'Complete the sentence',
+      _ => 'Choose the answer',
+    };
+  }
+
+  String _feedbackPhraseFor(LessonQuestion question) {
+    // Missing-word tutorial questions show the completed sentence after CHECK,
+    // matching the real lesson game feedback.
+    final match = RegExp(r'"([^"]+)"').firstMatch(question.prompt);
+    final sentence = match?.group(1) ?? question.prompt;
+    if (sentence.contains('___')) {
+      return _fillBlanks(sentence, question.answer.split(' '));
+    }
+    return question.targetPhrase;
+  }
+
+  String _fillBlanks(String sentence, List<String> answers) {
+    var index = 0;
+    return sentence.replaceAllMapped(RegExp(r'_{3,}'), (_) {
+      if (answers.isEmpty) return '';
+      if (index >= answers.length) return answers.last;
+      return answers[index++];
+    });
+  }
+
+  String _feedbackMeaningFor(LessonQuestion question) {
+    if (question.sentenceMeaning.trim().isNotEmpty) {
+      return question.sentenceMeaning.trim();
+    }
+    return question.targetMeaning.trim();
+  }
+
+  Widget _buildQuestionBody(LessonQuestion q) {
+    // Each evaluation question type uses a different interaction widget, but
+    // all answers flow back into the same scoring state above.
+    if (q.type == QuestionType.matching) {
+      return _MatchingExercise(
+        question: q,
+        matches: matches,
+        selectedLeft: selectedMatchLeft,
+        wrongLeft: wrongMatchLeft,
+        wrongRight: wrongMatchRight,
+        wrongAttempt: wrongMatchAttempt,
+        newMatchLeft: newMatchLeft,
+        newMatchRight: newMatchRight,
+        matchPulseAttempt: matchPulseAttempt,
+        onSelectLeft: _selectMatchLeft,
+        onSelectRight: _selectMatchRight,
+      );
+    }
+
+    if (q.type == QuestionType.imageChoice) {
+      return _ImageChoiceGrid(
+        question: q,
+        selected: selectedAnswer,
+        checked: checked,
+        onSelected: (value) {
+          if (checked) return;
+          setState(() => selectedAnswer = value);
+        },
+      );
+    }
+
+    if (q.type == QuestionType.typedTranslation) {
+      return _TypedAnswerBox(
+        controller: typedAnswerController,
+        checked: checked,
+        correct: checked && lastCorrect,
+        answer: q.answer,
+        onChanged: (_) => setState(() {}),
+      );
+    }
+
+    if (q.type == QuestionType.arrangeWords ||
+        q.type == QuestionType.fillBlank) {
+      return _WordBuilderExercise(
+        question: q,
+        builtWords: builtWords,
+        checked: checked,
+        correct: checked && lastCorrect,
+        onAddWord: (word) {
+          if (checked) return;
+          setState(() => builtWords.add(word));
+        },
+        onRemoveWord: (index) {
+          if (checked) return;
+          setState(() => builtWords.removeAt(index));
+        },
+      );
+    }
+
+    return _ChoiceList(
+      choices: q.choices,
+      selected: selectedAnswer,
+      checked: checked,
+      answer: q.answer,
+      feedbackAttempt: answerFeedbackAttempt,
+      choiceMeanings: {
+        for (final choice in q.choices) choice: translatedMeaningFor(choice),
+      },
+      onSelected: (value) {
+        if (checked) return;
+        setState(() => selectedAnswer = value);
+      },
+    );
+  }
+
+  Widget _exerciseArea(LessonQuestion q) {
+    if (q.type == QuestionType.matching) {
+      return _buildQuestionBody(q);
+    }
+
+    if (q.type == QuestionType.imageChoice ||
+        q.type == QuestionType.fillBlank) {
+      return SingleChildScrollView(child: _buildQuestionBody(q));
+    }
+
+    if (q.type == QuestionType.arrangeWords) {
+      return SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _PromptCard(question: q),
+            const SizedBox(height: 18),
+            _buildQuestionBody(q),
+          ],
+        ),
+      );
+    }
+
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _PromptCard(question: q),
+          const SizedBox(height: 26),
+          _buildQuestionBody(q),
+        ],
+      ),
+    );
+  }
+}
+
+Future<void> showEvaluationResultDialog({required BuildContext context}) {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false,
+    barrierColor: TudloColors.ink.withValues(alpha: .58),
+    builder: (_) {
+      return BackdropFilter(
+        filter: ui.ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+        child: const _EvaluationCompleteDialog(),
+      );
+    },
+  );
+}
+
+class _EvaluationCompleteDialog extends StatelessWidget {
+  const _EvaluationCompleteDialog();
+
+  @override
+  Widget build(BuildContext context) {
+    final modalWidth = (MediaQuery.sizeOf(context).width * .86)
+        .clamp(304.0, 384.0)
+        .toDouble();
+    final bannerWidth = (modalWidth * .64).clamp(210.0, 260.0).toDouble();
+
+    return Dialog(
+      insetPadding: const EdgeInsets.symmetric(horizontal: 22, vertical: 24),
+      backgroundColor: Colors.transparent,
+      child: TweenAnimationBuilder<double>(
+        tween: Tween(begin: .92, end: 1),
+        duration: const Duration(milliseconds: 320),
+        curve: Curves.easeOutBack,
+        builder: (context, value, child) {
+          return Opacity(
+            opacity: ((value - .92) / .08).clamp(0, 1),
+            child: Transform.scale(scale: value, child: child),
+          );
+        },
+        child: SizedBox(
+          width: modalWidth,
+          height: 350,
+          child: Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.topCenter,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 54),
+                padding: const EdgeInsets.fromLTRB(22, 82, 22, 22),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFFCF7),
+                  borderRadius: BorderRadius.circular(34),
+                  border: Border.all(
+                    color: TudloColors.green.withValues(alpha: .20),
+                    width: 2.5,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: .20),
+                      blurRadius: 34,
+                      offset: const Offset(0, 18),
+                    ),
+                    BoxShadow(
+                      color: TudloColors.green.withValues(alpha: .12),
+                      blurRadius: 22,
+                      offset: const Offset(0, 7),
+                    ),
+                  ],
+                ),
+                child: Stack(
+                  children: [
+                    const Positioned(
+                      left: 8,
+                      top: 8,
+                      child: _SoftSparkle(size: 16, opacity: .28),
+                    ),
+                    const Positioned(
+                      right: 18,
+                      top: 34,
+                      child: _SoftSparkle(size: 12, opacity: .22),
+                    ),
+                    Column(
+                      children: [
+                        const Spacer(),
+                        const Text(
+                          "Let's get started",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: TudloColors.ink,
+                            fontSize: 30,
+                            height: 1,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          'Your lessons are ready.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: TudloColors.muted.withValues(alpha: .92),
+                            fontSize: 15,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        const Spacer(),
+                        _ResultContinueButton(
+                          onPressed: () {
+                            // Continue button:
+                            // After the evaluation result is shown, this clears
+                            // the onboarding routes and directs the user to the
+                            // Home Map inside the main AppShell.
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const AppShell(initialIndex: 0),
+                              ),
+                              (route) => false,
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Positioned(
+                left: 18,
+                top: 6,
+                child: Transform.rotate(
+                  angle: -.10,
+                  child: const SizedBox(
+                    width: 92,
+                    height: 92,
+                    child: TudloMascot(size: 92),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 34,
+                child: Container(
+                  width: bannerWidth,
+                  height: 72,
+                  decoration: BoxDecoration(
+                    color: TudloColors.green,
+                    borderRadius: BorderRadius.circular(22),
+                    border: Border.all(
+                      color: Colors.white.withValues(alpha: .70),
+                      width: 3,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: TudloColors.green.withValues(alpha: .22),
+                        blurRadius: 14,
+                        offset: const Offset(0, 8),
+                      ),
+                    ],
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Wow!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 32,
+                        height: 1,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ResultContinueButton extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  const _ResultContinueButton({required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 66,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: TudloColors.green,
+          foregroundColor: Colors.white,
+          elevation: 0,
+          shadowColor: Colors.transparent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(28),
+          ),
+          textStyle: const TextStyle(fontSize: 23, fontWeight: FontWeight.w900),
+        ),
+        child: const Text('Continue'),
+      ),
+    );
+  }
+}
+
+class _SoftSparkle extends StatelessWidget {
+  final double size;
+  final double opacity;
+
+  const _SoftSparkle({required this.size, required this.opacity});
+
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      Icons.auto_awesome_rounded,
+      color: TudloColors.green.withValues(alpha: opacity),
+      size: size,
+    );
+  }
+}
+
+class _FeedbackBanner extends StatelessWidget {
+  final bool correct;
+  final String phrase;
+  final String meaning;
+  final bool showDetails;
+
+  const _FeedbackBanner({
+    required this.correct,
+    required this.phrase,
+    required this.meaning,
+    required this.showDetails,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final accent = correct ? TudloColors.green : TudloColors.coral;
+    final title = correct ? 'Excellent!' : 'Try again';
+    final subtitle = correct ? "You're correct!" : 'Check the answer below.';
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(14, 16, 14, 16),
+      decoration: BoxDecoration(
+        color: correct
+            ? TudloColors.softGreen.withValues(alpha: .92)
+            : TudloColors.coral.withValues(alpha: .10),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: accent.withValues(alpha: .22), width: 2),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const TudloMascot(size: 92),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: accent,
+                    fontSize: 30,
+                    height: 1,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    color: accent,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                if (showDetails) ...[
+                  const SizedBox(height: 12),
+                  Row(
+                    children: [
+                      Flexible(
+                        child: Text(
+                          phrase,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: TudloColors.ink,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Icon(Icons.volume_up_rounded, color: accent, size: 26),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  if (meaning.trim().isNotEmpty)
+                    Text(
+                      meaning,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: TudloColors.muted,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                ],
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PromptCard extends StatelessWidget {
+  final LessonQuestion question;
+
+  const _PromptCard({required this.question});
+
+  @override
+  Widget build(BuildContext context) {
+    // Same prompt layout as the real lesson game: Koka speaks the question in
+    // a rounded bubble, with a speaker icon at the start of the prompt.
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          const SizedBox(
+            width: 108,
+            height: 130,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: TudloMascot(size: 112),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              margin: const EdgeInsets.only(left: 8, bottom: 10),
+              padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(22),
+                border: Border.all(color: TudloColors.line, width: 4),
+                boxShadow: [
+                  BoxShadow(
+                    color: TudloColors.ink.withValues(alpha: .08),
+                    blurRadius: 18,
+                    offset: const Offset(0, 9),
+                  ),
+                ],
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 2, right: 12),
+                    child: Icon(
+                      Icons.volume_up_rounded,
+                      color: TudloColors.green,
+                      size: 34,
+                    ),
+                  ),
+                  Expanded(child: _PromptText(question: question)),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PromptText extends StatelessWidget {
+  final LessonQuestion question;
+
+  const _PromptText({required this.question});
+
+  @override
+  Widget build(BuildContext context) {
+    final promptText = _displayPrompt(question.prompt);
+    const style = TextStyle(
+      color: TudloColors.ink,
+      fontSize: 27,
+      height: 1.2,
+      fontWeight: FontWeight.w900,
+    );
+
+    if (question.type == QuestionType.arrangeWords) {
+      return Text(promptText, style: style);
+    }
+
+    if (question.targetPhrase.trim().isEmpty ||
+        question.targetMeaning.trim().isEmpty) {
+      return Text(promptText, style: style);
+    }
+
+    return TapWordMeaningText(
+      fullQuestionText: promptText,
+      targetPhrase: question.targetPhrase,
+      targetMeaning: question.targetMeaning,
+      directionLabel: question.directionLabel,
+      style: style,
+      includeKnownWords: true,
+    );
+  }
+
+  String _displayPrompt(String prompt) {
+    final match = RegExp(r'"([^"]+)"').firstMatch(prompt);
+    final quoted = match?.group(1);
+    return quoted == null ? _quoteOnce(prompt) : _quoteOnce(quoted);
+  }
+
+  String _quoteOnce(String value) {
+    final trimmed = value.trim();
+    if (trimmed.startsWith('"') && trimmed.endsWith('"')) return trimmed;
+    return '"$trimmed"';
+  }
+}
+
+class _ChoiceList extends StatelessWidget {
+  final List<String> choices;
+  final String? selected;
+  final bool checked;
+  final String answer;
+  final int feedbackAttempt;
+  final Map<String, String> choiceMeanings;
+  final ValueChanged<String> onSelected;
+
+  const _ChoiceList({
+    required this.choices,
+    required this.selected,
+    required this.checked,
+    required this.answer,
+    required this.feedbackAttempt,
+    required this.choiceMeanings,
+    required this.onSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: choices.map((choice) {
+        final active = selected == choice;
+        final correct = checked && active && choice == answer;
+        final wrong = checked && active && choice != answer;
+        return _AnswerTile(
+          label: choice,
+          active: active,
+          correct: correct,
+          wrong: wrong,
+          feedbackKey: active ? feedbackAttempt : 0,
+          longPressMeaning: choiceMeanings[choice] ?? choice,
+          onTap: checked ? null : () => onSelected(choice),
+        );
+      }).toList(),
+    );
+  }
+}
+
+class _ImageChoiceGrid extends StatelessWidget {
+  final LessonQuestion question;
+  final String? selected;
+  final bool checked;
+  final ValueChanged<String> onSelected;
+
+  const _ImageChoiceGrid({
+    required this.question,
+    required this.selected,
+    required this.checked,
+    required this.onSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final cards = question.imageChoices.take(4).map((choice) {
+      final active = selected == choice.hil;
+      final correct = checked && active && choice.hil == question.answer;
+      final wrong = checked && active && choice.hil != question.answer;
+
+      return Expanded(
+        child: InkWell(
+          borderRadius: BorderRadius.circular(24),
+          onTap: checked ? null : () => onSelected(choice.hil),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 140),
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              color: correct
+                  ? TudloColors.green.withValues(alpha: .10)
+                  : wrong
+                  ? TudloColors.coral.withValues(alpha: .08)
+                  : active
+                  ? TudloColors.green.withValues(alpha: .08)
+                  : Colors.white,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(
+                color: correct || active
+                    ? TudloColors.green
+                    : wrong
+                    ? TudloColors.coral
+                    : TudloColors.line,
+                width: correct || wrong || active ? 4 : 3,
+              ),
+            ),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Image.asset(
+                    choice.imagePath ?? '',
+                    fit: BoxFit.contain,
+                    filterQuality: FilterQuality.high,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  choice.hil,
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: wrong ? TudloColors.coral : TudloColors.ink,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }).toList();
+
+    while (cards.length < 4) {
+      cards.add(const Expanded(child: SizedBox.shrink()));
+    }
+
+    return SizedBox(
+      height: 520,
+      child: Column(
+        children: [
+          Expanded(
+            child: Row(
+              children: [cards[0], const SizedBox(width: 14), cards[1]],
+            ),
+          ),
+          const SizedBox(height: 14),
+          Expanded(
+            child: Row(
+              children: [cards[2], const SizedBox(width: 14), cards[3]],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TypedAnswerBox extends StatelessWidget {
+  final TextEditingController controller;
+  final bool checked;
+  final bool correct;
+  final String answer;
+  final ValueChanged<String> onChanged;
+
+  const _TypedAnswerBox({
+    required this.controller,
+    required this.checked,
+    required this.correct,
+    required this.answer,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final borderColor = checked
+        ? correct
+              ? TudloColors.green
+              : TudloColors.coral
+        : TudloColors.line;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 140),
+          padding: const EdgeInsets.fromLTRB(18, 10, 18, 10),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(28),
+            border: Border.all(color: borderColor, width: 4),
+          ),
+          child: TextField(
+            controller: controller,
+            readOnly: checked,
+            minLines: 3,
+            maxLines: 4,
+            cursorColor: TudloColors.green,
+            onChanged: onChanged,
+            style: const TextStyle(
+              color: TudloColors.ink,
+              fontSize: 23,
+              height: 1.25,
+              fontWeight: FontWeight.w800,
+            ),
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+              hintText: 'Type the translation here',
+              hintStyle: TextStyle(
+                color: TudloColors.muted,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ),
+        if (checked && !correct) ...[
+          const SizedBox(height: 12),
+          Text(
+            'Correct answer: $answer',
+            style: const TextStyle(
+              color: TudloColors.forest,
+              fontSize: 18,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _WordBuilderExercise extends StatelessWidget {
+  final LessonQuestion question;
+  final List<String> builtWords;
+  final bool checked;
+  final bool correct;
+  final ValueChanged<String> onAddWord;
+  final ValueChanged<int> onRemoveWord;
+
+  const _WordBuilderExercise({
+    required this.question,
+    required this.builtWords,
+    required this.checked,
+    required this.correct,
+    required this.onAddWord,
+    required this.onRemoveWord,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (question.type == QuestionType.fillBlank) {
+      return _ScenarioFillBlankExercise(
+        question: question,
+        builtWords: builtWords,
+        checked: checked,
+        correct: correct,
+        onAddWord: onAddWord,
+        onRemoveWord: onRemoveWord,
+      );
+    }
+
+    return _BuildSentenceExercise(
+      question: question,
+      builtWords: builtWords,
+      checked: checked,
+      correct: correct,
+      onAddWord: onAddWord,
+      onRemoveWord: onRemoveWord,
+    );
+  }
+}
+
+class _ScenarioFillBlankExercise extends StatelessWidget {
+  final LessonQuestion question;
+  final List<String> builtWords;
+  final bool checked;
+  final bool correct;
+  final ValueChanged<String> onAddWord;
+  final ValueChanged<int> onRemoveWord;
+
+  const _ScenarioFillBlankExercise({
+    required this.question,
+    required this.builtWords,
+    required this.checked,
+    required this.correct,
+    required this.onAddWord,
+    required this.onRemoveWord,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final available = [...question.choices];
+    for (final word in builtWords) {
+      available.remove(word);
+    }
+    final sentence = _missingSentenceFrom(question.prompt);
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final hasImage = question.imagePath.trim().isNotEmpty;
+        final imageHeight = hasImage
+            ? (constraints.maxHeight * .46).clamp(260.0, 360.0).toDouble()
+            : 0.0;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (hasImage) ...[
+              Center(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: 500,
+                    maxHeight: imageHeight,
+                  ),
+                  child: Image.asset(
+                    question.imagePath,
+                    fit: BoxFit.contain,
+                    filterQuality: FilterQuality.high,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+            ],
+            _ScenarioSentenceText(
+              sentence: sentence,
+              builtWords: builtWords,
+              checked: checked,
+              correct: correct,
+              wordMeanings: question.wordMeanings,
+              onRemoveWord: onRemoveWord,
+            ),
+            const SizedBox(height: 24),
+            _ScenarioWordChoices(
+              choices: available,
+              checked: checked,
+              answerWords: question.answer.split(' '),
+              wordMeanings: question.wordMeanings,
+              onAdd: onAddWord,
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  String _missingSentenceFrom(String prompt) {
+    final match = RegExp(r'"([^"]+)"').firstMatch(prompt);
+    return match?.group(1) ?? prompt;
+  }
+}
+
+class _ScenarioSentenceText extends StatelessWidget {
+  final String sentence;
+  final List<String> builtWords;
+  final bool checked;
+  final bool correct;
+  final Map<String, String> wordMeanings;
+  final ValueChanged<int> onRemoveWord;
+
+  const _ScenarioSentenceText({
+    required this.sentence,
+    required this.builtWords,
+    required this.checked,
+    required this.correct,
+    required this.wordMeanings,
+    required this.onRemoveWord,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    var blankIndex = 0;
+    final words = sentence.split(RegExp(r'\s+'));
+
+    return Wrap(
+      alignment: WrapAlignment.start,
+      crossAxisAlignment: WrapCrossAlignment.end,
+      spacing: 9,
+      runSpacing: 16,
+      children: words.map((word) {
+        if (word.contains('___')) {
+          final currentBlank = blankIndex;
+          final suffix = word.replaceFirst(RegExp(r'_{3,}'), '');
+          final selectedWord = blankIndex < builtWords.length
+              ? builtWords[blankIndex]
+              : '';
+          final chip = _ScenarioBlankChip(
+            label: selectedWord,
+            checked: checked,
+            correct: correct,
+            onTap: selectedWord.isEmpty || checked
+                ? null
+                : () => onRemoveWord(currentBlank),
+          );
+          blankIndex++;
+          if (suffix.isEmpty) return chip;
+          return Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              chip,
+              Text(
+                suffix,
+                style: const TextStyle(
+                  color: TudloColors.ink,
+                  fontSize: 25,
+                  height: 1.15,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ],
+          );
+        }
+
+        final key = _meaningKeyFor(word);
+        final meaning = wordMeanings[key] ?? '';
+        final text = Text(
+          word,
+          style: TextStyle(
+            color: TudloColors.ink,
+            fontSize: 25,
+            height: 1.15,
+            fontWeight: FontWeight.w900,
+            decoration: meaning.isEmpty ? null : TextDecoration.underline,
+            decorationStyle: TextDecorationStyle.dotted,
+            decorationColor: TudloColors.brightGreen,
+            decorationThickness: 2,
+          ),
+        );
+        return meaning.isEmpty
+            ? text
+            : WordMeaningTooltipTarget(
+                meaning: meaning,
+                showOnTap: true,
+                child: text,
+              );
+      }).toList(),
+    );
+  }
+
+  String _meaningKeyFor(String word) {
+    return word.replaceAll(RegExp(r'^[^\w-]+|[^\w-]+$'), '');
+  }
+}
+
+class _ScenarioBlankChip extends StatelessWidget {
+  final String label;
+  final bool checked;
+  final bool correct;
+  final VoidCallback? onTap;
+
+  const _ScenarioBlankChip({
+    required this.label,
+    required this.checked,
+    required this.correct,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final hasWord = label.trim().isNotEmpty;
+    final color = checked
+        ? correct
+              ? TudloColors.green
+              : TudloColors.coral
+        : TudloColors.green;
+
+    return InkWell(
+      borderRadius: BorderRadius.circular(14),
+      onTap: onTap,
+      child: Container(
+        constraints: const BoxConstraints(minWidth: 82, minHeight: 38),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+        decoration: BoxDecoration(
+          color: hasWord ? color.withValues(alpha: .12) : Colors.transparent,
+          borderRadius: BorderRadius.circular(14),
+          border: hasWord
+              ? Border.all(color: color.withValues(alpha: .72), width: 2.5)
+              : Border(
+                  bottom: BorderSide(
+                    color: TudloColors.muted.withValues(alpha: .55),
+                    width: 3,
+                  ),
+                ),
+        ),
+        child: Text(
+          hasWord ? label : '',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: checked && !correct ? TudloColors.coral : TudloColors.ink,
+            fontSize: 22,
+            height: 1,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ScenarioWordChoices extends StatelessWidget {
+  final List<String> choices;
+  final bool checked;
+  final List<String> answerWords;
+  final Map<String, String> wordMeanings;
+  final ValueChanged<String> onAdd;
+
+  const _ScenarioWordChoices({
+    required this.choices,
+    required this.checked,
+    required this.answerWords,
+    required this.wordMeanings,
+    required this.onAdd,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      alignment: WrapAlignment.center,
+      spacing: 10,
+      runSpacing: 10,
+      children: choices.map((choice) {
+        final canRevealMeaning = !answerWords.any(
+          (answer) => answer.toLowerCase() == choice.toLowerCase(),
+        );
+        final chip = ActionChip(
+          label: Text(choice),
+          labelPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          visualDensity: VisualDensity.compact,
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+            side: const BorderSide(color: TudloColors.line, width: 2.5),
+          ),
+          labelStyle: const TextStyle(
+            color: TudloColors.ink,
+            fontSize: 17,
+            fontWeight: FontWeight.w900,
+          ),
+          onPressed: checked ? () {} : () => onAdd(choice),
+        );
+        final meaning = canRevealMeaning ? wordMeanings[choice] ?? '' : '';
+        return meaning.isEmpty
+            ? chip
+            : WordMeaningTooltipTarget(meaning: meaning, child: chip);
+      }).toList(),
+    );
+  }
+}
+
+class _BuildSentenceExercise extends StatelessWidget {
+  final LessonQuestion question;
+  final List<String> builtWords;
+  final bool checked;
+  final bool correct;
+  final ValueChanged<String> onAddWord;
+  final ValueChanged<int> onRemoveWord;
+
+  const _BuildSentenceExercise({
+    required this.question,
+    required this.builtWords,
+    required this.checked,
+    required this.correct,
+    required this.onAddWord,
+    required this.onRemoveWord,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final available = [...question.sentenceWords];
+    for (final word in builtWords) {
+      available.remove(word);
+    }
+
+    const imageHeight = 170.0;
+    final answerHeight = checked ? 150.0 : 120.0;
+    final wordBlockHeight = checked ? 24.0 : 120.0;
+    final hasImage = question.imagePath.trim().isNotEmpty;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (hasImage) ...[
+          Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: 520,
+                maxHeight: imageHeight,
+              ),
+              child: Image.asset(
+                question.imagePath,
+                fit: BoxFit.contain,
+                filterQuality: FilterQuality.high,
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+        ],
+        Container(
+          width: double.infinity,
+          height: answerHeight,
+          padding: const EdgeInsets.symmetric(horizontal: 4),
+          child: Stack(
+            children: [
+              Positioned(
+                left: 0,
+                right: 0,
+                top: answerHeight * .38,
+                child: const _BuildSentenceLine(),
+              ),
+              Positioned(
+                left: 0,
+                right: 0,
+                top: answerHeight * .76,
+                child: const _BuildSentenceLine(),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: Wrap(
+                  spacing: 8,
+                  runSpacing: 7,
+                  children: builtWords.asMap().entries.map((entry) {
+                    return ActionChip(
+                      label: Text(entry.value),
+                      labelPadding: const EdgeInsets.symmetric(
+                        horizontal: 13,
+                        vertical: 7,
+                      ),
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      visualDensity: VisualDensity.compact,
+                      backgroundColor: Colors.white,
+                      disabledColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18),
+                        side: const BorderSide(
+                          color: TudloColors.line,
+                          width: 2.5,
+                        ),
+                      ),
+                      labelStyle: const TextStyle(
+                        color: TudloColors.ink,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w900,
+                      ),
+                      onPressed: checked
+                          ? () {}
+                          : () => onRemoveWord(entry.key),
+                    );
+                  }).toList(),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 12),
+        SizedBox(
+          height: wordBlockHeight,
+          child: Center(
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              runAlignment: WrapAlignment.center,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 10,
+              runSpacing: 10,
+              children: available.map((word) {
+                return WordMeaningTooltipTarget(
+                  meaning: translatedMeaningFor(word),
+                  child: ActionChip(
+                    label: Text(word),
+                    labelPadding: const EdgeInsets.symmetric(
+                      horizontal: 13,
+                      vertical: 7,
+                    ),
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    visualDensity: VisualDensity.compact,
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                      side: const BorderSide(
+                        color: TudloColors.line,
+                        width: 2.5,
+                      ),
+                    ),
+                    labelStyle: const TextStyle(
+                      color: TudloColors.ink,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w900,
+                    ),
+                    onPressed: checked ? () {} : () => onAddWord(word),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _BuildSentenceLine extends StatelessWidget {
+  const _BuildSentenceLine();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 4,
+      decoration: BoxDecoration(
+        color: TudloColors.line.withValues(alpha: .78),
+        borderRadius: BorderRadius.circular(999),
+      ),
+    );
+  }
+}
+
+class _MatchingExercise extends StatelessWidget {
+  final LessonQuestion question;
+  final Map<String, String> matches;
+  final String? selectedLeft;
+  final String? wrongLeft;
+  final String? wrongRight;
+  final int wrongAttempt;
+  final String? newMatchLeft;
+  final String? newMatchRight;
+  final int matchPulseAttempt;
+  final ValueChanged<String> onSelectLeft;
+  final ValueChanged<String> onSelectRight;
+
+  const _MatchingExercise({
+    required this.question,
+    required this.matches,
+    required this.selectedLeft,
+    required this.wrongLeft,
+    required this.wrongRight,
+    required this.wrongAttempt,
+    required this.newMatchLeft,
+    required this.newMatchRight,
+    required this.matchPulseAttempt,
+    required this.onSelectLeft,
+    required this.onSelectRight,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final leftItems = question.leftItems;
+    final rightItems = question.rightItems;
+    final usedRight = matches.values.toSet();
+    final maxRows = leftItems.length > rightItems.length
+        ? leftItems.length
+        : rightItems.length;
+
+    return Column(
+      children: List.generate(maxRows, (index) {
+        final left = index < leftItems.length ? leftItems[index] : null;
+        final right = index < rightItems.length ? rightItems[index] : null;
+
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 14),
+          child: Row(
+            children: [
+              Expanded(
+                child: left == null
+                    ? const SizedBox(height: 76)
+                    : _MatchTile(
+                        label: left,
+                        selected: selectedLeft == left,
+                        matched: matches.containsKey(left),
+                        wrong: wrongLeft == left,
+                        justMatched: newMatchLeft == left,
+                        shakeKey: wrongLeft == left ? wrongAttempt : 0,
+                        jumpKey: newMatchLeft == left ? matchPulseAttempt : 0,
+                        onTap: () => onSelectLeft(left),
+                      ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: right == null
+                    ? const SizedBox(height: 76)
+                    : _MatchTile(
+                        label: right,
+                        selected: false,
+                        matched: usedRight.contains(right),
+                        wrong: wrongRight == right,
+                        justMatched: newMatchRight == right,
+                        shakeKey: wrongRight == right ? wrongAttempt : 0,
+                        jumpKey: newMatchRight == right ? matchPulseAttempt : 0,
+                        onTap: () => onSelectRight(right),
+                        compact: true,
+                      ),
+              ),
+            ],
+          ),
+        );
+      }),
+    );
+  }
+}
+
+class _MatchTile extends StatelessWidget {
+  final String label;
+  final bool selected;
+  final bool matched;
+  final bool wrong;
+  final bool justMatched;
+  final int shakeKey;
+  final int jumpKey;
+  final bool compact;
+  final VoidCallback onTap;
+
+  const _MatchTile({
+    required this.label,
+    required this.selected,
+    required this.matched,
+    required this.wrong,
+    required this.justMatched,
+    required this.shakeKey,
+    required this.jumpKey,
+    required this.onTap,
+    this.compact = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final active = selected || matched || wrong || justMatched;
+    final borderColor = wrong
+        ? TudloColors.coral
+        : justMatched
+        ? TudloColors.green
+        : matched
+        ? TudloColors.line
+        : active
+        ? TudloColors.green
+        : TudloColors.line;
+    final textColor = justMatched
+        ? TudloColors.green
+        : matched
+        ? TudloColors.muted
+        : wrong
+        ? TudloColors.coral
+        : TudloColors.ink;
+    final backgroundColor = wrong
+        ? TudloColors.coral.withValues(alpha: .08)
+        : justMatched
+        ? TudloColors.green.withValues(alpha: .10)
+        : matched
+        ? TudloColors.paper
+        : active
+        ? TudloColors.green.withValues(alpha: .08)
+        : Colors.white;
+    final shadowColor = wrong ? TudloColors.coral : TudloColors.green;
+
+    return WordMeaningTooltipTarget(
+      meaning: translatedMeaningFor(label),
+      child: TweenAnimationBuilder<double>(
+        key: ValueKey('$label-$shakeKey-$jumpKey'),
+        tween: Tween(begin: 0, end: (wrong || justMatched) ? 1 : 0),
+        duration: const Duration(milliseconds: 420),
+        curve: Curves.easeOut,
+        builder: (context, value, child) {
+          final shakeOffset = wrong
+              ? math.sin(value * math.pi * 6) * (1 - value) * 9
+              : 0.0;
+          final jumpOffset = justMatched
+              ? -math.sin(value * math.pi) * (1 - value * .25) * 10
+              : 0.0;
+
+          return Transform.translate(
+            offset: Offset(shakeOffset, jumpOffset),
+            child: child,
+          );
+        },
+        child: InkWell(
+          borderRadius: BorderRadius.circular(18),
+          onTap: matched ? null : onTap,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 120),
+            height: 76,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+              color: backgroundColor,
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(color: borderColor, width: active ? 4 : 3),
+              boxShadow: active
+                  ? [
+                      BoxShadow(
+                        color: shadowColor.withValues(alpha: .16),
+                        blurRadius: 12,
+                        offset: const Offset(0, 6),
+                      ),
+                    ]
+                  : null,
+            ),
+            child: Center(
+              child: Text(
+                label,
+                textAlign: TextAlign.center,
+                maxLines: compact ? 2 : 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: compact ? 17 : 20,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _AnswerTile extends StatelessWidget {
+  final String label;
+  final bool active;
+  final bool correct;
+  final bool wrong;
+  final int feedbackKey;
+  final String longPressMeaning;
+  final VoidCallback? onTap;
+
+  const _AnswerTile({
+    required this.label,
+    required this.active,
+    required this.correct,
+    required this.wrong,
+    required this.feedbackKey,
+    required this.longPressMeaning,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final borderColor = correct
+        ? TudloColors.green
+        : wrong
+        ? TudloColors.coral
+        : active
+        ? TudloColors.green
+        : TudloColors.line;
+    final backgroundColor = correct
+        ? TudloColors.green.withValues(alpha: .10)
+        : wrong
+        ? TudloColors.coral.withValues(alpha: .08)
+        : active
+        ? TudloColors.sky.withValues(alpha: .12)
+        : Colors.white;
+
+    return WordMeaningTooltipTarget(
+      meaning: longPressMeaning,
+      child: _FeedbackMotion(
+        key: ValueKey('$label-$feedbackKey'),
+        correct: correct,
+        wrong: wrong,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(32),
+          onTap: onTap,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 140),
+            width: double.infinity,
+            margin: const EdgeInsets.only(bottom: 12),
+            constraints: const BoxConstraints(minHeight: 84),
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 19),
+            decoration: BoxDecoration(
+              color: backgroundColor,
+              borderRadius: BorderRadius.circular(32),
+              border: Border.all(color: borderColor, width: 4),
+            ),
+            child: Center(
+              child: Text(
+                label,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: wrong ? TudloColors.coral : TudloColors.ink,
+                  fontSize: 24,
+                  fontWeight: active ? FontWeight.w900 : FontWeight.w800,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _FeedbackMotion extends StatelessWidget {
+  final bool correct;
+  final bool wrong;
+  final Widget child;
+
+  const _FeedbackMotion({
+    super.key,
+    required this.correct,
+    required this.wrong,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0, end: (correct || wrong) ? 1 : 0),
+      duration: const Duration(milliseconds: 420),
+      curve: Curves.easeOut,
+      builder: (context, value, child) {
+        final shakeOffset = wrong
+            ? math.sin(value * math.pi * 6) * (1 - value) * 9
+            : 0.0;
+        final jumpOffset = correct
+            ? -math.sin(value * math.pi) * (1 - value * .25) * 10
+            : 0.0;
+
+        return Transform.translate(
+          offset: Offset(shakeOffset, jumpOffset),
+          child: child,
+        );
+      },
+      child: child,
+    );
+  }
+}

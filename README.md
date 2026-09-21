@@ -2,6 +2,16 @@
 
 A new Flutter project.
 
+## Run Locally
+
+Use one of these instead of opening `localhost:8080` directly:
+
+- VS Code: open Run and Debug, choose `Tudlo App - Chrome`, then press F5.
+- Terminal: run `.\scripts\run_web.ps1`.
+- Double-click: `scripts\run_web.bat`.
+
+The app will start Flutter for web on `http://localhost:8080`.
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
