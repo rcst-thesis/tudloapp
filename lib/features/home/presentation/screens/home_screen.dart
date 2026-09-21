@@ -202,8 +202,9 @@ class _HomeScreenState extends State<HomeScreen> {
         onOpenStickers: _openStickerScreen,
         onOpenAbout: _openAbout,
         onWordFavoriteChanged: (_) {
-          if (wordId != null)
+          if (wordId != null) {
             LearnerScope.of(context).toggleFavoriteWord(wordId);
+          }
         },
         onLessonTap: _showLessonPreview,
         onLessonsCollapsedChanged: (isCollapsed) {
