@@ -94,8 +94,9 @@ void main() {
     final effects = Directory(
       'assets/audio/effects',
     ).listSync().whereType<File>();
-    expect(effects, isNotEmpty);
-    expect(effects.every((file) => file.path.endsWith('.wav')), isTrue);
+    // The legacy app's low-latency effects are WAV; the v3 app ships MP3
+    // copies for flutter_soloud, so only require the WAV set to be present.
+    expect(effects.any((file) => file.path.endsWith('.wav')), isTrue);
   });
 
   test('dictionary index follows the section nearest the top', () {
@@ -164,6 +165,8 @@ Set<String> _staticImageAssetsFromDart() {
       assetLiteralPattern
           .allMatches(source)
           .map((match) => match.group(0)!)
+          // Skip interpolated paths; only literal assets can be checked.
+          .where((asset) => !asset.contains(r'$'))
           .where(_isImageAsset),
     );
   }

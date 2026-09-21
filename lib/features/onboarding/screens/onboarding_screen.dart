@@ -344,8 +344,9 @@ class _OnboardingBottomNav extends StatelessWidget {
                               backgroundColor: color,
                               foregroundColor: Colors.white,
                               elevation: 0,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ),
                               minimumSize: const Size(104, 42),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(999),
@@ -365,8 +366,9 @@ class _OnboardingBottomNav extends StatelessWidget {
                         : TextButton(
                             onPressed: onNext,
                             style: TextButton.styleFrom(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 4),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 4,
+                              ),
                               minimumSize: const Size(0, 44),
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             ),
