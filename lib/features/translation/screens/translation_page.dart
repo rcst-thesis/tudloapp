@@ -30,11 +30,19 @@ class _TranslateStyle {
   ];
 }
 
-/// Offline English-to-Hiligaynon model translation.
+/// Offline English <-> Hiligaynon model translation.
+///
+/// Either translator can be overridden (tests); a direction without an
+/// override falls back to the dictionary only.
 class TranslationPage extends StatefulWidget {
   final Future<String> Function(String)? translateEnglish;
+  final Future<String> Function(String)? translateHiligaynon;
 
-  const TranslationPage({super.key, this.translateEnglish});
+  const TranslationPage({
+    super.key,
+    this.translateEnglish,
+    this.translateHiligaynon,
+  });
 
   @override
   State<TranslationPage> createState() => _TranslationPageState();
@@ -56,19 +64,22 @@ class _TranslationPageState extends State<TranslationPage> {
   int _requestId = 0;
   Timer? _translationDebounce;
   String? _translationError;
-  ({String text, int requestId})? _pendingRequest;
+  ({String text, int requestId, bool toEnglish})? _pendingRequest;
   NmtTranslationService? _nmtService;
-  late final Future<String> Function(String) _translateEnglish;
+  late final Future<String> Function(String)? _translateEnglish;
+  late final Future<String> Function(String)? _translateHiligaynon;
 
   bool get _filterReady => !AppData.profanityFilterEnabled || _safetyReady;
 
   @override
   void initState() {
     super.initState();
-    _nmtService = widget.translateEnglish == null
-        ? NmtTranslationService()
-        : null;
-    _translateEnglish = widget.translateEnglish ?? _nmtService!.translate;
+    final useModel =
+        widget.translateEnglish == null && widget.translateHiligaynon == null;
+    _nmtService = useModel ? NmtTranslationService() : null;
+    _translateEnglish = widget.translateEnglish ?? _nmtService?.translate;
+    _translateHiligaynon =
+        widget.translateHiligaynon ?? _nmtService?.translateToEnglish;
     topController.addListener(_onInputChanged);
     _safetyReady = ChildSafetyFilter.isReady;
     if (!_safetyReady) {
@@ -119,6 +130,7 @@ class _TranslationPageState extends State<TranslationPage> {
       _isTranslating = false;
       _translationError =
           !_englishInput &&
+              _translateHiligaynon == null &&
               input.trim().isNotEmpty &&
               !AppData.dictionaryFallbackEnabled
           ? 'Dictionary fallback is disabled in Settings.'
@@ -129,10 +141,16 @@ class _TranslationPageState extends State<TranslationPage> {
       }
     });
 
-    if (_englishInput && !inputBlocked && input.trim().isNotEmpty) {
+    final translator = _englishInput ? _translateEnglish : _translateHiligaynon;
+    if (translator != null && !inputBlocked && input.trim().isNotEmpty) {
+      final toEnglish = !_englishInput;
       _translationDebounce = Timer(const Duration(milliseconds: 450), () {
         if (!_isCurrent(input, requestId)) return;
-        _pendingRequest = (text: input, requestId: requestId);
+        _pendingRequest = (
+          text: input,
+          requestId: requestId,
+          toEnglish: toEnglish,
+        );
         unawaited(_drainNmtRequests());
       });
     }
@@ -147,8 +165,11 @@ class _TranslationPageState extends State<TranslationPage> {
         _pendingRequest = null;
         if (!_isCurrent(request.text, request.requestId)) continue;
         setState(() => _isTranslating = true);
+        final translator = request.toEnglish
+            ? _translateHiligaynon!
+            : _translateEnglish!;
         try {
-          final translation = (await _translateEnglish(request.text)).trim();
+          final translation = (await translator(request.text)).trim();
           if (!_isCurrent(request.text, request.requestId)) continue;
           if (translation.isEmpty) {
             throw StateError('The model returned an empty translation.');
@@ -162,7 +183,7 @@ class _TranslationPageState extends State<TranslationPage> {
           final fallback = AppData.dictionaryFallbackEnabled
               ? DictionaryData.translateFallback(
                   request.text,
-                  fromEnglish: true,
+                  fromEnglish: !request.toEnglish,
                 )
               : '';
           setState(() {
@@ -197,7 +218,6 @@ class _TranslationPageState extends State<TranslationPage> {
   bool _isCurrent(String text, int requestId) {
     return !_disposed &&
         mounted &&
-        _englishInput &&
         requestId == _requestId &&
         topController.text == text;
   }
@@ -214,12 +234,15 @@ class _TranslationPageState extends State<TranslationPage> {
   void _submit() {
     if (topController.text.trim().isEmpty || _inputBlocked) return;
     final awaitingModel =
-        _englishInput &&
-        (_isTranslating || (_translationDebounce?.isActive ?? false));
+        _isTranslating || (_translationDebounce?.isActive ?? false);
     if (awaitingModel) {
       _translationDebounce?.cancel();
       _commitPending = true;
-      _pendingRequest ??= (text: topController.text, requestId: _requestId);
+      _pendingRequest ??= (
+        text: topController.text,
+        requestId: _requestId,
+        toEnglish: !_englishInput,
+      );
       unawaited(_drainNmtRequests());
       return;
     }
@@ -243,6 +266,22 @@ class _TranslationPageState extends State<TranslationPage> {
       _isTranslating = false;
       _translationError = null;
     });
+  }
+
+  /// Chevron on the source label: flip the direction but keep the typed text
+  /// and translate it again.
+  void _switchDirection() {
+    if (!_filterReady) return;
+    _translationDebounce?.cancel();
+    _pendingRequest = null;
+    _commitPending = false;
+    _requestId++;
+    setState(() {
+      _englishInput = !_englishInput;
+      _isTranslating = false;
+      _translationError = null;
+    });
+    _onInputChanged();
   }
 
   void _swapLanguages() {
@@ -342,6 +381,7 @@ class _TranslationPageState extends State<TranslationPage> {
                             swapEnabled: _filterReady && !_inputBlocked,
                             busy: !_filterReady || _isTranslating,
                             onSwap: _swapLanguages,
+                            onSwitchDirection: _switchDirection,
                             onSubmit: _submit,
                             onClear: topController.clear,
                           ),
@@ -783,6 +823,7 @@ class _InputCard extends StatelessWidget {
   final bool swapEnabled;
   final bool busy;
   final VoidCallback onSwap;
+  final VoidCallback onSwitchDirection;
   final VoidCallback onSubmit;
   final VoidCallback onClear;
 
@@ -797,6 +838,7 @@ class _InputCard extends StatelessWidget {
     required this.swapEnabled,
     required this.busy,
     required this.onSwap,
+    required this.onSwitchDirection,
     required this.onSubmit,
     required this.onClear,
   });
@@ -832,6 +874,7 @@ class _InputCard extends StatelessWidget {
               _LanguageLabelRow(
                 language: sourceLanguage,
                 color: _TranslateStyle.sourceLabel,
+                onTap: inputEnabled ? onSwitchDirection : null,
                 trailing: sourceText.isEmpty
                     ? const SizedBox(height: 48)
                     : IconButton(
@@ -897,24 +940,58 @@ class _LanguageLabelRow extends StatelessWidget {
   final Color color;
   final Widget trailing;
 
+  /// When set, the label shows a chevron and taps switch the direction.
+  final VoidCallback? onTap;
+
   const _LanguageLabelRow({
     required this.language,
     required this.color,
     required this.trailing,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
+    final label = Text(
+      language,
+      style: GoogleFonts.nunito(
+        color: color,
+        fontSize: 18,
+        fontWeight: FontWeight.w800,
+      ),
+    );
     return Row(
       children: [
         Expanded(
-          child: Text(
-            language,
-            style: GoogleFonts.nunito(
-              color: color,
-              fontSize: 18,
-              fontWeight: FontWeight.w800,
-            ),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: onTap == null
+                ? label
+                : Tooltip(
+                    message: 'Switch input language',
+                    child: InkWell(
+                      onTap: onTap,
+                      borderRadius: BorderRadius.circular(10),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 4,
+                          horizontal: 2,
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            label,
+                            const SizedBox(width: 2),
+                            Icon(
+                              Icons.unfold_more_rounded,
+                              size: 18,
+                              color: color,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
           ),
         ),
         trailing,

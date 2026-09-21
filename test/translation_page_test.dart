@@ -75,6 +75,67 @@ void main() {
     expect(find.text('I, house; home!'), findsOneWidget);
   });
 
+  testWidgets('uses the model for Hiligaynon input when available', (
+    tester,
+  ) async {
+    final hiligaynonRequests = <String>[];
+    await tester.pumpWidget(
+      MaterialApp(
+        home: TranslationPage(
+          translateEnglish: (_) async => 'maayong aga',
+          translateHiligaynon: (text) async {
+            hiligaynonRequests.add(text);
+            return 'good morning from the model';
+          },
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.tap(find.byTooltip('Swap languages'));
+    await tester.pump();
+
+    await tester.enterText(find.byType(TextField), 'maayong aga');
+    await tester.pump();
+    expect(find.text('good morning'), findsOneWidget);
+    expect(hiligaynonRequests, isEmpty);
+
+    await tester.pump(const Duration(milliseconds: 451));
+    await tester.pump();
+    expect(hiligaynonRequests, ['maayong aga']);
+    expect(find.text('good morning from the model'), findsOneWidget);
+  });
+
+  testWidgets('source chevron switches direction but keeps the text', (
+    tester,
+  ) async {
+    final hiligaynonRequests = <String>[];
+    await tester.pumpWidget(
+      MaterialApp(
+        home: TranslationPage(
+          translateEnglish: (_) async => 'maayong aga',
+          translateHiligaynon: (text) async {
+            hiligaynonRequests.add(text);
+            return 'good morning';
+          },
+        ),
+      ),
+    );
+    await tester.pump();
+
+    await tester.enterText(find.byType(TextField), 'maayong aga');
+    await tester.pump(const Duration(milliseconds: 451));
+    await tester.pump();
+    await tester.tap(find.byTooltip('Switch input language'));
+    await tester.pump(const Duration(milliseconds: 451));
+    await tester.pump();
+
+    final field = tester.widget<TextField>(find.byType(TextField));
+    expect(field.decoration?.hintText, 'Type Hiligaynon');
+    expect(field.controller?.text, 'maayong aga');
+    expect(hiligaynonRequests, ['maayong aga']);
+    expect(find.text('good morning'), findsOneWidget);
+  });
+
   testWidgets('debounces NMT and ignores stale results', (tester) async {
     final requests = <String>[];
     final completions = <Completer<String>>[];
