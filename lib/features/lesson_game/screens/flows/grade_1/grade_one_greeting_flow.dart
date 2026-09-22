@@ -390,11 +390,6 @@ class _BeachMapStepState extends State<_BeachMapStep> {
   // that push and pop back here once Beach is tapped; every other location
   // keeps its real locked/unlocked behaviour. Mirrors _LessonOneMapStep in
   // grade_one_letter_flow.dart, which targets School.
-  final _overrides = tudlo_map.MapEventOverrides()
-    ..setOverride(
-      tudlo_map.MapLocation.beach,
-      const tudlo_map.PopMapRouteAction(),
-    );
   var _openedHostedMap = false;
   bool _hosted = false;
 
@@ -415,14 +410,10 @@ class _BeachMapStepState extends State<_BeachMapStep> {
       message: 'I-tap ang Beach sa mapa.',
     );
     if (!mounted) return;
-    await Navigator.of(context).push(
-      FadePageRoute<void>(
-        page: tudlo_map.MapScreen(
-          eventOverrides: _overrides,
-          temporaryUnlockedLocations: const {tudlo_map.MapLocation.beach},
-          startExpanded: true,
-        ),
-      ),
+    await pushLessonMapBeat(
+      context,
+      target: tudlo_map.MapLocation.beach,
+      expanded: true,
     );
     if (!mounted) return;
     await AppAudioService.instance.playCorrect();

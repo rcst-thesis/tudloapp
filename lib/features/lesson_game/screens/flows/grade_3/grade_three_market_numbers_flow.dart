@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tudloapp/core/navigation/fade_page_route.dart';
 import 'package:tudloapp/core/services/app_audio_service.dart';
 import 'package:tudloapp/core/services/lesson_number_voice_service.dart';
 import 'package:tudloapp/core/state/app_state.dart';
@@ -16,10 +15,7 @@ import 'package:tudloapp/core/widgets/mascot_widget.dart';
 import 'package:tudloapp/features/lesson_game/screens/flows/grade_3/grade_three_pressable.dart';
 import 'package:tudloapp/features/lesson_game/widgets/reward_overlay.dart';
 import 'package:tudloapp/features/map/domain/map_location.dart' as tudlo_map;
-import 'package:tudloapp/features/map/domain/map_route_resolver.dart'
-    as tudlo_map;
-import 'package:tudloapp/features/map/presentation/screens/map_screen.dart'
-    as tudlo_map;
+import 'package:tudloapp/features/lesson_game/screens/flows/lesson_map_beat.dart';
 
 const String _marketRoot =
     'assets/images/level_game/grade3/G3_U1_L1.1_Numero_sa_Merkado_SVG_Assets';
@@ -287,20 +283,7 @@ class _GradeThreeMarketNumbersFlowState
       message: 'I-tap ang Market sa mapa.',
     );
     if (!mounted || _state != _MarketState.map) return;
-    final overrides = tudlo_map.MapEventOverrides()
-      ..setOverride(
-        tudlo_map.MapLocation.market,
-        const tudlo_map.PopMapRouteAction(),
-      );
-    await Navigator.of(context).push(
-      FadePageRoute<void>(
-        page: tudlo_map.MapScreen(
-          eventOverrides: overrides,
-          temporaryUnlockedLocations: const {tudlo_map.MapLocation.market},
-          initialFocusLocation: tudlo_map.MapLocation.market,
-        ),
-      ),
-    );
+    await pushLessonMapBeat(context, target: tudlo_map.MapLocation.market);
     if (!mounted || _state != _MarketState.map) return;
     await AppAudioService.instance.playCorrect();
     await _tapMarket();

@@ -1327,11 +1327,6 @@ class _LessonOneMapStepState extends State<_LessonOneMapStep>
   // School for the length of that push and pop back here once School is
   // tapped; every other location keeps its real locked/unlocked behaviour.
   // See docs/LESSON_MAP_STEP_FIX.md.
-  final _overrides = tudlo_map.MapEventOverrides()
-    ..setOverride(
-      tudlo_map.MapLocation.school,
-      const tudlo_map.PopMapRouteAction(),
-    );
   var _openedHostedMap = false;
   bool _hosted = false;
 
@@ -1352,14 +1347,10 @@ class _LessonOneMapStepState extends State<_LessonOneMapStep>
       message: 'I-tap ang eskwelahan sa mapa. Didto ta mangita.',
     );
     if (!mounted) return;
-    await Navigator.of(context).push(
-      FadePageRoute<void>(
-        page: tudlo_map.MapScreen(
-          eventOverrides: _overrides,
-          temporaryUnlockedLocations: const {tudlo_map.MapLocation.school},
-          startExpanded: true,
-        ),
-      ),
+    await pushLessonMapBeat(
+      context,
+      target: tudlo_map.MapLocation.school,
+      expanded: true,
     );
     if (!mounted) return;
     await AppAudioService.instance.playCorrect();

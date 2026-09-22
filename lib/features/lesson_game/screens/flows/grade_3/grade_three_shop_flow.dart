@@ -539,11 +539,6 @@ class _G3ShopMapPage extends StatefulWidget {
 }
 
 class _G3ShopMapPageState extends State<_G3ShopMapPage> {
-  final _overrides = tudlo_map.MapEventOverrides()
-    ..setOverride(
-      tudlo_map.MapLocation.market,
-      const tudlo_map.PopMapRouteAction(),
-    );
   var _opened = false;
 
   @override
@@ -560,15 +555,7 @@ class _G3ShopMapPageState extends State<_G3ShopMapPage> {
       message: 'I-tap ang Market sa mapa.',
     );
     if (!mounted) return;
-    await Navigator.of(context).push(
-      FadePageRoute<void>(
-        page: tudlo_map.MapScreen(
-          eventOverrides: _overrides,
-          temporaryUnlockedLocations: const {tudlo_map.MapLocation.market},
-          initialFocusLocation: tudlo_map.MapLocation.market,
-        ),
-      ),
-    );
+    await pushLessonMapBeat(context, target: tudlo_map.MapLocation.market);
     if (!mounted) return;
     await AppAudioService.instance.playCorrect();
     widget.onTapMarket();

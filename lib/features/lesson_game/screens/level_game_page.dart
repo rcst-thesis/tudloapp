@@ -25,10 +25,7 @@ import 'package:tudloapp/core/widgets/word_tooltip.dart';
 import 'package:tudloapp/features/energy/widgets/energy_indicator.dart';
 import 'package:tudloapp/features/lesson_game/widgets/reward_overlay.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_lesson_host_scope.dart';
-import 'package:tudloapp/core/navigation/fade_page_route.dart';
 import 'package:tudloapp/features/map/domain/map_location.dart' as tudlo_map;
-import 'package:tudloapp/features/map/domain/map_route_resolver.dart'
-    as tudlo_map;
 import 'package:tudloapp/features/map/presentation/screens/map_screen.dart'
     as tudlo_map;
 import 'package:tudloapp/features/settings/domain/app_settings_scope.dart';
@@ -38,6 +35,7 @@ import 'flows/grade_3/grade_three_pressable.dart';
 import 'flows/grade_3/grade_three_bantay_flow.dart';
 import 'flows/grade_3/grade_three_market_numbers_flow.dart';
 import 'flows/grade_3/grade_three_new_student_flow.dart';
+import 'package:tudloapp/features/lesson_game/screens/flows/lesson_map_beat.dart';
 
 part 'flows/grade_1/grade_one_letter_flow.dart';
 part 'flows/grade_1/grade_one_number_flow.dart';
@@ -355,11 +353,6 @@ class _GradeThreeSchoolMapThenLessonFlow extends StatefulWidget {
 
 class _GradeThreeSchoolMapThenLessonFlowState
     extends State<_GradeThreeSchoolMapThenLessonFlow> {
-  final _overrides = tudlo_map.MapEventOverrides()
-    ..setOverride(
-      tudlo_map.MapLocation.school,
-      const tudlo_map.PopMapRouteAction(),
-    );
   var _opened = false;
   var _mapComplete = false;
 
@@ -377,15 +370,7 @@ class _GradeThreeSchoolMapThenLessonFlowState
       message: 'I-tap ang School sa mapa.',
     );
     if (!mounted) return;
-    await Navigator.of(context).push(
-      FadePageRoute<void>(
-        page: tudlo_map.MapScreen(
-          eventOverrides: _overrides,
-          temporaryUnlockedLocations: const {tudlo_map.MapLocation.school},
-          initialFocusLocation: tudlo_map.MapLocation.school,
-        ),
-      ),
-    );
+    await pushLessonMapBeat(context, target: tudlo_map.MapLocation.school);
     if (!mounted) return;
     await AppAudioService.instance.playCorrect();
     setState(() => _mapComplete = true);

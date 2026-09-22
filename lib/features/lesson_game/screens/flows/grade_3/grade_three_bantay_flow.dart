@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tudloapp/core/navigation/fade_page_route.dart';
 import 'package:tudloapp/core/services/app_audio_service.dart';
 import 'package:tudloapp/core/state/app_state.dart';
 import 'package:tudloapp/core/theme/app_theme.dart';
@@ -16,10 +15,7 @@ import 'package:tudloapp/core/widgets/mascot_widget.dart';
 import 'package:tudloapp/features/lesson_game/screens/flows/grade_3/grade_three_pressable.dart';
 import 'package:tudloapp/features/lesson_game/widgets/reward_overlay.dart';
 import 'package:tudloapp/features/map/domain/map_location.dart' as tudlo_map;
-import 'package:tudloapp/features/map/domain/map_route_resolver.dart'
-    as tudlo_map;
-import 'package:tudloapp/features/map/presentation/screens/map_screen.dart'
-    as tudlo_map;
+import 'package:tudloapp/features/lesson_game/screens/flows/lesson_map_beat.dart';
 
 const _bantayRoot =
     'assets/images/level_game/grade3/G3_U2_L2.1_Ang_Nadula_nga_Ido_SVG_Assets';
@@ -387,17 +383,7 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
     );
     if (!mounted || _stage != stage) return;
     final location = _mapLocationForStage(stage);
-    final overrides = tudlo_map.MapEventOverrides()
-      ..setOverride(location, const tudlo_map.PopMapRouteAction());
-    await Navigator.of(context).push(
-      FadePageRoute<void>(
-        page: tudlo_map.MapScreen(
-          eventOverrides: overrides,
-          temporaryUnlockedLocations: {location},
-          initialFocusLocation: location,
-        ),
-      ),
-    );
+    await pushLessonMapBeat(context, target: location);
     if (!mounted || _stage != stage) return;
     await AppAudioService.instance.playCorrect();
     setState(() {

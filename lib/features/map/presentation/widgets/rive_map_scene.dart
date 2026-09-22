@@ -92,6 +92,7 @@ class RiveMapScene extends StatefulWidget {
 class _RiveMapSceneState extends State<RiveMapScene> {
   rive.RiveWidgetController? _controller;
   rive.ViewModelInstance? _viewModel;
+  Object? _loadError;
   final _unlockedProps = <MapLocation, rive.ViewModelInstanceBoolean>{};
   final _hasEventProps = <MapLocation, rive.ViewModelInstanceBoolean>{};
   final _tappedTriggers = <MapLocation, rive.ViewModelInstanceTrigger>{};
@@ -118,15 +119,32 @@ class _RiveMapSceneState extends State<RiveMapScene> {
     // owned/disposed by this widget. This is what makes opening the Map tab
     // instant after the very first load instead of re-decoding a ~4.5MB
     // file on every tab switch.
-    final file = await MapRiveAsset.preload();
+    final rive.File? file;
+    try {
+      file = await MapRiveAsset.preload();
+    } catch (error) {
+      if (mounted) {
+        setState(() => _loadError = error);
+      }
+      return;
+    }
     if (!mounted || file == null) return;
 
-    final controller = rive.RiveWidgetController(
-      file,
-      artboardSelector: rive.ArtboardSelector.byDefault(),
-      stateMachineSelector: rive.StateMachineSelector.byDefault(),
-    );
-    final viewModel = controller.dataBind(rive.DataBind.auto());
+    final rive.RiveWidgetController controller;
+    final rive.ViewModelInstance viewModel;
+    try {
+      controller = rive.RiveWidgetController(
+        file,
+        artboardSelector: rive.ArtboardSelector.byDefault(),
+        stateMachineSelector: rive.StateMachineSelector.byDefault(),
+      );
+      viewModel = controller.dataBind(rive.DataBind.auto());
+    } catch (error) {
+      if (mounted) {
+        setState(() => _loadError = error);
+      }
+      return;
+    }
     if (!mounted) {
       viewModel.dispose();
       controller.dispose();
@@ -201,7 +219,9 @@ class _RiveMapSceneState extends State<RiveMapScene> {
     return SizedBox(
       width: RiveMapScene.artboardWidth,
       height: RiveMapScene.artboardHeight,
-      child: controller == null
+      child: _loadError != null
+          ? const _RiveMapLoadFallback()
+          : controller == null
           ? const SizedBox.shrink()
           : rive.RiveWidget(
               controller: controller,
@@ -223,6 +243,37 @@ class _RiveMapSceneState extends State<RiveMapScene> {
               // Rive's hit-test/dispatch path at all.
               hitTestBehavior: rive.RiveHitTestBehavior.translucent,
             ),
+    );
+  }
+}
+
+class _RiveMapLoadFallback extends StatelessWidget {
+  const _RiveMapLoadFallback();
+
+  @override
+  Widget build(BuildContext context) {
+    return const ColoredBox(
+      color: Color(0xFFB9DDA0),
+      child: Center(
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(24)),
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 32, vertical: 24),
+            child: Text(
+              'Map is loading. Please try again.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Color(0xFF12304A),
+                fontSize: 28,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
