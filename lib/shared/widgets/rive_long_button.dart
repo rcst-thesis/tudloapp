@@ -18,6 +18,7 @@ class RiveLongButton extends StatefulWidget {
     this.soundEffectAsset,
     this.buttonHeight = RiveLongButton.height,
     this.fillBounds = false,
+    this.fallbackFontSize,
     super.key,
   });
 
@@ -35,6 +36,7 @@ class RiveLongButton extends StatefulWidget {
   final bool enabled;
   final double buttonHeight;
   final bool fillBounds;
+  final double? fallbackFontSize;
 
   /// Overrides the shared tap cue for a specific action.
   final String? soundEffectAsset;
@@ -170,7 +172,10 @@ class _RiveLongButtonState extends State<RiveLongButton> {
             child: IgnorePointer(
               ignoring: !widget.enabled,
               child: _usesFlutterSurface || controller == null
-                  ? _LongButtonFallback(label: widget.label)
+                  ? _LongButtonFallback(
+                      label: widget.label,
+                      fontSize: widget.fallbackFontSize,
+                    )
                   : rive.RiveWidget(
                       controller: controller,
                       fit: widget.fillBounds ? rive.Fit.fill : rive.Fit.contain,
@@ -185,9 +190,10 @@ class _RiveLongButtonState extends State<RiveLongButton> {
 }
 
 class _LongButtonFallback extends StatelessWidget {
-  const _LongButtonFallback({required this.label});
+  const _LongButtonFallback({required this.label, this.fontSize});
 
   final String label;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -219,9 +225,8 @@ class _LongButtonFallback extends StatelessWidget {
                   style: const TextStyle(
                     color: Colors.white,
                     fontFamily: 'ComicRelief',
-                    fontSize: 15,
                     fontWeight: FontWeight.w700,
-                  ),
+                  ).copyWith(fontSize: fontSize ?? 15),
                 ),
               ),
             ),
