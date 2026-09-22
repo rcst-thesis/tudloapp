@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:tudloapp/features/learner/domain/learner_scope.dart';
 import 'package:tudloapp/features/lesson/domain/lesson_definition.dart';
 import 'package:tudloapp/features/lesson/domain/lesson_progress_controller.dart';
-import 'package:tudloapp/vendor/devg/core/data/app_data.dart';
-import 'package:tudloapp/vendor/devg/core/models/lesson_score.dart';
-import 'package:tudloapp/vendor/devg/core/services/app_audio_service.dart';
-import 'package:tudloapp/vendor/devg/core/state/app_state.dart';
-import 'package:tudloapp/vendor/devg/features/home_map/screens/lessons_screen.dart'
+import 'package:tudloapp/core/data/app_data.dart';
+import 'package:tudloapp/core/models/lesson_score.dart';
+import 'package:tudloapp/core/services/app_audio_service.dart';
+import 'package:tudloapp/core/state/app_state.dart';
+import 'package:tudloapp/features/home_map/screens/lessons_screen.dart'
     hide MapLocation;
-import 'package:tudloapp/vendor/devg/features/lesson_game/screens/lesson_intro_page.dart';
-import 'package:tudloapp/vendor/devg/features/lesson_game/screens/level_game_page.dart';
+import 'package:tudloapp/features/lesson_game/screens/lesson_intro_page.dart';
+import 'package:tudloapp/features/lesson_game/screens/level_game_page.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_lesson_host_scope.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_lesson_mapping.dart';
 import 'package:tudloapp/features/map/domain/map_location.dart';
@@ -167,14 +167,15 @@ class _DevGLessonEnvironmentState extends State<_DevGLessonEnvironment> {
     super.didChangeDependencies();
     if (_appState != null) return;
     final learner = LearnerScope.of(context).profile;
-    _appState = AppState(
-      username: learner?.name ?? 'Abyan',
-      activeProfileId: learner?.id,
-    );
+    _appState = AppState()
+      ..username = learner?.name ?? 'Abyan'
+      ..activeProfileId = learner?.id;
   }
 
   @override
   void dispose() {
+    AppData.endHostedSession();
+    AppAudioService.instance.attach(null);
     _appState?.dispose();
     super.dispose();
   }
@@ -205,7 +206,7 @@ class _DevGLessonEnvironmentState extends State<_DevGLessonEnvironment> {
         stickers[sourceLevel] = completion.rewardAsset;
       }
     }
-    AppData.configure(
+    AppData.configureHostedSession(
       grade: grade,
       energy: learner?.energy ?? AppData.maxEnergy,
       unlockedLevels: unlocked,

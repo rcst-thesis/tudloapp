@@ -197,7 +197,94 @@ class AppData {
     return '$year-$month-$day';
   }
 
+  /// Whether a Tudlo lesson host is driving this session.
+  ///
+  /// The DevG lesson screens call these statics directly. When Tudlo hosts
+  /// them, it owns progress and energy itself, so the writes below become
+  /// no-ops and the unlock/catalogue state is projected from the active
+  /// learner profile through [configureHostedSession] instead.
+  static bool hostedSession = false;
+  static Set<int> _hostedUnlockedLevels = {1};
+  static Set<int> _hostedCatalogLevels = {1};
+
+  /// Projects the active Tudlo learner profile onto the statics the DevG
+  /// screens read. No value supplied here is written back by this class.
+  static void configureHostedSession({
+    required int grade,
+    required int energy,
+    required Iterable<int> unlockedLevels,
+    required Iterable<int> completed,
+    required Map<int, String> stickers,
+    required Iterable<int> catalogLevels,
+  }) {
+    hostedSession = true;
+    selectedGradeLevel = GradeLevel.values.firstWhere(
+      (value) => value.number == grade,
+      orElse: () => GradeLevel.grade1,
+    );
+    currentEnergy = energy.clamp(0, maxEnergy).toInt();
+    _hostedUnlockedLevels = unlockedLevels.toSet();
+    _hostedCatalogLevels = catalogLevels.toSet();
+    completedLevels
+      ..clear()
+      ..addAll(completed);
+    lessonStickers
+      ..clear()
+      ..addAll(stickers);
+    unlockedLevel = _hostedUnlockedLevels.isEmpty
+        ? 1
+        : _hostedUnlockedLevels.reduce((a, b) => a > b ? a : b);
+  }
+
+  /// Hands progress and energy back to the app when a lesson host goes away.
+  ///
+  /// Without this the writes above stay suppressed for the rest of the
+  /// process, so the app's own energy would never recharge again after the
+  /// first hosted lesson.
+  static void endHostedSession() {
+    hostedSession = false;
+    _hostedUnlockedLevels = {1};
+    _hostedCatalogLevels = {1};
+  }
+
+  /// Units holding at least one card the current entry point allows, so the
+  /// DevG dashboard stays visually intact while a map location shows only
+  /// its own lessons.
+  static List<AppUnit> get catalogUnits => hostedSession
+      ? units.where((unit) => catalogLevelsForUnit(unit).isNotEmpty).toList()
+      : units;
+
+  static int get catalogLevelCount =>
+      hostedSession ? _hostedCatalogLevels.length : maxLevel;
+
+  static bool isCatalogLevel(int level) =>
+      !hostedSession || _hostedCatalogLevels.contains(level);
+
+  static List<int> catalogLevelsForUnit(AppUnit unit) => [
+    for (var level = unit.startLevel; level <= unit.endLevel; level++)
+      if (isCatalogLevel(level)) level,
+  ];
+
+  /// A sensible first card for a filtered catalogue: an active incomplete
+  /// card when there is one, otherwise any card, so a child can still see
+  /// locked future lessons.
+  static int get firstCatalogLevel {
+    for (final unit in catalogUnits) {
+      for (final level in catalogLevelsForUnit(unit)) {
+        if (isLevelUnlocked(level) && !completedLevels.contains(level)) {
+          return level;
+        }
+      }
+    }
+    for (final unit in catalogUnits) {
+      final levels = catalogLevelsForUnit(unit);
+      if (levels.isNotEmpty) return levels.first;
+    }
+    return 1;
+  }
+
   static bool recordLessonStreakForToday({DateTime? now}) {
+    if (hostedSession) return false;
     final today = dateKeyFor(now ?? DateTime.now());
     if (lastDailyStreakDate == today) return false;
     streakDays = streakDays <= 0 ? 1 : streakDays + 1;
@@ -263,6 +350,7 @@ class AppData {
   /// The saved timestamp marks the last recharge boundary. If the app was
   /// closed for 72 minutes, this adds 3 energy because 72 / 24 = 3 intervals.
   static Future<void> refreshEnergy({DateTime? now, bool save = false}) async {
+    if (hostedSession) return;
     if (developerMode) {
       final changed = currentEnergy != maxEnergy;
       currentEnergy = maxEnergy;
@@ -315,6 +403,7 @@ class AppData {
   /// Deducts the fixed lesson-start cost. Individual quiz attempts do not
   /// spend energy, so one lesson always costs exactly 10 energy.
   static Future<bool> spendLessonEnergy() async {
+    if (hostedSession) return true;
     await refreshEnergy();
     if (developerMode) return true;
     if (currentEnergy < minimumEnergyToStartUnit) return false;
@@ -337,6 +426,7 @@ class AppData {
   }
 
   static Duration timeUntilNextEnergy({DateTime? now}) {
+    if (hostedSession) return Duration.zero;
     final updatedAt = now ?? DateTime.now();
     _applyRecharge(updatedAt);
     if (currentEnergy >= maxEnergy) return Duration.zero;
@@ -346,6 +436,7 @@ class AppData {
   }
 
   static Duration timeUntilFullEnergy({DateTime? now}) {
+    if (hostedSession) return Duration.zero;
     _applyRecharge(now ?? DateTime.now());
     if (currentEnergy >= maxEnergy) return Duration.zero;
     final missing = maxEnergy - currentEnergy;
@@ -391,6 +482,7 @@ class AppData {
     if (level < 1 || level > maxLevel) return false;
     if (!isProductionLessonAvailable(level)) return false;
     if (developerMode) return true;
+    if (hostedSession) return _hostedUnlockedLevels.contains(level);
     return true;
   }
 

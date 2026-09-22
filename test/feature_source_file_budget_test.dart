@@ -20,7 +20,7 @@ void main() {
     }
 
     // This protects the maintainable Tudlo integration. The preserved DevG
-    // source now lives under lib/vendor/devg/, outside these feature paths,
+    // source now lives under lib/features/lesson/presentation/devg_canonical/, outside these feature paths,
     // so it no longer needs an exclusion here.
     expect(
       oversized,

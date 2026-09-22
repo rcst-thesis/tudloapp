@@ -75,28 +75,28 @@ class MapDefaultRoutes {
       _actions[location] ?? const GoHomeRouteAction();
 
   static Widget _farm(BuildContext context) => const PlaceholderScreen(
-        title: 'Farm',
-        description: 'Temporary Farm shell',
-        icon: Icons.agriculture_rounded,
-      );
+    title: 'Farm',
+    description: 'Temporary Farm shell',
+    icon: Icons.agriculture_rounded,
+  );
 
   static Widget _beach(BuildContext context) => const PlaceholderScreen(
-        title: 'Beach',
-        description: 'Temporary Beach shell',
-        icon: Icons.beach_access_rounded,
-      );
+    title: 'Beach',
+    description: 'Temporary Beach shell',
+    icon: Icons.beach_access_rounded,
+  );
 
   static Widget _church(BuildContext context) => const PlaceholderScreen(
-        title: 'Church',
-        description: 'Temporary Church shell',
-        icon: Icons.church_rounded,
-      );
+    title: 'Church',
+    description: 'Temporary Church shell',
+    icon: Icons.church_rounded,
+  );
 
   static Widget _hospital(BuildContext context) => const PlaceholderScreen(
-        title: 'Hospital',
-        description: 'Temporary Hospital shell',
-        icon: Icons.local_hospital_rounded,
-      );
+    title: 'Hospital',
+    description: 'Temporary Hospital shell',
+    icon: Icons.local_hospital_rounded,
+  );
 }
 
 /// Flutter-owned truth for any lesson/event that currently overrides a map

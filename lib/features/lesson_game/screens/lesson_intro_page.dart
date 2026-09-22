@@ -13,6 +13,7 @@ import 'package:tudloapp/core/widgets/language_toggle.dart';
 import 'package:tudloapp/data/dictionary/dictionary_data.dart';
 import 'package:tudloapp/data/lesson_bank/lesson_bank.dart';
 import 'package:tudloapp/features/lesson_game/screens/level_game_page.dart';
+import 'package:tudloapp/features/lesson/presentation/devg_lesson_host_scope.dart';
 
 class LessonIntroPage extends StatefulWidget {
   final int level;
@@ -40,6 +41,11 @@ class _LessonIntroPageState extends State<LessonIntroPage> {
   int get _localLessonNumber => AppData.lessonNumberForLevel(widget.level);
 
   void _openLessonGame() {
+    final host = DevGLessonHostScope.maybeOf(context);
+    if (host != null) {
+      host.startSourceLevel(widget.level);
+      return;
+    }
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (_) => LevelGamePage(level: widget.level)),
@@ -67,7 +73,14 @@ class _LessonIntroPageState extends State<LessonIntroPage> {
             children: [
               _IntroHeader(
                 lessonNumber: _localLessonNumber,
-                onBack: () => Navigator.pop(context),
+                onBack: () {
+                  final host = DevGLessonHostScope.maybeOf(context);
+                  if (host != null) {
+                    unawaited(host.exitIncomplete());
+                  } else {
+                    Navigator.pop(context);
+                  }
+                },
               ),
               SizedBox(height: topContentGap),
               Expanded(

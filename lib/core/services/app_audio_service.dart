@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tudloapp/shared/audio/tudlo_audio_controller.dart';
 
 class AppAudioService {
   AppAudioService();
@@ -65,6 +66,23 @@ class AppAudioService {
   double _backgroundVolume = .18;
   bool _initialized = false;
   int _voiceToken = 0;
+
+  /// Set by a lesson host that owns Tudlo's single audio controller.
+  ///
+  /// While attached, every call below is routed through that one controller
+  /// instead of this service's own players, so a hosted lesson never opens a
+  /// second audio stack or persists a duplicate set of audio settings.
+  TudloAudioController? _hostAudio;
+  final Set<String> _hostVoiceAssets = {};
+
+  void attach(TudloAudioController? audio) => _hostAudio = audio;
+
+  static String _assetPath(String value) =>
+      value.startsWith('assets/') ? value : 'assets/$value';
+
+  /// The host controller streams the compressed copies of the effects.
+  static String _hostEffect(String value) =>
+      _assetPath(value).replaceAll('.wav', '.mp3');
 
   bool get soundEffectsEnabled => soundEffectsEnabledNotifier.value;
   bool get musicEnabled => musicEnabledNotifier.value;
@@ -174,6 +192,13 @@ class AppAudioService {
   }
 
   Future<void> preloadLessonAudio(Iterable<String> assetPaths) async {
+    final hostAudio = _hostAudio;
+    if (hostAudio != null) {
+      for (final path in assetPaths.take(8)) {
+        hostAudio.preloadVoiceOver(_assetPath(path));
+      }
+      return;
+    }
     final paths = assetPaths
         .map((path) => path.startsWith('assets/') ? path.substring(7) : path)
         .where((path) => path.isNotEmpty)
@@ -193,6 +218,11 @@ class AppAudioService {
     bool allowRapidRepeat = false,
   }) async {
     if (!soundEffectsEnabled) return;
+    final hostAudio = _hostAudio;
+    if (hostAudio != null) {
+      await hostAudio.playSoundEffect(_hostEffect(assetPath));
+      return;
+    }
     final now = DateTime.now();
     if (!allowRapidRepeat &&
         now.difference(_lastEffectAt) < const Duration(milliseconds: 70)) {
@@ -224,6 +254,17 @@ class AppAudioService {
     double volume = .95,
   }) async {
     if (!voiceOverEnabled || assetPaths.isEmpty) return;
+    final hostAudio = _hostAudio;
+    if (hostAudio != null) {
+      await stopVoice();
+      for (final assetPath in assetPaths) {
+        final asset = _assetPath(assetPath);
+        _hostVoiceAssets.add(asset);
+        await hostAudio.playVoiceOverAndWait(asset);
+        _hostVoiceAssets.remove(asset);
+      }
+      return;
+    }
     final token = ++_voiceToken;
     try {
       await _voicePlayer.stop();
@@ -250,6 +291,13 @@ class AppAudioService {
   }
 
   Future<void> stopVoice() async {
+    final hostAudio = _hostAudio;
+    if (hostAudio != null) {
+      final active = _hostVoiceAssets.toList();
+      _hostVoiceAssets.clear();
+      await Future.wait(active.map(hostAudio.stopVoiceOver));
+      return;
+    }
     _voiceToken++;
     try {
       await _voicePlayer.stop();
@@ -260,6 +308,7 @@ class AppAudioService {
     String assetPath, {
     double volume = .18,
   }) async {
+    if (_hostAudio != null) return;
     if (!musicEnabled || _currentBackgroundTrack == assetPath) return;
     _currentBackgroundTrack = assetPath;
     _backgroundVolume = volume.clamp(0, 1).toDouble();
@@ -274,12 +323,14 @@ class AppAudioService {
   }
 
   Future<void> lowerBackgroundVolume() async {
+    if (_hostAudio != null) return;
     try {
       await _backgroundPlayer.setVolume(.05);
     } catch (_) {}
   }
 
   Future<void> restoreBackgroundVolume() async {
+    if (_hostAudio != null) return;
     if (!musicEnabled) return;
     try {
       await _backgroundPlayer.setVolume(_backgroundVolume);

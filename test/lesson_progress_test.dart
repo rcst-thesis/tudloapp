@@ -7,8 +7,8 @@ import 'package:tudloapp/features/learner/domain/learner_scope.dart';
 import 'package:tudloapp/features/lesson/domain/lesson_content.dart';
 import 'package:tudloapp/features/lesson/domain/lesson_definition.dart';
 import 'package:tudloapp/features/lesson/domain/lesson_progress_controller.dart';
-import 'package:tudloapp/vendor/devg/core/data/app_data.dart';
-import 'package:tudloapp/vendor/devg/features/home_map/screens/lessons_screen.dart'
+import 'package:tudloapp/core/data/app_data.dart';
+import 'package:tudloapp/features/home_map/screens/lessons_screen.dart'
     hide MapLocation;
 import 'package:tudloapp/features/lesson/presentation/devg_lesson_host.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_lesson_mapping.dart';
@@ -208,7 +208,7 @@ void main() {
         grade: 1,
         location: MapLocation.school,
       );
-      AppData.configure(
+      AppData.configureHostedSession(
         grade: 1,
         energy: 60,
         unlockedLevels: [DevGLessonMapping.sourceLevelFor(school.first)],

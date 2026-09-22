@@ -24,6 +24,7 @@ import 'package:tudloapp/data/lesson_bank/lesson_bank.dart';
 import 'package:tudloapp/core/widgets/word_tooltip.dart';
 import 'package:tudloapp/features/energy/widgets/energy_indicator.dart';
 import 'package:tudloapp/features/lesson_game/widgets/reward_overlay.dart';
+import 'package:tudloapp/features/lesson/presentation/devg_lesson_host_scope.dart';
 import 'package:tudloapp/features/navigation/app_shell.dart';
 
 import 'flows/grade_3/grade_three_bantay_flow.dart';
@@ -401,7 +402,14 @@ class _LevelGamePageState extends State<LevelGamePage> {
     final wasCompleted = AppData.completedLevels.contains(widget.level);
     final previousNextLevel = AppData.firstUnlockedIncompleteLevel;
     AppData.lessonDashboardFocusLevel = widget.level;
-    AppData.saveLevelScore(widget.level, _buildLessonScoreStats());
+    final scoreStats = _buildLessonScoreStats();
+    AppData.saveLevelScore(widget.level, scoreStats);
+    // The one handoff from the lesson mechanics to Tudlo progress, and only
+    // once the learner has claimed the reward UI.
+    unawaited(
+      DevGLessonHostScope.maybeOf(context)?.claimCompletion(scoreStats) ??
+          Future<void>.value(),
+    );
     _showDailyStreakAfterCompletion = wasCompleted
         ? false
         : AppData.recordLessonStreakForToday();
@@ -578,15 +586,7 @@ class _LevelGamePageState extends State<LevelGamePage> {
           _claimRewardsOnce();
           Navigator.pop(context);
           if (widget.level >= AppData.maxLevel) {
-            await _restorePortraitBeforePortraitRoute();
-            if (!mounted || !context.mounted) return;
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const AppShell(initialIndex: 2),
-              ),
-              (route) => false,
-            );
+            await _returnToMapAfterPortraitRestore();
             return;
           }
           final nextLevel = _nextAvailableLevel();
@@ -625,6 +625,12 @@ class _LevelGamePageState extends State<LevelGamePage> {
     if (!mounted || !shouldExit) return;
     await _restorePortraitBeforePortraitRoute();
     if (!mounted) return;
+    final host = DevGLessonHostScope.maybeOf(context);
+    if (host != null) {
+      await host.exitIncomplete();
+      return;
+    }
+    if (!context.mounted) return;
     Navigator.pop(context);
   }
 
@@ -637,6 +643,14 @@ class _LevelGamePageState extends State<LevelGamePage> {
   Future<void> _returnToMapAfterPortraitRestore() async {
     await _restorePortraitBeforePortraitRoute();
     if (!mounted) return;
+    // Under a Tudlo lesson host, the host owns where a finished lesson goes
+    // back to. Standalone, this page returns to its own lesson dashboard.
+    final host = DevGLessonHostScope.maybeOf(context);
+    if (host != null) {
+      await host.exitAfterCompletion();
+      return;
+    }
+    if (!context.mounted) return;
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (_) => const AppShell(initialIndex: 2)),
