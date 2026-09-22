@@ -40,9 +40,9 @@ Future<void> _openDialog(
   await tester.pump(const Duration(milliseconds: 400));
 }
 
-double _retryNoticeOpacity(WidgetTester tester) => tester
+double _unavailableNoticeOpacity(WidgetTester tester) => tester
     .widget<AnimatedOpacity>(
-      find.byKey(const Key('lesson-preview-retry-notice')),
+      find.byKey(const Key('lesson-preview-action-unavailable-notice')),
     )
     .opacity;
 
@@ -59,14 +59,14 @@ void main() {
         onStart: () {},
       );
 
-      expect(_retryNoticeOpacity(tester), 0);
+      expect(_unavailableNoticeOpacity(tester), 0);
 
       await tester.tap(find.byKey(const Key('lesson-preview-retry-button')));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 200));
 
       expect(retried, isFalse);
-      expect(_retryNoticeOpacity(tester), 1);
+      expect(_unavailableNoticeOpacity(tester), 1);
       expect(find.text('wala pa natapos ang lesson'), findsOneWidget);
       expect(tester.takeException(), isNull);
     },
@@ -87,7 +87,7 @@ void main() {
     await tester.pump();
 
     expect(retried, isTrue);
-    expect(_retryNoticeOpacity(tester), 0);
+    expect(_unavailableNoticeOpacity(tester), 0);
     expect(tester.takeException(), isNull);
   });
 
@@ -96,6 +96,49 @@ void main() {
     await _openDialog(
       tester,
       status: HomeLessonStatus.available,
+      onRetry: () {},
+      onStart: () => started = true,
+    );
+
+    await tester.tap(find.byKey(const Key('lesson-preview-start-button')));
+    await tester.pump();
+
+    expect(started, isTrue);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets(
+    'suguran ta is unavailable for a locked lesson (previous lesson not '
+    'finished yet) -- tapping it shows a notice instead of firing onStart',
+    (tester) async {
+      var started = false;
+      await _openDialog(
+        tester,
+        status: HomeLessonStatus.locked,
+        onRetry: () {},
+        onStart: () => started = true,
+      );
+
+      expect(_unavailableNoticeOpacity(tester), 0);
+
+      await tester.tap(find.byKey(const Key('lesson-preview-start-button')));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 200));
+
+      expect(started, isFalse);
+      expect(_unavailableNoticeOpacity(tester), 1);
+      expect(find.text('tapusa anay ang una nga lesson'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets('suguran ta still fires onStart for a completed lesson', (
+    tester,
+  ) async {
+    var started = false;
+    await _openDialog(
+      tester,
+      status: HomeLessonStatus.completed,
       onRetry: () {},
       onStart: () => started = true,
     );

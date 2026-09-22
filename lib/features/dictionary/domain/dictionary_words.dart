@@ -1,9 +1,10 @@
 import 'package:tudloapp/features/dictionary/domain/dictionary_entry.dart';
 
 /// Real dictionary content (Hiligaynon), generated from the supplied
-/// `dictionary_data.json`. Only `balay` has dedicated dictionary art
-/// ([DictionaryEntry.frontCardImage]/[DictionaryEntry.favThumbImage]) so
-/// far -- everything else renders as a blank card until its art arrives.
+/// `dictionary_data.json`. Only the entries with dedicated dictionary art
+/// ([DictionaryEntry.frontCardImage]/[DictionaryEntry.favThumbImage]) set
+/// have that art -- everything else renders as a blank card until its art
+/// arrives.
 abstract final class DictionaryWords {
   static const all = <DictionaryEntry>[
     DictionaryEntry(
@@ -13,6 +14,8 @@ abstract final class DictionaryWords {
       definition: 'n. Lawyer, attorney-at-law.',
       example: 'Si abogado ara diri.',
       category: 'people',
+      frontCardImage: 'assets/images/abogado_dictionary.png',
+      favThumbImage: 'assets/images/abogado_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'abot',
@@ -21,6 +24,8 @@ abstract final class DictionaryWords {
       definition: 'n. Arrival.',
       example: 'Ang abot ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/abot_dictionary.png',
+      favThumbImage: 'assets/images/abot_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'abril',
@@ -29,6 +34,8 @@ abstract final class DictionaryWords {
       definition: 'n. April.',
       example: 'Ang Abril ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/abril_dictionary.png',
+      favThumbImage: 'assets/images/abril_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'adlaw',
@@ -87,6 +94,8 @@ abstract final class DictionaryWords {
       definition: 'n. Forehead.',
       example: 'Ang agtang ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/agtang_dictionary.png',
+      favThumbImage: 'assets/images/agtang_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'aguy',
@@ -95,6 +104,8 @@ abstract final class DictionaryWords {
       definition: 'expression. Ouch.',
       example: 'aguy!',
       category: 'grammar',
+      frontCardImage: 'assets/images/aguy_dictionary.png',
+      favThumbImage: 'assets/images/aguy_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'ahos',
@@ -248,6 +259,8 @@ abstract final class DictionaryWords {
       definition: 'question word. What.',
       example: 'Ginagamit ang “ano” sa pangungusap.',
       category: 'grammar',
+      frontCardImage: 'assets/images/ano_dictionary.png',
+      favThumbImage: 'assets/images/ano_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'anum',
@@ -256,6 +269,8 @@ abstract final class DictionaryWords {
       definition: 'adj. Six.',
       example: 'anum ang ini.',
       category: 'numbers',
+      frontCardImage: 'assets/images/anum_dictionary.png',
+      favThumbImage: 'assets/images/anum_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'anyos',
@@ -272,6 +287,8 @@ abstract final class DictionaryWords {
       definition: 'adj. Four.',
       example: 'Apat ka táo.',
       category: 'numbers',
+      frontCardImage: 'assets/images/apat_dictionary.png',
+      favThumbImage: 'assets/images/apat_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'apelyido',
@@ -280,6 +297,8 @@ abstract final class DictionaryWords {
       definition: 'n. Family-name, surname.',
       example: 'Subong ang apelyido.',
       category: 'time',
+      frontCardImage: 'assets/images/apelyido_dictionary.png',
+      favThumbImage: 'assets/images/apelyido_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'apo',
@@ -288,6 +307,8 @@ abstract final class DictionaryWords {
       definition: 'n. Grandchild.',
       example: 'Ang apo ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/apo_dictionary.png',
+      favThumbImage: 'assets/images/apo_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'ara-dira',
@@ -296,6 +317,8 @@ abstract final class DictionaryWords {
       definition: 'expression. (in) there, location.',
       example: 'ara dira!',
       category: 'grammar',
+      frontCardImage: 'assets/images/ara-dira_dictionary.png',
+      favThumbImage: 'assets/images/ara-dira_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'ara-diri',
@@ -328,6 +351,8 @@ abstract final class DictionaryWords {
       definition: 'n. Earring/s.',
       example: 'Ang aritus ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/aritus_dictionary.png',
+      favThumbImage: 'assets/images/aritus_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'arroz-caldo',
@@ -344,6 +369,8 @@ abstract final class DictionaryWords {
       definition: 'n. Artist; actor/actress; performer.',
       example: 'Ang artista ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/artista_dictionary.png',
+      favThumbImage: 'assets/images/artista_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'asawa',
@@ -353,6 +380,8 @@ abstract final class DictionaryWords {
           'n. Wife, spouse, a married woman whose husband is alive; to take a wife, marry, wed, espouse.',
       example: 'My asáwa siá.',
       category: 'family',
+      frontCardImage: 'assets/images/asawa_dictionary.png',
+      favThumbImage: 'assets/images/asawa_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'asin',
@@ -361,6 +390,8 @@ abstract final class DictionaryWords {
       definition: 'n. Salt; to salt.',
       example: 'Asiní ang ísdà.',
       category: 'food',
+      frontCardImage: 'assets/images/asin_dictionary.png',
+      favThumbImage: 'assets/images/asin_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'asul',
@@ -378,6 +409,8 @@ abstract final class DictionaryWords {
           'n. The custard-apple, tree and fruit. The fruit resembles a pine-cone.',
       example: 'Gusto ko ang atis.',
       category: 'food',
+      frontCardImage: 'assets/images/atis_dictionary.png',
+      favThumbImage: 'assets/images/atis_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'ato',
@@ -386,6 +419,8 @@ abstract final class DictionaryWords {
       definition: 'pron. That.',
       example: 'Ang ato ara diri.',
       category: 'grammar',
+      frontCardImage: 'assets/images/ato_dictionary.png',
+      favThumbImage: 'assets/images/ato_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'ato-didto',
@@ -402,6 +437,8 @@ abstract final class DictionaryWords {
       definition: 'pron. Our; ours (inclusive).',
       example: 'Ang aton ara diri.',
       category: 'grammar',
+      frontCardImage: 'assets/images/aton_dictionary.png',
+      favThumbImage: 'assets/images/aton_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'atubangan',
@@ -410,6 +447,8 @@ abstract final class DictionaryWords {
       definition: 'n. In front of; across the.',
       example: 'Ang atubangan ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/atubangan_dictionary.png',
+      favThumbImage: 'assets/images/atubangan_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'ayu',
@@ -418,6 +457,8 @@ abstract final class DictionaryWords {
       definition: 'n. Discount; bargain.',
       example: 'Ang ayu ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/ayu_dictionary.png',
+      favThumbImage: 'assets/images/ayu_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'baba',
@@ -426,6 +467,8 @@ abstract final class DictionaryWords {
       definition: 'n. Mouth.',
       example: 'Masakit ang akon bâbâ.',
       category: 'body',
+      frontCardImage: 'assets/images/baba_dictionary.png',
+      favThumbImage: 'assets/images/baba_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'babay',
@@ -442,6 +485,8 @@ abstract final class DictionaryWords {
       definition: 'n. Female; girl.',
       example: 'Ang babayi ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/babayi_dictionary.png',
+      favThumbImage: 'assets/images/babayi_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'baboy',
@@ -450,6 +495,8 @@ abstract final class DictionaryWords {
       definition: 'n. Pig, swine, pork.',
       example: 'Giníhaw níla ang báboy nga pinatámbok.',
       category: 'animals',
+      frontCardImage: 'assets/images/baboy_dictionary.png',
+      favThumbImage: 'assets/images/baboy_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bag-o',
@@ -458,6 +505,8 @@ abstract final class DictionaryWords {
       definition: 'adj. New (as in objects); recent; unfamiliar.',
       example: 'bag-o ang ini.',
       category: 'descriptions',
+      frontCardImage: 'assets/images/bag-o_dictionary.png',
+      favThumbImage: 'assets/images/bag-o_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bagatnan',
@@ -466,6 +515,8 @@ abstract final class DictionaryWords {
       definition: 'n. South.',
       example: 'Ang bagatnan ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/bagatnan_dictionary.png',
+      favThumbImage: 'assets/images/bagatnan_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bago',
@@ -490,6 +541,8 @@ abstract final class DictionaryWords {
       definition: 'n. To buy, purchase.',
       example: 'Báklon ko iní.',
       category: 'work',
+      frontCardImage: 'assets/images/bakal_dictionary.png',
+      favThumbImage: 'assets/images/bakal_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'balagay',
@@ -498,6 +551,8 @@ abstract final class DictionaryWords {
       definition: 'n. Winged beans.',
       example: 'Ang balagay ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/balagay_dictionary.png',
+      favThumbImage: 'assets/images/balagay_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'balatong',
@@ -506,6 +561,8 @@ abstract final class DictionaryWords {
       definition: 'n. String beans.',
       example: 'Ang balatong ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/balatong_dictionary.png',
+      favThumbImage: 'assets/images/balatong_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'balay',
@@ -543,6 +600,8 @@ abstract final class DictionaryWords {
           'v. To come back, return, go back to the place one came from.',
       example: 'Nagbálik siá sa Ilóng-ílong.',
       category: 'body',
+      frontCardImage: 'assets/images/balik_dictionary.png',
+      favThumbImage: 'assets/images/balik_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'balikan',
@@ -551,6 +610,8 @@ abstract final class DictionaryWords {
       definition: 'v. To go back (INF); go back (IMP).',
       example: 'Gusto ko magbalikan.',
       category: 'body',
+      frontCardImage: 'assets/images/balikan_dictionary.png',
+      favThumbImage: 'assets/images/balikan_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'balikawang',
@@ -567,6 +628,8 @@ abstract final class DictionaryWords {
       definition: 'n. News.',
       example: 'Naghambal siya sang balita.',
       category: 'communication',
+      frontCardImage: 'assets/images/balita_dictionary.png',
+      favThumbImage: 'assets/images/balita_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'balita-2',
@@ -584,6 +647,8 @@ abstract final class DictionaryWords {
           'n. Husband, a married man, whose wife is alive; to take a husband, to join a man in wedlock.',
       example: 'Sín-o man ang banáhon mo?',
       category: 'family',
+      frontCardImage: 'assets/images/bana_dictionary.png',
+      favThumbImage: 'assets/images/bana_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'banwa',
@@ -593,6 +658,8 @@ abstract final class DictionaryWords {
           'n. Town, city, municipality, state, common-wealth, public weal; citizens, electors, inhabitants; to become a town.',
       example: 'Ang bánwa nga nataóhan níya',
       category: 'places',
+      frontCardImage: 'assets/images/banwa_dictionary.png',
+      favThumbImage: 'assets/images/banwa_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'banyo',
@@ -601,6 +668,8 @@ abstract final class DictionaryWords {
       definition: 'n. Bathroom; comfort room.',
       example: 'Ang banyo ara diri.',
       category: 'home',
+      frontCardImage: 'assets/images/banyo_dictionary.png',
+      favThumbImage: 'assets/images/banyo_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bapor',
@@ -609,6 +678,8 @@ abstract final class DictionaryWords {
       definition: 'n. Ship; freighter.',
       example: 'Makadto ako sa bapor.',
       category: 'travel',
+      frontCardImage: 'assets/images/bapor_dictionary.png',
+      favThumbImage: 'assets/images/bapor_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'barangay',
@@ -618,6 +689,8 @@ abstract final class DictionaryWords {
           'n. A boat worked by oars; a ward of several families; a settlement, colony, district, village, borough of a town presided over by a freeman (.',
       example: 'Makadto kami sa barangay.',
       category: 'places',
+      frontCardImage: 'assets/images/barangay_dictionary.png',
+      favThumbImage: 'assets/images/barangay_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'barato',
@@ -626,6 +699,8 @@ abstract final class DictionaryWords {
       definition: 'adj. Inexpensive.',
       example: 'barato ang ini.',
       category: 'descriptions',
+      frontCardImage: 'assets/images/barato_dictionary.png',
+      favThumbImage: 'assets/images/barato_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'barbero',
@@ -634,6 +709,8 @@ abstract final class DictionaryWords {
       definition: 'n. Barber.',
       example: 'Ang barbero ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/barbero_dictionary.png',
+      favThumbImage: 'assets/images/barbero_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'baroto',
@@ -642,6 +719,8 @@ abstract final class DictionaryWords {
       definition: 'n. Boat; banca.',
       example: 'Makadto ako sa baroto.',
       category: 'travel',
+      frontCardImage: 'assets/images/baroto_dictionary.png',
+      favThumbImage: 'assets/images/baroto_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'basa',
@@ -650,6 +729,8 @@ abstract final class DictionaryWords {
       definition: 'adj. Wet; soaked.',
       example: 'basà ang ini.',
       category: 'descriptions',
+      frontCardImage: 'assets/images/basa_dictionary.png',
+      favThumbImage: 'assets/images/basa_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'basi',
@@ -658,6 +739,8 @@ abstract final class DictionaryWords {
       definition: 'particle. A particle which expresses uncertainty.',
       example: 'Ginagamit ang “basî” sa pangungusap.',
       category: 'grammar',
+      frontCardImage: 'assets/images/basi_dictionary.png',
+      favThumbImage: 'assets/images/basi_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'baso',
@@ -666,6 +749,8 @@ abstract final class DictionaryWords {
       definition: 'n. Drinking glass.',
       example: 'Ang baso ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/baso_dictionary.png',
+      favThumbImage: 'assets/images/baso_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'basta',
@@ -682,6 +767,8 @@ abstract final class DictionaryWords {
       definition: 'n. Child; baby.',
       example: 'Ang batâ ara sa amon balay.',
       category: 'family',
+      frontCardImage: 'assets/images/bata_dictionary.png',
+      favThumbImage: 'assets/images/bata_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bata-2',
@@ -706,6 +793,8 @@ abstract final class DictionaryWords {
       definition: 'n. The calf of the leg.',
       example: 'Masakit ang akon batiis.',
       category: 'body',
+      frontCardImage: 'assets/images/batiis_dictionary.png',
+      favThumbImage: 'assets/images/batiis_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bato',
@@ -714,6 +803,8 @@ abstract final class DictionaryWords {
       definition: 'n. Stone, rock; to stone.',
       example: 'Batohá ang idô.',
       category: 'nature',
+      frontCardImage: 'assets/images/bato_dictionary.png',
+      favThumbImage: 'assets/images/bato_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'baton',
@@ -730,6 +821,8 @@ abstract final class DictionaryWords {
       definition: 'n. Feeling; sense.',
       example: 'Ang batyag ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/batyag_dictionary.png',
+      favThumbImage: 'assets/images/batyag_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bayabas',
@@ -738,6 +831,8 @@ abstract final class DictionaryWords {
       definition: 'n. Guava.',
       example: 'Ang bayabas ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/bayabas_dictionary.png',
+      favThumbImage: 'assets/images/bayabas_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bayaw',
@@ -746,6 +841,8 @@ abstract final class DictionaryWords {
       definition: 'n. Brother-in-law; sister-in-law.',
       example: 'Ang bayaw ara sa amon balay.',
       category: 'family',
+      frontCardImage: 'assets/images/bayaw_dictionary.png',
+      favThumbImage: 'assets/images/bayaw_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bayaw-2',
@@ -762,6 +859,8 @@ abstract final class DictionaryWords {
       definition: 'n. Woman\'s dress; clothing.',
       example: 'Ang bayû ara diri.',
       category: 'clothing',
+      frontCardImage: 'assets/images/bayu_dictionary.png',
+      favThumbImage: 'assets/images/bayu_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bayu-2',
@@ -779,6 +878,8 @@ abstract final class DictionaryWords {
           'adj. Green; immodest, indecent, applied to talk, pictures, writing.',
       example: 'berde ang ini.',
       category: 'colors',
+      frontCardImage: 'assets/images/berde_dictionary.png',
+      favThumbImage: 'assets/images/berde_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'beses',
@@ -787,6 +888,8 @@ abstract final class DictionaryWords {
       definition: 'n. Frequency.',
       example: 'Ang beses ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/beses_dictionary.png',
+      favThumbImage: 'assets/images/beses_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'beynte',
@@ -795,6 +898,8 @@ abstract final class DictionaryWords {
       definition: 'adj. Twenty.',
       example: 'beynte ang ini.',
       category: 'descriptions',
+      frontCardImage: 'assets/images/beynte_dictionary.png',
+      favThumbImage: 'assets/images/beynte_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bibig',
@@ -803,6 +908,8 @@ abstract final class DictionaryWords {
       definition: 'n. Lip(s).',
       example: 'Ang bibig ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/bibig_dictionary.png',
+      favThumbImage: 'assets/images/bibig_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bihon',
@@ -811,6 +918,8 @@ abstract final class DictionaryWords {
       definition: 'n. Rice noodles.',
       example: 'Gusto ko ang bihon.',
       category: 'food',
+      frontCardImage: 'assets/images/bihon_dictionary.png',
+      favThumbImage: 'assets/images/bihon_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bili',
@@ -836,6 +945,8 @@ abstract final class DictionaryWords {
       definition: 'n. Window.',
       example: 'Ang bintana ara diri.',
       category: 'home',
+      frontCardImage: 'assets/images/bintana_dictionary.png',
+      favThumbImage: 'assets/images/bintana_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bis-ak',
@@ -852,6 +963,8 @@ abstract final class DictionaryWords {
       definition: 'conj. Even.',
       example: 'Ginagamit ang “bisan” sa pangungusap.',
       category: 'grammar',
+      frontCardImage: 'assets/images/bisan_dictionary.png',
+      favThumbImage: 'assets/images/bisan_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bisan-ano',
@@ -860,6 +973,8 @@ abstract final class DictionaryWords {
       definition: 'n. Anything; whatever.',
       example: 'Ang bisan ano ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/bisan-ano_dictionary.png',
+      favThumbImage: 'assets/images/bisan-ano_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bisita',
@@ -868,6 +983,8 @@ abstract final class DictionaryWords {
       definition: 'n. Visitor; guest.',
       example: 'Ang bisita ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/bisita_dictionary.png',
+      favThumbImage: 'assets/images/bisita_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bisitahon',
@@ -876,6 +993,8 @@ abstract final class DictionaryWords {
       definition: 'v. Will be visited by (D-F).',
       example: 'Gusto ko magbisitahon.',
       category: 'actions',
+      frontCardImage: 'assets/images/bisitahon_dictionary.png',
+      favThumbImage: 'assets/images/bisitahon_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'biskwit',
@@ -884,6 +1003,8 @@ abstract final class DictionaryWords {
       definition: 'n. Biscuit.',
       example: 'Ang biskwit ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/biskwit_dictionary.png',
+      favThumbImage: 'assets/images/biskwit_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'biyernes',
@@ -892,6 +1013,8 @@ abstract final class DictionaryWords {
       definition: 'n. Friday.',
       example: 'Ang Biyernes ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/biyernes_dictionary.png',
+      favThumbImage: 'assets/images/biyernes_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'botika',
@@ -900,6 +1023,8 @@ abstract final class DictionaryWords {
       definition: 'n. Drugstore; pharmacy.',
       example: 'Ang botika ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/botika_dictionary.png',
+      favThumbImage: 'assets/images/botika_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bubungan',
@@ -908,6 +1033,8 @@ abstract final class DictionaryWords {
       definition: 'n. Roof (var. atup).',
       example: 'Ang bubungan ara diri.',
       category: 'home',
+      frontCardImage: 'assets/images/bubungan_dictionary.png',
+      favThumbImage: 'assets/images/bubungan_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'buena-mano',
@@ -916,6 +1043,8 @@ abstract final class DictionaryWords {
       definition: 'n. First customer.',
       example: 'Subong ang buena mano.',
       category: 'time',
+      frontCardImage: 'assets/images/buena-mano_dictionary.png',
+      favThumbImage: 'assets/images/buena-mano_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bug-at',
@@ -924,6 +1053,8 @@ abstract final class DictionaryWords {
       definition: 'n. Weight; heaviness.',
       example: 'Ang bug-at ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/bug-at_dictionary.png',
+      favThumbImage: 'assets/images/bug-at_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bug-at-2',
@@ -940,6 +1071,8 @@ abstract final class DictionaryWords {
       definition: 'n. Hulled rice; pimple; to hull or be hulled (of rice).',
       example: 'Nagbugás na ang humáy sa lusóng.',
       category: 'food',
+      frontCardImage: 'assets/images/bugas_dictionary.png',
+      favThumbImage: 'assets/images/bugas_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bugkus',
@@ -948,6 +1081,8 @@ abstract final class DictionaryWords {
       definition: 'n. A bunch; a bundle.',
       example: 'Ang bugkus ara diri.',
       category: 'general',
+      frontCardImage: 'assets/images/bugkus_dictionary.png',
+      favThumbImage: 'assets/images/bugkus_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bugtaw',
@@ -956,6 +1091,8 @@ abstract final class DictionaryWords {
       definition: 'v. Wake up.',
       example: 'Gusto ko magbugtaw.',
       category: 'actions',
+      frontCardImage: 'assets/images/bugtaw_dictionary.png',
+      favThumbImage: 'assets/images/bugtaw_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'bugtaw-2',
@@ -3678,6 +3815,8 @@ abstract final class DictionaryWords {
       definition: 'adj. The back, rear, background, the part behind.',
       example: 'Sa likód mo.',
       category: 'body',
+      frontCardImage: 'assets/images/likod_dictionary.png',
+      favThumbImage: 'assets/images/likod_dictionary_fav_thumb.png',
     ),
     DictionaryEntry(
       id: 'lima',

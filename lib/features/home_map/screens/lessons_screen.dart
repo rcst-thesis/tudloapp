@@ -15,6 +15,8 @@ import 'package:tudloapp/core/widgets/mascot_widget.dart';
 import 'package:tudloapp/data/lesson_bank/lesson_bank.dart';
 import 'package:tudloapp/features/energy/widgets/energy_indicator.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_lesson_host_scope.dart';
+import 'package:tudloapp/features/lesson/presentation/widgets/lesson_content_footer.dart';
+import 'package:tudloapp/shared/widgets/sticker_press_button.dart';
 
 const double _mapHeaderHeight = 340;
 const Size _barangayMapViewBox = Size(2400, 1400);
@@ -249,31 +251,19 @@ class _LessonsScreenState extends State<LessonsScreen> {
   static const double _topPad = 250;
   static const double _bottomPad = 330;
   final ScrollController _scrollController = ScrollController();
-  late final PageController _lessonCarouselController;
   bool _showScrollTopButton = false;
   int _mapHelpStep = 0;
   int? _activeLevel;
   int _selectedUnitNumber = 1;
-  int _selectedLessonIndex = 0;
   bool _launchingLevel = false;
-  String? _lastLessonCardVoiceAsset;
 
   @override
   void initState() {
     super.initState();
     final initialLevel = _initialDashboardLevel();
     final initialUnit = AppData.unitForLevel(initialLevel);
-    final initialLevels = AppData.catalogLevelsForUnit(initialUnit);
     _selectedUnitNumber = initialUnit.number;
-    _selectedLessonIndex = math.max(0, initialLevels.indexOf(initialLevel));
-    _lessonCarouselController = PageController(
-      viewportFraction: .88,
-      initialPage: _selectedLessonIndex,
-    );
     _scrollController.addListener(_handleScroll);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) _playSelectedLessonCardVoice();
-    });
   }
 
   int _initialDashboardLevel() {
@@ -293,13 +283,11 @@ class _LessonsScreenState extends State<LessonsScreen> {
     _scrollController
       ..removeListener(_handleScroll)
       ..dispose();
-    _lessonCarouselController.dispose();
     unawaited(AppAudioService.instance.stopVoice());
     super.dispose();
   }
 
   void _stopLessonCardVoice() {
-    _lastLessonCardVoiceAsset = null;
     unawaited(AppAudioService.instance.stopVoice());
   }
 
@@ -322,24 +310,19 @@ class _LessonsScreenState extends State<LessonsScreen> {
     };
   }
 
-  Future<void> _playSelectedLessonCardVoice() async {
-    final unit = AppData.unitForNumber(_selectedUnitNumber);
-    final levels = AppData.catalogLevelsForUnit(unit);
-    if (levels.isEmpty) return;
-    final index = _selectedLessonIndex.clamp(0, levels.length - 1).toInt();
-    final level = levels[index];
+  /// Plays a single lesson's VO on demand -- only used inside the "start
+  /// lesson" popup below, not while just browsing the grid. With several
+  /// lesson cards visible on screen at once, there's no single "selected"
+  /// card left to narrate automatically; narrating whichever one the
+  /// learner actually chose to start makes more sense than guessing.
+  Future<void> _playLessonVoiceForLevel(int level) async {
     final asset = _lessonCardVoiceAssetForLevel(level);
-    if (asset == null) {
-      _lastLessonCardVoiceAsset = null;
-      return;
-    }
-    if (asset == _lastLessonCardVoiceAsset) return;
-    _lastLessonCardVoiceAsset = asset;
+    if (asset == null) return;
     try {
       await AppAudioService.instance.lowerBackgroundVolume();
       await AppAudioService.instance.playVoiceAssets([asset]);
     } catch (_) {
-      // Missing or unsupported card VO should not block lesson browsing.
+      // Missing or unsupported card VO should not block starting the lesson.
     } finally {
       await AppAudioService.instance.restoreBackgroundVolume();
     }
@@ -408,45 +391,44 @@ class _LessonsScreenState extends State<LessonsScreen> {
     }
   }
 
-  Future<void> _showUnitPicker() async {
-    final selected = await showModalBottomSheet<int>(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) => _GradeOneUnitSheet(
-        selectedUnit: _selectedUnitNumber,
-        units: AppData.catalogUnits,
-      ),
-    );
-    if (selected == null || selected == _selectedUnitNumber) return;
+  // Applies a unit picked from the "yunits" dropdown in
+  // _GradeOneUnitSelector (which owns showing/positioning that dropdown
+  // itself -- this is just the resulting state mutation, replacing what
+  // the old showModalBottomSheet-based picker used to do inline).
+  void _applySelectedUnit(int selected) {
+    if (selected == _selectedUnitNumber) return;
     final unit = AppData.unitForNumber(selected);
     final levels = AppData.catalogLevelsForUnit(unit);
     if (levels.isEmpty) return;
     _stopLessonCardVoice();
     AppData.lessonDashboardFocusLevel = levels.first;
-    setState(() {
-      _selectedUnitNumber = selected;
-      _selectedLessonIndex = 0;
-      _lastLessonCardVoiceAsset = null;
-    });
-    _lessonCarouselController.jumpToPage(0);
-    unawaited(_playSelectedLessonCardVoice());
+    setState(() => _selectedUnitNumber = selected);
   }
 
-  void _moveLessonCarousel(int delta) {
-    final unit = AppData.unitForNumber(_selectedUnitNumber);
-    final levels = AppData.catalogLevelsForUnit(unit);
-    if (levels.isEmpty) return;
-    final next = (_selectedLessonIndex + delta)
-        .clamp(0, levels.length - 1)
-        .toInt();
-    if (next == _selectedLessonIndex) return;
-    _stopLessonCardVoice();
-    AppData.lessonDashboardFocusLevel = levels[next];
-    _lessonCarouselController.animateToPage(
-      next,
-      duration: const Duration(milliseconds: 360),
-      curve: Curves.easeOutCubic,
+  // Tapping a card's Play button no longer jumps straight into the lesson.
+  // It pops up a dimmed confirmation card for that one lesson and narrates
+  // it there instead -- narrating on the grid itself doesn't make sense
+  // once several lesson cards can be on screen together.
+  Future<void> _presentLessonStartPopup(int level) async {
+    if (_launchingLevel) return;
+    if (!AppData.isProductionLessonAvailable(level)) return;
+    final title = _lessonTitleForDashboard(level);
+    unawaited(_playLessonVoiceForLevel(level));
+    await showGeneralDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: 'Close lesson popup',
+      barrierColor: const Color(0xCC000000),
+      transitionDuration: const Duration(milliseconds: 220),
+      pageBuilder: (dialogContext, _, __) => _LessonStartPopup(
+        title: title,
+        onStart: () {
+          Navigator.of(dialogContext).pop();
+          unawaited(_startLevel(level));
+        },
+      ),
     );
+    _stopLessonCardVoice();
   }
 
   Widget _buildGradeOneDashboard(BuildContext context) {
@@ -480,9 +462,6 @@ class _LessonsScreenState extends State<LessonsScreen> {
         ? AppData.unitForNumber(_selectedUnitNumber)
         : AppData.unitForLevel(AppData.firstCatalogLevel);
     final levels = AppData.catalogLevelsForUnit(unit);
-    final selectedLessonIndex = _selectedLessonIndex
-        .clamp(0, math.max(0, levels.length - 1))
-        .toInt();
     final completedInUnit = [
       for (final level in levels)
         if (AppData.completedLevels.contains(level)) level,
@@ -491,130 +470,121 @@ class _LessonsScreenState extends State<LessonsScreen> {
     final completedLessons = AppData.completedLevelCount;
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: SvgPicture.asset(
-              'assets/images/game_map/backgroundv3.svg',
-              fit: BoxFit.cover,
-              alignment: Alignment.center,
-            ),
-          ),
-          SafeArea(
-            bottom: false,
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final h = constraints.maxHeight;
-                final compact = h < 790;
-                final horizontal = constraints.maxWidth.clamp(360.0, 520.0);
-                final sidePadding =
-                    (constraints.maxWidth - horizontal) / 2 + 22;
-                final topPadding = compact ? 8.0 : 14.0;
-                final gap = compact ? 8.0 : 12.0;
-                // The outer LessonCatalogScreen Scaffold already reserves
-                // AppBottomTabNavigation's own height (it isn't overlaid),
-                // so this only needs a small breathing gap -- not another
-                // nav-bar-sized reserve stacked on top of it, which was
-                // shrinking the carousel's available height and forcing it
-                // to scale down more than necessary.
-                final bottomReserve = compact ? 16.0 : 20.0;
-                return Padding(
+      backgroundColor: const Color(0xFF90E0EF),
+      body: SafeArea(
+        bottom: false,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final h = constraints.maxHeight;
+            final compact = h < 790;
+            final horizontal = constraints.maxWidth.clamp(360.0, 520.0);
+            final sidePadding = (constraints.maxWidth - horizontal) / 2 + 22;
+            final topPadding = compact ? 8.0 : 14.0;
+            final gap = compact ? 8.0 : 12.0;
+            return CustomScrollView(
+              slivers: [
+                SliverPadding(
                   padding: EdgeInsets.fromLTRB(
                     sidePadding,
                     topPadding,
                     sidePadding,
-                    bottomReserve,
+                    0,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      _GradeOneHeader(
-                        gradeLabel: AppData.selectedGradeLevel.label,
-                        compact: compact,
-                      ),
-                      SizedBox(height: gap),
-                      _GradeOneUnitSelector(
-                        unit: unit,
-                        completed: completedInUnit,
-                        lessonCount: levels.length,
-                        compact: compact,
-                        onTap: _showUnitPicker,
-                      ),
-                      SizedBox(height: gap),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: _GradeOneStatCard(
-                              icon: Icons.menu_book_rounded,
-                              value: '${unit.number}',
-                              label: 'yunit',
-                              compact: compact,
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: _GradeOneStatCard(
-                              icon: Icons.star_rounded,
-                              value: '$badges',
-                              label: 'badges',
-                              compact: compact,
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: _GradeOneStatCard(
-                              icon: Icons.grid_view_rounded,
-                              value:
-                                  '$completedLessons/${AppData.catalogLevelCount}',
-                              label: 'lessons',
-                              compact: compact,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: gap),
-                      Expanded(
-                        child: LayoutBuilder(
-                          builder: (context, carouselConstraints) {
-                            final carouselHeight =
-                                carouselConstraints.maxHeight;
-                            return _GradeOneLessonCarousel(
-                              height: carouselHeight,
-                              controller: _lessonCarouselController,
-                              unit: unit,
-                              levels: levels,
-                              selectedIndex: selectedLessonIndex,
-                              launching: _launchingLevel,
-                              onPageChanged: (index) {
-                                _stopLessonCardVoice();
-                                final level = levels[index];
-                                AppData.lessonDashboardFocusLevel = level;
-                                setState(() => _selectedLessonIndex = index);
-                                unawaited(_playSelectedLessonCardVoice());
-                              },
-                              onCenterCard: (index) {
-                                _stopLessonCardVoice();
-                                AppData.lessonDashboardFocusLevel =
-                                    levels[index];
-                                _lessonCarouselController.animateToPage(
-                                  index,
-                                  duration: const Duration(milliseconds: 320),
-                                  curve: Curves.easeOutCubic,
-                                );
-                              },
-                              onPlay: (level) => _startLevel(level),
-                              onArrow: _moveLessonCarousel,
-                            );
-                          },
+                  sliver: SliverToBoxAdapter(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        _GradeOneHeader(
+                          gradeLabel: AppData.selectedGradeLevel.label,
+                          isGradeOne:
+                              AppData.selectedGradeLevel == GradeLevel.grade1,
+                          compact: compact,
                         ),
-                      ),
-                    ],
+                        SizedBox(height: gap),
+                        _GradeOneUnitSelector(
+                          unit: unit,
+                          completed: completedInUnit,
+                          lessonCount: levels.length,
+                          compact: compact,
+                          onUnitSelected: _applySelectedUnit,
+                        ),
+                        SizedBox(height: gap),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: _GradeOneStatCard(
+                                iconAsset: 'assets/images/stat_unit_symbol.svg',
+                                value: '${unit.number}',
+                                label: 'yunit',
+                                compact: compact,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: _GradeOneStatCard(
+                                iconAsset:
+                                    'assets/images/stat_badge_symbol.svg',
+                                value: '$badges',
+                                label: 'badges',
+                                compact: compact,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: _GradeOneStatCard(
+                                iconAsset:
+                                    'assets/images/stat_lesson_symbol.svg',
+                                value:
+                                    '$completedLessons/${AppData.catalogLevelCount}',
+                                label: 'lessons',
+                                compact: compact,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: gap),
+                      ],
+                    ),
                   ),
-                );
-              },
-            ),
-          ),
-        ],
+                ),
+                SliverPadding(
+                  padding: EdgeInsets.symmetric(horizontal: sidePadding),
+                  sliver: SliverGrid(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio:
+                              _GradeOneLessonCard._cardAspectRatio,
+                        ),
+                    delegate: SliverChildBuilderDelegate((context, index) {
+                      final level = levels[index];
+                      return _GradeOneLessonCard(
+                        key: ValueKey(level),
+                        level: level,
+                        unit: unit,
+                        active: true,
+                        launching: _launchingLevel,
+                        available: AppData.isProductionLessonAvailable(level),
+                        onTapCard: () {},
+                        onPlay: () => _presentLessonStartPopup(level),
+                      );
+                    }, childCount: levels.length),
+                  ),
+                ),
+                SliverToBoxAdapter(child: SizedBox(height: gap)),
+                // Sits at the bottom of the scroll content instead of a
+                // fixed bottomNavigationBar so it scrolls with everything
+                // else -- same single-wave shape as Home/Dictionary/Me's
+                // own content footers, just filled with this screen's
+                // #00B4D8. The outer LessonCatalogScreen Scaffold still
+                // reserves AppBottomTabNavigation's own height separately.
+                const SliverToBoxAdapter(
+                  child: SizedBox(height: 32, child: LessonContentFooter()),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
@@ -1267,41 +1237,213 @@ class _MapCircleButton extends StatelessWidget {
 
 class _GradeOneHeader extends StatelessWidget {
   final String gradeLabel;
+  final bool isGradeOne;
   final bool compact;
 
-  const _GradeOneHeader({required this.gradeLabel, required this.compact});
+  const _GradeOneHeader({
+    required this.gradeLabel,
+    required this.isGradeOne,
+    required this.compact,
+  });
+
+  // The supplied Figma wordmark's own viewBox (208x73) -- used to keep the
+  // artwork's aspect ratio while it's sized to the same em-height the
+  // replaced text used, so it occupies the same scale/position as before.
+  static const _artworkAspectRatio = 208 / 73;
 
   @override
   Widget build(BuildContext context) {
+    final labelHeight = compact ? 58.0 : 68.0;
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(
-          child: Text(
-            gradeLabel,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: GoogleFonts.nunito(
-              color: Colors.white,
-              fontSize: compact ? 46 : 56,
-              height: .95,
-              fontWeight: FontWeight.w900,
-              shadows: [
-                Shadow(
-                  color: TudloColors.ink.withValues(alpha: .42),
-                  offset: const Offset(2, 5),
-                  blurRadius: 2,
-                ),
-              ],
-            ),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: isGradeOne
+                ? Transform.translate(
+                    // Visual-only nudge (doesn't affect the Row's layout/
+                    // height, unlike Padding) -- bump this to move the
+                    // artwork lower/higher independent of the battery icon.
+                    offset: const Offset(0, 11),
+                    child: SizedBox(
+                      height: labelHeight,
+                      width: labelHeight * _artworkAspectRatio,
+                      child: SvgPicture.asset(
+                        'assets/images/grade1_dashboard_label.svg',
+                        fit: BoxFit.contain,
+                        alignment: Alignment.centerLeft,
+                        semanticsLabel: gradeLabel,
+                      ),
+                    ),
+                  )
+                : Text(
+                    gradeLabel,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.nunito(
+                      color: Colors.white,
+                      fontSize: labelHeight,
+                      height: .95,
+                      fontWeight: FontWeight.w900,
+                      shadows: [
+                        Shadow(
+                          color: TudloColors.ink.withValues(alpha: .42),
+                          offset: const Offset(2, 5),
+                          blurRadius: 2,
+                        ),
+                      ],
+                    ),
+                  ),
           ),
         ),
         const SizedBox(width: 16),
-        const Padding(
-          padding: EdgeInsets.only(top: 4),
-          child: EnergyIndicator(light: true),
-        ),
+        const _GradeOneEnergyIndicator(),
       ],
+    );
+  }
+}
+
+/// Dashboard battery-style energy gauge, replacing the DevG-source
+/// [EnergyIndicator] pill for this header only. Same real data source
+/// (`AppData.currentEnergy`/`maxEnergy`, already Tudlo's 10-100 learner
+/// energy -- see `AppData.configure`) and the same live-update/tap-to-open
+/// behavior as [EnergyIndicator]; only the presentation changes to match
+/// the supplied battery artwork.
+///
+/// The fill bars and the "n%" label are Flutter-drawn on top of the SVG
+/// shell, the same technique `HomeEnergyIndicator` uses -- the source
+/// Figma export baked its own 6 permanently-"full" bars and a static "60%"
+/// label as vector text, so a real value never showed. The shipped asset
+/// (`assets/images/lesson_energy_indicator.svg`) has both stripped out,
+/// keeping only the shell/nub/badge-pill/window artwork.
+class _GradeOneEnergyIndicator extends StatefulWidget {
+  const _GradeOneEnergyIndicator();
+
+  @override
+  State<_GradeOneEnergyIndicator> createState() =>
+      _GradeOneEnergyIndicatorState();
+}
+
+class _GradeOneEnergyIndicatorState extends State<_GradeOneEnergyIndicator> {
+  // Scales the whole battery (SVG + Flutter-drawn bars + label) uniformly
+  // -- adjust this alone to resize; all the geometry below is fixed to the
+  // SVG's own 86x60 coordinate space, so scaling the box directly instead
+  // would require recomputing every bar/label position by hand.
+  static const _scale = 0.8;
+
+  // 10 bars = 10% per bar, same intuitive mapping HomeEnergyIndicator uses.
+  static const _barCount = 10;
+  // The battery window's fill bars, in the SVG's own 86x60 coordinate space
+  // (matches this widget's fixed SizedBox size 1:1). Derived from the
+  // source artwork's own (now-removed) 6-bar spacing, extended to fill the
+  // window edge to edge for 10 bars instead of leaving roughly 40% empty.
+  static const _barLeftStart = 19.0;
+  static const _barLeftStep = 6.0204;
+  static const _barTop = 26.0;
+  static const _barWidth = 4.81633;
+  static const _barHeight = 24.0;
+  static const _barRadius = 2.40816;
+  static const _filledColor = Color(0xFF00D7FF);
+  static const _labelColor = Color(0xFF0C2F4F);
+
+  // The source artwork's badge-pill bounding box (also in the SVG's own
+  // coordinate space) -- the "n%" label sits centered inside it.
+  static const _labelLeft = 31.0;
+  static const _labelTop = 2.06641;
+  static const _labelWidth = 37.0;
+  static const _labelHeight = 14.9333;
+
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    AppData.refreshEnergy(save: true);
+    _timer = Timer.periodic(const Duration(minutes: 1), (_) async {
+      await AppData.refreshEnergy(save: true);
+      if (mounted) setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<int>(
+      valueListenable: AppData.energyRevision,
+      builder: (context, _, __) {
+        final displayedEnergy = AppData.developerMode
+            ? AppData.maxEnergy
+            : AppData.currentEnergy.clamp(0, AppData.maxEnergy);
+        final filledBars = (displayedEnergy / AppData.maxEnergy * _barCount)
+            .round();
+        return Semantics(
+          key: const Key('grade-one-energy-indicator'),
+          label: 'Energy $displayedEnergy percent',
+          child: GestureDetector(
+            onTap: () => showEnergyDetails(context),
+            behavior: HitTestBehavior.opaque,
+            child: Transform.scale(
+              scale: _scale,
+              alignment: Alignment.centerLeft,
+              child: SizedBox(
+                width: 86,
+                height: 60,
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                      child: SvgPicture.asset(
+                        'assets/images/lesson_energy_indicator.svg',
+                        fit: BoxFit.contain,
+                        excludeFromSemantics: true,
+                      ),
+                    ),
+                    for (var index = 0; index < filledBars; index++)
+                      Positioned(
+                        left: _barLeftStart + index * _barLeftStep,
+                        top: _barTop,
+                        width: _barWidth,
+                        height: _barHeight,
+                        child: DecoratedBox(
+                          key: Key('grade-one-energy-bar-$index'),
+                          decoration: BoxDecoration(
+                            color: _filledColor,
+                            borderRadius: BorderRadius.circular(_barRadius),
+                          ),
+                        ),
+                      ),
+                    Positioned(
+                      left: _labelLeft,
+                      top: _labelTop,
+                      width: _labelWidth,
+                      height: _labelHeight,
+                      child: Center(
+                        child: Text(
+                          AppData.developerMode ? '∞' : '$displayedEnergy%',
+                          key: const Key('grade-one-energy-label'),
+                          maxLines: 1,
+                          style: const TextStyle(
+                            color: _labelColor,
+                            fontFamily: 'ComicRelief',
+                            fontSize: 11,
+                            height: 1,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -1311,383 +1453,606 @@ class _GradeOneUnitSelector extends StatelessWidget {
   final int completed;
   final int lessonCount;
   final bool compact;
-  final VoidCallback onTap;
+  final ValueChanged<int> onUnitSelected;
 
   const _GradeOneUnitSelector({
     required this.unit,
     required this.completed,
     required this.lessonCount,
     required this.compact,
-    required this.onTap,
+    required this.onUnitSelected,
   });
+
+  // Supplied Figma card ("yunit card.svg"): two flat, unblurred rects --
+  // a back one offset straight down, a front one at the origin -- instead
+  // of a soft BoxShadow, giving the card a solid/boxy drop-shadow edge.
+  // Keep the *ratio* of that offset to the card's height (source: 1.79834
+  // / 123.201 tall), not the literal Figma pixel offset, so it scales with
+  // this card's actual responsive height instead of a fixed export size.
+  static const _shadowOffsetRatio = 1.79834 / 123.201;
+  static const _shadowColor = Color(0xFF58858E);
+  static const _cardColor = Color(0xFFCAF0F8);
+
+  // Progress tracker label + fill -- deliberately 0xFF57858E, not this
+  // card's own 0xFF58858E _shadowColor above (one digit apart, but a
+  // separately supplied value, not a typo/duplicate of it).
+  static const _progressColor = Color(0xFF57858E);
 
   @override
   Widget build(BuildContext context) {
     final progress = lessonCount <= 0 ? 0.0 : completed / lessonCount;
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(28),
-        onTap: onTap,
-        child: Ink(
-          height: compact ? 80 : 90,
-          padding: EdgeInsets.fromLTRB(
-            18,
-            compact ? 8 : 12,
-            16,
-            compact ? 8 : 12,
-          ),
-          decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: .92),
-            borderRadius: BorderRadius.circular(28),
-            boxShadow: [
-              BoxShadow(
-                color: TudloColors.forest.withValues(alpha: .16),
-                blurRadius: 16,
-                offset: const Offset(0, 8),
-              ),
-            ],
-          ),
-          child: Row(
+    final cardHeight = compact ? 90.0 : 100.0;
+    final shadowOffset = cardHeight * _shadowOffsetRatio;
+    return SizedBox(
+      height: cardHeight + shadowOffset,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          // Splits the card horizontally so the centered "yunit N" label
+          // and the unit-title label never overlap: the title's column
+          // starts partway across the card instead of spanning the full
+          // width like "yunit N" does.
+          final titleStart = constraints.maxWidth * 0.54;
+          const titleGap = 40.0;
+          final titleFontSize = (MediaQuery.sizeOf(context).width * 0.03).clamp(
+            12.0,
+            16.0,
+          );
+          return Stack(
+            clipBehavior: Clip.none,
             children: [
-              Container(
-                width: compact ? 72 : 86,
-                height: compact ? 54 : 64,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFFF4D1),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: const Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Positioned(
-                      left: 14,
-                      child: _TinyLetterTile(
-                        letter: 'A',
-                        color: Color(0xFFFF62A6),
-                      ),
-                    ),
-                    Positioned(
-                      top: 8,
-                      child: _TinyLetterTile(
-                        letter: 'B',
-                        color: Color(0xFF1998FF),
-                      ),
-                    ),
-                    Positioned(
-                      right: 14,
-                      child: _TinyLetterTile(
-                        letter: 'C',
-                        color: Color(0xFFFF9D24),
-                      ),
-                    ),
-                  ],
+              Positioned(
+                left: 0,
+                right: 0,
+                top: shadowOffset,
+                height: cardHeight,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: _shadowColor,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                 ),
               ),
-              const SizedBox(width: 18),
-              Expanded(
+              Positioned(
+                left: 0,
+                right: 0,
+                top: 0,
+                height: cardHeight,
+                // The whole card is no longer itself tappable -- switching
+                // units is now the dedicated "yunits" dropdown button's job
+                // (below), not the whole card's, so this is a plain
+                // decorated container instead of a Material/InkWell.
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: _cardColor,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+              ),
+              Positioned(
+                left: 3,
+                top: 0,
+                height: cardHeight,
+                // Supplied "3 dots.svg" decoration, vertically centered at the
+                // card's own left edge. Sized as a ratio of cardHeight (source
+                // viewBox 16x36, aspect ratio kept) rather than the Figma export's
+                // literal pixel size, same reasoning as the card's shadow offset.
+                child: Center(
+                  child: SizedBox(
+                    height: cardHeight * 0.35,
+                    width: cardHeight * 0.35 * (16 / 36),
+                    child: SvgPicture.asset(
+                      'assets/images/unit_card_dots.svg',
+                      fit: BoxFit.contain,
+                      excludeFromSemantics: true,
+                    ),
+                  ),
+                ),
+              ),
+              // Supplied "unit1 thumbnail.png", pinned to the card's own
+              // top-left corner (unlike the dots above, which stay vertically
+              // centered) -- this is what the old A/B/C tile is replaced by;
+              // that Row slot above is now just an empty width-preserving
+              // spacer. Sized as a ratio of cardHeight, square, same reasoning
+              // as the other card decorations.
+              Positioned(
+                left: 26,
+                top: 4,
+                child: SizedBox(
+                  // Shrunk from the old 0.85 so there's genuine room left
+                  // in the card, below both this and the labels, for the
+                  // progress tracker underneath -- growing the card's own
+                  // height instead of shrinking this was tried and
+                  // reverted.
+                  height: cardHeight * 0.70,
+                  width: cardHeight * 0.70,
+                  child: Center(
+                    child: FractionallySizedBox(
+                      widthFactor: _unitThumbnailScaleForDashboard(unit.number),
+                      heightFactor: _unitThumbnailScaleForDashboard(
+                        unit.number,
+                      ),
+                      child: Image.asset(
+                        _unitThumbnailForDashboard(unit.number),
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              // Progress tracker (label + bar) -- bottom-anchored, full
+              // card width, so it always sits below the thumbnail *and*
+              // below "yunit N"/the title (both vertically centered
+              // higher up), inside the card's existing bounds.
+              Positioned(
+                left: 18,
+                right: 16,
+                bottom: compact ? 8 : 10,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Row(
-                      children: [
-                        Flexible(
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Yunit ${unit.number}',
-                              style: GoogleFonts.nunito(
-                                color: TudloColors.ink,
-                                fontSize: compact ? 25 : 30,
-                                height: 1,
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 2,
-                          height: compact ? 34 : 42,
-                          margin: EdgeInsets.symmetric(
-                            horizontal: compact ? 10 : 16,
-                          ),
-                          color: TudloColors.muted.withValues(alpha: .45),
-                        ),
-                        Expanded(
-                          child: Text(
-                            unit.title,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.nunito(
-                              color: const Color(0xFF045941),
-                              fontSize: compact ? 16 : 19,
-                              height: .98,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                        ),
-                        Icon(
-                          completed == lessonCount
-                              ? Icons.check_rounded
-                              : Icons.expand_more_rounded,
-                          color: TudloColors.forest,
-                          size: compact ? 32 : 40,
-                        ),
-                      ],
+                    _CardStrokeLabel(
+                      text: '$completed of $lessonCount done',
+                      fontSize: compact ? 11 : 12,
+                      color: _progressColor,
                     ),
-                    SizedBox(height: compact ? 5 : 8),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(999),
-                      child: LinearProgressIndicator(
-                        minHeight: compact ? 9 : 12,
-                        value: progress.clamp(0, 1),
-                        backgroundColor: TudloColors.line.withValues(
-                          alpha: .75,
-                        ),
-                        valueColor: const AlwaysStoppedAnimation<Color>(
-                          TudloColors.forest,
+                    SizedBox(height: compact ? 4 : 6),
+                    Container(
+                      height: compact ? 9 : 12,
+                      decoration: BoxDecoration(
+                        // Empty-state track is a plain white pill
+                        // floating above the card, not a flat gray inset
+                        // like a normal progress bar -- the drop shadow
+                        // is what sells "floating".
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(999),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: .18),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      // Small gap between the white container and the fill
+                      // -- the fill floats inside the track instead of
+                      // touching its edges.
+                      child: Padding(
+                        padding: const EdgeInsets.all(2),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(999),
+                          child: LinearProgressIndicator(
+                            value: progress.clamp(0, 1),
+                            backgroundColor: Colors.transparent,
+                            valueColor: const AlwaysStoppedAnimation<Color>(
+                              _progressColor,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _TinyLetterTile extends StatelessWidget {
-  final String letter;
-  final Color color;
-
-  const _TinyLetterTile({required this.letter, required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Transform.rotate(
-      angle: letter == 'A'
-          ? -.18
-          : letter == 'C'
-          ? .18
-          : 0,
-      child: Container(
-        width: 34,
-        height: 38,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(8),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: .16),
-              blurRadius: 4,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
-        child: Text(
-          letter,
-          style: GoogleFonts.nunito(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.w900,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _GradeOneStatCard extends StatelessWidget {
-  final IconData icon;
-  final String value;
-  final String label;
-  final bool compact;
-
-  const _GradeOneStatCard({
-    required this.icon,
-    required this.value,
-    required this.label,
-    required this.compact,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: compact ? 74 : 86,
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: compact ? 8 : 10),
-      decoration: BoxDecoration(
-        color: const Color(0xFFE7FCFF).withValues(alpha: .92),
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(
-          color: Colors.white.withValues(alpha: .72),
-          width: 2,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: TudloColors.ink.withValues(alpha: .08),
-            blurRadius: 12,
-            offset: const Offset(0, 7),
-          ),
-        ],
-      ),
-      child: FittedBox(
-        fit: BoxFit.scaleDown,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: TudloColors.forest, size: compact ? 24 : 30),
-            Text(
-              value,
-              style: GoogleFonts.nunito(
-                color: const Color(0xFF075744),
-                fontSize: compact ? 28 : 34,
-                height: .95,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-            Text(
-              label,
-              style: GoogleFonts.nunito(
-                color: const Color(0xFF075744),
-                fontSize: compact ? 14 : 17,
-                height: 1,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _GradeOneLessonCarousel extends StatelessWidget {
-  final double height;
-  final PageController controller;
-  final AppUnit unit;
-  final List<int> levels;
-  final int selectedIndex;
-  final bool launching;
-  final ValueChanged<int> onPageChanged;
-  final ValueChanged<int> onCenterCard;
-  final ValueChanged<int> onPlay;
-  final ValueChanged<int> onArrow;
-
-  const _GradeOneLessonCarousel({
-    required this.height,
-    required this.controller,
-    required this.unit,
-    required this.levels,
-    required this.selectedIndex,
-    required this.launching,
-    required this.onPageChanged,
-    required this.onCenterCard,
-    required this.onPlay,
-    required this.onArrow,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: math.max(0, height - 28),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              PageView.builder(
-                controller: controller,
-                itemCount: levels.length,
-                clipBehavior: Clip.none,
-                padEnds: true,
-                onPageChanged: onPageChanged,
-                itemBuilder: (context, index) {
-                  final level = levels[index];
-                  return AnimatedBuilder(
-                    animation: controller,
-                    builder: (context, child) {
-                      var page = controller.initialPage.toDouble();
-                      if (controller.hasClients &&
-                          controller.position.hasContentDimensions) {
-                        page = controller.page ?? page;
-                      }
-                      final distance = (page - index).clamp(-2.0, 2.0);
-                      final isActive = distance.abs() < .5;
-                      return Transform.translate(
-                        offset: Offset(distance * 28, distance.abs() * 18),
-                        child: Transform.rotate(
-                          angle: distance * -.075,
-                          child: AnimatedScale(
-                            duration: const Duration(milliseconds: 220),
-                            curve: Curves.easeOutCubic,
-                            scale: isActive ? 1 : .90,
-                            child: AnimatedOpacity(
-                              duration: const Duration(milliseconds: 180),
-                              opacity: isActive ? 1 : .74,
-                              child: child,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                    child: _GradeOneLessonCard(
-                      level: level,
-                      unit: unit,
-                      active: index == selectedIndex,
-                      launching: launching,
-                      available: AppData.isProductionLessonAvailable(level),
-                      onTapCard: () => onCenterCard(index),
-                      onPlay: () => onPlay(level),
+              Positioned(
+                left: 0,
+                right: 0,
+                top: 12,
+                child: Center(
+                  child: _CardStrokeLabel(
+                    text: 'padayuna (keep going)',
+                    // Edit this label's size independently of "Yunit N" below.
+                    fontSize: (MediaQuery.sizeOf(context).width * 0.03).clamp(
+                      10.0,
+                      13.0,
                     ),
-                  );
-                },
+                  ),
+                ),
               ),
               Positioned(
                 left: 0,
-                child: _GradeOneCarouselArrow(
-                  visible: selectedIndex > 0,
-                  left: true,
-                  onTap: () => onArrow(-1),
+                right: 0,
+                top: 0,
+                height: cardHeight,
+                child: Center(
+                  child: _CardStrokeLabel(
+                    text: 'yunit ${unit.number}',
+                    // Edit this label's size independently of "padayuna" above.
+                    fontSize: (MediaQuery.sizeOf(context).width * 0.03).clamp(
+                      28.0,
+                      41.0,
+                    ),
+                  ),
                 ),
               ),
               Positioned(
-                right: 0,
-                child: _GradeOneCarouselArrow(
-                  visible: selectedIndex < levels.length - 1,
-                  left: false,
-                  onTap: () => onArrow(1),
+                left: titleStart,
+                right: 16,
+                top: 0,
+                height: cardHeight,
+                // Stays in this same center-right column always -- no
+                // FittedBox shrink and never moved elsewhere on the card.
+                // If it's too long for one line it wraps in place (up to
+                // 2 lines); if it's still too long even then, the second
+                // line ellipsizes instead of a 3rd line ever appearing.
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    // Gap between "yunit N" and this title -- edit to
+                    // widen/narrow the breathing room between them.
+                    padding: const EdgeInsets.only(left: titleGap),
+                    child: _CardStrokeLabel(
+                      text: unit.title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      // Edit this label's size independently of the others.
+                      fontSize: titleFontSize,
+                    ),
+                  ),
                 ),
+              ),
+              Positioned(
+                top: compact ? 6 : 8,
+                right: 10,
+                child: _UnitDropdownButton(
+                  compact: compact,
+                  selectedUnit: unit.number,
+                  onUnitSelected: onUnitSelected,
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+/// The "yunits [chevron]" pill above the unit title -- replaces the old
+/// showModalBottomSheet unit picker with a dropdown anchored to this
+/// button. Front/depth colors and the white front-only stroke are the
+/// supplied spec; the label reuses [_CardStrokeLabel]'s stroke/shadow
+/// style but with this button's own fill color (0xFF58858E, distinct from
+/// the other labels' 0xFF57858E).
+class _UnitDropdownButton extends StatelessWidget {
+  const _UnitDropdownButton({
+    required this.compact,
+    required this.selectedUnit,
+    required this.onUnitSelected,
+  });
+
+  final bool compact;
+  final int selectedUnit;
+  final ValueChanged<int> onUnitSelected;
+
+  static const _frontColor = Color(0xFFCAF0F8);
+  static const _depthColor = Color(0xFF57858E);
+  static const _labelColor = Color(0xFF58858E);
+
+  Future<void> _openMenu(BuildContext context) async {
+    final button = context.findRenderObject()! as RenderBox;
+    final overlay =
+        Navigator.of(context).overlay!.context.findRenderObject()! as RenderBox;
+    final position = RelativeRect.fromRect(
+      Rect.fromPoints(
+        button.localToGlobal(
+          Offset(0, button.size.height + 4),
+          ancestor: overlay,
+        ),
+        button.localToGlobal(
+          button.size.bottomRight(Offset.zero),
+          ancestor: overlay,
+        ),
+      ),
+      Offset.zero & overlay.size,
+    );
+    final selected = await showMenu<int>(
+      context: context,
+      position: position,
+      color: _frontColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      // Just the yunit number per unit, not the full title/progress the
+      // old bottom sheet showed -- this is a quick switcher, not a browser.
+      items: [
+        for (final (index, catalogUnit) in AppData.catalogUnits.indexed) ...[
+          if (index > 0)
+            const PopupMenuItem<Never>(
+              enabled: false,
+              height: 1,
+              padding: EdgeInsets.zero,
+              // White, and inset just barely from each edge -- not the
+              // default PopupMenuDivider's theme-gray full-bleed line.
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(color: Colors.white),
+                  child: SizedBox(height: 1, width: double.infinity),
+                ),
+              ),
+            ),
+          PopupMenuItem<int>(
+            value: catalogUnit.number,
+            child: _CardStrokeLabel(
+              text: 'yunit ${catalogUnit.number}',
+              fontSize: 15,
+              color: _labelColor,
+            ),
+          ),
+        ],
+      ],
+    );
+    if (selected != null) onUnitSelected(selected);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Builder(
+      builder: (buttonContext) => SizedBox(
+        width: compact ? 83 : 97,
+        height: compact ? 23 : 27,
+        child: StickerPressButton(
+          restLift: 2,
+          borderRadius: 999,
+          frontColor: _frontColor,
+          depthColor: _depthColor,
+          frontBorder: Border.all(color: Colors.white, width: 1.6),
+          playButtonSound: true,
+          onPressed: () => _openMenu(buttonContext),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            // Safety net against overflow at the smallest supported
+            // viewport widths -- this chrome control isn't one of the
+            // no-shrink card labels, so scaling it down slightly here is
+            // fine.
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _CardStrokeLabel(
+                    text: 'yunits',
+                    fontSize: compact ? 12 : 13,
+                    color: _labelColor,
+                  ),
+                  const SizedBox(width: 3),
+                  const Icon(
+                    Icons.keyboard_arrow_down_rounded,
+                    color: _labelColor,
+                    size: 16,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Reusable card caption *style* -- white stroke behind a filled fill color
+/// with a soft drop shadow, since Flutter's TextStyle has no native stroke:
+/// two stacked Text widgets sharing the same string, the back one painted
+/// stroke-only (Paint.style = PaintingStyle.stroke) as the white outline,
+/// the front one normally filled on top. The top "padayuna" label, the
+/// center "yunit N" label, and the left-aligned unit-title label all use
+/// this, but each caller passes its own [fontSize] -- they are not tied
+/// together. Positioning is the caller's job too; it never wraps text or
+/// shrinks its own font size -- optional [maxLines]/[overflow] only let a
+/// caller opt into single-line ellipsis truncation.
+class _CardStrokeLabel extends StatelessWidget {
+  const _CardStrokeLabel({
+    required this.text,
+    required this.fontSize,
+    this.maxLines,
+    this.overflow,
+    this.color = _defaultColor,
+    this.textAlign,
+  });
+
+  final String text;
+
+  // Each caller computes/passes its own size -- "padayuna" and "Yunit N"
+  // look the same but are independently sized, not a shared computed value.
+  final double fontSize;
+
+  // Optional: callers that need to cap this at one line (with ellipsis if
+  // it still doesn't fit) pass these -- this widget still never wraps or
+  // shrinks its font size on its own otherwise.
+  final int? maxLines;
+  final TextOverflow? overflow;
+
+  // Most labels share this fill color; the "yunits" dropdown button's
+  // label uses a slightly different one (0xFF58858E vs this 0xFF57858E)
+  // per its own supplied spec, hence this being overridable per instance.
+  final Color color;
+
+  // Only needed by callers whose label can wrap to 2+ lines inside a
+  // fixed-width box (e.g. a right-aligned title next to a badge) -- a
+  // single-line label ignores this since there's nothing to align.
+  final TextAlign? textAlign;
+  static const _defaultColor = Color(0xFF57858E);
+
+  @override
+  Widget build(BuildContext context) {
+    final style = TextStyle(
+      fontFamily: 'ComicRelief',
+      fontSize: fontSize,
+      fontWeight: FontWeight.w700,
+      height: 1,
+    );
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Text(
+          text,
+          maxLines: maxLines,
+          overflow: overflow,
+          textAlign: textAlign,
+          style: style.copyWith(
+            foreground: Paint()
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = fontSize * 0.22
+              ..color = Colors.white,
+          ),
+        ),
+        Text(
+          text,
+          maxLines: maxLines,
+          overflow: overflow,
+          textAlign: textAlign,
+          style: style.copyWith(
+            color: color,
+            shadows: [
+              Shadow(
+                color: Colors.black.withValues(alpha: .25),
+                offset: const Offset(0, 1),
+                blurRadius: 1.5,
               ),
             ],
           ),
         ),
-        const SizedBox(height: 8),
-        _GradeOneDots(count: levels.length, active: selectedIndex),
       ],
     );
   }
 }
 
+class _GradeOneStatCard extends StatelessWidget {
+  final String iconAsset;
+  final String value;
+  final String label;
+  final bool compact;
+
+  const _GradeOneStatCard({
+    required this.iconAsset,
+    required this.value,
+    required this.label,
+    required this.compact,
+  });
+
+  // Same boxy solid-shadow technique and colors as the yunit card
+  // (_GradeOneUnitSelector): a flat, unblurred back rect offset straight
+  // down instead of a soft BoxShadow, and the same front/shadow color
+  // pair, kept in ratio to this card's own height rather than the yunit
+  // card's literal pixel offset.
+  static const _shadowOffsetRatio = 3.79834 / 123.201;
+  static const _shadowColor = Color(0xFF58858E);
+  static const _cardColor = Color(0xFFCAF0F8);
+  // Value/label text color, same as the yunit card's labels.
+  static const _labelColor = Color(0xFF58858E);
+
+  @override
+  Widget build(BuildContext context) {
+    final cardHeight = compact ? 74.0 : 86.0;
+    final shadowOffset = cardHeight * _shadowOffsetRatio;
+    return SizedBox(
+      height: cardHeight + shadowOffset,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Positioned(
+            left: 0,
+            right: 0,
+            top: shadowOffset,
+            height: cardHeight,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: _shadowColor,
+                borderRadius: BorderRadius.circular(18),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            top: 0,
+            height: cardHeight,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: _cardColor,
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: compact ? 8 : 10,
+                ),
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: compact ? 18 : 24,
+                        height: compact ? 18 : 24,
+                        // Supplied symbol SVGs are already colored
+                        // 0xFF57858E, matching this card set's palette --
+                        // no colorFilter override needed.
+                        child: SvgPicture.asset(iconAsset, fit: BoxFit.contain),
+                      ),
+                      SizedBox(height: compact ? 4 : 6),
+                      _CardStrokeLabel(
+                        text: value,
+                        fontSize: compact ? 28 : 34,
+                        color: _labelColor,
+                      ),
+                      _CardStrokeLabel(
+                        text: label,
+                        fontSize: compact ? 14 : 17,
+                        color: _labelColor,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _GradeOneLessonCard extends StatelessWidget {
-  // The card's content used to rely on an Expanded thumbnail to soak up
-  // whatever height the carousel happened to give it, with the header/
-  // footer text and Play button always at fixed natural size -- fine as
-  // long as the carousel's height was generous, but it silently overflowed
-  // (hiding the Play button) whenever the carousel gave it a genuinely
-  // tight height. Using a fixed "natural" content size wrapped in
-  // FittedBox(scaleDown) instead reproduces the original look whenever
-  // there's enough room, and shrinks the whole card content uniformly
-  // -- title, thumbnail, and Play button together -- instead of overflowing
-  // when there isn't.
-  static const _contentWidth = 260.0;
-  static const _thumbnailHeight = 150.0;
+  // Supplied "grade 1 lesson 1 card.svg"'s own card canvas -- 213 wide x
+  // 371 tall -- kept as both an aspect ratio (so the card's actual
+  // on-screen size still matches the source proportions instead of
+  // stretching to whatever width the grid cell happens to give it)
+  // and a literal design-space size every child below is positioned in,
+  // 1:1 with that SVG's own pixel coordinates.
+  static const _designWidth = 233.0;
+  static const _designHeight = 391.0;
+  static const _cardAspectRatio = _designWidth / _designHeight;
+
+  // The supplied PNG already has its own rounded corners baked in via
+  // alpha transparency (measured from the source file: opaque starts at
+  // ~112px into an 852px-wide image, i.e. 112 * (213/852) here) -- the
+  // outer ClipRRect below must use 0 for this specific card (PNG's own
+  // rounding wins) or it double-rounds with a mismatched curve, notching
+  // the corners. The dynamically-built fallback card (any lesson besides
+  // Grade 1 Unit 1 Lesson 1, which has no hand-drawn art yet) is flat
+  // rects with no baked-in rounding, so it uses _dynamicCardRadius for
+  // both its own background and the shared ClipRRect instead.
+  static const _cardRadius = 10.0;
+  static const _dynamicCardRadius = 10.0;
+  static const _cardFill = Color(0xFFACE6B0);
+
+  // Only the fallback (non-lesson-1) card uses these -- the supplied PNG
+  // has its own colors baked in.
+  static const _frameTeal = Color(0xFF76C4AE);
+  static const _labelTeal = Color(0xFF4A7B6D);
+
+  // Play button colors, per explicit instruction: front 0x4A7B6D, back/
+  // depth 0x004A35. Unit 2 uses its own front/back pair (0x884830 /
+  // 0x482518) and play-triangle asset/tint to match that unit's own
+  // orange card color instead of Unit 1's green.
+  static const _playFront = Color(0xFF4A7B6D);
+  static const _playDepth = Color(0xFF004A35);
+  static const _unit2PlayFront = Color(0xFF884830);
+  static const _unit2PlayDepth = Color(0xFF482518);
+  static const _unit2IconTint = Color(0xFFF9A488);
+  static const _playDiameter = 64.0;
 
   final int level;
   final AppUnit unit;
@@ -1705,6 +2070,7 @@ class _GradeOneLessonCard extends StatelessWidget {
     required this.available,
     required this.onTapCard,
     required this.onPlay,
+    super.key,
   });
 
   @override
@@ -1714,242 +2080,362 @@ class _GradeOneLessonCard extends StatelessWidget {
     final completed = AppData.completedLevels.contains(level);
     final lessonNumber = AppData.lessonNumberForLevel(level);
     final title = _lessonTitleForDashboard(level);
-    final thumbnail = _lessonThumbnailForDashboard(unit.number, lessonNumber);
 
-    return GestureDetector(
-      onTap: active ? null : onTapCard,
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(28),
-          color: Colors.white,
-          border: Border.all(color: Colors.white, width: 5),
-          boxShadow: [
-            BoxShadow(
-              color: TudloColors.forest.withValues(alpha: .25),
-              blurRadius: 18,
-              offset: const Offset(0, 12),
-            ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(22),
-          child: ColorFiltered(
-            colorFilter: playable
-                ? const ColorFilter.matrix(<double>[
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                  ])
-                : const ColorFilter.matrix(<double>[
-                    0.2126,
-                    0.7152,
-                    0.0722,
-                    0,
-                    0,
-                    0.2126,
-                    0.7152,
-                    0.0722,
-                    0,
-                    0,
-                    0.2126,
-                    0.7152,
-                    0.0722,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    .62,
-                    0,
-                  ]),
-            child: Stack(
-              children: [
-                const Positioned.fill(
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [Colors.white, Color(0xFFE9FFE6)],
+    // Hand-drawn art exists for a handful of specific lessons -- every
+    // other lesson falls back to a dynamically-built card (same color
+    // language, generated content) since there's no equivalent art for
+    // them yet.
+    final cardArt = _lessonCardArtForDashboard(unit.number, lessonNumber);
+    final cardRadius = cardArt != null ? _cardRadius : _dynamicCardRadius;
+
+    final isUnit2 = unit.number == 2;
+    final playFront = isUnit2 ? _unit2PlayFront : _playFront;
+    final playDepth = isUnit2 ? _unit2PlayDepth : _playDepth;
+    final playIconTint = isUnit2 ? _unit2IconTint : _cardFill;
+    final playIconAsset = isUnit2
+        ? 'assets/images/lesson_play_icon_unit2.svg'
+        : 'assets/images/lesson_play_icon.svg';
+
+    // Icon shown on the play button per state -- the supplied play.svg
+    // triangle only makes sense when the lesson is actually playable;
+    // completed/locked/unavailable states keep using plain Material icons
+    // like the previous button did, just recolored to match the new
+    // button's light-on-dark look.
+    final Widget buttonIcon = completed
+        ? Icon(Icons.check_rounded, size: 30, color: playIconTint)
+        : !available
+        ? Icon(Icons.block_rounded, size: 30, color: playIconTint)
+        : !unlocked
+        ? Icon(Icons.lock_rounded, size: 30, color: playIconTint)
+        : SvgPicture.asset(playIconAsset, width: 26, height: 26);
+
+    return Center(
+      child: AspectRatio(
+        aspectRatio: _cardAspectRatio,
+        child: GestureDetector(
+          onTap: active ? null : onTapCard,
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(cardRadius),
+              // A single FittedBox scales this whole design-space Stack
+              // (art, button, and the locked/unavailable scrim together)
+              // as one unit -- keeping the scrim sized to this Stack
+              // instead of to the outer post-margin box means it can never
+              // read taller than the card it's covering.
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child: SizedBox(
+                  width: _designWidth,
+                  height: _designHeight,
+                  child: Stack(
+                    children: [
+                      ColorFiltered(
+                        colorFilter: playable
+                            ? const ColorFilter.matrix(<double>[
+                                1,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                1,
+                                0,
+                              ])
+                            : const ColorFilter.matrix(<double>[
+                                0.2126,
+                                0.7152,
+                                0.0722,
+                                0,
+                                0,
+                                0.2126,
+                                0.7152,
+                                0.0722,
+                                0,
+                                0,
+                                0.2126,
+                                0.7152,
+                                0.0722,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                .62,
+                                0,
+                              ]),
+                        // The card itself -- background, badge, "yunit N",
+                        // unit title, thumbnail, caption, title bar -- is
+                        // the raw supplied PNG rendered as-is, not rebuilt
+                        // out of Flutter widgets.
+                        child: cardArt != null
+                            // An invisible native Container sized to the
+                            // card's design dimensions -- it, not the PNG,
+                            // is what the FittedBox above scales for each
+                            // viewport, and the PNG just fits inside it. A
+                            // raw Image at a fixed pixel size wouldn't
+                            // rescale cleanly across viewports on its own.
+                            ? Container(
+                                width: _designWidth,
+                                height: _designHeight,
+                                color: Colors.transparent,
+                                child: Image.asset(
+                                  cardArt,
+                                  fit: BoxFit.contain,
+                                ),
+                              )
+                            : _DynamicLessonCardArt(
+                                unit: unit,
+                                lessonNumber: lessonNumber,
+                                title: title,
+                                cardRadius: _dynamicCardRadius,
+                                cardFill: _cardFill,
+                                frameTeal: _frameTeal,
+                                labelTeal: _labelTeal,
+                                designWidth: _designWidth,
+                                designHeight: _designHeight,
+                              ),
                       ),
-                    ),
-                  ),
-                ),
-                Positioned.fill(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(18, 16, 18, 16),
-                    child: Center(
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: SizedBox(
-                          width: _contentWidth,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'Yunit ${unit.number} • ${unit.title}',
-                                textAlign: TextAlign.center,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.nunito(
-                                  color: const Color(0xFF075744),
-                                  fontSize: 18,
-                                  height: 1.05,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              SizedBox(
-                                width: _contentWidth,
-                                height: _thumbnailHeight,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(18),
-                                  child: Stack(
-                                    fit: StackFit.expand,
-                                    children: [
-                                      _DashboardSvgImage(asset: thumbnail),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                            colors: [
-                                              Colors.transparent,
-                                              Colors.white.withValues(
-                                                alpha: .18,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 14),
-                              Text(
-                                'Lesson ${unit.number}.$lessonNumber',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.nunito(
-                                  color: const Color(0xFF075744),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ),
-                              Text(
-                                title,
-                                textAlign: TextAlign.center,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.nunito(
-                                  color: const Color(0xFF075744),
-                                  fontSize: 22,
-                                  height: 1.02,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ),
-                              const SizedBox(height: 18),
-                              Semantics(
-                                button: true,
-                                enabled: active && playable && !launching,
-                                label: available
-                                    ? playable
-                                          ? 'Open $title'
-                                          : '$title locked'
-                                    : '$title unavailable',
-                                child: ElevatedButton(
-                                  onPressed: active && playable && !launching
-                                      ? onPlay
-                                      : null,
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFF008E63),
-                                    disabledBackgroundColor: Colors.white70,
-                                    foregroundColor: Colors.white,
-                                    minimumSize: const Size(66, 66),
-                                    shape: const CircleBorder(),
-                                    elevation: 8,
-                                    shadowColor: TudloColors.ink.withValues(
-                                      alpha: .28,
-                                    ),
-                                  ),
-                                  child: Icon(
-                                    completed
-                                        ? Icons.check_rounded
-                                        : !available
-                                        ? Icons.block_rounded
-                                        : unlocked
-                                        ? Icons.play_arrow_rounded
-                                        : Icons.lock_rounded,
-                                    size: 44,
-                                  ),
-                                ),
-                              ),
-                            ],
+                      // The play button (not present in the art) is
+                      // overlaid on top, since the card still needs to be
+                      // interactive.
+                      Positioned(
+                        left: (_designWidth - _playDiameter) / 2,
+                        // Biased toward the bottom of the footer zone
+                        // (below the title bar at y=257) instead of
+                        // centered in it.
+                        top: 257 + (_designHeight - 257 - _playDiameter) * 0.7,
+                        width: _playDiameter,
+                        height: _playDiameter,
+                        child: Semantics(
+                          button: true,
+                          enabled: active && playable && !launching,
+                          label: available
+                              ? playable
+                                    ? 'Open $title'
+                                    : '$title locked'
+                              : '$title unavailable',
+                          child: StickerPressButton(
+                            onPressed: onPlay,
+                            enabled: active && playable && !launching,
+                            frontColor: playFront,
+                            depthColor: playDepth,
+                            height: _playDiameter,
+                            borderRadius: _playDiameter / 2,
+                            playButtonSound: false,
+                            child: buttonIcon,
                           ),
                         ),
                       ),
-                    ),
+                      if (!playable)
+                        Positioned.fill(
+                          child: Container(
+                            // A strong dark scrim (not a light wash) so the
+                            // card visibly reads as inactive rather than
+                            // just slightly faded.
+                            color: const Color(
+                              0xFF14211D,
+                            ).withValues(alpha: .68),
+                            alignment: Alignment.center,
+                            child: _LockedCardBadge(
+                              icon: available
+                                  ? Icons.lock_rounded
+                                  : Icons.hourglass_bottom_rounded,
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                 ),
-                if (!playable)
-                  Positioned.fill(
-                    child: Container(
-                      color: available
-                          ? Colors.white.withValues(alpha: .42)
-                          : Colors.grey.shade500.withValues(alpha: .58),
-                      alignment: Alignment.center,
-                      child: available
-                          ? const Icon(
-                              Icons.lock_rounded,
-                              size: 64,
-                              color: TudloColors.ink,
-                            )
-                          : Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 18,
-                                vertical: 10,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.black.withValues(alpha: .58),
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: Text(
-                                'Unavailable',
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.nunito(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w900,
-                                  letterSpacing: 0,
-                                ),
-                              ),
-                            ),
-                    ),
-                  ),
-              ],
+              ),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+// A locked/unavailable card's badge -- a chunky sticker circle (flat fill,
+// hard offset "depth" shadow, no blur) in the same visual language as the
+// status indicators on Home and the card's own play button.
+class _LockedCardBadge extends StatelessWidget {
+  const _LockedCardBadge({required this.icon});
+
+  final IconData icon;
+
+  static const _fill = Color(0xFFDADAD8);
+  static const _depth = Color(0xFF908C8A);
+  static const _iconColor = Color(0xFF6B6663);
+  static const _diameter = 68.0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: _diameter,
+      height: _diameter,
+      decoration: const BoxDecoration(
+        color: _fill,
+        shape: BoxShape.circle,
+        boxShadow: [BoxShadow(color: _depth, offset: Offset(0, 5))],
+      ),
+      child: Icon(icon, size: 32, color: _iconColor),
+    );
+  }
+}
+
+// Dynamically-built card art for every lesson besides Grade 1 Unit 1
+// Lesson 1 (which has its own hand-drawn PNG) -- same color language and
+// pixel positions as that PNG's own layout, just generated from the
+// actual unit/lesson/title data instead of being baked into an image.
+class _DynamicLessonCardArt extends StatelessWidget {
+  const _DynamicLessonCardArt({
+    required this.unit,
+    required this.lessonNumber,
+    required this.title,
+    required this.cardRadius,
+    required this.cardFill,
+    required this.frameTeal,
+    required this.labelTeal,
+    required this.designWidth,
+    required this.designHeight,
+  });
+
+  final AppUnit unit;
+  final int lessonNumber;
+  final String title;
+  final double cardRadius;
+  final Color cardFill;
+  final Color frameTeal;
+  final Color labelTeal;
+  final double designWidth;
+  final double designHeight;
+
+  @override
+  Widget build(BuildContext context) {
+    final thumbnail = _lessonThumbnailForDashboard(unit.number, lessonNumber);
+    return Stack(
+      children: [
+        Container(
+          width: designWidth,
+          height: designHeight,
+          decoration: BoxDecoration(
+            color: cardFill,
+            border: Border.all(color: Colors.white, width: 3),
+            borderRadius: BorderRadius.circular(cardRadius),
+          ),
+        ),
+        Positioned(
+          left: 19,
+          top: 14,
+          width: 26,
+          height: 26,
+          child: Center(
+            child: FractionallySizedBox(
+              widthFactor: _unitThumbnailScaleForDashboard(unit.number),
+              heightFactor: _unitThumbnailScaleForDashboard(unit.number),
+              child: Image.asset(
+                _unitThumbnailForDashboard(unit.number),
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          left: 49,
+          top: 14,
+          width: 59,
+          height: 29,
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: _CardStrokeLabel(
+              text: 'yunit ${unit.number}',
+              fontSize: 15,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              color: labelTeal,
+            ),
+          ),
+        ),
+        Positioned(
+          left: 108,
+          top: 14,
+          width: 90,
+          height: 29,
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: _CardStrokeLabel(
+              text: unit.title.toUpperCase(),
+              fontSize: 11,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.right,
+              color: labelTeal,
+            ),
+          ),
+        ),
+        Positioned(
+          left: 13,
+          top: 60,
+          width: 188,
+          height: 142,
+          child: Container(
+            decoration: BoxDecoration(
+              color: frameTeal,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: _DashboardSvgImage(asset: thumbnail),
+            ),
+          ),
+        ),
+        Positioned(
+          left: 0,
+          top: 207,
+          width: designWidth,
+          height: 13,
+          child: Center(
+            child: _CardStrokeLabel(
+              text: 'lesson ${unit.number}.$lessonNumber',
+              fontSize: 11,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              color: labelTeal,
+            ),
+          ),
+        ),
+        Positioned(
+          left: 3,
+          top: 228,
+          width: 207,
+          height: 29,
+          child: Container(
+            color: frameTeal,
+            alignment: Alignment.center,
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: _CardStrokeLabel(
+              text: title,
+              fontSize: 14,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              color: labelTeal,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -1973,228 +2459,23 @@ class _DashboardSvgImage extends StatelessWidget {
   }
 }
 
-class _GradeOneCarouselArrow extends StatelessWidget {
-  final bool visible;
-  final bool left;
-  final VoidCallback onTap;
-
-  const _GradeOneCarouselArrow({
-    required this.visible,
-    required this.left,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedOpacity(
-      opacity: visible ? 1 : 0,
-      duration: const Duration(milliseconds: 180),
-      child: IgnorePointer(
-        ignoring: !visible,
-        child: IconButton.filled(
-          tooltip: left ? 'Previous lesson' : 'Next lesson',
-          onPressed: onTap,
-          style: IconButton.styleFrom(
-            backgroundColor: Colors.white,
-            foregroundColor: TudloColors.forest,
-            minimumSize: const Size(58, 58),
-            shadowColor: TudloColors.ink.withValues(alpha: .18),
-            elevation: 5,
-          ),
-          icon: Icon(
-            left ? Icons.arrow_back_rounded : Icons.arrow_forward_rounded,
-            size: 42,
-            weight: 900,
-          ),
-        ),
-      ),
-    );
-  }
+/// Small badge icon for a unit -- shown on the "yunits" selector card and
+/// on each lesson card's top-left corner.
+String _unitThumbnailForDashboard(int unitNumber) {
+  return switch ((AppData.selectedGradeLevel, unitNumber)) {
+    (GradeLevel.grade1, 2) => 'assets/images/unit2_thumbnail.png',
+    _ => 'assets/images/unit1_thumbnail.png',
+  };
 }
 
-class _GradeOneDots extends StatelessWidget {
-  final int count;
-  final int active;
-
-  const _GradeOneDots({required this.count, required this.active});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        for (var index = 0; index < count; index++)
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 220),
-            margin: const EdgeInsets.symmetric(horizontal: 6),
-            width: index == active ? 20 : 14,
-            height: 14,
-            decoration: BoxDecoration(
-              color: index == active ? TudloColors.forest : Colors.white,
-              borderRadius: BorderRadius.circular(999),
-              boxShadow: [
-                BoxShadow(
-                  color: TudloColors.ink.withValues(alpha: .14),
-                  blurRadius: 5,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-          ),
-      ],
-    );
-  }
-}
-
-class _GradeOneUnitSheet extends StatelessWidget {
-  final int selectedUnit;
-  final List<AppUnit> units;
-
-  const _GradeOneUnitSheet({required this.selectedUnit, required this.units});
-
-  @override
-  Widget build(BuildContext context) {
-    final view = MediaQuery.sizeOf(context);
-    return SafeArea(
-      child: Container(
-        constraints: BoxConstraints(maxHeight: view.height * .74),
-        margin: const EdgeInsets.all(18),
-        padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(28),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: .18),
-              blurRadius: 20,
-              offset: const Offset(0, 10),
-            ),
-          ],
-        ),
-        child: Column(
-          children: [
-            Text(
-              'Pili-a ang yunit',
-              style: GoogleFonts.nunito(
-                color: TudloColors.ink,
-                fontSize: 26,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-            const SizedBox(height: 14),
-            Expanded(
-              child: ListView.separated(
-                padding: EdgeInsets.zero,
-                itemCount: units.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 10),
-                itemBuilder: (context, index) {
-                  final unit = units[index];
-                  return _GradeOneUnitSheetTile(
-                    unit: unit,
-                    selected: unit.number == selectedUnit,
-                    unlocked: AppData.catalogLevelsForUnit(
-                      unit,
-                    ).any(AppData.isLevelUnlocked),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _GradeOneUnitSheetTile extends StatelessWidget {
-  final AppUnit unit;
-  final bool selected;
-  final bool unlocked;
-
-  const _GradeOneUnitSheetTile({
-    required this.unit,
-    required this.selected,
-    required this.unlocked,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(20),
-        // Let children inspect the location's future cards even when they are
-        // locked; only the source card's Play action starts a lesson.
-        onTap: () => Navigator.pop(context, unit.number),
-        child: Ink(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          decoration: BoxDecoration(
-            color: selected
-                ? TudloColors.brightGreen.withValues(alpha: .18)
-                : const Color(0xFFF1FFF4),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: selected ? TudloColors.forest : TudloColors.line,
-              width: selected ? 3 : 2,
-            ),
-          ),
-          child: Row(
-            children: [
-              Icon(
-                unlocked ? Icons.menu_book_rounded : Icons.lock_rounded,
-                color: unlocked ? TudloColors.forest : Colors.grey,
-                size: 34,
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'Yunit ${unit.number}',
-                      style: GoogleFonts.nunito(
-                        color: TudloColors.ink,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                    Text(
-                      unit.title,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.nunito(
-                        color: unlocked ? TudloColors.muted : Colors.grey,
-                        fontSize: 16,
-                        height: 1.05,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              if (selected)
-                const Icon(
-                  Icons.check_circle_rounded,
-                  color: TudloColors.forest,
-                ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-String _lessonTitleForDashboard(int level) {
-  final unit = AppData.unitForLevel(level);
-  final lesson = AppData.lessonNumberForLevel(level);
-  return switch ((AppData.selectedGradeLevel, unit.number, lesson)) {
-    (GradeLevel.grade1, 1, 1) => 'Ang Nadula nga mga Letra ni Koka',
-    (GradeLevel.grade1, 1, 7) => 'Isa tubtob Lima',
-    (GradeLevel.grade1, 2, 1) => 'Kilalahon ta ang Pamilya',
-    (GradeLevel.grade1, 2, 4) => 'Nagtipon ang Pamilya sa Picnic',
-    _ => LessonBank.lessonTitleForLevel(level),
+/// Each unit thumbnail's source PNG has its own amount of built-in padding
+/// around the art, so the same display box doesn't render every unit's
+/// icon at the same visual size -- this is the per-unit correction factor
+/// (1.0 = no change) applied on top of that shared box.
+double _unitThumbnailScaleForDashboard(int unitNumber) {
+  return switch ((AppData.selectedGradeLevel, unitNumber)) {
+    (GradeLevel.grade1, 2) => 0.8,
+    _ => 1.0,
   };
 }
 
@@ -2235,6 +2516,98 @@ String _lessonThumbnailForDashboard(int unitNumber, int lessonNumber) {
     (GradeLevel.grade3, 5, _) =>
       'assets/images/level_game/backgrounds/lesson4-popup.svg',
     _ => 'assets/images/level_game/backgrounds/classroom.svg',
+  };
+}
+
+String _lessonTitleForDashboard(int level) {
+  final unit = AppData.unitForLevel(level);
+  final lesson = AppData.lessonNumberForLevel(level);
+  return switch ((AppData.selectedGradeLevel, unit.number, lesson)) {
+    (GradeLevel.grade1, 1, 1) => 'Ang Nadula nga mga Letra ni Koka',
+    (GradeLevel.grade1, 1, 7) => 'Ang Lima ka Tikang Pakadto sa Payong',
+    (GradeLevel.grade1, 2, 1) => 'Ang Litrato sang Pamilya',
+    (GradeLevel.grade1, 2, 4) => 'Pamilya Picnic',
+    _ => LessonBank.lessonTitleForLevel(level),
+  };
+}
+
+// A dimmed pop-up shown when a lesson card's Play button is tapped, before
+// actually launching the lesson -- this is where the lesson's VO narrates,
+// rather than on the grid itself where several cards can be visible at
+// once and there's no single card left to narrate automatically.
+class _LessonStartPopup extends StatelessWidget {
+  const _LessonStartPopup({required this.title, required this.onStart});
+
+  final String title;
+  final VoidCallback onStart;
+
+  @override
+  Widget build(BuildContext context) {
+    final width = math.min(MediaQuery.sizeOf(context).width * .78, 320.0);
+    return SafeArea(
+      child: Center(
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            width: width,
+            padding: const EdgeInsets.fromLTRB(24, 28, 24, 24),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: const [
+                BoxShadow(color: Color(0x33000000), offset: Offset(0, 8)),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.nunito(
+                    fontSize: 19,
+                    fontWeight: FontWeight.w900,
+                    color: TudloColors.ink,
+                  ),
+                ),
+                const SizedBox(height: 22),
+                SizedBox(
+                  width: double.infinity,
+                  child: StickerPressButton(
+                    key: const Key('lesson-start-popup-play-button'),
+                    onPressed: onStart,
+                    frontColor: const Color(0xFF4A7B6D),
+                    depthColor: const Color(0xFF004A35),
+                    height: 54,
+                    borderRadius: 27,
+                    child: Text(
+                      'sugodan ta',
+                      style: GoogleFonts.nunito(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Hand-drawn card art asset for lessons that have one, or null to fall
+/// back to the dynamically-built card.
+String? _lessonCardArtForDashboard(int unitNumber, int lessonNumber) {
+  return switch ((AppData.selectedGradeLevel, unitNumber, lessonNumber)) {
+    (GradeLevel.grade1, 1, 1) => 'assets/images/grade1_lesson1_card.png',
+    (GradeLevel.grade1, 1, 7) => 'assets/images/grade1_unit1_lesson7_card.png',
+    (GradeLevel.grade1, 2, 1) => 'assets/images/grade1_unit2_lesson1_card.png',
+    (GradeLevel.grade1, 2, 4) => 'assets/images/grade1_unit2_lesson4_card.png',
+    _ => null,
   };
 }
 

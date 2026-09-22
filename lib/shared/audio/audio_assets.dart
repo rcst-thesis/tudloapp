@@ -17,6 +17,11 @@ abstract final class TudloAudioAssets {
   static const learnerCardVoiceOver = 'assets/audio/vo_learner_card.wav';
   static const welcomeAboardVoiceOver = 'assets/audio/vo_welcome_aboard.wav';
 
+  /// Loops for as long as the day-streak flow (`DailyCheckInScreen` ->
+  /// `DailyStreakScreen`) is on screen -- background music is silent there
+  /// and resumes once the flow hands off to Home.
+  static const dailyStreakVoiceOver = 'assets/audio/vo_daily_streak.wav';
+
   /// Shared tap feedback for StickerPressButton and Rive buttons.
   static const buttonTapSoundEffect = 'assets/audio/sfx_button_press.wav';
 
@@ -43,6 +48,7 @@ abstract final class TudloAudioAssets {
     energySetterVoiceOver => const Duration(milliseconds: 7273),
     learnerCardVoiceOver => const Duration(milliseconds: 4249),
     welcomeAboardVoiceOver => const Duration(milliseconds: 7668),
+    dailyStreakVoiceOver => const Duration(milliseconds: 117190),
     _ => const Duration(seconds: 15),
   };
 }

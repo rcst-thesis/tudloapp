@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:tudloapp/core/theme/app_colors.dart';
 import 'package:tudloapp/features/main_menu/presentation/main_menu_screen.dart';
+import 'package:tudloapp/features/me/presentation/screens/daily_checkin_screen.dart';
+import 'package:tudloapp/features/me/presentation/screens/daily_streak_screen.dart';
 import 'package:tudloapp/shared/audio/tudlo_audio_controller.dart';
 import 'package:tudloapp/shared/audio/tudlo_audio_scope.dart';
 import 'package:tudloapp/shared/widgets/sticker_press_button.dart';
@@ -16,12 +18,21 @@ class StartupFlow extends StatefulWidget {
     this.logoAudioDelay = Duration.zero,
     this.logoAudioPlayer,
     this.backgroundMusicPlayer,
+    this.debugShowDailyStreakFirst = false,
     super.key,
   });
 
   final Duration splashDuration;
   final Future<void> Function()? splashWarmup;
   final Future<void> Function()? assetWarmup;
+
+  /// TEMP DEBUG: when true, shows the new day-streak flow (check-in screen,
+  /// then the sun-rays celebration) right after boot, before Main Menu --
+  /// quick to check on an emulator without wiring a real trigger yet.
+  /// Defaults to false (existing behavior) so this never affects the app
+  /// unless a call site opts in; `main.dart` is the only place that
+  /// currently does, and only for this debugging pass.
+  final bool debugShowDailyStreakFirst;
 
   /// How long after the rendered Maral logo the sting plays. It defaults to
   /// zero so the Stage 0 visual and audio arrive together.
@@ -45,6 +56,8 @@ class _StartupFlowState extends State<StartupFlow> {
   int _stage = 0;
   bool _running = false;
   Object? _startupError;
+  bool _debugCheckInDismissed = false;
+  bool _debugStreakDismissed = false;
 
   Timer? _logoAudioTimer;
   TudloAudioController? _audio;
@@ -217,6 +230,21 @@ class _StartupFlowState extends State<StartupFlow> {
           semanticLabel: 'Tudlo splash screen',
           designWidth: 116,
         ),
+        _ when widget.debugShowDailyStreakFirst && !_debugCheckInDismissed =>
+          DailyCheckInScreen(
+            key: const ValueKey('daily-checkin-debug'),
+            // No real learner profile exists yet this early in boot -- a
+            // week-old placeholder date just previews "day 7" here; the
+            // real trigger will pass the actual profile's createdAt.
+            createdAt: DateTime.now().subtract(const Duration(days: 6)),
+            onStart: () => setState(() => _debugCheckInDismissed = true),
+          ),
+        _ when widget.debugShowDailyStreakFirst && !_debugStreakDismissed =>
+          DailyStreakScreen(
+            key: const ValueKey('daily-streak-debug'),
+            streakCount: 1,
+            onContinue: () => setState(() => _debugStreakDismissed = true),
+          ),
         _ => const MainMenuScreen(key: ValueKey('menu')),
       },
     );

@@ -12,8 +12,10 @@ import 'package:tudloapp/shared/widgets/svg_text_overlay.dart';
 class MeDailyStreakCard extends StatelessWidget {
   const MeDailyStreakCard({this.currentStreak = 1, super.key});
 
-  /// Constructor-carried placeholder (same pattern as the learner card's
-  /// progress counts) until real streak tracking exists.
+  /// The caller (`MeScreen`) resolves this from
+  /// `LearnerProfile.effectiveStreak`, which both advances on consecutive
+  /// days of lesson completion and resets once a day is skipped -- this
+  /// widget just renders whatever number it's given.
   final int currentStreak;
 
   static const double _cardWidth = 372;

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import 'package:tudloapp/features/home/presentation/widgets/home_lesson_card.dart';
 import 'package:tudloapp/features/home/presentation/widgets/home_lesson_panel.dart';
 import 'package:tudloapp/shared/widgets/sticker_press_button.dart';
 
@@ -70,13 +71,16 @@ class _HomeLessonPreviewDialogState extends State<_HomeLessonPreviewDialog> {
   static const _cardExpansionDuration = Duration(milliseconds: 380);
   static const _actionRevealDelay = Duration(milliseconds: 160);
   static const _actionRevealDuration = Duration(milliseconds: 180);
-  static const _retryNoticeDuration = Duration(milliseconds: 1800);
+  static const _unavailableNoticeDuration = Duration(milliseconds: 1800);
+  static const _retryUnavailableMessage = 'wala pa natapos ang lesson';
+  static const _startUnavailableMessage = 'tapusa anay ang una nga lesson';
 
   final _cardKey = GlobalKey();
   bool _cardIsOpen = false;
   bool _actionsAreVisible = false;
-  bool _showRetryNotice = false;
-  Timer? _retryNoticeTimer;
+  bool _showUnavailableNotice = false;
+  String _unavailableNoticeMessage = _retryUnavailableMessage;
+  Timer? _unavailableNoticeTimer;
   Offset _launchTravel = Offset.zero;
   double _launchScaleX = .9;
   double _launchScaleY = .55;
@@ -87,15 +91,35 @@ class _HomeLessonPreviewDialogState extends State<_HomeLessonPreviewDialog> {
   bool get _retryAvailable =>
       widget.lesson.status == HomeLessonStatus.completed;
 
+  /// A locked lesson (its predecessor isn't finished/claimed yet) can't be
+  /// started -- same as [_retryAvailable]'s reasoning, just for the other
+  /// direction: nothing to retry vs. nothing to start yet.
+  bool get _startAvailable => widget.lesson.status != HomeLessonStatus.locked;
+
   void _handleRetryTap() {
     if (_retryAvailable) {
       widget.onRetry();
       return;
     }
-    _retryNoticeTimer?.cancel();
-    setState(() => _showRetryNotice = true);
-    _retryNoticeTimer = Timer(_retryNoticeDuration, () {
-      if (mounted) setState(() => _showRetryNotice = false);
+    _notifyUnavailable(_retryUnavailableMessage);
+  }
+
+  void _handleStartTap() {
+    if (_startAvailable) {
+      widget.onStart();
+      return;
+    }
+    _notifyUnavailable(_startUnavailableMessage);
+  }
+
+  void _notifyUnavailable(String message) {
+    _unavailableNoticeTimer?.cancel();
+    setState(() {
+      _unavailableNoticeMessage = message;
+      _showUnavailableNotice = true;
+    });
+    _unavailableNoticeTimer = Timer(_unavailableNoticeDuration, () {
+      if (mounted) setState(() => _showUnavailableNotice = false);
     });
   }
 
@@ -127,7 +151,7 @@ class _HomeLessonPreviewDialogState extends State<_HomeLessonPreviewDialog> {
 
   @override
   void dispose() {
-    _retryNoticeTimer?.cancel();
+    _unavailableNoticeTimer?.cancel();
     super.dispose();
   }
 
@@ -200,7 +224,9 @@ class _HomeLessonPreviewDialogState extends State<_HomeLessonPreviewDialog> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Image.asset(
-                                      'assets/images/home_lesson_category.png',
+                                      categoryIconForUnit(
+                                        widget.lesson.unitNumber,
+                                      ),
                                       width: 36,
                                       height: 36,
                                       fit: BoxFit.contain,
@@ -289,7 +315,8 @@ class _HomeLessonPreviewDialogState extends State<_HomeLessonPreviewDialog> {
                           emojiScale: .48,
                           showSurface: true,
                           verticalOffset: 0,
-                          onTap: widget.onStart,
+                          enabled: _startAvailable,
+                          onTap: _handleStartTap,
                         ),
                         _LessonPreviewAction(
                           icon: Icons.schedule_rounded,
@@ -312,16 +339,20 @@ class _HomeLessonPreviewDialogState extends State<_HomeLessonPreviewDialog> {
             Positioned(
               top: -46,
               child: IgnorePointer(
-                ignoring: !_showRetryNotice,
+                ignoring: !_showUnavailableNotice,
                 child: AnimatedSlide(
                   duration: const Duration(milliseconds: 180),
                   curve: _settleCurve,
-                  offset: _showRetryNotice ? Offset.zero : const Offset(0, .3),
+                  offset: _showUnavailableNotice
+                      ? Offset.zero
+                      : const Offset(0, .3),
                   child: AnimatedOpacity(
-                    key: const Key('lesson-preview-retry-notice'),
+                    key: const Key('lesson-preview-action-unavailable-notice'),
                     duration: const Duration(milliseconds: 180),
-                    opacity: _showRetryNotice ? 1 : 0,
-                    child: const _RetryUnavailableNotice(),
+                    opacity: _showUnavailableNotice ? 1 : 0,
+                    child: _ActionUnavailableNotice(
+                      message: _unavailableNoticeMessage,
+                    ),
                   ),
                 ),
               ),
@@ -333,8 +364,10 @@ class _HomeLessonPreviewDialogState extends State<_HomeLessonPreviewDialog> {
   }
 }
 
-class _RetryUnavailableNotice extends StatelessWidget {
-  const _RetryUnavailableNotice();
+class _ActionUnavailableNotice extends StatelessWidget {
+  const _ActionUnavailableNotice({required this.message});
+
+  final String message;
 
   @override
   Widget build(BuildContext context) {
@@ -350,11 +383,11 @@ class _RetryUnavailableNotice extends StatelessWidget {
           ),
         ],
       ),
-      child: const Padding(
-        padding: EdgeInsets.fromLTRB(12, 8, 12, 8),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
         child: Text(
-          'wala pa natapos ang lesson',
-          style: TextStyle(
+          message,
+          style: const TextStyle(
             fontFamily: 'ComicRelief',
             fontWeight: FontWeight.w700,
             fontSize: 12,

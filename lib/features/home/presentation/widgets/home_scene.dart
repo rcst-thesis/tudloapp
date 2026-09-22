@@ -80,6 +80,9 @@ class HomeScene extends StatelessWidget {
         final lessonPanelHeight = HomeLessonPanel.designHeightForEnergy(
           energy,
           isCollapsed: lessonsCollapsed,
+          configuredLessonCount: lessonPreviews.isEmpty
+              ? 1
+              : lessonPreviews.length,
         );
         final contentEndSceneHeight =
             HomeSceneLayout.footerBottomFor(lessonPanelHeight) * sceneScale;

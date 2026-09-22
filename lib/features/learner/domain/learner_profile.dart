@@ -32,12 +32,19 @@ class LearnerProfile {
     this.featuredIds = const [],
     this.featuredDate,
     this.featuredHistory = const {},
+    this.lastStreakCheckInDate,
+    this.currentEnergy,
+    this.lastEnergyDrainAt,
     this.settings = AppSettings.defaults,
   });
 
   final String id;
   final String name;
   final int grade;
+
+  /// The parent-configured energy level (Onboarding's/Settings' "battery"
+  /// picker, 10-100 in steps of 10) -- the ceiling [effectiveEnergy]
+  /// recharges up to, not a live spendable count on its own.
   final int energy;
   final DateTime createdAt;
 
@@ -80,12 +87,76 @@ class LearnerProfile {
   final DateTime? featuredDate;
   final Set<String> featuredHistory;
 
+  /// The calendar date (year/month/day only) the day-streak check-in flow
+  /// (`DailyCheckInScreen` -> `DailyStreakScreen`) was last shown to this
+  /// learner, right before Home -- so it only pops up once per day rather
+  /// than every time "continue"/"load" is tapped. `null` means it has never
+  /// been shown yet.
+  final DateTime? lastStreakCheckInDate;
+
+  /// The learner's actual spendable energy right now, as of
+  /// [lastEnergyDrainAt] -- drains by 10 per completed lesson
+  /// (`LearnerScope.spendLessonEnergy`) and regenerates by 10 every 4 hours
+  /// after that, capped at [energy]. `null` means never drained yet, i.e.
+  /// full. Use [effectiveEnergy] to read the regen-adjusted value -- this
+  /// raw field goes stale between drains, same reasoning as
+  /// [currentStreak]/[effectiveStreak].
+  final int? currentEnergy;
+  final DateTime? lastEnergyDrainAt;
+
   /// This learner's own Settings values (language, volumes, animation/
   /// quality preferences, lesson reminders) -- seeded once from the
   /// device-wide `AppSettingsController` at creation
   /// (`LearnerController.createAndSave`'s `initialSettings` param), then
   /// fully independent from it and from every other learner's own copy.
   final AppSettings settings;
+
+  /// The streak as it should actually display right now, not just whatever
+  /// [currentStreak] was last saved as. [currentStreak] only ever advances
+  /// when a lesson is first-completed (see `LearnerScope.recordLessonCompletion`),
+  /// so on its own it never reflects a streak the learner has since broken
+  /// by skipping a day -- this catches that up at read time instead of
+  /// requiring some background job to notice and reset it.
+  int effectiveStreak([DateTime? now]) {
+    final last = lessonProgress.lastFirstCompletionDate;
+    // Never completed a lesson yet -- keep the day-one default rather than
+    // treating "no history" as a broken streak.
+    if (last == null) return currentStreak;
+    final today = now ?? DateTime.now();
+    final todayDate = DateTime(today.year, today.month, today.day);
+    final lastDate = DateTime(last.year, last.month, last.day);
+    final daysSince = todayDate.difference(lastDate).inDays;
+    // Still today or as recent as yesterday -- the streak is intact (today's
+    // completion may not have landed yet). Anything older means at least one
+    // full day was skipped.
+    return daysSince <= 1 ? currentStreak : 0;
+  }
+
+  /// The energy that should actually display/be spendable right now --
+  /// [currentEnergy] plus every whole 4-hour block that's passed since
+  /// [lastEnergyDrainAt], capped at [energy] (never above the parent-set
+  /// level). Never drained yet (either field `null`) reads as full.
+  int effectiveEnergy([DateTime? now]) {
+    final stored = currentEnergy;
+    final anchor = lastEnergyDrainAt;
+    if (stored == null || anchor == null) return energy;
+    final elapsedHours = (now ?? DateTime.now()).difference(anchor).inHours;
+    final ticks = elapsedHours ~/ 4;
+    if (ticks <= 0) return stored;
+    return (stored + ticks * 10).clamp(0, energy);
+  }
+
+  /// Whether the day-streak check-in flow should show before Home right
+  /// now -- true the first time this learner is resumed on a given
+  /// calendar date, false for every later "continue"/"load" that same day.
+  bool needsStreakCheckInToday([DateTime? now]) {
+    final last = lastStreakCheckInDate;
+    if (last == null) return true;
+    final today = now ?? DateTime.now();
+    return !(last.year == today.year &&
+        last.month == today.month &&
+        last.day == today.day);
+  }
 
   LearnerProfile copyWith({
     String? name,
@@ -105,6 +176,9 @@ class LearnerProfile {
     List<String>? featuredIds,
     DateTime? featuredDate,
     Set<String>? featuredHistory,
+    DateTime? lastStreakCheckInDate,
+    int? currentEnergy,
+    DateTime? lastEnergyDrainAt,
     AppSettings? settings,
   }) {
     return LearnerProfile(
@@ -128,6 +202,10 @@ class LearnerProfile {
       featuredIds: featuredIds ?? this.featuredIds,
       featuredDate: featuredDate ?? this.featuredDate,
       featuredHistory: featuredHistory ?? this.featuredHistory,
+      lastStreakCheckInDate:
+          lastStreakCheckInDate ?? this.lastStreakCheckInDate,
+      currentEnergy: currentEnergy ?? this.currentEnergy,
+      lastEnergyDrainAt: lastEnergyDrainAt ?? this.lastEnergyDrainAt,
       settings: settings ?? this.settings,
     );
   }
@@ -153,6 +231,9 @@ class LearnerProfile {
     'featuredIds': featuredIds,
     'featuredDate': featuredDate?.toIso8601String(),
     'featuredHistory': featuredHistory.toList(),
+    'lastStreakCheckInDate': lastStreakCheckInDate?.toIso8601String(),
+    'currentEnergy': currentEnergy,
+    'lastEnergyDrainAt': lastEnergyDrainAt?.toIso8601String(),
     'settings': settings.toJson(),
   };
 
@@ -195,6 +276,13 @@ class LearnerProfile {
       featuredHistory: (json['featuredHistory'] as List<Object?>? ?? const [])
           .cast<String>()
           .toSet(),
+      lastStreakCheckInDate: json['lastStreakCheckInDate'] != null
+          ? DateTime.parse(json['lastStreakCheckInDate']! as String)
+          : null,
+      currentEnergy: json['currentEnergy'] as int?,
+      lastEnergyDrainAt: json['lastEnergyDrainAt'] != null
+          ? DateTime.parse(json['lastEnergyDrainAt']! as String)
+          : null,
       settings: json['settings'] != null
           ? AppSettings.fromJson(json['settings']! as Map<String, Object?>)
           : AppSettings.defaults,

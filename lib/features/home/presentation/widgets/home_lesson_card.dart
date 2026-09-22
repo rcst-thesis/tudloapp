@@ -4,6 +4,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tudloapp/features/home/presentation/widgets/home_lesson_panel_layout.dart';
 import 'package:tudloapp/features/home/presentation/widgets/home_lesson_preview.dart';
 
+/// Each unit's own category icon -- matches the badge used on the lesson
+/// dashboard's unit selector and cards. Also used by the lesson preview
+/// popup so it shows the right unit's icon too.
+String categoryIconForUnit(int unitNumber) {
+  return switch (unitNumber) {
+    2 => 'assets/images/unit2_thumbnail.png',
+    _ => 'assets/images/home_lesson_category.png',
+  };
+}
+
 /// One card in Home's lesson list or its collapsed summary deck.
 class HomeLessonCard extends StatelessWidget {
   const HomeLessonCard({
@@ -83,11 +93,11 @@ class _LessonCardContent extends StatelessWidget {
           ),
           SizedBox(width: HomeLessonPanelLayout.dotsToIconGap * scale),
           Image.asset(
-            'assets/images/home_lesson_category.png',
+            categoryIconForUnit(lesson.unitNumber),
             width: HomeLessonPanelLayout.categoryIconSize * scale,
             height: HomeLessonPanelLayout.categoryIconSize * scale,
             fit: BoxFit.contain,
-            semanticLabel: 'Alphabeto kag numero',
+            semanticLabel: lesson.category,
           ),
           SizedBox(width: HomeLessonPanelLayout.categoryToTextGap * scale),
           Expanded(

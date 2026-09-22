@@ -101,7 +101,7 @@ class _DictionaryBrowseScreenState extends State<DictionaryBrowseScreen> {
     final controller = LearnerScope.of(context);
     final profile = controller.profile;
     final eligiblePool = widget.entries
-        .where((e) => e.favThumbImage != null)
+        .where((e) => e.frontCardImage != null)
         .toList();
     if (eligiblePool.isEmpty) return;
 

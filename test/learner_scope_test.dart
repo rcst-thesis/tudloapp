@@ -2,7 +2,19 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:tudloapp/features/learner/domain/learner_scope.dart';
+import 'package:tudloapp/features/lesson/domain/lesson_progress.dart';
 import 'package:tudloapp/features/settings/domain/app_settings.dart';
+
+LessonCompletion _completion(String lessonId, DateTime completedAt) =>
+    LessonCompletion(
+      lessonId: lessonId,
+      score: 10,
+      accuracy: 1,
+      mistakes: 0,
+      duration: const Duration(minutes: 1),
+      completedAt: completedAt,
+      rewardAsset: 'reward.svg',
+    );
 
 void main() {
   setUp(() {
@@ -143,4 +155,125 @@ void main() {
       expect(fresh.profile!.settings.language, AppLanguage.english);
     },
   );
+
+  test('the day streak extends on consecutive days and resets after a '
+      'skipped day', () async {
+    final controller = LearnerController();
+    await controller.createAndSave(name: 'Anna', grade: 1, energy: 60);
+    final day1 = DateTime(2026, 1, 1);
+    final day2 = day1.add(const Duration(days: 1));
+    final day4 = day1.add(const Duration(days: 3)); // day 3 skipped
+
+    await controller.recordLessonCompletion(
+      completion: _completion('l1', day1),
+      nextLessonId: 'l2',
+      unlockedLocationIds: const {},
+    );
+    expect(controller.profile!.currentStreak, 1);
+
+    await controller.recordLessonCompletion(
+      completion: _completion('l2', day2),
+      nextLessonId: 'l3',
+      unlockedLocationIds: const {},
+    );
+    expect(controller.profile!.currentStreak, 2);
+
+    await controller.recordLessonCompletion(
+      completion: _completion('l3', day4),
+      nextLessonId: null,
+      unlockedLocationIds: const {},
+    );
+    expect(controller.profile!.currentStreak, 1);
+  });
+
+  test(
+    'effectiveStreak reads as broken once a day has passed with no new '
+    'completion, without waiting for the next completion to notice',
+    () async {
+      final controller = LearnerController();
+      await controller.createAndSave(name: 'Anna', grade: 1, energy: 60);
+      final day1 = DateTime(2026, 1, 1);
+      await controller.recordLessonCompletion(
+        completion: _completion('l1', day1),
+        nextLessonId: 'l2',
+        unlockedLocationIds: const {},
+      );
+
+      // Still today or the very next day -- today's completion may just not
+      // have happened yet, so the streak should still read as intact.
+      expect(controller.profile!.effectiveStreak(day1), 1);
+      expect(
+        controller.profile!.effectiveStreak(day1.add(const Duration(days: 1))),
+        1,
+      );
+      // A full day skipped with nothing recorded -- reads as broken even
+      // though the stored currentStreak field hasn't been touched.
+      expect(
+        controller.profile!.effectiveStreak(day1.add(const Duration(days: 2))),
+        0,
+      );
+    },
+  );
+
+  test('energy drains 10 per completed lesson, replays included', () async {
+    final controller = LearnerController();
+    await controller.createAndSave(name: 'Anna', grade: 1, energy: 100);
+    final day1 = DateTime(2026, 1, 1);
+
+    await controller.recordLessonCompletion(
+      completion: _completion('l1', day1),
+      nextLessonId: 'l2',
+      unlockedLocationIds: const {},
+    );
+    expect(controller.profile!.effectiveEnergy(day1), 90);
+
+    // A replay of the same lesson still costs energy.
+    await controller.recordLessonCompletion(
+      completion: _completion('l1', day1),
+      nextLessonId: 'l2',
+      unlockedLocationIds: const {},
+    );
+    expect(controller.profile!.effectiveEnergy(day1), 80);
+  });
+
+  test('energy regenerates 10 every 4 hours after a drain, capped at the '
+      "profile's set energy level", () async {
+    final controller = LearnerController();
+    await controller.createAndSave(name: 'Anna', grade: 1, energy: 100);
+    final day1 = DateTime(2026, 1, 1);
+
+    await controller.recordLessonCompletion(
+      completion: _completion('l1', day1),
+      nextLessonId: 'l2',
+      unlockedLocationIds: const {},
+    );
+    await controller.recordLessonCompletion(
+      completion: _completion('l2', day1),
+      nextLessonId: 'l3',
+      unlockedLocationIds: const {},
+    );
+    expect(controller.profile!.effectiveEnergy(day1), 80);
+
+    // Under 4 hours -- no regen tick yet.
+    expect(
+      controller.profile!.effectiveEnergy(day1.add(const Duration(hours: 3))),
+      80,
+    );
+    // One whole 4-hour block passed.
+    expect(
+      controller.profile!.effectiveEnergy(day1.add(const Duration(hours: 4))),
+      90,
+    );
+    // Two whole blocks.
+    expect(
+      controller.profile!.effectiveEnergy(day1.add(const Duration(hours: 8))),
+      100,
+    );
+    // Never above the profile's set energy level (100 here), even with
+    // more blocks than needed to reach it.
+    expect(
+      controller.profile!.effectiveEnergy(day1.add(const Duration(hours: 12))),
+      100,
+    );
+  });
 }

@@ -255,11 +255,34 @@ class LearnerController extends ChangeNotifier {
     }
   }
 
+  /// Marks the day-streak check-in flow as shown for today, so
+  /// [LearnerProfile.needsStreakCheckInToday] reports false for the rest of
+  /// the calendar date -- called once, right when that flow is about to be
+  /// shown, not after the learner finishes clicking through it, so an
+  /// interrupted flow (app killed mid-way) still doesn't reappear later the
+  /// same day.
+  Future<void> recordStreakCheckIn({DateTime? now}) async {
+    final current = _profile;
+    if (current == null) return;
+    final today = _dateOnly(now ?? DateTime.now());
+    if (_sameDate(current.lastStreakCheckInDate, today)) return;
+    final updated = current.copyWith(lastStreakCheckInDate: today);
+    _profile = updated;
+    notifyListeners();
+    try {
+      await _repository.save(updated);
+    } catch (_) {
+      // Best-effort, consistent with the rest of learner persistence.
+    }
+  }
+
   /// Stores a completed/claimed lesson result and any progression it causes.
   ///
   /// A replay may replace a result only when it is genuinely better (higher
   /// accuracy, then fewer mistakes, then a higher score). It never increments
-  /// finished lessons, stickers, or the daily streak a second time.
+  /// finished lessons, stickers, or the daily streak a second time -- but
+  /// every completion (including replays) spends 10 energy, same as the
+  /// original DevG cost.
   Future<void> recordLessonCompletion({
     required LessonCompletion completion,
     required String? nextLessonId,
@@ -279,6 +302,15 @@ class LearnerController extends ChangeNotifier {
     final today = _dateOnly(completion.completedAt);
     final lastDate = current.lessonProgress.lastFirstCompletionDate;
     final countsForStreak = firstCompletion && !_sameDate(lastDate, today);
+    // A real day streak, not just a running total of distinct active days:
+    // only extend it when yesterday's the last time a lesson was first
+    // completed. Any bigger gap means the streak already broke, so today's
+    // completion starts a fresh one at 1 instead of resuming the old count.
+    final yesterday = today.subtract(const Duration(days: 1));
+    final continuesStreak = _sameDate(lastDate, yesterday);
+    final nextStreak = !countsForStreak
+        ? current.currentStreak
+        : (continuesStreak ? current.currentStreak + 1 : 1);
     final progress = LessonProgress(
       version: LessonProgress.currentVersion,
       initialized: true,
@@ -288,15 +320,22 @@ class LearnerController extends ChangeNotifier {
           ? today
           : current.lessonProgress.lastFirstCompletionDate,
     );
+    // 10 energy per finished lesson (replays cost the same as a first
+    // completion), catching up any regen accrued since the last drain
+    // first so a completion right after a regen tick doesn't lose it.
+    final energyBeforeSpend = current.effectiveEnergy(completion.completedAt);
+    final nextEnergy = (energyBeforeSpend - 10).clamp(0, current.energy);
     final updated = current.copyWith(
       lessonsFinished: current.lessonsFinished + (firstCompletion ? 1 : 0),
       stickersEarned: current.stickersEarned + (firstCompletion ? 1 : 0),
-      currentStreak: current.currentStreak + (countsForStreak ? 1 : 0),
+      currentStreak: nextStreak,
       lessonProgress: progress,
       unlockedMapLocations: {
         ...current.unlockedMapLocations,
         ...unlockedLocationIds,
       },
+      currentEnergy: nextEnergy,
+      lastEnergyDrainAt: completion.completedAt,
     );
     _profile = updated;
     notifyListeners();

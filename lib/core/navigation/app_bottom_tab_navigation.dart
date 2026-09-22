@@ -31,7 +31,11 @@ class AppBottomTabNavigation extends StatelessWidget {
   static const _dictionaryNavigationColor = Color(0xFFFFB3BA);
   static const _dictionarySelectedTileColor = Color(0xFFED5F74);
   static const _dictionaryLabelColor = Color(0xFF392F5A);
+  static const _lessonNavigationColor = Color(0xFF90E0EF);
+  static const _lessonSelectedTileColor = Color(0xFF54D3EA);
+  static const _lessonLabelColor = Color(0xFF000000);
 
+  static const _lessonTabIndex = 2;
   static const _mapTabIndex = 3;
   static const _dictionaryTabIndex = 4;
   static const _meTabIndex = 5;
@@ -44,18 +48,21 @@ class AppBottomTabNavigation extends StatelessWidget {
         _meTabIndex => _meNavigationColor,
         _mapTabIndex => _mapNavigationColor,
         _dictionaryTabIndex => _dictionaryNavigationColor,
+        _lessonTabIndex => _lessonNavigationColor,
         _ => _defaultNavigationColor,
       },
       selectedTileColor: switch (currentIndex) {
         _meTabIndex => _meSelectedTileColor,
         _mapTabIndex => _mapSelectedTileColor,
         _dictionaryTabIndex => _dictionarySelectedTileColor,
+        _lessonTabIndex => _lessonSelectedTileColor,
         _ => _defaultSelectedTileColor,
       },
       labelColor: switch (currentIndex) {
         _meTabIndex => _meLabelColor,
         _mapTabIndex => _mapLabelColor,
         _dictionaryTabIndex => _dictionaryLabelColor,
+        _lessonTabIndex => _lessonLabelColor,
         _ => Colors.white,
       },
       onItemTapped: (index) => _navigate(context, index),

@@ -70,6 +70,11 @@ class _GradeSelectionScreenState extends State<GradeSelectionScreen> {
 
   int _selectedIndex = 0;
   bool _voiceOverPlaying = false;
+
+  /// Whether the single dialogue box has switched from the intro line to
+  /// narrating/prompting the selected grade -- flips once, permanently,
+  /// right after the intro VO is first heard (see [_playIntroVoiceOver]).
+  var _showGradeText = false;
   TudloAudioController? _audio;
   Timer? _frontCardVoiceOverTimer;
   var _initialCardVoiceOverScheduled = false;
@@ -125,10 +130,15 @@ class _GradeSelectionScreenState extends State<GradeSelectionScreen> {
     );
   }
 
-  Future<void> _playIntroVoiceOver() {
-    return _playVoiceOver(
+  Future<void> _playIntroVoiceOver() async {
+    await _playVoiceOver(
       widget.introVoiceOverPlayer ?? _playDefaultIntroVoiceOver,
     );
+    // The single dialogue box only ever narrates the intro once -- once
+    // it's been heard (the automatic first play, or a manual replay via
+    // its voice button before that happens), it permanently switches to
+    // prompting/narrating whichever grade is selected instead.
+    if (mounted && !_showGradeText) setState(() => _showGradeText = true);
   }
 
   Future<void> _playSelectedGradeVoiceOver() {
@@ -240,20 +250,40 @@ class _GradeSelectionScreenState extends State<GradeSelectionScreen> {
                               ),
                               child: Stack(
                                 children: [
-                                  const Positioned(
+                                  Positioned(
                                     left: 44,
                                     top: 18,
                                     width: 236,
-                                    child: Text(
-                                      'nice to meet you, ano na imo nga\n'
-                                      'grade subong?',
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14,
-                                        height: 1.35,
-                                        fontWeight: FontWeight.w400,
+                                    height: 43,
+                                    child: AnimatedSwitcher(
+                                      duration: const Duration(
+                                        milliseconds: 250,
                                       ),
+                                      child: _showGradeText
+                                          ? Text(
+                                              key: ValueKey(_selectedIndex),
+                                              'Grade ${_grades[_selectedIndex].word} '
+                                              'kana subong?',
+                                              maxLines: 1,
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 18,
+                                                height: 1,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            )
+                                          : const Text(
+                                              key: ValueKey('intro'),
+                                              'nice to meet you, ano na imo nga\n'
+                                              'grade subong?',
+                                              maxLines: 2,
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 14,
+                                                height: 1.35,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
                                     ),
                                   ),
                                   Positioned(
@@ -266,63 +296,9 @@ class _GradeSelectionScreenState extends State<GradeSelectionScreen> {
                                       size: 48,
                                       iconSize: 24,
                                       playing: _voiceOverPlaying,
-                                      onPressed: _playIntroVoiceOver,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            left: 166,
-                            top: 254,
-                            width: 215,
-                            height: 61,
-                            child: CustomPaint(
-                              key: const Key('grade-selection-bubble'),
-                              painter: const _BubblePainter(
-                                tailCenter: 153,
-                                bodyHeight: 53,
-                              ),
-                              child: Stack(
-                                children: [
-                                  Positioned(
-                                    left: 29,
-                                    top: 15,
-                                    width: 151,
-                                    child: FittedBox(
-                                      fit: BoxFit.scaleDown,
-                                      child: AnimatedSwitcher(
-                                        duration: const Duration(
-                                          milliseconds: 250,
-                                        ),
-                                        child: Text(
-                                          key: ValueKey(_selectedIndex),
-                                          'Grade ${_grades[_selectedIndex].word} '
-                                          'kana subong?',
-                                          maxLines: 1,
-                                          softWrap: false,
-                                          textAlign: TextAlign.center,
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    right: 5,
-                                    top: 7,
-                                    child: _GradeVoiceButton(
-                                      key: const Key(
-                                        'grade-selection-voice-button',
-                                      ),
-                                      size: 40,
-                                      iconSize: 16,
-                                      playing: _voiceOverPlaying,
-                                      onPressed: _playSelectedGradeVoiceOver,
+                                      onPressed: _showGradeText
+                                          ? _playSelectedGradeVoiceOver
+                                          : _playIntroVoiceOver,
                                     ),
                                   ),
                                 ],

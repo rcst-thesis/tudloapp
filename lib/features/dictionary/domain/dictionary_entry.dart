@@ -24,18 +24,16 @@ class DictionaryEntry {
   final String category;
 
   /// A fully-designed front-card image (art + word label already baked in)
-  /// for the word-of-the-day flip card. Also doubles as this entry's
-  /// **word-of-the-day eligibility gate** -- `resolveWordOfTheDay` only
-  /// ever picks from entries where this is non-null, since the flip
-  /// card's front face has nothing worth showing otherwise.
+  /// for the word-of-the-day flip card and the browse-screen featured tray.
+  /// Also doubles as this entry's **word-of-the-day and featured-tray
+  /// eligibility gate** -- `resolveWordOfTheDay`/`resolveFeatured` only
+  /// ever pick from entries where this is non-null, since those cards have
+  /// nothing worth showing otherwise.
   final String? frontCardImage;
 
   /// A fully-designed small card image (art + word label already baked in)
-  /// for the favorites carousel and browse-screen featured tray. Also
-  /// doubles as this entry's **featured-tray eligibility gate** --
-  /// `resolveFeatured` only ever picks from entries where this is
-  /// non-null. When null, this entry still appears in the favorites
-  /// carousel/search thumbnails as a blank card (word label, no image), just
-  /// never in the featured tray.
+  /// for the favorites carousel. When null, this entry still appears in the
+  /// favorites carousel/search thumbnails as a blank card (word label, no
+  /// image).
   final String? favThumbImage;
 }

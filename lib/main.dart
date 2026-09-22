@@ -7,6 +7,11 @@ import 'package:rive/rive.dart' as rive;
 import 'app/tudlo_app.dart';
 import 'features/map/domain/map_rive_asset.dart';
 
+// TEMP DEBUG: shows the new daily-streak screen right after boot, before
+// Main Menu, so it's quick to check on an emulator. Flip back to false (or
+// remove) once the real trigger for that screen is wired up.
+const _debugShowDailyStreakFirst = false;
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await rive.RiveNative.init();
@@ -18,5 +23,5 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  runApp(const TudloApp());
+  runApp(const TudloApp(debugShowDailyStreakFirst: _debugShowDailyStreakFirst));
 }

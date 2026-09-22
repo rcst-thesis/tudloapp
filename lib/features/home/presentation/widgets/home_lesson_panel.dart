@@ -31,8 +31,18 @@ class HomeLessonPanel extends StatefulWidget {
 
   /// HomeScene uses this before layout so its scroll extent matches the
   /// currently rendered cards. It must stay in step with [_LessonDeck].
-  static double designHeightForEnergy(int energy, {required bool isCollapsed}) {
-    final lessonCount = (energy.clamp(0, 60) ~/ 10).clamp(0, 6);
+  ///
+  /// [configuredLessonCount] is the actual number of real lessons on offer
+  /// (e.g. the grade's lesson catalog size) -- energy is a display cap, not
+  /// an invitation to invent extra locked slots past what's really there.
+  static double designHeightForEnergy(
+    int energy, {
+    required bool isCollapsed,
+    required int configuredLessonCount,
+  }) {
+    final lessonCount = (energy.clamp(0, 60) ~/ 10)
+        .clamp(0, 6)
+        .clamp(0, configuredLessonCount);
     if (isCollapsed && lessonCount > 1) {
       final stackDepth = lessonCount.clamp(1, 3);
       return HomeLessonPanelLayout.headingIconSize +
@@ -62,20 +72,20 @@ class HomeLessonPanel extends StatefulWidget {
 class _HomeLessonPanelState extends State<HomeLessonPanel> {
   bool _isExpanded = true;
 
-  int get _availableLessons => (widget.energy.clamp(0, 60) ~/ 10).clamp(0, 6);
+  List<HomeLessonPreview> get _configuredLessons => [
+    widget.lesson,
+    ...widget.additionalLessons,
+  ];
 
-  List<HomeLessonPreview> get _visibleLessons {
-    final configuredLessons = [widget.lesson, ...widget.additionalLessons];
-    return List.generate(_availableLessons, (index) {
-      if (index < configuredLessons.length) return configuredLessons[index];
-      // A visual slot never invents playable curriculum: it opens catalog.
-      return HomeLessonPreview(
-        unitTitle: 'yunit ${index + 1}',
-        category: widget.lesson.category,
-        status: HomeLessonStatus.locked,
-      );
-    });
-  }
+  // Energy is a display cap, not an invitation to invent curriculum: never
+  // show more slots than there are real lessons, even at max energy.
+  int get _availableLessons => ((widget.energy.clamp(0, 60) ~/ 10).clamp(
+    0,
+    6,
+  )).clamp(0, _configuredLessons.length);
+
+  List<HomeLessonPreview> get _visibleLessons =>
+      _configuredLessons.take(_availableLessons).toList();
 
   bool get _canCollapse => _visibleLessons.length > 1;
   String get _summaryCategories =>

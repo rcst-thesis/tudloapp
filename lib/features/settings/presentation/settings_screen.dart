@@ -1008,7 +1008,7 @@ class _LearningEnergyPanelState extends State<_LearningEnergyPanel> {
   Widget _buildExpandedContent() {
     final learnerController = LearnerScope.of(context);
     final profile = learnerController.profile;
-    final energy = profile?.energy ?? 60;
+    final energy = profile?.effectiveEnergy() ?? 60;
     // Same formula home_lesson_panel.dart's `_availableLessons` uses --
     // this text is a preview of the exact cap Home enforces, not an
     // independent number.

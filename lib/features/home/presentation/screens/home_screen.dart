@@ -43,7 +43,9 @@ class _HomeScreenState extends State<HomeScreen> {
   String get _learnerName =>
       widget.learnerName ?? LearnerScope.of(context).profile?.name ?? '';
   int get _energy =>
-      widget.energy ?? LearnerScope.of(context).profile?.energy ?? 60;
+      widget.energy ??
+      LearnerScope.of(context).profile?.effectiveEnergy() ??
+      60;
 
   @override
   void didChangeDependencies() {
@@ -143,6 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
             lessonId: definition.id,
             unitTitle: definition.unitLabel.toLowerCase(),
             category: definition.title.toUpperCase(),
+            unitNumber: definition.unit,
             status: progress.isComplete(definition)
                 ? HomeLessonStatus.completed
                 : progress.isUnlocked(definition)

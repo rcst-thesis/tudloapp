@@ -106,7 +106,7 @@ class _MeScreenState extends State<MeScreen> {
       0;
   int get _currentStreak =>
       widget.currentStreak ??
-      LearnerScope.of(context).profile?.currentStreak ??
+      LearnerScope.of(context).profile?.effectiveStreak() ??
       1;
 
   void _openSettings(BuildContext context) {

@@ -25,6 +25,7 @@ class StickerPressButton extends StatefulWidget {
     required this.onPressed,
     required this.frontColor,
     required this.depthColor,
+    this.frontBorder,
     this.labelColor = Colors.white,
     this.height = 48,
     this.restLift = 5,
@@ -44,6 +45,12 @@ class StickerPressButton extends StatefulWidget {
   final VoidCallback onPressed;
   final Color frontColor;
   final Color depthColor;
+
+  /// Optional border on the front (moving) layer only -- the depth layer
+  /// underneath never gets one. Stays in sync with the front layer's press
+  /// animation since it's painted as part of the same DecoratedBox, unlike
+  /// a border added by wrapping this whole widget from the outside.
+  final BoxBorder? frontBorder;
   final Color labelColor;
   final double height;
   final double restLift;
@@ -146,6 +153,7 @@ class _StickerPressButtonState extends State<StickerPressButton> {
               child: DecoratedBox(
                 decoration: BoxDecoration(
                   color: frontColor,
+                  border: widget.frontBorder,
                   borderRadius: BorderRadius.circular(widget.borderRadius),
                 ),
                 child: Center(

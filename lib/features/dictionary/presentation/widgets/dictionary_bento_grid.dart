@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:tudloapp/features/dictionary/domain/dictionary_entry.dart';
 import 'package:tudloapp/features/dictionary/presentation/dictionary_colors.dart';
+import 'package:tudloapp/features/dictionary/presentation/widgets/dictionary_asset_image.dart';
 
 /// The "featured words" banner: one bento tray that sizes itself to however
 /// many [entries] there actually are (1 to 5, caller's responsibility to
@@ -74,6 +75,7 @@ class _BentoCompartment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final frontCardImage = entry.frontCardImage;
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -81,16 +83,29 @@ class _BentoCompartment extends StatelessWidget {
         onTap: () => onTap(entry),
         child: SizedBox(
           height: height,
-          child: Center(
-            child: Text(
-              entry.word,
-              style: const TextStyle(
-                fontFamily: 'ComicRelief',
-                fontWeight: FontWeight.bold,
-                color: DictionaryColors.ink,
-              ),
-            ),
-          ),
+          width: double.infinity,
+          // The tray is already gated to art-eligible entries (see
+          // resolveFeatured's caller), so frontCardImage is normally always
+          // set here -- this text fallback only guards against that
+          // invariant ever slipping.
+          child: frontCardImage != null
+              ? Padding(
+                  padding: const EdgeInsets.all(6),
+                  child: DictionaryAssetImage(
+                    path: frontCardImage,
+                    fit: BoxFit.contain,
+                  ),
+                )
+              : Center(
+                  child: Text(
+                    entry.word,
+                    style: const TextStyle(
+                      fontFamily: 'ComicRelief',
+                      fontWeight: FontWeight.bold,
+                      color: DictionaryColors.ink,
+                    ),
+                  ),
+                ),
         ),
       ),
     );

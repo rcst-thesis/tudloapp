@@ -13,7 +13,11 @@ import 'package:tudloapp/shared/audio/tudlo_audio_controller.dart';
 import 'package:tudloapp/shared/audio/tudlo_audio_scope.dart';
 
 class TudloApp extends StatefulWidget {
-  const TudloApp({super.key});
+  const TudloApp({this.debugShowDailyStreakFirst = false, super.key});
+
+  /// TEMP DEBUG: threaded straight through to [StartupFlow]. See that
+  /// widget's own doc for what this does.
+  final bool debugShowDailyStreakFirst;
 
   @override
   State<TudloApp> createState() => _TudloAppState();
@@ -111,7 +115,9 @@ class _TudloAppState extends State<TudloApp> with WidgetsBindingObserver {
                       child: child ?? const SizedBox.shrink(),
                     );
                   },
-                  home: const StartupFlow(),
+                  home: StartupFlow(
+                    debugShowDailyStreakFirst: widget.debugShowDailyStreakFirst,
+                  ),
                 ),
               ),
             ),

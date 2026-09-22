@@ -42,7 +42,9 @@ class _DevGLessonCatalogHostState extends State<DevGLessonCatalogHost> {
       grade: grade,
       sourceLevel: sourceLevel,
     );
-    if (lesson != null) setState(() => _running = lesson);
+    if (lesson == null) return;
+    AppData.lessonDashboardFocusLevel = sourceLevel;
+    setState(() => _running = lesson);
   }
 
   Future<void> _claim(LessonScoreStats score) {
@@ -111,6 +113,10 @@ class _DevGLessonRunnerScreenState extends State<DevGLessonRunnerScreen> {
         sourceLevel != DevGLessonMapping.sourceLevelFor(lesson)) {
       return;
     }
+    // Keeps the Lessons dashboard focused on this same lesson (its unit and
+    // card) the next time it's opened, even though it was launched from
+    // Home rather than from the dashboard's own grid.
+    AppData.lessonDashboardFocusLevel = sourceLevel;
     setState(() => _activityStarted = true);
   }
 
@@ -208,7 +214,7 @@ class _DevGLessonEnvironmentState extends State<_DevGLessonEnvironment> {
     }
     AppData.configureHostedSession(
       grade: grade,
-      energy: learner?.energy ?? AppData.maxEnergy,
+      energy: learner?.effectiveEnergy() ?? AppData.maxEnergy,
       unlockedLevels: unlocked,
       completed: completed,
       stickers: stickers,
