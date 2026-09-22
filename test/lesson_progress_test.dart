@@ -9,6 +9,7 @@ import 'package:tudloapp/features/lesson/domain/lesson_content.dart';
 import 'package:tudloapp/features/lesson/domain/lesson_definition.dart';
 import 'package:tudloapp/features/lesson/domain/lesson_progress_controller.dart';
 import 'package:tudloapp/core/data/app_data.dart';
+import 'package:tudloapp/core/models/grade_level.dart';
 import 'package:tudloapp/core/models/lesson_score.dart';
 import 'package:tudloapp/features/home_map/screens/lessons_screen.dart'
     hide MapLocation;
@@ -440,4 +441,54 @@ void main() {
     expect(find.byType(AppBottomTabNavigation), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
+
+  test('Grade 3 catalogue helpers always expose the four approved lessons', () {
+    AppData.configureHostedSession(
+      grade: 3,
+      energy: 60,
+      unlockedLevels: const [1],
+      completed: const <int>[],
+      stickers: const <int, String>{},
+      catalogLevels: const [1],
+    );
+
+    expect(AppData.catalogUnits.map((unit) => unit.number), [1, 2]);
+    expect(AppData.catalogLevelsForUnit(AppData.unitForNumber(1)), [1, 3]);
+    expect(AppData.catalogLevelsForUnit(AppData.unitForNumber(2)), [4, 5]);
+    expect(AppData.catalogLevelCount, 4);
+  });
+
+  testWidgets(
+    'a Grade 3 map catalog still shows all approved Grade 3 lessons',
+    (tester) async {
+      final learner = LearnerController();
+      await learner.createAndSave(name: 'Koka', grade: 3, energy: 60);
+      await learner.seedLessonProgress(activeLessonId: 'g3_u1_l1');
+      final controller = LessonProgressController(
+        learnerController: learner,
+        mapProgress: MapProgressController(),
+      );
+      addTearDown(controller.dispose);
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: LearnerScope(
+            controller: learner,
+            child: LessonProgressScope(
+              controller: controller,
+              child: const DevGLessonCatalogHost(location: MapLocation.school),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      expect(find.byType(LessonsScreen), findsOneWidget);
+      expect(AppData.selectedGradeLevel, GradeLevel.grade3);
+      expect(AppData.catalogUnits.map((unit) => unit.number), [1, 2]);
+      expect(AppData.catalogLevelsForUnit(AppData.unitForNumber(1)), [1, 3]);
+      expect(AppData.catalogLevelsForUnit(AppData.unitForNumber(2)), [4, 5]);
+      expect(AppData.catalogLevelCount, 4);
+    },
+  );
 }

@@ -315,6 +315,8 @@ class _LessonsScreenState extends State<LessonsScreen> {
       (GradeLevel.grade2, 2, 2) => 'audio/VO-final/grade2/Gr_2_Les_2_2_1.wav',
       (GradeLevel.grade3, 1, 1) => 'audio/VO-final/grade3/Gr_3_Les_1_1_1.wav',
       (GradeLevel.grade3, 1, 3) => 'audio/VO-final/grade3/Gr_3_Les_1_3_1.wav',
+      (GradeLevel.grade3, 2, 1) => 'audio/VO-final/grade3/Gr_3_Les_2_1_1.wav',
+      (GradeLevel.grade3, 2, 2) => 'audio/VO-final/grade3/Gr_3_Les_2_2_1.wav',
       _ => null,
     };
   }

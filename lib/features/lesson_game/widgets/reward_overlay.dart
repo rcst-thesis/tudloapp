@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tudloapp/core/theme/app_theme.dart';
@@ -27,106 +24,124 @@ class GradeThreeStickerRewardOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final view = MediaQuery.sizeOf(context);
-    final stickerHeight = (view.height * .50).clamp(210.0, 292.0).toDouble();
-    final stickerWidth = stickerHeight * .64;
-    final glowSize = stickerHeight * 1.34;
     final hasSecondary = secondaryLabel != null && onSecondary != null;
+    final buttonHeight = (view.height * .075).clamp(36.0, 46.0).toDouble();
+    final buttonBottom = (view.height * .045).clamp(14.0, 26.0).toDouble();
+    final middleTop = (view.height * .075).clamp(22.0, 40.0).toDouble();
+    final middleBottom = buttonBottom + buttonHeight + 10;
+    final middleHeight = (view.height - middleTop - middleBottom)
+        .clamp(150.0, 380.0)
+        .toDouble();
+    final messageHeight = (view.height * .14).clamp(48.0, 72.0).toDouble();
+    final stickerHeight = (middleHeight - messageHeight - 4)
+        .clamp(170.0, 340.0)
+        .toDouble();
+    final stickerWidth = (view.width * .48)
+        .clamp(330.0, 470.0)
+        .toDouble()
+        .clamp(0.0, view.width * .72)
+        .toDouble();
 
     return Stack(
       children: [
         Positioned.fill(
-          child: ColoredBox(color: Colors.black.withValues(alpha: .56)),
+          child: ColoredBox(color: Colors.black.withValues(alpha: .50)),
         ),
         Positioned(
-          left: view.width * .08,
-          right: view.width * .08,
-          top: view.height * .11,
-          child: Text(
-            message,
-            textAlign: TextAlign.center,
-            style: GoogleFonts.nunito(
-              color: Colors.white,
-              fontSize: (view.width * .036).clamp(24.0, 38.0),
-              height: 1.08,
-              fontWeight: FontWeight.w900,
-              letterSpacing: 0,
-              shadows: const [
-                Shadow(
-                  color: TudloColors.ink,
-                  offset: Offset(0, 3),
-                  blurRadius: 2,
+          top: middleTop,
+          bottom: middleBottom,
+          left: 0,
+          right: 0,
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  height: messageHeight,
+                  child: Center(
+                    child: Text(
+                      message,
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.nunito(
+                        color: Colors.white,
+                        fontSize: (view.width * .024).clamp(17.0, 25.0),
+                        height: 1.04,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0,
+                        shadows: const [
+                          Shadow(
+                            color: TudloColors.ink,
+                            offset: Offset(0, 2),
+                            blurRadius: 2,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 6),
+                GestureDetector(
+                  onTap: onPrimary,
+                  child: SizedBox(
+                    width: stickerWidth,
+                    height: stickerHeight,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Positioned.fill(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: stickerWidth * .17,
+                              vertical: stickerHeight * .05,
+                            ),
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: const Color(
+                                  0xFFFFD94A,
+                                ).withValues(alpha: .12),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: const Color(
+                                      0xFFFFD33D,
+                                    ).withValues(alpha: .74),
+                                    blurRadius: 42,
+                                    spreadRadius: 12,
+                                  ),
+                                  BoxShadow(
+                                    color: Colors.white.withValues(alpha: .32),
+                                    blurRadius: 22,
+                                    spreadRadius: 1,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: stickerWidth,
+                          height: stickerHeight,
+                          child: _GradeThreeRewardSticker(asset: stickerAsset),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
         ),
-        Align(
-          alignment: const Alignment(0, -.10),
-          child: GestureDetector(
-            onTap: onPrimary,
-            child: SizedBox(
-              width: glowSize,
-              height: glowSize,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  DecoratedBox(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(999),
-                      gradient: RadialGradient(
-                        radius: .84,
-                        colors: [
-                          const Color(0xFFFFF0A8).withValues(alpha: .48),
-                          const Color(0xFFFFD33D).withValues(alpha: .25),
-                          Colors.transparent,
-                        ],
-                        stops: const [0, .50, 1],
-                      ),
-                    ),
-                    child: SizedBox(width: glowSize, height: glowSize),
-                  ),
-                  Container(
-                    width: stickerWidth,
-                    height: stickerHeight,
-                    padding: EdgeInsets.all(stickerHeight * .035),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(18),
-                      border: Border.all(
-                        color: const Color(0xFFFFF3A6),
-                        width: 4,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0xFFFFF3A6).withValues(alpha: .66),
-                          blurRadius: 26,
-                          spreadRadius: 7,
-                        ),
-                        BoxShadow(
-                          color: const Color(0xFFFFB800).withValues(alpha: .35),
-                          blurRadius: 48,
-                          spreadRadius: 12,
-                        ),
-                      ],
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(18),
-                      child: _RewardStickerImage(asset: stickerAsset),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
         Positioned(
-          left: view.width * .04,
-          right: view.width * .04,
-          bottom: view.height * .05,
+          left: view.width * .08,
+          right: view.width * .08,
+          bottom: buttonBottom,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (hasSecondary) ...[
-                Expanded(
+                Flexible(
                   child: _GradeThreeRewardButton(
                     label: secondaryLabel!,
                     onTap: onSecondary!,
@@ -135,7 +150,7 @@ class GradeThreeStickerRewardOverlay extends StatelessWidget {
                 ),
                 SizedBox(width: view.width * .02),
               ],
-              Expanded(
+              Flexible(
                 child: _GradeThreeRewardButton(
                   label: primaryLabel,
                   onTap: onPrimary,
@@ -150,69 +165,30 @@ class GradeThreeStickerRewardOverlay extends StatelessWidget {
   }
 }
 
-class _RewardStickerImage extends StatelessWidget {
+class _GradeThreeRewardSticker extends StatelessWidget {
   final String asset;
 
-  const _RewardStickerImage({required this.asset});
+  const _GradeThreeRewardSticker({required this.asset});
 
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<_EmbeddedStickerImage?>(
-      future: _loadEmbeddedStickerImage(asset),
-      builder: (context, snapshot) {
-        final embedded = snapshot.data;
-        if (embedded != null) {
-          return Image.memory(
-            embedded.bytes,
-            fit: BoxFit.contain,
-            gaplessPlayback: true,
-          );
-        }
-        if (snapshot.connectionState == ConnectionState.done) {
-          return SvgPicture.asset(
-            asset,
-            fit: BoxFit.contain,
-            placeholderBuilder: (_) => const _RewardStickerPlaceholder(),
-          );
-        }
-        return const _RewardStickerPlaceholder();
-      },
-    );
-  }
-}
-
-class _EmbeddedStickerImage {
-  final Uint8List bytes;
-
-  const _EmbeddedStickerImage(this.bytes);
-}
-
-Future<_EmbeddedStickerImage?> _loadEmbeddedStickerImage(String asset) async {
-  if (!asset.toLowerCase().endsWith('.svg')) return null;
-  try {
-    final svg = await rootBundle.loadString(asset);
-    final match = RegExp(
-      r'data:image/(?:png|jpeg|jpg);base64,([^"]+)',
-    ).firstMatch(svg);
+  String? get _pngFallback {
+    final name = asset.split('/').last;
+    final match = RegExp(r'^(.+)-home-sticker\.svg$').firstMatch(name);
     if (match == null) return null;
-    return _EmbeddedStickerImage(base64Decode(match.group(1)!));
-  } catch (_) {
-    return null;
+    return 'assets/images/home_sticker_${match.group(1)}.png';
   }
-}
-
-class _RewardStickerPlaceholder extends StatelessWidget {
-  const _RewardStickerPlaceholder();
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Icon(
-        Icons.workspace_premium_rounded,
-        color: Color(0xFFFFC928),
-        size: 96,
-      ),
-    );
+    final fallback = _pngFallback;
+    if (fallback != null) {
+      return Image.asset(
+        fallback,
+        fit: BoxFit.contain,
+        errorBuilder: (context, error, stackTrace) =>
+            SvgPicture.asset(asset, fit: BoxFit.contain),
+      );
+    }
+    return SvgPicture.asset(asset, fit: BoxFit.contain);
   }
 }
 
@@ -233,32 +209,39 @@ class _GradeThreeRewardButton extends StatelessWidget {
     final green = TudloColors.green;
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        height: (view.height * .16).clamp(58.0, 86.0),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: filled ? green : Colors.white,
-          borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: green, width: 4),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: .16),
-              blurRadius: 10,
-              offset: const Offset(0, 5),
-            ),
-          ],
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          minWidth: (view.width * .18).clamp(135.0, 190.0),
+          maxWidth: (view.width * .28).clamp(185.0, 270.0),
         ),
-        child: Text(
-          label,
-          textAlign: TextAlign.center,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: GoogleFonts.nunito(
-            color: filled ? Colors.white : green,
-            fontSize: (view.width * .027).clamp(22.0, 34.0),
-            height: 1,
-            fontWeight: FontWeight.w900,
-            letterSpacing: 0,
+        child: Container(
+          height: (view.height * .075).clamp(36.0, 46.0),
+          alignment: Alignment.center,
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          decoration: BoxDecoration(
+            color: filled ? green : Colors.white,
+            borderRadius: BorderRadius.circular(13),
+            border: Border.all(color: green, width: 2.5),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: .16),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: GoogleFonts.nunito(
+              color: filled ? Colors.white : green,
+              fontSize: (view.width * .014).clamp(13.0, 18.0),
+              height: 1,
+              fontWeight: FontWeight.w900,
+              letterSpacing: 0,
+            ),
           ),
         ),
       ),

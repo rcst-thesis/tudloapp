@@ -2,7 +2,7 @@ import 'package:tudloapp/features/map/domain/map_location.dart';
 
 /// The display orientation required by an individual lesson session.
 ///
-/// Tudlo remains portrait-first. Only the three Grade 3 source lessons use
+/// Tudlo remains portrait-first. Only the four Grade 3 source lessons use
 /// landscape, and the session route restores the app's portrait policy when
 /// it is dismissed.
 enum LessonOrientation { portrait, landscape }

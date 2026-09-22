@@ -6,13 +6,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tudloapp/core/navigation/fade_page_route.dart';
 import 'package:tudloapp/core/services/app_audio_service.dart';
 import 'package:tudloapp/core/state/app_state.dart';
 import 'package:tudloapp/core/theme/app_theme.dart';
 import 'package:tudloapp/core/widgets/animated_point_finger.dart';
 import 'package:tudloapp/core/widgets/language_toggle.dart';
 import 'package:tudloapp/core/widgets/mascot_widget.dart';
+import 'package:tudloapp/features/lesson_game/screens/flows/grade_3/grade_three_pressable.dart';
 import 'package:tudloapp/features/lesson_game/widgets/reward_overlay.dart';
+import 'package:tudloapp/features/map/domain/map_location.dart' as tudlo_map;
+import 'package:tudloapp/features/map/domain/map_route_resolver.dart'
+    as tudlo_map;
+import 'package:tudloapp/features/map/presentation/screens/map_screen.dart'
+    as tudlo_map;
 
 const _bantayRoot =
     'assets/images/level_game/grade3/G3_U2_L2.1_Ang_Nadula_nga_Ido_SVG_Assets';
@@ -73,6 +80,7 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
   String? _activeMarketDialogueClip;
   Set<String> _wiggling = {};
   Set<String> _nudging = {};
+  final Set<_BantayStage> _openedMapStages = {};
   int _voiceGeneration = 0;
   Set<String> _voiceAssets = {};
   late final String _rewardStickerAsset = widget.rewardStickerAsset;
@@ -143,6 +151,7 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
     setState(() {});
     if (_collected) widget.onLessonComplete();
     await _voiceForStage();
+    if (mounted) await _openMapForStage(_stage);
   }
 
   Future<void> _save() {
@@ -327,6 +336,72 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
     if (next == _BantayStage.reward && !_sequenceValidated) return;
     setState(() {
       _stage = next;
+      _selected = null;
+      _busy = true;
+    });
+    await _save();
+    if (mounted) {
+      await _voiceForStage();
+      if (mounted) await _openMapForStage(next);
+    }
+  }
+
+  bool _isMapStage(_BantayStage stage) =>
+      stage == _BantayStage.schoolMap ||
+      stage == _BantayStage.marketMap ||
+      stage == _BantayStage.farmMap;
+
+  tudlo_map.MapLocation _mapLocationForStage(_BantayStage stage) =>
+      switch (stage) {
+        _BantayStage.schoolMap => tudlo_map.MapLocation.school,
+        _BantayStage.marketMap => tudlo_map.MapLocation.market,
+        _BantayStage.farmMap => tudlo_map.MapLocation.farm,
+        _ => tudlo_map.MapLocation.house,
+      };
+
+  _BantayStage _lessonStageAfterMap(_BantayStage stage) => switch (stage) {
+    _BantayStage.schoolMap => _BantayStage.classroom,
+    _BantayStage.marketMap => _BantayStage.market,
+    _BantayStage.farmMap => _BantayStage.farm,
+    _ => stage,
+  };
+
+  String _mapInstructionForStage(_BantayStage stage) => switch (stage) {
+    _BantayStage.schoolMap => 'I-tap ang School sa mapa.',
+    _BantayStage.marketMap => 'I-tap ang Market sa mapa.',
+    _BantayStage.farmMap => 'I-tap ang Farm sa mapa.',
+    _ => 'I-tap ang lugar sa mapa.',
+  };
+
+  Future<void> _openMapForStage(_BantayStage stage) async {
+    if (!_isMapStage(stage) ||
+        _openedMapStages.contains(stage) ||
+        !mounted ||
+        _stage != stage) {
+      return;
+    }
+    _openedMapStages.add(stage);
+    await _showGradeThreeMapInstructionDialog(
+      context,
+      message: _mapInstructionForStage(stage),
+    );
+    if (!mounted || _stage != stage) return;
+    final location = _mapLocationForStage(stage);
+    final overrides = tudlo_map.MapEventOverrides()
+      ..setOverride(location, const tudlo_map.PopMapRouteAction());
+    await Navigator.of(context).push(
+      FadePageRoute<void>(
+        page: tudlo_map.MapScreen(
+          eventOverrides: overrides,
+          temporaryUnlockedLocations: {location},
+          initialFocusLocation: location,
+        ),
+      ),
+    );
+    if (!mounted || _stage != stage) return;
+    await AppAudioService.instance.playCorrect();
+    setState(() {
+      _stage = _lessonStageAfterMap(stage);
       _selected = null;
       _busy = true;
     });
@@ -588,26 +663,35 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
     ),
   );
 
-  Widget _button(String label, VoidCallback action) => ElevatedButton(
-    onPressed: _busy ? null : action,
-    style: ElevatedButton.styleFrom(
-      elevation: 4,
-      shadowColor: Colors.black.withValues(alpha: .2),
-      backgroundColor: const Color(0xFF1BA7F2),
-      foregroundColor: Colors.white,
-      disabledBackgroundColor: const Color(0xFF1BA7F2).withValues(alpha: .65),
-      disabledForegroundColor: Colors.white.withValues(alpha: .75),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18),
-        side: const BorderSide(color: Colors.white, width: 4),
-      ),
-    ),
-    child: Text(
-      label,
-      style: const TextStyle(
-        fontFamily: 'Baloo2',
-        fontSize: 30,
-        fontWeight: FontWeight.w800,
+  Widget _button(String label, VoidCallback action) => GradeThreePressable(
+    enabled: !_busy,
+    onTap: _busy ? null : action,
+    borderRadius: 18,
+    child: Opacity(
+      opacity: _busy ? .65 : 1,
+      child: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: const Color(0xFF1BA7F2),
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: Colors.white, width: 4),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: .2),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Text(
+          label,
+          style: const TextStyle(
+            color: Colors.white,
+            fontFamily: 'Baloo2',
+            fontSize: 30,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
       ),
     ),
   );
@@ -710,60 +794,7 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
     ].contains(_stage);
     if (map) {
       final active = _location;
-      const names = ['House', 'School', 'Market', 'Farm'];
-      return [
-        _prompt('I-tap ang $active.'),
-        for (final entry in names.indexed)
-          _at(
-            160 + entry.$1 * 186,
-            175,
-            170,
-            230,
-            _BantayPulse(
-              active:
-                  entry.$2 == active || _nudging.contains('map_${entry.$2}'),
-              wiggle: _nudging.contains('map_${entry.$2}'),
-              child: GestureDetector(
-                onTap: () {
-                  if (_busy) return;
-                  if (entry.$2 == active) {
-                    unawaited(
-                      _go(switch (active) {
-                        'School' => _BantayStage.classroom,
-                        'Market' => _BantayStage.market,
-                        _ => _BantayStage.farm,
-                      }),
-                    );
-                  } else {
-                    unawaited(_nudge('map_${entry.$2}'));
-                  }
-                },
-                child: _panel(
-                  Column(
-                    children: [
-                      _text(entry.$2.toUpperCase(), size: 22),
-                      Expanded(
-                        child: _asset('map/${entry.$2}_Location_Icon.svg'),
-                      ),
-                      Icon(
-                        entry.$2 == active
-                            ? Icons.touch_app
-                            : (entry.$1 < names.indexOf(active)
-                                  ? Icons.check_circle
-                                  : Icons.lock),
-                        color: entry.$1 <= names.indexOf(active)
-                            ? Colors.green
-                            : Colors.grey,
-                        size: 44,
-                      ),
-                    ],
-                  ),
-                  correct: entry.$2 == active,
-                ),
-              ),
-            ),
-          ),
-      ];
+      return [_prompt('Ginapangita ang $active sa mapa...')];
     }
     return switch (_stage) {
       _BantayStage.house => [
@@ -853,12 +884,12 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
             362,
             82,
             82,
-            IgnorePointer(
+            const IgnorePointer(
               child: AnimatedPointFinger(
                 asset: _bantayPointFinger,
                 size: 74,
                 angle: -.14,
-                tapOffset: const Offset(8, -4),
+                tapOffset: Offset(8, -4),
               ),
             ),
           ),
@@ -899,12 +930,12 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
             444,
             88,
             88,
-            IgnorePointer(
+            const IgnorePointer(
               child: AnimatedPointFinger(
                 asset: _bantayPointFinger,
                 size: 82,
                 angle: -.16,
-                tapOffset: const Offset(0, -8),
+                tapOffset: Offset(0, -8),
               ),
             ),
           ),
@@ -1065,11 +1096,7 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
       'Market' => 'MarketLandscape 1.svg',
       _ => 'FarmLandscape 1.svg',
     };
-    final isMap = [
-      _BantayStage.schoolMap,
-      _BantayStage.marketMap,
-      _BantayStage.farmMap,
-    ].contains(_stage);
+    final backgroundAsset = '$_bantayBackgroundRoot/$background';
     return ColoredBox(
       color: Colors.black,
       child: SafeArea(
@@ -1085,9 +1112,7 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
                   children: [
                     Positioned.fill(
                       child: SvgPicture.asset(
-                        isMap
-                            ? 'assets/images/level_game/backgrounds/tudlomap.svg'
-                            : '$_bantayBackgroundRoot/$background',
+                        backgroundAsset,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -1326,5 +1351,75 @@ class _BantayPulseState extends State<_BantayPulse>
       ),
     ),
     child: widget.child,
+  );
+}
+
+Future<void> _showGradeThreeMapInstructionDialog(
+  BuildContext context, {
+  required String message,
+}) {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false,
+    builder: (dialogContext) => Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: const EdgeInsets.symmetric(horizontal: 28),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 22),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(22),
+              border: Border.all(color: TudloColors.blue, width: 3),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: .18),
+                  blurRadius: 18,
+                  offset: const Offset(0, 8),
+                ),
+              ],
+            ),
+            child: Text(
+              message,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontFamily: 'Baloo2',
+                fontSize: 28,
+                height: 1.08,
+                fontWeight: FontWeight.w900,
+                color: TudloColors.ink,
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          SizedBox(
+            width: 180,
+            height: 58,
+            child: FilledButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              style: FilledButton.styleFrom(
+                backgroundColor: TudloColors.blue,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                  side: const BorderSide(color: Colors.white, width: 3),
+                ),
+              ),
+              child: const Text(
+                'SIGE',
+                style: TextStyle(
+                  fontFamily: 'Baloo2',
+                  fontSize: 26,
+                  height: 1,
+                  fontWeight: FontWeight.w900,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
   );
 }

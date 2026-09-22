@@ -6,18 +6,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tudloapp/core/navigation/fade_page_route.dart';
 import 'package:tudloapp/core/services/app_audio_service.dart';
 import 'package:tudloapp/core/services/lesson_number_voice_service.dart';
 import 'package:tudloapp/core/state/app_state.dart';
 import 'package:tudloapp/core/theme/app_theme.dart';
 import 'package:tudloapp/core/widgets/animated_point_finger.dart';
 import 'package:tudloapp/core/widgets/mascot_widget.dart';
+import 'package:tudloapp/features/lesson_game/screens/flows/grade_3/grade_three_pressable.dart';
 import 'package:tudloapp/features/lesson_game/widgets/reward_overlay.dart';
+import 'package:tudloapp/features/map/domain/map_location.dart' as tudlo_map;
+import 'package:tudloapp/features/map/domain/map_route_resolver.dart'
+    as tudlo_map;
+import 'package:tudloapp/features/map/presentation/screens/map_screen.dart'
+    as tudlo_map;
 
 const String _marketRoot =
     'assets/images/level_game/grade3/G3_U1_L1.1_Numero_sa_Merkado_SVG_Assets';
 const String _marketBg = '$_marketRoot/background/MarketLandscape.svg';
-const String _fruitStall = '$_marketRoot/stalls/Stall_Fruit_Empty.svg';
 const String _vendor = '$_marketRoot/people/Vendor_Female.svg';
 const String _pointFinger =
     'assets/images/level_game/lesson-game-assets/point-finger.png';
@@ -82,6 +88,7 @@ class _GradeThreeMarketNumbersFlowState
   int _wrongPulse = 0;
   bool _busy = true;
   bool _stallOpened = false;
+  bool _marketMapOpened = false;
   bool _rewardCollected = false;
   bool _completedCallbackSent = false;
   late final String _rewardStickerAsset = widget.rewardStickerAsset;
@@ -161,8 +168,15 @@ class _GradeThreeMarketNumbersFlowState
       widget.onLessonComplete();
     }
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) unawaited(_playStateVoice());
+      if (mounted) unawaited(_playRestoredState());
     });
+  }
+
+  Future<void> _playRestoredState() async {
+    await _playStateVoice();
+    if (mounted && _state == _MarketState.map) {
+      await _openMarketMap();
+    }
   }
 
   Future<void> _save() {
@@ -237,6 +251,9 @@ class _GradeThreeMarketNumbersFlowState
       await _playStateVoice();
       if (mounted) setState(() => _busy = false);
     }
+    if (mounted && next == _MarketState.map) {
+      await _openMarketMap();
+    }
   }
 
   Future<void> _wrong({int? choice}) async {
@@ -260,6 +277,33 @@ class _GradeThreeMarketNumbersFlowState
 
   Future<void> _tapMarket() async {
     await _go(_MarketState.stall);
+  }
+
+  Future<void> _openMarketMap() async {
+    if (_marketMapOpened || !mounted || _state != _MarketState.map) return;
+    _marketMapOpened = true;
+    await _showGradeThreeMapInstructionDialog(
+      context,
+      message: 'I-tap ang Market sa mapa.',
+    );
+    if (!mounted || _state != _MarketState.map) return;
+    final overrides = tudlo_map.MapEventOverrides()
+      ..setOverride(
+        tudlo_map.MapLocation.market,
+        const tudlo_map.PopMapRouteAction(),
+      );
+    await Navigator.of(context).push(
+      FadePageRoute<void>(
+        page: tudlo_map.MapScreen(
+          eventOverrides: overrides,
+          temporaryUnlockedLocations: const {tudlo_map.MapLocation.market},
+          initialFocusLocation: tudlo_map.MapLocation.market,
+        ),
+      ),
+    );
+    if (!mounted || _state != _MarketState.map) return;
+    await AppAudioService.instance.playCorrect();
+    await _tapMarket();
   }
 
   Future<void> _tapStall() async {
@@ -467,22 +511,7 @@ class _GradeThreeMarketNumbersFlowState
   }
 
   List<Widget> _mapScene() {
-    const names = ['MARKET', 'PARK', 'SCHOOL', 'BAHAY'];
-    return [
-      _dialogue('I-tap ang Market.'),
-      for (final item in names.indexed)
-        _at(
-          50 + item.$1 * 220,
-          210,
-          190,
-          210,
-          _locationCard(
-            item.$2,
-            active: item.$2 == 'MARKET',
-            onTap: item.$2 == 'MARKET' ? () => unawaited(_tapMarket()) : null,
-          ),
-        ),
-    ];
+    return [_dialogue('Ginapangita ang Market sa mapa...')];
   }
 
   List<Widget> _stallScene() {
@@ -574,11 +603,21 @@ class _GradeThreeMarketNumbersFlowState
   }
 
   List<Widget> _questionScene() {
+    const choiceSize = 118.0;
+    const choiceStep = 135.0;
+    const choiceStartX =
+        (960 - (choiceSize * 3 + (choiceStep - choiceSize) * 2)) / 2;
     return [
       _dialogue('How many apples?'),
-      _at(270, 165, 420, 245, _displayTrayWithApples(5)),
+      _at(222, 126, 516, 300, _displayTrayWithApples(5)),
       for (final entry in [4, 5, 6].indexed)
-        _at(315 + entry.$1 * 135, 372, 118, 118, _answerCard(entry.$2)),
+        _at(
+          choiceStartX + entry.$1 * choiceStep,
+          372,
+          choiceSize,
+          choiceSize,
+          _answerCard(entry.$2),
+        ),
       if (_correctChoice == 5)
         _bottomActionButton(
           'SUNOD',
@@ -591,7 +630,7 @@ class _GradeThreeMarketNumbersFlowState
     return [
       _dialogue('Ihan-ay ang six pakadto ten.'),
       _at(35, 245, 200, 235, const TudloMascot(size: 235, mood: KokaMood.idle)),
-      _at(265, 205, 570, 125, _numberStrip(_orderTray)),
+      _at(265, 205, 570, 125, _numberStrip(_targetOrder)),
       _bottomActionButton(
         'SUNOD',
         () => unawaited(_go(_MarketState.arrangeOrder)),
@@ -674,10 +713,12 @@ class _GradeThreeMarketNumbersFlowState
               for (var number = 1; number <= 10; number++)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: GestureDetector(
+                  child: GradeThreePressable(
+                    enabled: interactive,
                     onTap: interactive
                         ? () => unawaited(_tapNumber(number))
                         : null,
+                    borderRadius: 12,
                     child: _FeedbackMotionLite(
                       active: _heardNumbers.contains(number),
                       child: _smallNumberTile(number),
@@ -742,8 +783,9 @@ class _GradeThreeMarketNumbersFlowState
   }
 
   Widget _numberTile(int number, {required bool draggable}) {
-    final tile = GestureDetector(
+    final tile = GradeThreePressable(
       onTap: () => setState(() => _selectedTile = number),
+      borderRadius: 12,
       child: _FeedbackMotionLite(
         active: _selectedTile == number,
         wrong: _wrongChoice == number,
@@ -765,8 +807,11 @@ class _GradeThreeMarketNumbersFlowState
 
   Widget _answerCard(int value) {
     final labels = {4: 'Four', 5: 'Five', 6: 'Six'};
-    return GestureDetector(
-      onTap: () => unawaited(_chooseAnswer(value)),
+    return GradeThreePressable(
+      onTap: _correctChoice == null
+          ? () => unawaited(_chooseAnswer(value))
+          : null,
+      borderRadius: 14,
       child: _FeedbackMotionLite(
         active: _correctChoice == value,
         wrong: _wrongChoice == value,
@@ -927,46 +972,6 @@ class _GradeThreeMarketNumbersFlowState
     );
   }
 
-  Widget _locationCard(
-    String label, {
-    required bool active,
-    VoidCallback? onTap,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: _pulse(
-        active: active,
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: active
-                ? const Color(0xFFE6FFD9)
-                : Colors.white.withValues(alpha: .62),
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(
-              color: active ? TudloColors.green : Colors.grey.shade500,
-              width: 4,
-            ),
-          ),
-          child: Column(
-            children: [
-              Expanded(
-                child: active
-                    ? _asset(_fruitStall)
-                    : Icon(Icons.lock, size: 72, color: Colors.grey.shade600),
-              ),
-              _bigLabel(
-                label,
-                size: 22,
-                color: active ? Colors.white : Colors.white,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget _counterCard(int number, String label) {
     return Container(
       decoration: BoxDecoration(
@@ -1038,8 +1043,10 @@ class _GradeThreeMarketNumbersFlowState
   }
 
   Widget _blueButton(String label, VoidCallback? onTap) {
-    return GestureDetector(
+    return GradeThreePressable(
       onTap: onTap,
+      enabled: onTap != null,
+      borderRadius: 24,
       child: Opacity(
         opacity: onTap == null ? .55 : 1,
         child: Container(
@@ -1231,4 +1238,74 @@ class _FeedbackMotionLite extends StatelessWidget {
       child: child,
     );
   }
+}
+
+Future<void> _showGradeThreeMapInstructionDialog(
+  BuildContext context, {
+  required String message,
+}) {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false,
+    builder: (dialogContext) => Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: const EdgeInsets.symmetric(horizontal: 28),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 22),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(22),
+              border: Border.all(color: TudloColors.blue, width: 3),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: .18),
+                  blurRadius: 18,
+                  offset: const Offset(0, 8),
+                ),
+              ],
+            ),
+            child: Text(
+              message,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.nunito(
+                fontSize: 28,
+                height: 1.08,
+                fontWeight: FontWeight.w900,
+                color: TudloColors.ink,
+                letterSpacing: 0,
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          SizedBox(
+            width: 180,
+            height: 58,
+            child: FilledButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              style: FilledButton.styleFrom(
+                backgroundColor: TudloColors.blue,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                  side: const BorderSide(color: Colors.white, width: 3),
+                ),
+              ),
+              child: Text(
+                'SIGE',
+                style: GoogleFonts.nunito(
+                  fontSize: 26,
+                  height: 1,
+                  fontWeight: FontWeight.w900,
+                  color: Colors.white,
+                  letterSpacing: 0,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }

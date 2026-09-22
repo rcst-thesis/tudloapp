@@ -11,6 +11,7 @@ import 'package:tudloapp/core/theme/app_theme.dart';
 import 'package:tudloapp/core/widgets/animated_point_finger.dart';
 import 'package:tudloapp/core/widgets/language_toggle.dart';
 import 'package:tudloapp/core/widgets/mascot_widget.dart';
+import 'package:tudloapp/features/lesson_game/screens/flows/grade_3/grade_three_pressable.dart';
 import 'package:tudloapp/features/lesson_game/widgets/reward_overlay.dart';
 
 const _newStudentRoot =
@@ -303,7 +304,7 @@ class _GradeThreeNewStudentFlowState extends State<GradeThreeNewStudentFlow> {
       onReplay: _playStageVoice,
       child: switch (_stage) {
         _NewStudentStage.intro => _IntroPage(
-          onStart: () => _go(_NewStudentStage.map),
+          onStart: () => _go(_NewStudentStage.search),
         ),
         _NewStudentStage.map => _MapPage(
           onSchool: () => _go(_NewStudentStage.search),
@@ -877,12 +878,12 @@ class _ModelPage extends StatelessWidget {
       prompt:
           'Una nahadlok siya. Sunod, ginkumusta siya. Katapusan, may mga abyan siya.',
       footer: _BlueGreenButton(label: 'SUNOD', onTap: onNext),
-      child: Center(
+      child: const Center(
         child: SizedBox(
           height: 300,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: const [
+            children: [
               Expanded(child: _EventPanel(event: 'afraid')),
               SizedBox(
                 width: 50,
@@ -1031,7 +1032,7 @@ class _SceneShell extends StatelessWidget {
     final view = MediaQuery.sizeOf(context);
     return Stack(
       children: [
-        Positioned.fill(child: _SoftClassroomBackground()),
+        const Positioned.fill(child: _SoftClassroomBackground()),
         Positioned(
           left: view.width * .10,
           right: view.width * .10,
@@ -1257,36 +1258,35 @@ class _ChoiceCard extends StatelessWidget {
       child: _FeedbackMotion(
         correct: correct,
         wrong: wrong,
-        child: IgnorePointer(
-          ignoring: !enabled,
-          child: GestureDetector(
-            onTap: () => onTap(id),
-            child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 8),
-              constraints: const BoxConstraints(minHeight: 68),
-              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: wrong ? const Color(0xFFFFF1EC) : Colors.white,
-                borderRadius: BorderRadius.circular(22),
-                border: Border.all(
-                  color: correct
-                      ? TudloColors.green
-                      : wrong
-                      ? TudloColors.coral
-                      : const Color(0xFF1BA7F2),
-                  width: 5,
-                ),
+        child: GradeThreePressable(
+          enabled: enabled,
+          onTap: enabled ? () => onTap(id) : null,
+          borderRadius: 22,
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 8),
+            constraints: const BoxConstraints(minHeight: 68),
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: wrong ? const Color(0xFFFFF1EC) : Colors.white,
+              borderRadius: BorderRadius.circular(22),
+              border: Border.all(
+                color: correct
+                    ? TudloColors.green
+                    : wrong
+                    ? TudloColors.coral
+                    : const Color(0xFF1BA7F2),
+                width: 5,
               ),
-              child: Text(
-                label,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.nunito(
-                  color: TudloColors.ink,
-                  fontSize: fontSize,
-                  height: 1,
-                  fontWeight: FontWeight.w900,
-                ),
+            ),
+            child: Text(
+              label,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.nunito(
+                color: TudloColors.ink,
+                fontSize: fontSize,
+                height: 1,
+                fontWeight: FontWeight.w900,
               ),
             ),
           ),

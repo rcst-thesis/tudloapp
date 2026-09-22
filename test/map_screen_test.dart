@@ -118,4 +118,36 @@ void main() {
     expect(find.byKey(const Key('map-expand-button')), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('MapScreen can open focused on a lesson target location', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(412, 915);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(const MaterialApp(home: MapScreen()));
+    await tester.pump();
+    final defaultViewer = tester.widget<InteractiveViewer>(
+      find.byKey(const Key('map-interactive-viewer')),
+    );
+    final defaultTransform = defaultViewer.transformationController!.value
+        .clone();
+
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: MapScreen(initialFocusLocation: MapLocation.market),
+      ),
+    );
+    await tester.pump();
+    final marketViewer = tester.widget<InteractiveViewer>(
+      find.byKey(const Key('map-interactive-viewer')),
+    );
+    final marketTransform = marketViewer.transformationController!.value;
+
+    expect(marketTransform.storage[12], isNot(defaultTransform.storage[12]));
+    expect(marketTransform.storage[13], isNot(defaultTransform.storage[13]));
+    expect(tester.takeException(), isNull);
+  });
 }

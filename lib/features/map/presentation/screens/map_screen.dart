@@ -3,6 +3,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import 'package:tudloapp/features/map/presentation/screens/map_camera.dart';
 import 'package:tudloapp/features/map/presentation/screens/map_fullscreen_chrome.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -61,11 +62,13 @@ class MapScreen extends StatefulWidget {
     this.eventOverrides,
     this.temporaryUnlockedLocations = const {},
     this.startExpanded = false,
+    this.initialFocusLocation,
     super.key,
   });
 
   final MapEventOverrides? eventOverrides;
   final Set<MapLocation> temporaryUnlockedLocations;
+  final MapLocation? initialFocusLocation;
 
   /// Opens in the same landscape view as the expand button when requested.
   final bool startExpanded;
@@ -75,21 +78,6 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  static const _mapWidth = RiveMapScene.artboardWidth;
-  static const _mapHeight = RiveMapScene.artboardHeight;
-
-  // Koka's house sits roughly here in the map art; used to frame the
-  // default portrait camera position.
-  static const _houseCenterX = 2085.0;
-  static const _houseCenterY = 1064.5;
-  static const _portraitCropWidth = 420.0;
-  static const _portraitVerticalAnchor = 0.42;
-
-  // Fullscreen/landscape zooms out to show nearly the whole map instead.
-  static const _fullscreenCropWidth = _mapWidth * 0.96;
-  static const _fullscreenCenterX = _mapWidth / 2;
-  static const _fullscreenCenterY = _mapHeight / 2;
-
   // "barangay koka" label size, native aspect ratio (233x60) preserved.
   // Smaller again in fullscreen, where the zoomed-out map leaves less
   // headroom for it.
@@ -113,6 +101,8 @@ class _MapScreenState extends State<MapScreen> {
   TudloAudioController? _audio;
 
   Size? _viewportSize;
+  MapLocation? _appliedFocusLocation;
+  bool? _appliedFullscreenState;
   late bool _isFullscreen;
   var _isHandlingTap = false;
 
@@ -219,7 +209,7 @@ class _MapScreenState extends State<MapScreen> {
   }) {
     final scale = viewport.width / cropWidth;
     final cropHeight = viewport.height / scale;
-    // `_mapWidth - cropWidth`/`_mapHeight - cropHeight` are normally
+    // `MapCamera.mapWidth - cropWidth`/`MapCamera.mapHeight - cropHeight` are normally
     // positive (the crop is smaller than the full map), but a transient
     // viewport whose aspect ratio doesn't match `cropWidth` yet -- e.g. one
     // frame mid orientation-change during the fullscreen toggle, where
@@ -231,10 +221,10 @@ class _MapScreenState extends State<MapScreen> {
     // top/left origin for that one bad frame instead of crashing: the
     // next real layout recomputes a sane crop.
     final cropLeft = (centerX - cropWidth / 2)
-        .clamp(0.0, math.max(0.0, _mapWidth - cropWidth))
+        .clamp(0.0, math.max(0.0, MapCamera.mapWidth - cropWidth))
         .toDouble();
     final cropTop = (centerY - cropHeight * verticalAnchor)
-        .clamp(0.0, math.max(0.0, _mapHeight - cropHeight))
+        .clamp(0.0, math.max(0.0, MapCamera.mapHeight - cropHeight))
         .toDouble();
     return Matrix4.identity()
       ..scaleByDouble(scale, scale, scale, 1)
@@ -242,19 +232,34 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   Matrix4 _defaultFramingFor(Size viewport) {
+    final focus = widget.initialFocusLocation;
+    final focusCenter = focus == null ? null : MapCamera.focusCenters[focus];
+    if (!_isFullscreen && focusCenter != null) {
+      return _framedOn(
+        viewport: viewport,
+        cropWidth: focus == MapLocation.house
+            ? MapCamera.portraitCropWidth
+            : MapCamera.lessonFocusCropWidth,
+        centerX: focusCenter.dx,
+        centerY: focusCenter.dy,
+        verticalAnchor: focus == MapLocation.house
+            ? MapCamera.portraitVerticalAnchor
+            : MapCamera.lessonFocusVerticalAnchor,
+      );
+    }
     return _isFullscreen
         ? _framedOn(
             viewport: viewport,
-            cropWidth: _fullscreenCropWidth,
-            centerX: _fullscreenCenterX,
-            centerY: _fullscreenCenterY,
+            cropWidth: MapCamera.fullscreenCropWidth,
+            centerX: MapCamera.fullscreenCenterX,
+            centerY: MapCamera.fullscreenCenterY,
           )
         : _framedOn(
             viewport: viewport,
-            cropWidth: _portraitCropWidth,
-            centerX: _houseCenterX,
-            centerY: _houseCenterY,
-            verticalAnchor: _portraitVerticalAnchor,
+            cropWidth: MapCamera.portraitCropWidth,
+            centerX: MapCamera.houseCenterX,
+            centerY: MapCamera.houseCenterY,
+            verticalAnchor: MapCamera.portraitVerticalAnchor,
           );
   }
 
@@ -392,13 +397,18 @@ class _MapScreenState extends State<MapScreen> {
               viewport.height.isFinite &&
               viewport.width > 0 &&
               viewport.height > 0;
-          if (_viewportSize != viewport && hasValidViewport) {
+          if ((_viewportSize != viewport ||
+                  _appliedFocusLocation != widget.initialFocusLocation ||
+                  _appliedFullscreenState != _isFullscreen) &&
+              hasValidViewport) {
             _viewportSize = viewport;
+            _appliedFocusLocation = widget.initialFocusLocation;
+            _appliedFullscreenState = _isFullscreen;
             _transformationController.value = _defaultFramingFor(viewport);
           }
           final cropWidth = _isFullscreen
-              ? _fullscreenCropWidth
-              : _portraitCropWidth;
+              ? MapCamera.fullscreenCropWidth
+              : MapCamera.portraitCropWidth;
           // Same invalid-viewport case as above would otherwise produce a
           // zero/non-finite minScale here, which InteractiveViewer asserts
           // must be > 0 -- fall back to a harmless placeholder for this one
@@ -410,9 +420,10 @@ class _MapScreenState extends State<MapScreen> {
           // exposing the Scaffold's background behind it).
           final minScale = !hasValidViewport
               ? 1.0
-              : viewport.width / _mapWidth > viewport.height / _mapHeight
-              ? viewport.width / _mapWidth
-              : viewport.height / _mapHeight;
+              : viewport.width / MapCamera.mapWidth >
+                    viewport.height / MapCamera.mapHeight
+              ? viewport.width / MapCamera.mapWidth
+              : viewport.height / MapCamera.mapHeight;
           final initialScale = hasValidViewport
               ? viewport.width / cropWidth
               : 1.0;

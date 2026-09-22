@@ -34,6 +34,7 @@ import 'package:tudloapp/features/map/presentation/screens/map_screen.dart'
 import 'package:tudloapp/features/settings/domain/app_settings_scope.dart';
 import 'package:tudloapp/shared/widgets/sticker_press_button.dart';
 
+import 'flows/grade_3/grade_three_pressable.dart';
 import 'flows/grade_3/grade_three_bantay_flow.dart';
 import 'flows/grade_3/grade_three_market_numbers_flow.dart';
 import 'flows/grade_3/grade_three_new_student_flow.dart';
@@ -338,6 +339,69 @@ class _GradeThreeLandscapeCanvas extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _GradeThreeSchoolMapThenLessonFlow extends StatefulWidget {
+  final VoidCallback onLessonComplete;
+
+  const _GradeThreeSchoolMapThenLessonFlow({required this.onLessonComplete});
+
+  @override
+  State<_GradeThreeSchoolMapThenLessonFlow> createState() =>
+      _GradeThreeSchoolMapThenLessonFlowState();
+}
+
+class _GradeThreeSchoolMapThenLessonFlowState
+    extends State<_GradeThreeSchoolMapThenLessonFlow> {
+  final _overrides = tudlo_map.MapEventOverrides()
+    ..setOverride(
+      tudlo_map.MapLocation.school,
+      const tudlo_map.PopMapRouteAction(),
+    );
+  var _opened = false;
+  var _mapComplete = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _openMap());
+  }
+
+  Future<void> _openMap() async {
+    if (_opened || !mounted) return;
+    _opened = true;
+    await _showMapBeatInstructionDialog(
+      context,
+      message: 'I-tap ang School sa mapa.',
+    );
+    if (!mounted) return;
+    await Navigator.of(context).push(
+      FadePageRoute<void>(
+        page: tudlo_map.MapScreen(
+          eventOverrides: _overrides,
+          temporaryUnlockedLocations: const {tudlo_map.MapLocation.school},
+          initialFocusLocation: tudlo_map.MapLocation.school,
+        ),
+      ),
+    );
+    if (!mounted) return;
+    await AppAudioService.instance.playCorrect();
+    setState(() => _mapComplete = true);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_mapComplete) {
+      return const SizedBox.expand();
+    }
+    return GradeThreeNewStudentFlow(
+      onExit: () => Navigator.of(context).maybePop(),
+      rewardStickerAsset: _activeLessonStickerAsset(),
+      onLessonComplete: widget.onLessonComplete,
+      onBackToMap: () => Navigator.of(context).maybePop(),
+      onContinue: () => Navigator.of(context).maybePop(),
     );
   }
 }
@@ -2519,63 +2583,63 @@ class _LessonResultPage extends StatelessWidget {
             ),
           Padding(
             padding: EdgeInsets.fromLTRB(
-              24,
-              top + (fullscreenResult && size.height < 650 ? 40 : 86),
-              24,
-              (fullscreenResult ? 16 : 24) + bottom,
+              28,
+              top + (fullscreenResult && size.height < 650 ? 40 : 74),
+              28,
+              (fullscreenResult ? 16 : 18) + bottom,
             ),
             child: Column(
               children: [
                 Expanded(
                   child: Center(
                     child: Transform.translate(
-                      offset: Offset(0, -size.height * .035),
+                      offset: Offset(0, -size.height * .045),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          _ResultGoldStar(
-                            maxSize: fullscreenResult && size.height < 650
-                                ? size.height * .23
-                                : null,
-                          ),
-                          SizedBox(height: size.height * .035),
-                          Text(
-                            'Natapos mo na ang Leksyon!',
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.nunito(
-                              color: Colors.white,
-                              fontSize: (size.width * .083).clamp(32.0, 50.0),
-                              height: 1.05,
-                              fontWeight: FontWeight.w900,
-                              letterSpacing: 0,
-                              shadows: [
-                                Shadow(
-                                  color: TudloColors.ink.withValues(alpha: .70),
-                                  blurRadius: 10,
-                                  offset: const Offset(0, 4),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 12),
                           Text(
                             'Maayo gid!',
                             textAlign: TextAlign.center,
                             style: GoogleFonts.nunito(
                               color: Colors.white,
-                              fontSize: (size.width * .055).clamp(24.0, 36.0),
-                              height: 1.1,
+                              fontSize: (size.width * .03).clamp(17.0, 24.0),
+                              height: 1,
                               fontWeight: FontWeight.w900,
                               letterSpacing: 0,
                               shadows: [
                                 Shadow(
                                   color: TudloColors.ink.withValues(alpha: .70),
-                                  blurRadius: 10,
-                                  offset: const Offset(0, 4),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 3),
                                 ),
                               ],
                             ),
                           ),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Natapos mo na ang Leksyon!',
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.nunito(
+                              color: Colors.white,
+                              fontSize: (size.width * .038).clamp(20.0, 30.0),
+                              height: 1,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 0,
+                              shadows: [
+                                Shadow(
+                                  color: TudloColors.ink.withValues(alpha: .70),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: (size.height * .025).clamp(8.0, 16.0),
+                          ),
+                          const _ResultGoldStar(),
                         ],
                       ),
                     ),
@@ -2622,25 +2686,32 @@ class _LessonResultPage extends StatelessWidget {
                       ),
                     ),
                   )
-                else
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _ResultPrimaryButton(
-                          label: 'MAG BALIK SA MAPA',
-                          onTap: onBackToMap,
-                          outlined: true,
-                        ),
+                else ...[
+                  SizedBox(height: (size.height * .015).clamp(6.0, 12.0)),
+                  Center(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(maxWidth: size.width * .78),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: _ResultPrimaryButton(
+                              label: 'MAG BALIK SA MAPA',
+                              onTap: onBackToMap,
+                              outlined: true,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: _ResultPrimaryButton(
+                              label: 'PADAYUN KITA',
+                              onTap: onContinue,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 14),
-                      Expanded(
-                        child: _ResultPrimaryButton(
-                          label: 'PADAYUN KITA',
-                          onTap: onContinue,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
+                ],
               ],
             ),
           ),
@@ -2772,18 +2843,15 @@ class _ResultGoldStar extends StatelessWidget {
   static const _asset =
       'assets/images/level_game/lesson-game-assets/Tudlo_Reward_Star_Rays_Exact.svg';
 
-  final double? maxSize;
-
-  const _ResultGoldStar({this.maxSize});
+  const _ResultGoldStar();
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
     final height = MediaQuery.sizeOf(context).height;
-    final naturalSize = math.min(width * .84, height * .34).clamp(260.0, 430.0);
-    final size = maxSize == null
-        ? naturalSize
-        : math.min(naturalSize, maxSize!);
+    // v3's sizing already fits a short fullscreen result, so the cap this
+    // once needed is gone.
+    final size = math.min(width * .66, height * .44).clamp(170.0, 300.0);
     return SizedBox(
       width: size,
       height: size,
@@ -2805,19 +2873,21 @@ class _ResultPrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
     return GestureDetector(
       onTap: () {
         unawaited(AppAudioService.instance.playTap());
         unawaited(Future.sync(onTap));
       },
       child: Container(
-        height: 70,
+        height: (size.height * .1).clamp(42.0, 54.0),
         alignment: Alignment.center,
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
           color: outlined ? Colors.white : TudloColors.green,
-          borderRadius: BorderRadius.circular(22),
+          borderRadius: BorderRadius.circular(16),
           border: outlined
-              ? Border.all(color: TudloColors.green, width: 4)
+              ? Border.all(color: TudloColors.green, width: 3)
               : null,
           boxShadow: [
             BoxShadow(
@@ -2825,7 +2895,7 @@ class _ResultPrimaryButton extends StatelessWidget {
                   ? TudloColors.forest.withValues(alpha: .14)
                   : TudloColors.forest.withValues(alpha: .26),
               blurRadius: 0,
-              offset: const Offset(0, 8),
+              offset: const Offset(0, 5),
             ),
           ],
         ),
@@ -2834,7 +2904,7 @@ class _ResultPrimaryButton extends StatelessWidget {
           textAlign: TextAlign.center,
           style: GoogleFonts.nunito(
             color: outlined ? TudloColors.green : Colors.white,
-            fontSize: 20,
+            fontSize: (size.width * .018).clamp(13.0, 18.0),
             height: 1,
             fontWeight: FontWeight.w900,
             letterSpacing: 0,

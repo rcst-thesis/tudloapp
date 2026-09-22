@@ -258,14 +258,11 @@ class _DevGLessonEnvironmentState extends State<_DevGLessonEnvironment> {
     final unlocked = <int>[];
     final completed = <int>[];
     final stickers = <int, String>{};
-    final catalogLessons = widget.running != null
-        ? <LessonDefinition>[widget.running!]
-        : widget.catalogLocation == null
-        ? LessonCatalog.forGrade(grade)
-        : LessonCatalog.forLocation(
-            grade: grade,
-            location: widget.catalogLocation!,
-          );
+    final catalogLessons = _catalogLessonsFor(
+      grade: grade,
+      running: widget.running,
+      location: widget.catalogLocation,
+    );
 
     for (final lesson in LessonCatalog.forGrade(grade)) {
       final sourceLevel = DevGLessonMapping.sourceLevelFor(lesson);
@@ -299,6 +296,21 @@ class _DevGLessonEnvironmentState extends State<_DevGLessonEnvironment> {
       ),
     );
   }
+}
+
+List<LessonDefinition> _catalogLessonsFor({
+  required int grade,
+  required LessonDefinition? running,
+  required MapLocation? location,
+}) {
+  if (running != null) return <LessonDefinition>[running];
+
+  // Grade 3 map lessons handle their own location sequence once a card is
+  // started, so keeping the catalogue whole stops a map entry from hiding
+  // the other approved Grade 3 lessons.
+  if (location == null || grade == 3) return LessonCatalog.forGrade(grade);
+
+  return LessonCatalog.forLocation(grade: grade, location: location);
 }
 
 Future<void> _completeLesson(

@@ -441,7 +441,7 @@ class _Grade3IntroStep extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 18),
-          _Grade3TipBubble(
+          const _Grade3TipBubble(
             text: 'Basaha anay. Pindoton ang speaker kon gusto mo mamati.',
           ),
           const SizedBox(height: 28),
@@ -979,30 +979,7 @@ class _G3MarketMapPage extends StatelessWidget {
     return _G3MarketContentFrame(
       prompt: 'Kadtuon ta ang merkado.',
       footer: _LessonOneBlueButton(label: 'Sige', onTap: onNext),
-      child: SizedBox(
-        height: 360,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            const _LessonPictureAsset(
-              asset: 'assets/images/level_game/backgrounds/tudlomap.svg',
-              fit: BoxFit.cover,
-            ),
-            Container(
-              padding: const EdgeInsets.all(18),
-              decoration: const BoxDecoration(
-                color: TudloColors.coral,
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.location_on_rounded,
-                color: Colors.white,
-                size: 48,
-              ),
-            ),
-          ],
-        ),
-      ),
+      child: const SizedBox(height: 360),
     );
   }
 }
@@ -1278,19 +1255,24 @@ class _G3DraggableNumber extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tile = Container(
-      width: 72,
-      height: 72,
-      alignment: Alignment.center,
-      decoration: _g3SoftPanelDecoration(borderColor: TudloColors.blue),
-      child: Text(
-        '$number',
-        style: GoogleFonts.nunito(
-          color: TudloColors.blue,
-          fontSize: 34,
-          height: 1,
-          fontWeight: FontWeight.w900,
-          letterSpacing: 0,
+    final tile = GradeThreePressable(
+      onTap: () {},
+      playButtonSound: false,
+      borderRadius: 20,
+      child: Container(
+        width: 72,
+        height: 72,
+        alignment: Alignment.center,
+        decoration: _g3SoftPanelDecoration(borderColor: TudloColors.blue),
+        child: Text(
+          '$number',
+          style: GoogleFonts.nunito(
+            color: TudloColors.blue,
+            fontSize: 34,
+            height: 1,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 0,
+          ),
         ),
       ),
     );
@@ -1482,8 +1464,8 @@ class _G3ModelCountPage extends StatelessWidget {
     return _G3MarketContentFrame(
       prompt: 'Pila ka mangga?',
       footer: _LessonOneBlueButton(label: 'Sunod', onTap: onNext),
-      child: Column(
-        children: const [
+      child: const Column(
+        children: [
           _G3MarketSceneLayer(stallAsset: _grade3MarketFruitStallAsset),
           SizedBox(height: 10),
           _G3ObjectTray(
@@ -1761,8 +1743,9 @@ class _G3DraggableShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shell = GestureDetector(
+    final shell = GradeThreePressable(
       onTap: onTap,
+      borderRadius: 16,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),
         width: 58,
@@ -1811,10 +1794,10 @@ class _G3BuildSayPage extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(
+              const Expanded(
                 child: SizedBox(
                   height: 150,
-                  child: const _LessonPictureAsset(
+                  child: _LessonPictureAsset(
                     asset: _grade3MarketPailFullAsset,
                     fit: BoxFit.contain,
                   ),
@@ -2079,8 +2062,8 @@ class _G3MarketRewardPage extends StatelessWidget {
     return _G3MarketContentFrame(
       prompt: 'Maayo gid!',
       footer: _LessonOneBlueButton(label: 'Padayon', onTap: onComplete),
-      child: Column(
-        children: const [
+      child: const Column(
+        children: [
           SizedBox(height: 12),
           _LessonKokaMascot(size: 150, mood: KokaMood.idle),
           SizedBox(height: 8),
@@ -2297,8 +2280,9 @@ class _G3NumberAnswerButton extends StatelessWidget {
       key: ValueKey('g3-market-$value-$wrong-$correct-$pulse'),
       correct: correct,
       wrong: wrong,
-      child: GestureDetector(
+      child: GradeThreePressable(
         onTap: correct ? null : onTap,
+        borderRadius: 20,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 160),
           height: 62,
@@ -2344,8 +2328,9 @@ class _G3GroupChoiceCard extends StatelessWidget {
       key: ValueKey('g3-group-$count-$selectedWrong-$selectedCorrect'),
       correct: selectedCorrect,
       wrong: selectedWrong,
-      child: GestureDetector(
+      child: GradeThreePressable(
         onTap: selectedCorrect ? null : onTap,
+        borderRadius: 20,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 160),
           height: 150,
@@ -2686,8 +2671,8 @@ class _Grade3SentenceCardState extends State<_Grade3SentenceCard> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(20),
+    return GradeThreePressable(
+      borderRadius: 20,
       onTap: _speak,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 180),
@@ -2848,8 +2833,8 @@ class _Grade3QuestionScreenState extends State<_Grade3QuestionScreen> {
               highlightedSentenceIndex: 0,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(18, 0, 18, 18),
             child: _Grade3TipBubble(
               text: 'Liwata. Pangitaa ang sabat sa sugilanon.',
             ),
@@ -2901,7 +2886,9 @@ class _Grade3QuestionScreenState extends State<_Grade3QuestionScreen> {
             const SizedBox(height: 12),
           ],
           const Spacer(),
-          _Grade3TipBubble(text: 'Kon indi sigurado, baliki ang sugilanon.'),
+          const _Grade3TipBubble(
+            text: 'Kon indi sigurado, baliki ang sugilanon.',
+          ),
         ],
       ),
     );
@@ -2929,8 +2916,8 @@ class _Grade3AnswerCard extends StatelessWidget {
       key: ValueKey('g3-$label-$shakeKey'),
       correct: correct,
       wrong: shakeKey > 0 && !correct,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(24),
+      child: GradeThreePressable(
+        borderRadius: 24,
         onTap: onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 160),
@@ -3088,24 +3075,34 @@ class _Grade3PrimaryButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: 64,
-      child: ElevatedButton(
-        onPressed: onTap,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: TudloColors.green,
-          foregroundColor: Colors.white,
-          elevation: 8,
-          shadowColor: TudloColors.forest.withValues(alpha: .22),
-          shape: RoundedRectangleBorder(
+      child: GradeThreePressable(
+        onTap: onTap,
+        borderRadius: 28,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: TudloColors.green,
             borderRadius: BorderRadius.circular(28),
+            boxShadow: [
+              BoxShadow(
+                color: TudloColors.forest.withValues(alpha: .22),
+                blurRadius: 10,
+                offset: const Offset(0, 5),
+              ),
+            ],
           ),
-          textStyle: GoogleFonts.nunito(
-            fontSize: 22,
-            height: 1,
-            fontWeight: FontWeight.w900,
-            letterSpacing: 0,
+          child: Center(
+            child: Text(
+              label,
+              style: GoogleFonts.nunito(
+                color: Colors.white,
+                fontSize: 22,
+                height: 1,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 0,
+              ),
+            ),
           ),
         ),
-        child: Text(label),
       ),
     );
   }
@@ -3126,21 +3123,35 @@ class _Grade3SecondaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 60,
-      child: OutlinedButton(
-        onPressed: enabled ? onTap : null,
-        style: OutlinedButton.styleFrom(
-          foregroundColor: TudloColors.green,
-          side: const BorderSide(color: TudloColors.green, width: 2),
-          shape: RoundedRectangleBorder(
+      child: GradeThreePressable(
+        enabled: enabled,
+        onTap: enabled ? onTap : null,
+        borderRadius: 28,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: Colors.white,
             borderRadius: BorderRadius.circular(28),
+            border: Border.all(
+              color: enabled
+                  ? TudloColors.green
+                  : TudloColors.green.withValues(alpha: .35),
+              width: 2,
+            ),
           ),
-          textStyle: GoogleFonts.nunito(
-            fontSize: 20,
-            fontWeight: FontWeight.w900,
-            letterSpacing: 0,
+          child: Center(
+            child: Text(
+              label,
+              style: GoogleFonts.nunito(
+                color: enabled
+                    ? TudloColors.green
+                    : TudloColors.green.withValues(alpha: .35),
+                fontSize: 20,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 0,
+              ),
+            ),
           ),
         ),
-        child: Text(label),
       ),
     );
   }

@@ -273,15 +273,28 @@ class AppData {
       ? units.where((unit) => catalogLevelsForUnit(unit).isNotEmpty).toList()
       : units;
 
-  static int get catalogLevelCount =>
-      hostedSession ? _hostedCatalogLevels.length : maxLevel;
+  static int get catalogLevelCount {
+    if (!hostedSession) return maxLevel;
+    // Grade 3's catalogue follows which lessons are actually built rather
+    // than the host's per-location card list.
+    if (selectedGradeLevel == GradeLevel.grade3) {
+      return catalogUnits.fold<int>(
+        0,
+        (count, unit) => count + catalogLevelsForUnit(unit).length,
+      );
+    }
+    return _hostedCatalogLevels.length;
+  }
 
   static bool isCatalogLevel(int level) =>
       !hostedSession || _hostedCatalogLevels.contains(level);
 
   static List<int> catalogLevelsForUnit(AppUnit unit) => [
     for (var level = unit.startLevel; level <= unit.endLevel; level++)
-      if (isCatalogLevel(level)) level,
+      if (selectedGradeLevel == GradeLevel.grade3
+          ? isProductionLessonAvailable(level)
+          : isCatalogLevel(level))
+        level,
   ];
 
   /// A sensible first card for a filtered catalogue: an active incomplete
