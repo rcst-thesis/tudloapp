@@ -12,9 +12,15 @@ import 'package:tudloapp/data/dictionary/dictionary_data.dart';
 import 'package:tudloapp/features/translation/services/child_safety_filter.dart';
 import 'package:tudloapp/features/translation/services/nmt_translation_service.dart';
 import 'package:tudloapp/features/translation/services/translation_history.dart';
+import 'package:tudloapp/core/navigation/app_bottom_tab_navigation.dart';
+import 'package:tudloapp/shared/widgets/content_footer_wave.dart';
 
 class _TranslateStyle {
-  static const softBg = TudloColors.paper;
+  /// Mockup tones: a light green page closed by a deeper green wave, the
+  /// same shape every other screen's content footer uses.
+  static const softBg = Color(0xFFC9EFBF);
+  static const wave = Color(0xFF6FBF5A);
+  static const heading = Color(0xFF3FA93F);
   static const card = Colors.white;
   static const sourceLabel = Color(0xFF6B86A8);
   static const targetLabel = TudloColors.forest;
@@ -336,6 +342,21 @@ class _TranslationPageState extends State<TranslationPage> {
 
     return Scaffold(
       backgroundColor: _TranslateStyle.softBg,
+      // The exit button and the Translate title are chrome, not content, so
+      // they sit in the app bar and stay put while the cards scroll.
+      appBar: AppBar(
+        backgroundColor: _TranslateStyle.softBg,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+        toolbarHeight: 72,
+        automaticallyImplyLeading: false,
+        titleSpacing: 0,
+        title: _TranslateHeader(
+          titleSize: MediaQuery.sizeOf(context).width >= 700 ? 40 : 32,
+          onHistory: _openHistory,
+        ),
+      ),
+      bottomNavigationBar: const AppBottomTabNavigation(currentIndex: 1),
       body: Stack(
         children: [
           const Positioned.fill(child: _TranslateBackground()),
@@ -345,7 +366,6 @@ class _TranslationPageState extends State<TranslationPage> {
                 final wide = constraints.maxWidth >= 700;
                 final horizontalPadding = wide ? 44.0 : 20.0;
                 final maxContentWidth = wide ? 720.0 : 560.0;
-                final titleSize = wide ? 40.0 : 32.0;
 
                 return Center(
                   child: SingleChildScrollView(
@@ -360,11 +380,7 @@ class _TranslationPageState extends State<TranslationPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          _TranslateHeader(
-                            titleSize: titleSize,
-                            onHistory: _openHistory,
-                          ),
-                          SizedBox(height: wide ? 28 : 20),
+                          SizedBox(height: wide ? 12 : 6),
                           _RecentsStack(gap: wide ? 22 : 16),
                           _InputCard(
                             sourceLanguage: sourceLanguage,
@@ -556,7 +572,7 @@ class _TranslateHeader extends StatelessWidget {
               textAlign: TextAlign.center,
               maxLines: 1,
               style: GoogleFonts.archivoBlack(
-                color: TudloColors.forest,
+                color: _TranslateStyle.heading,
                 fontSize: titleSize,
                 letterSpacing: 0,
               ),
@@ -1079,81 +1095,103 @@ class _ExpandedResultState extends State<_ExpandedResult> {
     final landscape =
         MediaQuery.orientationOf(context) == Orientation.landscape;
     return Dialog.fullscreen(
-      backgroundColor: TudloColors.forest,
-      child: SafeArea(
-        child: Stack(
-          children: [
-            Center(
-              child: SingleChildScrollView(
-                padding: EdgeInsets.symmetric(
-                  horizontal: landscape ? 80 : 28,
-                  vertical: landscape ? 28 : 80,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      entry.source,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.nunito(
-                        color: Colors.white.withValues(alpha: .75),
-                        fontSize: landscape ? 26 : 24,
-                        fontWeight: FontWeight.w800,
-                      ),
+      backgroundColor: _TranslateStyle.softBg,
+      child: Stack(
+        children: [
+          const Positioned.fill(child: _TranslateBackground()),
+          SafeArea(
+            child: Stack(
+              children: [
+                Center(
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: landscape ? 80 : 28,
+                      vertical: landscape ? 28 : 80,
                     ),
-                    const SizedBox(height: 18),
-                    Text(
-                      entry.target,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.nunito(
-                        color: Colors.white,
-                        fontSize: landscape ? 64 : 52,
-                        height: 1.1,
-                        fontWeight: FontWeight.w900,
-                      ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          entry.source,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.nunito(
+                            color: _TranslateStyle.heading.withValues(
+                              alpha: .75,
+                            ),
+                            fontSize: landscape ? 26 : 24,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        const SizedBox(height: 18),
+                        Text(
+                          entry.target,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.nunito(
+                            color: _TranslateStyle.heading,
+                            fontSize: landscape ? 64 : 52,
+                            height: 1.1,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
+                Positioned(
+                  top: 12,
+                  right: 12,
+                  child: _SheetCloseButton(
+                    onTap: () => Navigator.of(context).pop(),
+                  ),
+                ),
+                // Same affordance as the card's dictionary action, kept
+                // reachable without leaving the fullscreen phrase.
+                Positioned(
+                  left: 24,
+                  bottom: 24,
+                  child: _RoundButton(
+                    tooltip: 'Look up in the dictionary',
+                    icon: Icons.chat_rounded,
+                    onTap: () => unawaited(_openDictionary(context)),
+                  ),
+                ),
+              ],
             ),
-            Positioned(
-              top: 12,
-              right: 12,
-              child: _SheetCloseButton(
-                onTap: () => Navigator.of(context).pop(),
-                onDark: true,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
+    );
+  }
+
+  Future<void> _openDictionary(BuildContext context) async {
+    await AppAudioService.instance.playTap();
+    if (!context.mounted) return;
+    await showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => _DictionarySheet(entry: widget.entry),
     );
   }
 }
 
 class _SheetCloseButton extends StatelessWidget {
   final VoidCallback onTap;
-  final bool onDark;
 
-  const _SheetCloseButton({required this.onTap, this.onDark = false});
+  const _SheetCloseButton({required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: onDark
-          ? Colors.white.withValues(alpha: .18)
-          : TudloColors.line.withValues(alpha: .55),
+      color: TudloColors.line.withValues(alpha: .55),
       shape: const CircleBorder(),
       child: InkWell(
         customBorder: const CircleBorder(),
         onTap: onTap,
         child: SizedBox.square(
           dimension: 44,
-          child: Icon(
-            Icons.close_rounded,
-            color: onDark ? Colors.white : TudloColors.ink,
-            size: 26,
-          ),
+          child: Icon(Icons.close_rounded, color: TudloColors.ink, size: 26),
         ),
       ),
     );
@@ -1537,35 +1575,18 @@ class _TranslateBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DecoratedBox(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Color(0xFFF9FFFB), TudloColors.paper, TudloColors.softGreen],
+    return const ColoredBox(
+      color: _TranslateStyle.softBg,
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: SizedBox(
+          height: 120,
+          child: ContentFooterWave(
+            color: _TranslateStyle.wave,
+            paintKey: Key('translate-content-footer'),
+          ),
         ),
       ),
-      child: CustomPaint(painter: _TranslateBackgroundPainter()),
     );
   }
-}
-
-class _TranslateBackgroundPainter extends CustomPainter {
-  const _TranslateBackgroundPainter();
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()..style = PaintingStyle.fill;
-
-    paint.color = TudloColors.brightGreen.withValues(alpha: .055);
-    canvas.drawCircle(Offset(size.width * .10, size.height * .10), 96, paint);
-    canvas.drawCircle(Offset(size.width * .96, size.height * .30), 132, paint);
-
-    paint.color = TudloColors.forest.withValues(alpha: .045);
-    canvas.drawCircle(Offset(size.width * .04, size.height * .78), 150, paint);
-    canvas.drawCircle(Offset(size.width * .82, size.height * .88), 92, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

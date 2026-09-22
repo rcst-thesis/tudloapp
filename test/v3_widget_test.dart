@@ -94,20 +94,23 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('welcome next opens the tutorial placeholder', (tester) async {
+  testWidgets('welcome next is inert while the tutorial does not exist', (
+    tester,
+  ) async {
     await tester.pumpWidget(const MaterialApp(home: WelcomeAboardScreen()));
     await tester.pump();
 
-    await tester.tap(find.byKey(const Key('welcome-aboard-next-button')));
+    await tester.tap(
+      find.byKey(const Key('welcome-aboard-next-button')),
+      warnIfMissed: false,
+    );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
 
-    expect(find.byType(PlaceholderScreen), findsOneWidget);
-    expect(find.text('Tutorial'), findsOneWidget);
-    expect(
-      find.text('New learner tutorial will be built here.'),
-      findsOneWidget,
-    );
+    // Nothing is pushed: the tutorial is not built yet, so `next` is dimmed
+    // and ignores taps. `skip` is the way on from here.
+    expect(find.byType(PlaceholderScreen), findsNothing);
+    expect(find.byType(WelcomeAboardScreen), findsOneWidget);
   });
 
   testWidgets('welcome aboard automatically plays its voice-over', (

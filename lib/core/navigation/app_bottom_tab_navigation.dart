@@ -6,7 +6,7 @@ import 'package:tudloapp/features/home/presentation/widgets/home_bottom_navigati
 import 'package:tudloapp/features/lesson/presentation/lesson_catalog_screen.dart';
 import 'package:tudloapp/features/map/presentation/screens/map_screen.dart';
 import 'package:tudloapp/features/me/presentation/screens/me_screen.dart';
-import 'package:tudloapp/features/placeholder/presentation/placeholder_screen.dart';
+import 'package:tudloapp/features/translation/screens/translation_page.dart';
 
 /// Single source of truth for the six-tab bottom navigation's routing.
 ///
@@ -95,12 +95,7 @@ class AppBottomTabNavigation extends StatelessWidget {
   static Widget destinationFor(int index) {
     switch (index) {
       case 1:
-        return const PlaceholderScreen(
-          title: 'Translate',
-          description: 'Temporary Translate shell',
-          icon: Icons.translate_rounded,
-          bottomNavigationBar: AppBottomTabNavigation(currentIndex: 1),
-        );
+        return const TranslationPage();
       case 2:
         return const LessonCatalogScreen();
       case 3:

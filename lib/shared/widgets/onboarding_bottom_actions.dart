@@ -15,6 +15,7 @@ class OnboardingBottomActions extends StatelessWidget {
     required this.primaryKey,
     required this.secondaryKey,
     this.primaryStyle = OnboardingPrimaryButtonStyle.green,
+    this.primaryEnabled = true,
     super.key,
   });
 
@@ -28,6 +29,10 @@ class OnboardingBottomActions extends StatelessWidget {
   final Key primaryKey;
   final Key secondaryKey;
   final OnboardingPrimaryButtonStyle primaryStyle;
+
+  /// When false the primary action is shown dimmed and ignores taps -- for a
+  /// destination that is not built yet.
+  final bool primaryEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -45,20 +50,26 @@ class OnboardingBottomActions extends StatelessWidget {
             key: primaryKey,
             width: width,
             height: RiveLongButton.height,
-            child: white
-                ? StickerPressButton(
-                    label: primaryLabel,
-                    onPressed: onPrimaryPressed,
-                    frontColor: frontColor,
-                    depthColor: depthColor,
-                    labelColor: foregroundColor,
-                    height: 44,
-                    fontSize: 15,
-                  )
-                : RiveLongButton(
-                    label: primaryLabel,
-                    onPressed: onPrimaryPressed,
-                  ),
+            child: IgnorePointer(
+              ignoring: !primaryEnabled,
+              child: Opacity(
+                opacity: primaryEnabled ? 1 : .45,
+                child: white
+                    ? StickerPressButton(
+                        label: primaryLabel,
+                        onPressed: onPrimaryPressed,
+                        frontColor: frontColor,
+                        depthColor: depthColor,
+                        labelColor: foregroundColor,
+                        height: 44,
+                        fontSize: 15,
+                      )
+                    : RiveLongButton(
+                        label: primaryLabel,
+                        onPressed: onPrimaryPressed,
+                      ),
+              ),
+            ),
           ),
           Positioned(
             left: (width - 120) / 2,

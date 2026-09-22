@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 import 'package:tudloapp/core/navigation/fade_page_route.dart';
 import 'package:tudloapp/features/home/presentation/screens/home_screen.dart';
-import 'package:tudloapp/features/placeholder/presentation/placeholder_screen.dart';
 import 'package:tudloapp/features/welcome/presentation/widgets/farm_depth_background.dart';
 import 'package:tudloapp/shared/audio/audio_assets.dart';
 import 'package:tudloapp/shared/audio/tudlo_audio_controller.dart';
@@ -33,7 +32,6 @@ class WelcomeAboardScreen extends StatefulWidget {
 class _WelcomeAboardScreenState extends State<WelcomeAboardScreen> {
   Offset _farmTilt = Offset.zero;
   Timer? _recenterTimer;
-  bool _openingTutorial = false;
   bool _openingHome = false;
   TudloAudioController? _audio;
   var _initialVoiceOverScheduled = false;
@@ -63,22 +61,6 @@ class _WelcomeAboardScreenState extends State<WelcomeAboardScreen> {
         Future<void>.value();
   }
 
-  Future<void> _openTutorialPlaceholder() async {
-    if (_openingTutorial) return;
-    _openingTutorial = true;
-    unawaited(_stopVoiceOver());
-    await Navigator.of(context).push(
-      FadePageRoute<void>(
-        page: const PlaceholderScreen(
-          title: 'Tutorial',
-          description: 'New learner tutorial will be built here.',
-          icon: Icons.school_rounded,
-        ),
-      ),
-    );
-    _openingTutorial = false;
-  }
-
   Future<void> _openHome() async {
     if (_openingHome) return;
     _openingHome = true;
@@ -96,7 +78,6 @@ class _WelcomeAboardScreenState extends State<WelcomeAboardScreen> {
       callback();
       return;
     }
-    unawaited(_openTutorialPlaceholder());
   }
 
   void _handleSkip() {
@@ -298,6 +279,10 @@ class _WelcomeAboardScreenState extends State<WelcomeAboardScreen> {
                             primaryLabel: 'next',
                             secondaryLabel: 'skip',
                             primaryStyle: OnboardingPrimaryButtonStyle.white,
+                            // The tutorial does not exist yet, so `next` is
+                            // dimmed and inert unless a caller supplies its
+                            // own destination. `skip` still goes Home.
+                            primaryEnabled: widget.onNext != null,
                             onPrimaryPressed: _handleNext,
                             onSecondaryPressed: _handleSkip,
                           ),
