@@ -421,13 +421,16 @@ void main() {
               'assets/images/translate_title.png',
     );
     expect(wordmark, findsOneWidget);
-    // Sits to the right of the disc button, and the row fits the phone.
     final button = find.byTooltip('Favorites and recents');
     expect(button, findsOneWidget);
-    expect(
-      tester.getTopLeft(wordmark).dx,
-      greaterThan(tester.getTopRight(button).dx - 1),
-    );
+
+    // Centred on the screen, not merely placed right of the button: its
+    // midpoint sits on the screen's, within a pixel.
+    final screenWidth =
+        tester.view.physicalSize.width / tester.view.devicePixelRatio;
+    final box = tester.getRect(wordmark);
+    expect(box.center.dx, closeTo(screenWidth / 2, 1));
+    expect(box.left, greaterThan(tester.getRect(button).right));
     expect(tester.takeException(), isNull);
   });
 }

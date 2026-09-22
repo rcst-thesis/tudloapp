@@ -360,10 +360,21 @@ class _TranslationPageState extends State<TranslationPage> {
         elevation: 0,
         toolbarHeight: 88,
         automaticallyImplyLeading: false,
-        titleSpacing: 0,
-        title: _TranslateHeader(
-          titleSize: MediaQuery.sizeOf(context).width >= 700 ? 64 : 52,
-          onHistory: _openHistory,
+        // The button is the bar's leading slot and the wordmark its title, so
+        // the wordmark centres on the screen rather than in whatever space is
+        // left beside the button.
+        leadingWidth: 76,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 16),
+          child: _RoundButton(
+            tooltip: 'Favorites and recents',
+            icon: Icons.exit_to_app_rounded,
+            onTap: _openHistory,
+          ),
+        ),
+        centerTitle: true,
+        title: _TranslateWordmark(
+          height: MediaQuery.sizeOf(context).width >= 700 ? 64 : 52,
         ),
       ),
       bottomNavigationBar: const AppBottomTabNavigation(currentIndex: 1),
@@ -559,37 +570,21 @@ class _SwipeableResultCard extends StatelessWidget {
   }
 }
 
-class _TranslateHeader extends StatelessWidget {
-  /// Height the wordmark is drawn at; the disc button sits beside it.
-  final double titleSize;
-  final VoidCallback onHistory;
+class _TranslateWordmark extends StatelessWidget {
+  /// Height the wordmark is drawn at.
+  final double height;
 
-  const _TranslateHeader({required this.titleSize, required this.onHistory});
+  const _TranslateWordmark({required this.height});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        _RoundButton(
-          tooltip: 'Favorites and recents',
-          icon: Icons.exit_to_app_rounded,
-          onTap: onHistory,
-        ),
-        const SizedBox(width: 12),
-        // The wordmark carries the screen's name, so there is no text title.
-        // Scales down on a narrow phone rather than overflowing the row.
-        Expanded(
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Image.asset(
-              'assets/images/translate_title.png',
-              height: titleSize,
-              fit: BoxFit.contain,
-              semanticLabel: 'Translate',
-            ),
-          ),
-        ),
-      ],
+    // The wordmark carries the screen's name, so it also carries the label
+    // and the bar has no text title.
+    return Image.asset(
+      'assets/images/translate_title.png',
+      height: height,
+      fit: BoxFit.contain,
+      semanticLabel: 'Translate',
     );
   }
 }
