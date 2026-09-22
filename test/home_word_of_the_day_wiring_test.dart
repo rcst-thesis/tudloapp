@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:tudloapp/features/dictionary/domain/dictionary_words.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:tudloapp/features/home/presentation/screens/home_screen.dart';
@@ -35,10 +36,9 @@ void main() {
     (tester) async {
       setViewport(tester);
       final controller = await _controllerWithProfile();
-      // "balay" is the only real dictionary entry eligible for word-of-the-day
-      // (the only one with a frontCardImage) -- pinning it here isn't a
-      // coincidence with Home's old hardcoded default, it's the same reason
-      // that default was "balay" in the first place.
+      // "balay" is one of the eligible word-of-the-day entries. This test
+      // records it explicitly, so Home must show that recorded word rather
+      // than resolving a fresh one.
       await controller.recordWordOfTheDay(
         id: 'balay',
         date: DateTime.now(),
@@ -65,7 +65,15 @@ void main() {
       await tester.pumpWidget(_wrap(controller));
       await tester.pump();
 
-      expect(controller.profile!.wordOfTheDayId, 'balay');
+      // Home shuffles the eligible pool, so assert what must hold for any
+      // pick: it persisted one of the entries it is allowed to choose.
+      final eligibleIds = DictionaryWords.all
+          .where((entry) => entry.frontCardImage != null)
+          .map((entry) => entry.id)
+          .toSet();
+      expect(eligibleIds, isNotEmpty);
+      expect(controller.profile!.wordOfTheDayId, isNotNull);
+      expect(eligibleIds, contains(controller.profile!.wordOfTheDayId));
       expect(tester.takeException(), isNull);
     },
   );

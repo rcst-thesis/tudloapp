@@ -231,10 +231,13 @@ const _voiceOverMusicMultiplier = 0.35;
 const _musicDuckingDuration = Duration(milliseconds: 160);
 
 bool _isEnabled(AppSettings settings, _AudioChannel channel) {
-  return switch (channel) {
+  final enabled = switch (channel) {
     _AudioChannel.voiceOver => settings.voiceEnabled,
     _AudioChannel.soundEffects => settings.sfxEnabled,
   };
+  // A slider at zero is the same intent as the switch being off, so don't
+  // spend a backend voice handle on a clip nobody can hear.
+  return enabled && _volumeFor(settings, channel) > 0;
 }
 
 double _volumeFor(AppSettings settings, _AudioChannel channel) {

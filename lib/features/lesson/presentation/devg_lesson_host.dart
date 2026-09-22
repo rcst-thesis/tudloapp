@@ -181,7 +181,7 @@ class _DevGLessonEnvironmentState extends State<_DevGLessonEnvironment> {
   @override
   void dispose() {
     AppData.endHostedSession();
-    AppAudioService.instance.attach(null);
+    AppAudioService.instance.detach();
     _appState?.dispose();
     super.dispose();
   }

@@ -8,6 +8,17 @@ import 'package:tudloapp/shared/audio/audio_assets.dart';
 import 'package:tudloapp/shared/audio/audio_backend.dart';
 import 'package:tudloapp/shared/audio/tudlo_audio_controller.dart';
 
+/// The volume the controller actually asks the backend for: its base clip
+/// volume scaled by the master and sound-effect settings. Derived rather than
+/// hard-coded so a change to either default cannot quietly rot this file.
+String _expectedPlay(String asset) {
+  const baseVolume = 15.0;
+  final settings = AppSettings.defaults;
+  final volume =
+      baseVolume * (settings.masterVolume / 100) * (settings.sfxVolume / 100);
+  return 'play:$asset:$volume:false';
+}
+
 void main() {
   test('music uses normalized settings and recovers after unmuting', () async {
     final backend = _FakeAudioBackend();
@@ -70,7 +81,7 @@ void main() {
     await Future<void>.delayed(Duration.zero);
     expect(
       backend.commands,
-      contains('play:${TudloAudioAssets.buttonTapSoundEffect}:15.0:false'),
+      contains(_expectedPlay(TudloAudioAssets.buttonTapSoundEffect)),
     );
     final playCount = backend.commands
         .where((command) => command.startsWith('play:'))
@@ -142,7 +153,7 @@ void main() {
 
       expect(
         backend.commands,
-        contains('play:${TudloAudioAssets.mapUnlockedSoundEffect}:15.0:false'),
+        contains(_expectedPlay(TudloAudioAssets.mapUnlockedSoundEffect)),
       );
     },
   );

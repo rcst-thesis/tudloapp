@@ -45,15 +45,25 @@ class AppAudioService {
       usageType: AndroidUsageType.game,
       audioFocus: AndroidAudioFocus.none,
     ),
-    iOS: AudioContextIOS(
-      category: AVAudioSessionCategory.ambient,
-      options: const {AVAudioSessionOptions.mixWithOthers},
-    ),
+    // `ambient` already mixes with other audio and silences under the ring
+    // switch, which is what a learning app's effects want. Passing
+    // `mixWithOthers` alongside it trips an assertion in audioplayers, which
+    // the loader below used to swallow -- leaving every effect silently
+    // unloaded.
+    iOS: AudioContextIOS(category: AVAudioSessionCategory.ambient),
   );
   final Map<String, StreamSubscription<void>> _effectSubs = {};
   String? _currentId;
-  final AudioPlayer _backgroundPlayer = AudioPlayer();
-  final AudioPlayer _voicePlayer = AudioPlayer();
+  // Created on first use, not at construction. Building an AudioPlayer opens
+  // a platform event stream, so an eager field made merely holding this
+  // service touch the audio plugin -- pointless when a host owns audio, or
+  // when only sound effects are ever played.
+  AudioPlayer? _backgroundPlayerOrNull;
+  AudioPlayer? _voicePlayerOrNull;
+
+  AudioPlayer get _backgroundPlayer =>
+      _backgroundPlayerOrNull ??= AudioPlayer();
+  AudioPlayer get _voicePlayer => _voicePlayerOrNull ??= AudioPlayer();
   final ValueNotifier<bool> soundEffectsEnabledNotifier = ValueNotifier<bool>(
     true,
   );
@@ -73,9 +83,23 @@ class AppAudioService {
   /// instead of this service's own players, so a hosted lesson never opens a
   /// second audio stack or persists a duplicate set of audio settings.
   TudloAudioController? _hostAudio;
+  bool _hosted = false;
   final Set<String> _hostVoiceAssets = {};
 
-  void attach(TudloAudioController? audio) => _hostAudio = audio;
+  /// Hands audio to a host. Being hosted is what matters, not whether a
+  /// controller came with it: a host that has not resolved its controller
+  /// yet must stay silent rather than fall back to this service's own
+  /// players, which would be the second audio stack the host exists to avoid.
+  void attach(TudloAudioController? audio) {
+    _hosted = true;
+    _hostAudio = audio;
+  }
+
+  /// Returns audio to this service when the host goes away.
+  void detach() {
+    _hosted = false;
+    _hostAudio = null;
+  }
 
   static String _assetPath(String value) =>
       value.startsWith('assets/') ? value : 'assets/$value';
@@ -145,7 +169,14 @@ class AppAudioService {
       await player.setReleaseMode(ReleaseMode.stop);
       await player.setAudioContext(_effectContext);
       await player.setSource(AssetSource(assetPath)); // decode + buffer now
-    } catch (_) {
+    } catch (error) {
+      // A placeholder or missing clip must never interrupt learning, but a
+      // silent catch here once hid a misconfigured audio context that
+      // unloaded every effect, so say so in debug builds.
+      assert(() {
+        debugPrint('AppAudioService: could not load "$assetPath" -- $error');
+        return true;
+      }());
       await player.dispose();
       return null;
     }
@@ -192,10 +223,9 @@ class AppAudioService {
   }
 
   Future<void> preloadLessonAudio(Iterable<String> assetPaths) async {
-    final hostAudio = _hostAudio;
-    if (hostAudio != null) {
+    if (_hosted) {
       for (final path in assetPaths.take(8)) {
-        hostAudio.preloadVoiceOver(_assetPath(path));
+        _hostAudio?.preloadVoiceOver(_assetPath(path));
       }
       return;
     }
@@ -218,9 +248,8 @@ class AppAudioService {
     bool allowRapidRepeat = false,
   }) async {
     if (!soundEffectsEnabled) return;
-    final hostAudio = _hostAudio;
-    if (hostAudio != null) {
-      await hostAudio.playSoundEffect(_hostEffect(assetPath));
+    if (_hosted) {
+      await _hostAudio?.playSoundEffect(_hostEffect(assetPath));
       return;
     }
     final now = DateTime.now();
@@ -254,8 +283,9 @@ class AppAudioService {
     double volume = .95,
   }) async {
     if (!voiceOverEnabled || assetPaths.isEmpty) return;
-    final hostAudio = _hostAudio;
-    if (hostAudio != null) {
+    if (_hosted) {
+      final hostAudio = _hostAudio;
+      if (hostAudio == null) return;
       await stopVoice();
       for (final assetPath in assetPaths) {
         final asset = _assetPath(assetPath);
@@ -291,16 +321,18 @@ class AppAudioService {
   }
 
   Future<void> stopVoice() async {
-    final hostAudio = _hostAudio;
-    if (hostAudio != null) {
+    if (_hosted) {
+      final hostAudio = _hostAudio;
       final active = _hostVoiceAssets.toList();
       _hostVoiceAssets.clear();
-      await Future.wait(active.map(hostAudio.stopVoiceOver));
+      if (hostAudio != null) {
+        await Future.wait(active.map(hostAudio.stopVoiceOver));
+      }
       return;
     }
     _voiceToken++;
     try {
-      await _voicePlayer.stop();
+      await _voicePlayerOrNull?.stop();
     } catch (_) {}
   }
 
@@ -308,14 +340,14 @@ class AppAudioService {
     String assetPath, {
     double volume = .18,
   }) async {
-    if (_hostAudio != null) return;
+    if (_hosted) return;
     if (!musicEnabled || _currentBackgroundTrack == assetPath) return;
     _currentBackgroundTrack = assetPath;
     _backgroundVolume = volume.clamp(0, 1).toDouble();
     try {
       await _backgroundPlayer.stop();
       await _backgroundPlayer.setReleaseMode(ReleaseMode.loop);
-      await _backgroundPlayer.setVolume(_backgroundVolume);
+      await _backgroundPlayerOrNull?.setVolume(_backgroundVolume);
       await _backgroundPlayer.play(AssetSource(assetPath));
     } catch (_) {
       _currentBackgroundTrack = null;
@@ -323,14 +355,14 @@ class AppAudioService {
   }
 
   Future<void> lowerBackgroundVolume() async {
-    if (_hostAudio != null) return;
+    if (_hosted) return;
     try {
-      await _backgroundPlayer.setVolume(.05);
+      await _backgroundPlayerOrNull?.setVolume(.05);
     } catch (_) {}
   }
 
   Future<void> restoreBackgroundVolume() async {
-    if (_hostAudio != null) return;
+    if (_hosted) return;
     if (!musicEnabled) return;
     try {
       await _backgroundPlayer.setVolume(_backgroundVolume);
@@ -350,9 +382,9 @@ class AppAudioService {
     await prefs.setBool(_musicKey, enabled);
     try {
       if (!enabled) {
-        await _backgroundPlayer.pause();
+        await _backgroundPlayerOrNull?.pause();
       } else if (_currentBackgroundTrack != null) {
-        await _backgroundPlayer.resume();
+        await _backgroundPlayerOrNull?.resume();
       }
     } catch (_) {}
   }
@@ -373,7 +405,7 @@ class AppAudioService {
     _effectSubs.clear();
     _effectPlayers.clear();
     _currentId = null;
-    await _backgroundPlayer.dispose();
-    await _voicePlayer.dispose();
+    await _backgroundPlayerOrNull?.dispose();
+    await _voicePlayerOrNull?.dispose();
   }
 }
