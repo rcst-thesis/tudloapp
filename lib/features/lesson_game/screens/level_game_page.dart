@@ -25,7 +25,6 @@ import 'package:tudloapp/core/widgets/word_tooltip.dart';
 import 'package:tudloapp/features/energy/widgets/energy_indicator.dart';
 import 'package:tudloapp/features/lesson_game/widgets/reward_overlay.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_lesson_host_scope.dart';
-import 'package:tudloapp/features/navigation/app_shell.dart';
 
 import 'flows/grade_3/grade_three_bantay_flow.dart';
 import 'flows/grade_3/grade_three_market_numbers_flow.dart';
@@ -651,11 +650,7 @@ class _LevelGamePageState extends State<LevelGamePage> {
       return;
     }
     if (!context.mounted) return;
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (_) => const AppShell(initialIndex: 2)),
-      (route) => false,
-    );
+    Navigator.pop(context);
   }
 
   int? _nextAvailableLevel() {

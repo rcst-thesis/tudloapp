@@ -7,7 +7,7 @@ import 'package:tudloapp/core/services/app_audio_service.dart';
 import 'package:tudloapp/core/state/app_state.dart';
 import 'package:tudloapp/core/theme/app_theme.dart';
 import 'package:tudloapp/data/dictionary/dictionary_data.dart';
-import 'package:tudloapp/features/lesson_game/screens/level_game_page.dart';
+import 'package:tudloapp/features/lesson_game/screens/legacy_lesson_host.dart';
 import 'package:tudloapp/features/profile/screens/profile_selection_screen.dart';
 import 'package:tudloapp/features/streak/helpers/streak_helper.dart';
 
@@ -1628,7 +1628,7 @@ class _UnitProgressTile extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => LevelGamePage(level: playLevel),
+                  builder: (_) => LegacyLessonHost(level: playLevel),
                 ),
               );
             },

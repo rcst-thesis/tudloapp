@@ -14,7 +14,7 @@ import 'package:tudloapp/core/widgets/dialogue_assets.dart';
 import 'package:tudloapp/core/widgets/language_toggle.dart';
 import 'package:tudloapp/core/widgets/mascot_widget.dart';
 import 'package:tudloapp/features/energy/widgets/energy_indicator.dart';
-import 'package:tudloapp/features/lesson_game/screens/level_game_page.dart';
+import 'package:tudloapp/features/lesson_game/screens/legacy_lesson_host.dart';
 import 'package:tudloapp/data/lesson_bank/lesson_bank.dart';
 
 const double _mapHeaderHeight = 340;
@@ -438,7 +438,7 @@ class _HomeMapPageState extends State<HomeMapPage> {
     if (!mounted) return;
     await Navigator.push(
       context,
-      MaterialPageRoute(builder: (_) => LevelGamePage(level: level)),
+      MaterialPageRoute(builder: (_) => LegacyLessonHost(level: level)),
     );
     if (mounted) {
       setState(() => _launchingLevel = false);
