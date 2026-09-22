@@ -38,6 +38,7 @@ class HomeScene extends StatelessWidget {
     required this.wordOfTheDay,
     required this.isWordOfTheDayFavorited,
     required this.lessonPreviews,
+    required this.earnedRewardAssets,
     required this.lessonsCollapsed,
     required this.onOpenSettings,
     required this.onOpenMap,
@@ -59,6 +60,7 @@ class HomeScene extends StatelessWidget {
   final DictionaryEntry? wordOfTheDay;
   final bool isWordOfTheDayFavorited;
   final List<HomeLessonPreview> lessonPreviews;
+  final Set<String> earnedRewardAssets;
   final bool lessonsCollapsed;
   final VoidCallback onOpenSettings;
   final VoidCallback onOpenMap;
@@ -109,6 +111,7 @@ class HomeScene extends StatelessWidget {
                           wordOfTheDay: wordOfTheDay,
                           isWordOfTheDayFavorited: isWordOfTheDayFavorited,
                           lessonPreviews: lessonPreviews,
+                          earnedRewardAssets: earnedRewardAssets,
                           energy: energy,
                           lessonsCollapsed: lessonsCollapsed,
                           onOpenMap: onOpenMap,
@@ -165,6 +168,7 @@ class _SceneCanvas extends StatelessWidget {
     required this.wordOfTheDay,
     required this.isWordOfTheDayFavorited,
     required this.lessonPreviews,
+    required this.earnedRewardAssets,
     required this.energy,
     required this.lessonsCollapsed,
     required this.onOpenMap,
@@ -182,6 +186,7 @@ class _SceneCanvas extends StatelessWidget {
   final DictionaryEntry? wordOfTheDay;
   final bool isWordOfTheDayFavorited;
   final List<HomeLessonPreview> lessonPreviews;
+  final Set<String> earnedRewardAssets;
   final int energy;
   final bool lessonsCollapsed;
   final VoidCallback onOpenMap;
@@ -289,7 +294,10 @@ class _SceneCanvas extends StatelessWidget {
         _item(
           HomeSceneLayout.stickerContainer,
           scale,
-          HomeStickerContainer(onOpenStickers: onOpenStickers),
+          HomeStickerContainer(
+            onOpenStickers: onOpenStickers,
+            earnedRewardAssets: earnedRewardAssets,
+          ),
           top: stickerTop,
         ),
         _item(

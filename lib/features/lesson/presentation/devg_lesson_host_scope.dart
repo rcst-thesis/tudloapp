@@ -10,6 +10,8 @@ class DevGLessonHostScope extends InheritedWidget {
     required this.startSourceLevel,
     required this.exitIncomplete,
     required this.exitAfterCompletion,
+    this.exitToLessonsGallery,
+    this.continueToNextLesson,
     required this.claimCompletion,
     required super.child,
     super.key,
@@ -18,6 +20,8 @@ class DevGLessonHostScope extends InheritedWidget {
   final void Function(int sourceLevel) startSourceLevel;
   final Future<void> Function() exitIncomplete;
   final Future<void> Function() exitAfterCompletion;
+  final Future<void> Function()? exitToLessonsGallery;
+  final Future<void> Function()? continueToNextLesson;
   final Future<void> Function(LessonScoreStats score) claimCompletion;
 
   static DevGLessonHostScope? maybeOf(BuildContext context) =>

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:tudloapp/core/models/grade_level.dart';
 import 'package:tudloapp/core/models/learner_profile.dart';
 import 'package:tudloapp/core/models/lesson_score.dart';
@@ -204,6 +205,7 @@ class AppData {
   /// no-ops and the unlock/catalogue state is projected from the active
   /// learner profile through [configureHostedSession] instead.
   static bool hostedSession = false;
+  static bool _energyNotificationPending = false;
   static Set<int> _hostedUnlockedLevels = {1};
   static Set<int> _hostedCatalogLevels = {1};
 
@@ -222,7 +224,9 @@ class AppData {
       (value) => value.number == grade,
       orElse: () => GradeLevel.grade1,
     );
-    currentEnergy = energy.clamp(0, maxEnergy).toInt();
+    final nextEnergy = energy.clamp(10, maxEnergy).toInt();
+    final energyChanged = currentEnergy != nextEnergy;
+    currentEnergy = nextEnergy;
     _hostedUnlockedLevels = unlockedLevels.toSet();
     _hostedCatalogLevels = catalogLevels.toSet();
     completedLevels
@@ -234,6 +238,21 @@ class AppData {
     unlockedLevel = _hostedUnlockedLevels.isEmpty
         ? 1
         : _hostedUnlockedLevels.reduce((a, b) => a > b ? a : b);
+    if (!energyChanged) return;
+    // A host configures this from its build, and energyRevision drives
+    // widgets that are building right then -- notifying synchronously would
+    // mutate a notifier mid-build. Defer to after the frame in that case.
+    if (SchedulerBinding.instance.schedulerPhase ==
+        SchedulerPhase.persistentCallbacks) {
+      if (_energyNotificationPending) return;
+      _energyNotificationPending = true;
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        _energyNotificationPending = false;
+        energyRevision.value++;
+      });
+      return;
+    }
+    energyRevision.value++;
   }
 
   /// Hands progress and energy back to the app when a lesson host goes away.

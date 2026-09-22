@@ -1321,6 +1321,51 @@ class _LessonOneMapStepState extends State<_LessonOneMapStep>
   Animation<Matrix4>? _zoomAnimation;
   Size? _lastView;
 
+  // Under a Tudlo host this beat uses Tudlo's one real Map screen -- the same
+  // MapScreen the Map tab uses -- rather than the inline map below. Its own
+  // standalone overrides (not MapProgressScope's shared instance) glow only
+  // School for the length of that push and pop back here once School is
+  // tapped; every other location keeps its real locked/unlocked behaviour.
+  // See docs/LESSON_MAP_STEP_FIX.md.
+  final _overrides = tudlo_map.MapEventOverrides()
+    ..setOverride(
+      tudlo_map.MapLocation.school,
+      const tudlo_map.PopMapRouteAction(),
+    );
+  var _openedHostedMap = false;
+  bool _hosted = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _hosted = DevGLessonHostScope.maybeOf(context) != null;
+    if (_hosted && !_openedHostedMap) {
+      _openedHostedMap = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) => _openHostedMap());
+    }
+  }
+
+  Future<void> _openHostedMap() async {
+    if (!mounted) return;
+    await _showMapBeatInstructionDialog(
+      context,
+      message: 'I-tap ang eskwelahan sa mapa. Didto ta mangita.',
+    );
+    if (!mounted) return;
+    await Navigator.of(context).push(
+      FadePageRoute<void>(
+        page: tudlo_map.MapScreen(
+          eventOverrides: _overrides,
+          temporaryUnlockedLocations: const {tudlo_map.MapLocation.school},
+          startExpanded: true,
+        ),
+      ),
+    );
+    if (!mounted) return;
+    await AppAudioService.instance.playCorrect();
+    widget.onNext();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -1359,6 +1404,15 @@ class _LessonOneMapStepState extends State<_LessonOneMapStep>
 
   @override
   Widget build(BuildContext context) {
+    if (_hosted) {
+      // The real map is a pushed route, so this step itself shows only chrome.
+      return _LessonOneChrome(
+        progress: widget.progress,
+        onExit: widget.onExit,
+        onReplay: widget.onReplay,
+        child: const SizedBox.shrink(),
+      );
+    }
     final view = MediaQuery.sizeOf(context);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) _animateToSchool(view);
@@ -1406,6 +1460,36 @@ class _LessonOneMapStepState extends State<_LessonOneMapStep>
       ),
     );
   }
+}
+
+/// Instruction shown just before a lesson pushes the real
+/// [tudlo_map.MapScreen] for its "tap the map" beat. The real map has no room
+/// for an in-scene message card the way the inline placeholder map does, so
+/// this dialog carries the instruction visually; the step's narration still
+/// runs through its own voice-over seam.
+Future<void> _showMapBeatInstructionDialog(
+  BuildContext context, {
+  required String message,
+}) {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false,
+    builder: (dialogContext) => Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: const EdgeInsets.symmetric(horizontal: 28),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _LessonOneMessageCard(message: message),
+          const SizedBox(height: 16),
+          _LessonOneBlueButton(
+            label: 'Sige',
+            onTap: () => Navigator.of(dialogContext).pop(),
+          ),
+        ],
+      ),
+    ),
+  );
 }
 
 class _LessonOneMapDestinationCue extends StatefulWidget {

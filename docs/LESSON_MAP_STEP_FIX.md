@@ -247,7 +247,9 @@ text for the dialog) to find the real target:
 
 - `grade_one_letter_flow.dart` — `_LessonOneMapStep` → School
   (`temporaryUnlockedLocations: {MapLocation.school}`). Dialog message:
-  "I-tap ang eskwelahan sa mapa. Didto ta mangita."
+  "I-tap ang eskwelahan sa mapa. Didto ta mangita." This step passes
+  `startExpanded: true` so its real map opens in the expand button's landscape
+  view; ordinary Map-tab entry still opens in portrait.
 - `grade_one_greeting_flow.dart` — `_BeachMapStep` → Beach
   (`temporaryUnlockedLocations: {MapLocation.beach}`). Dialog message:
   "I-tap ang Beach sa mapa."

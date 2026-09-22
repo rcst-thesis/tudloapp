@@ -108,7 +108,9 @@ const mapAnchors = <MapLocation, MapAnchor>{
 /// This page draws the road, unit message cards, level buttons, and map
 /// decorations. It also opens lessons and unit vocabulary previews.
 class LessonsScreen extends StatefulWidget {
-  const LessonsScreen({super.key});
+  const LessonsScreen({this.initialSourceLevel, super.key});
+
+  final int? initialSourceLevel;
 
   @override
   State<LessonsScreen> createState() => _LessonsScreenState();
@@ -264,10 +266,17 @@ class _LessonsScreenState extends State<LessonsScreen> {
     final initialUnit = AppData.unitForLevel(initialLevel);
     _selectedUnitNumber = initialUnit.number;
     _scrollController.addListener(_handleScroll);
+    final requestedLevel = widget.initialSourceLevel;
+    if (requestedLevel != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) unawaited(_presentLessonStartPopup(requestedLevel));
+      });
+    }
   }
 
   int _initialDashboardLevel() {
-    final focused = AppData.lessonDashboardFocusLevel;
+    final focused =
+        widget.initialSourceLevel ?? AppData.lessonDashboardFocusLevel;
     if (focused != null &&
         focused >= 1 &&
         focused <= AppData.maxLevel &&

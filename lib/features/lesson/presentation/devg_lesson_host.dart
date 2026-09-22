@@ -15,7 +15,9 @@ import 'package:tudloapp/features/lesson_game/screens/lesson_intro_page.dart';
 import 'package:tudloapp/features/lesson_game/screens/level_game_page.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_lesson_host_scope.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_lesson_mapping.dart';
+import 'package:tudloapp/features/lesson/presentation/lesson_catalog_screen.dart';
 import 'package:tudloapp/features/map/domain/map_location.dart';
+import 'package:tudloapp/core/navigation/fade_page_route.dart';
 import 'package:tudloapp/shared/audio/tudlo_audio_scope.dart';
 
 /// Hosts the preserved DevG lesson-card page inside Tudlo.
@@ -24,9 +26,16 @@ import 'package:tudloapp/shared/audio/tudlo_audio_scope.dart';
 /// source-authentic. Navigation, persistence, energy, and audio are projected
 /// from Tudlo at this boundary rather than imported from DevG.
 class DevGLessonCatalogHost extends StatefulWidget {
-  const DevGLessonCatalogHost({this.location, super.key});
+  const DevGLessonCatalogHost({
+    this.location,
+    this.initialLessonId,
+    this.onActivityChanged,
+    super.key,
+  });
 
   final MapLocation? location;
+  final String? initialLessonId;
+  final ValueChanged<bool>? onActivityChanged;
 
   @override
   State<DevGLessonCatalogHost> createState() => _DevGLessonCatalogHostState();
@@ -35,6 +44,8 @@ class DevGLessonCatalogHost extends StatefulWidget {
 class _DevGLessonCatalogHostState extends State<DevGLessonCatalogHost> {
   LessonDefinition? _running;
   Future<void>? _completion;
+  bool _openInitialPopup = true;
+  String? _pendingPopupLessonId;
 
   void _startSourceLevel(int sourceLevel) {
     final grade = LearnerScope.of(context).profile?.grade ?? 1;
@@ -44,7 +55,10 @@ class _DevGLessonCatalogHostState extends State<DevGLessonCatalogHost> {
     );
     if (lesson == null) return;
     AppData.lessonDashboardFocusLevel = sourceLevel;
+    _openInitialPopup = false;
+    _pendingPopupLessonId = null;
     setState(() => _running = lesson);
+    widget.onActivityChanged?.call(true);
   }
 
   Future<void> _claim(LessonScoreStats score) {
@@ -59,12 +73,39 @@ class _DevGLessonCatalogHostState extends State<DevGLessonCatalogHost> {
     setState(() {
       _running = null;
       _completion = null;
+      _pendingPopupLessonId = null;
     });
+    widget.onActivityChanged?.call(false);
+  }
+
+  Future<void> _continueToNextLesson() async {
+    await (_completion ?? Future<void>.value());
+    if (!mounted) return;
+    final next = _running == null ? null : LessonCatalog.nextAfter(_running!);
+    if (next != null) {
+      AppData.lessonDashboardFocusLevel = DevGLessonMapping.sourceLevelFor(
+        next,
+      );
+    }
+    setState(() {
+      _running = null;
+      _completion = null;
+      _pendingPopupLessonId = next?.id;
+    });
+    widget.onActivityChanged?.call(false);
   }
 
   @override
   Widget build(BuildContext context) {
     final running = _running;
+    final learnerGrade = LearnerScope.of(context).profile?.grade ?? 1;
+    final popupLesson = LessonCatalog.byId(
+      _pendingPopupLessonId ??
+          (_openInitialPopup ? widget.initialLessonId : null),
+    );
+    final initialSourceLevel = popupLesson?.grade == learnerGrade
+        ? DevGLessonMapping.sourceLevelFor(popupLesson!)
+        : null;
     return _DevGLessonEnvironment(
       running: running,
       catalogLocation: widget.location,
@@ -72,8 +113,10 @@ class _DevGLessonCatalogHostState extends State<DevGLessonCatalogHost> {
       onClaim: _claim,
       onExitIncomplete: _returnToCards,
       onExitAfterCompletion: () => _returnToCards(waitForCompletion: true),
+      onExitToLessonsGallery: () => _returnToCards(waitForCompletion: true),
+      onContinueToNextLesson: _continueToNextLesson,
       child: running == null
-          ? const LessonsScreen()
+          ? LessonsScreen(initialSourceLevel: initialSourceLevel)
           : LevelGamePage(level: DevGLessonMapping.sourceLevelFor(running)),
     );
   }
@@ -107,6 +150,21 @@ class _DevGLessonRunnerScreenState extends State<DevGLessonRunnerScreen> {
     if (mounted) Navigator.of(context).pop();
   }
 
+  Future<void> _openLessonsGallery({bool openNextLesson = false}) async {
+    await (_completion ?? Future<void>.value());
+    if (!mounted) return;
+    final next = openNextLesson && _lesson != null
+        ? LessonCatalog.nextAfter(_lesson!)
+        : null;
+    unawaited(
+      Navigator.of(context).pushReplacement<void, void>(
+        FadePageRoute<void>(
+          page: LessonCatalogScreen(initialLessonId: next?.id),
+        ),
+      ),
+    );
+  }
+
   void _startSourceLevel(int sourceLevel) {
     final lesson = _lesson;
     if (lesson == null ||
@@ -135,6 +193,8 @@ class _DevGLessonRunnerScreenState extends State<DevGLessonRunnerScreen> {
       onClaim: _claim,
       onExitIncomplete: () => _exit(waitForCompletion: false),
       onExitAfterCompletion: () => _exit(waitForCompletion: true),
+      onExitToLessonsGallery: _openLessonsGallery,
+      onContinueToNextLesson: () => _openLessonsGallery(openNextLesson: true),
       child: _activityStarted
           ? LevelGamePage(level: DevGLessonMapping.sourceLevelFor(lesson))
           : LessonIntroPage(level: DevGLessonMapping.sourceLevelFor(lesson)),
@@ -150,6 +210,8 @@ class _DevGLessonEnvironment extends StatefulWidget {
     required this.onClaim,
     required this.onExitIncomplete,
     required this.onExitAfterCompletion,
+    required this.onExitToLessonsGallery,
+    required this.onContinueToNextLesson,
     required this.child,
   });
 
@@ -159,6 +221,8 @@ class _DevGLessonEnvironment extends StatefulWidget {
   final Future<void> Function(LessonScoreStats) onClaim;
   final Future<void> Function() onExitIncomplete;
   final Future<void> Function() onExitAfterCompletion;
+  final Future<void> Function() onExitToLessonsGallery;
+  final Future<void> Function() onContinueToNextLesson;
   final Widget child;
 
   @override
@@ -228,6 +292,8 @@ class _DevGLessonEnvironmentState extends State<_DevGLessonEnvironment> {
         startSourceLevel: widget.onStartSourceLevel,
         exitIncomplete: widget.onExitIncomplete,
         exitAfterCompletion: widget.onExitAfterCompletion,
+        exitToLessonsGallery: widget.onExitToLessonsGallery,
+        continueToNextLesson: widget.onContinueToNextLesson,
         claimCompletion: widget.onClaim,
         child: widget.child,
       ),

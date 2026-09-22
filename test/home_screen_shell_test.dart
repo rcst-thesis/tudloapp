@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tudloapp/tudlo.dart';
 import 'package:tudloapp/features/dictionary/domain/dictionary_words.dart';
 import 'package:tudloapp/features/home/presentation/widgets/home_energy_indicator.dart';
 import 'package:tudloapp/features/home/presentation/widgets/home_lesson_panel.dart';
+import 'package:tudloapp/features/home/presentation/widgets/home_sticker_grid.dart';
+import 'package:tudloapp/features/learner/domain/learner_scope.dart';
 import 'package:tudloapp/features/lesson/domain/lesson_definition.dart';
+import 'package:tudloapp/features/lesson/domain/lesson_progress_controller.dart';
+import 'package:tudloapp/features/lesson_game/screens/level_game_page.dart';
+import 'package:tudloapp/features/lesson/presentation/devg_lesson_host_scope.dart';
+import 'package:tudloapp/features/map/domain/map_progress.dart';
 
 void main() {
   testWidgets('Home content scrolls while bottom navigation remains fixed', (
@@ -393,6 +400,121 @@ void main() {
     await tester.pump(const Duration(milliseconds: 400));
     await tester.pump(const Duration(milliseconds: 400));
     expect(find.text('lesson mo subong nga adlaw'), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('Home lesson start opens the matching Lessons tab popup', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({});
+    final learner = LearnerController();
+    await learner.createAndSave(name: 'Koka', grade: 1, energy: 60);
+    await learner.seedLessonProgress(activeLessonId: 'g1_u1_l1');
+    final progress = LessonProgressController(
+      learnerController: learner,
+      mapProgress: MapProgressController(),
+    );
+    addTearDown(progress.dispose);
+    await tester.pumpWidget(
+      LearnerScope(
+        controller: learner,
+        child: LessonProgressScope(
+          controller: progress,
+          child: const MaterialApp(home: HomeScreen()),
+        ),
+      ),
+    );
+
+    final lessonCard = find.byKey(const Key('home-lesson-card-0'));
+    await tester.ensureVisible(lessonCard);
+    await tester.tap(lessonCard);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+    await tester.pump(const Duration(milliseconds: 400));
+
+    await tester.tap(find.byKey(const Key('lesson-preview-start-button')));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.byKey(const Key('lesson-catalog-screen')), findsOneWidget);
+    expect(
+      find.byKey(const Key('lesson-start-popup-play-button')),
+      findsOneWidget,
+    );
+    expect(find.text('sugodan ta'), findsOneWidget);
+    expect(find.text('lesson mo subong nga adlaw'), findsNothing);
+
+    await tester.tap(find.byKey(const Key('lesson-start-popup-play-button')));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.byType(LevelGamePage), findsOneWidget);
+    expect(find.byKey(const Key('home-bottom-navigation')), findsNothing);
+
+    await DevGLessonHostScope.of(
+      tester.element(find.byType(LevelGamePage)),
+    ).exitIncomplete();
+    await tester.pump();
+    expect(
+      find.byKey(const Key('lesson-start-popup-play-button')),
+      findsNothing,
+    );
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('claiming a lesson unlocks only its matching Home sticker', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({});
+    final learner = LearnerController();
+    await learner.createAndSave(name: 'Koka', grade: 1, energy: 60);
+    await learner.seedLessonProgress(activeLessonId: 'g1_u1_l1');
+    final progress = LessonProgressController(
+      learnerController: learner,
+      mapProgress: MapProgressController(),
+    );
+    addTearDown(progress.dispose);
+    await tester.pumpWidget(
+      LearnerScope(
+        controller: learner,
+        child: LessonProgressScope(
+          controller: progress,
+          child: const MaterialApp(home: HomeScreen()),
+        ),
+      ),
+    );
+
+    HomeStickerGrid grid() =>
+        tester.widget<HomeStickerGrid>(find.byType(HomeStickerGrid));
+    final school = LessonCatalog.byId('g1_u1_l1')!;
+    expect(grid().earnedRewardAssets, isEmpty);
+
+    await progress.completeAndClaim(
+      lesson: school,
+      score: 80,
+      accuracy: .8,
+      mistakes: 2,
+      duration: const Duration(seconds: 30),
+    );
+    await tester.pump();
+
+    expect(grid().earnedRewardAssets, contains(school.rewardAsset));
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is Semantics && widget.properties.label == 'School sticker',
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is Semantics &&
+            widget.properties.label == 'Cat sticker, not earned yet',
+      ),
+      findsOneWidget,
+    );
     expect(tester.takeException(), isNull);
   });
 

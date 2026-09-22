@@ -6,7 +6,11 @@ import 'package:tudloapp/features/home/presentation/widgets/home_sticker_grid.da
 /// until the next Home step; this widget currently owns only its label, frame,
 /// and navigation button.
 class HomeStickerContainer extends StatelessWidget {
-  const HomeStickerContainer({required this.onOpenStickers, super.key});
+  const HomeStickerContainer({
+    required this.onOpenStickers,
+    this.earnedRewardAssets = const {},
+    super.key,
+  });
 
   static const double designWidth = 378;
   // Wide enough for the icon + "imo mga stickers" at its reference font
@@ -35,6 +39,7 @@ class HomeStickerContainer extends StatelessWidget {
       labelHeight + labelToFrameGap + frameHeight;
 
   final VoidCallback onOpenStickers;
+  final Set<String> earnedRewardAssets;
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +115,7 @@ class HomeStickerContainer extends StatelessWidget {
                   (frameTop + stickerGridTopInset + stickerGridOffsetY) * scale,
               width: HomeStickerGrid.designWidth * scale,
               height: HomeStickerGrid.designHeight * scale,
-              child: const HomeStickerGrid(),
+              child: HomeStickerGrid(earnedRewardAssets: earnedRewardAssets),
             ),
             Positioned(
               left: buttonLeft * scale,

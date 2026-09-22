@@ -2,7 +2,8 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
+import 'package:tudloapp/features/map/presentation/screens/map_fullscreen_chrome.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:tudloapp/core/navigation/app_bottom_tab_navigation.dart';
@@ -59,11 +60,15 @@ class MapScreen extends StatefulWidget {
   const MapScreen({
     this.eventOverrides,
     this.temporaryUnlockedLocations = const {},
+    this.startExpanded = false,
     super.key,
   });
 
   final MapEventOverrides? eventOverrides;
   final Set<MapLocation> temporaryUnlockedLocations;
+
+  /// Opens in the same landscape view as the expand button when requested.
+  final bool startExpanded;
 
   @override
   State<MapScreen> createState() => _MapScreenState();
@@ -93,15 +98,6 @@ class _MapScreenState extends State<MapScreen> {
   static const _fullscreenLabelWidth = 140.0;
   static const _fullscreenLabelHeight = 36.0;
 
-  static const _portraitOrientations = [
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ];
-  static const _landscapeOrientations = [
-    DeviceOrientation.landscapeLeft,
-    DeviceOrientation.landscapeRight,
-  ];
-
   final _transformationController = TransformationController();
   final _riveMapController = RiveMapSceneController();
 
@@ -117,7 +113,7 @@ class _MapScreenState extends State<MapScreen> {
   TudloAudioController? _audio;
 
   Size? _viewportSize;
-  var _isFullscreen = false;
+  late bool _isFullscreen;
   var _isHandlingTap = false;
 
   // Rate-limits the locked-location toast per location -- without this,
@@ -127,6 +123,13 @@ class _MapScreenState extends State<MapScreen> {
   // instead of being suppressed by whichever location was tapped last.
   static const _lockedMessageCooldown = Duration(seconds: 5);
   final _lastLockedMessageAt = <MapLocation, DateTime>{};
+
+  @override
+  void initState() {
+    super.initState();
+    _isFullscreen = widget.startExpanded;
+    if (_isFullscreen) MapFullscreenChrome.enter();
+  }
 
   @override
   void didChangeDependencies() {
@@ -203,7 +206,7 @@ class _MapScreenState extends State<MapScreen> {
   void dispose() {
     _eventOverrides.removeListener(_syncEventVisuals);
     _transformationController.dispose();
-    if (_isFullscreen) _restorePortrait();
+    if (_isFullscreen) MapFullscreenChrome.restorePortrait();
     super.dispose();
   }
 
@@ -349,19 +352,13 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   void _enterFullscreen() {
-    SystemChrome.setPreferredOrientations(_landscapeOrientations);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    MapFullscreenChrome.enter();
     setState(() => _isFullscreen = true);
     _viewportSize = null;
   }
 
-  void _restorePortrait() {
-    SystemChrome.setPreferredOrientations(_portraitOrientations);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-  }
-
   void _exitFullscreen() {
-    _restorePortrait();
+    MapFullscreenChrome.restorePortrait();
     setState(() => _isFullscreen = false);
     _viewportSize = null;
   }

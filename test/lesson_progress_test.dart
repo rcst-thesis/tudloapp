@@ -2,16 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:tudloapp/core/navigation/app_bottom_tab_navigation.dart';
 import 'package:tudloapp/features/learner/domain/learner_profile.dart';
 import 'package:tudloapp/features/learner/domain/learner_scope.dart';
 import 'package:tudloapp/features/lesson/domain/lesson_content.dart';
 import 'package:tudloapp/features/lesson/domain/lesson_definition.dart';
 import 'package:tudloapp/features/lesson/domain/lesson_progress_controller.dart';
 import 'package:tudloapp/core/data/app_data.dart';
+import 'package:tudloapp/core/models/lesson_score.dart';
 import 'package:tudloapp/features/home_map/screens/lessons_screen.dart'
     hide MapLocation;
+import 'package:tudloapp/features/lesson_game/screens/level_game_page.dart';
+import 'package:tudloapp/features/lesson_game/screens/lesson_intro_page.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_lesson_host.dart';
+import 'package:tudloapp/features/lesson/presentation/devg_lesson_host_scope.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_lesson_mapping.dart';
+import 'package:tudloapp/features/lesson/presentation/lesson_catalog_screen.dart';
 import 'package:tudloapp/features/map/domain/map_location.dart';
 import 'package:tudloapp/features/map/domain/map_progress.dart';
 import 'package:tudloapp/features/map/domain/map_route_resolver.dart';
@@ -252,5 +258,170 @@ void main() {
     expect(find.byType(LessonsScreen), findsOneWidget);
     expect(AppData.catalogUnits.map((unit) => unit.number), [1]);
     expect(AppData.catalogLevelsForUnit(AppData.unitForNumber(1)), [1, 7]);
+  });
+
+  testWidgets(
+    'Lessons tab hides navigation during an activity and restores it on exit',
+    (tester) async {
+      final learner = LearnerController();
+      await learner.createAndSave(name: 'Koka', grade: 1, energy: 60);
+      await learner.seedLessonProgress(activeLessonId: 'g1_u1_l1');
+      final controller = LessonProgressController(
+        learnerController: learner,
+        mapProgress: MapProgressController(),
+      );
+      addTearDown(controller.dispose);
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: LearnerScope(
+            controller: learner,
+            child: LessonProgressScope(
+              controller: controller,
+              child: const LessonCatalogScreen(),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+      expect(find.byType(AppBottomTabNavigation), findsOneWidget);
+
+      DevGLessonHostScope.of(
+        tester.element(find.byType(LessonsScreen)),
+      ).startSourceLevel(1);
+      await tester.pump();
+      expect(find.byType(LevelGamePage), findsOneWidget);
+      expect(find.byType(AppBottomTabNavigation), findsNothing);
+
+      await DevGLessonHostScope.of(
+        tester.element(find.byType(LevelGamePage)),
+      ).exitIncomplete();
+      await tester.pump();
+      expect(find.byType(LessonsScreen), findsOneWidget);
+      expect(find.byType(AppBottomTabNavigation), findsOneWidget);
+    },
+  );
+
+  testWidgets('continuing after lesson one opens the next lesson popup', (
+    tester,
+  ) async {
+    final learner = LearnerController();
+    await learner.createAndSave(name: 'Koka', grade: 1, energy: 60);
+    await learner.seedLessonProgress(activeLessonId: 'g1_u1_l1');
+    final controller = LessonProgressController(
+      learnerController: learner,
+      mapProgress: MapProgressController(),
+    );
+    addTearDown(controller.dispose);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: LearnerScope(
+          controller: learner,
+          child: LessonProgressScope(
+            controller: controller,
+            child: const LessonCatalogScreen(),
+          ),
+        ),
+      ),
+    );
+    DevGLessonHostScope.of(
+      tester.element(find.byType(LessonsScreen)),
+    ).startSourceLevel(1);
+    await tester.pump();
+
+    final host = DevGLessonHostScope.of(
+      tester.element(find.byType(LevelGamePage)),
+    );
+    await host.claimCompletion(
+      const LessonScoreStats(
+        lessonId: '1-1',
+        totalActivities: 5,
+        attempts: 5,
+        correctAnswers: 5,
+        mistakes: 0,
+        accuracy: 100,
+        bestAccuracy: 100,
+        replayCount: 0,
+        timeTakenMs: 30000,
+        completionDate: null,
+        completed: true,
+        activities: [],
+      ),
+    );
+    await host.continueToNextLesson!();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 350));
+
+    expect(learner.profile!.lessonProgress.activeLessonId, 'g1_u1_l7');
+    expect(find.byType(LevelGamePage), findsNothing);
+    expect(find.byType(LessonsScreen), findsOneWidget);
+    expect(
+      find.byKey(const Key('lesson-start-popup-play-button')),
+      findsOneWidget,
+    );
+    expect(find.byType(AppBottomTabNavigation), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('map-launched lesson continues into the Lessons gallery popup', (
+    tester,
+  ) async {
+    final learner = LearnerController();
+    await learner.createAndSave(name: 'Koka', grade: 1, energy: 60);
+    await learner.seedLessonProgress(activeLessonId: 'g1_u1_l1');
+    final controller = LessonProgressController(
+      learnerController: learner,
+      mapProgress: MapProgressController(),
+    );
+    addTearDown(controller.dispose);
+
+    await tester.pumpWidget(
+      LearnerScope(
+        controller: learner,
+        child: LessonProgressScope(
+          controller: controller,
+          child: const MaterialApp(
+            home: DevGLessonRunnerScreen(lessonId: 'g1_u1_l1'),
+          ),
+        ),
+      ),
+    );
+    DevGLessonHostScope.of(
+      tester.element(find.byType(LessonIntroPage)),
+    ).startSourceLevel(1);
+    await tester.pump();
+
+    final host = DevGLessonHostScope.of(
+      tester.element(find.byType(LevelGamePage)),
+    );
+    await host.claimCompletion(
+      const LessonScoreStats(
+        lessonId: '1-1',
+        totalActivities: 5,
+        attempts: 5,
+        correctAnswers: 5,
+        mistakes: 0,
+        accuracy: 100,
+        bestAccuracy: 100,
+        replayCount: 0,
+        timeTakenMs: 30000,
+        completionDate: null,
+        completed: true,
+        activities: [],
+      ),
+    );
+    await host.continueToNextLesson!();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+    await tester.pump(const Duration(milliseconds: 350));
+
+    expect(find.byType(LessonCatalogScreen), findsOneWidget);
+    expect(
+      find.byKey(const Key('lesson-start-popup-play-button')),
+      findsOneWidget,
+    );
+    expect(find.byType(AppBottomTabNavigation), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 }

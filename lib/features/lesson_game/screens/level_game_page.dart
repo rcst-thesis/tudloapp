@@ -25,6 +25,13 @@ import 'package:tudloapp/core/widgets/word_tooltip.dart';
 import 'package:tudloapp/features/energy/widgets/energy_indicator.dart';
 import 'package:tudloapp/features/lesson_game/widgets/reward_overlay.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_lesson_host_scope.dart';
+import 'package:tudloapp/core/navigation/fade_page_route.dart';
+import 'package:tudloapp/features/map/domain/map_location.dart' as tudlo_map;
+import 'package:tudloapp/features/map/domain/map_route_resolver.dart'
+    as tudlo_map;
+import 'package:tudloapp/features/map/presentation/screens/map_screen.dart'
+    as tudlo_map;
+import 'package:tudloapp/shared/widgets/sticker_press_button.dart';
 
 import 'flows/grade_3/grade_three_bantay_flow.dart';
 import 'flows/grade_3/grade_three_market_numbers_flow.dart';
@@ -565,12 +572,18 @@ class _LevelGamePageState extends State<LevelGamePage> {
     final durationLabel = _formatDuration(
       DateTime.now().difference(_levelStartedAt),
     );
+    final lessonOneResult =
+        AppData.selectedGradeLevel == GradeLevel.grade1 &&
+        AppData.unitForLevel(widget.level).number == 1 &&
+        AppData.lessonNumberForLevel(widget.level) == 1;
     showDialog(
       context: context,
+      useSafeArea: !lessonOneResult,
       barrierDismissible: false,
       barrierColor: TudloColors.ink.withValues(alpha: .62),
       builder: (_) => _LessonCompleteDialog(
         level: widget.level,
+        fullscreenResult: lessonOneResult,
         backgroundAsset: _lessonCompleteBackgroundAsset(widget.level),
         accuracy: accuracy,
         mistakes: scoreStats.mistakes,
@@ -579,11 +592,24 @@ class _LevelGamePageState extends State<LevelGamePage> {
         onBackToMap: () {
           _claimRewardsOnce();
           Navigator.pop(context);
-          unawaited(_returnToMapAfterPortraitRestore());
+          unawaited(
+            lessonOneResult
+                ? _finishLessonOneToGallery(openNextLesson: false)
+                : _returnToMapAfterPortraitRestore(),
+          );
         },
         onContinue: () async {
           _claimRewardsOnce();
           Navigator.pop(context);
+          if (lessonOneResult) {
+            await _finishLessonOneToGallery(openNextLesson: true);
+            return;
+          }
+          if (DevGLessonHostScope.maybeOf(context) != null) {
+            // A host owns what follows one of its lessons.
+            await _returnToMapAfterPortraitRestore();
+            return;
+          }
           if (widget.level >= AppData.maxLevel) {
             await _returnToMapAfterPortraitRestore();
             return;
@@ -661,6 +687,20 @@ class _LevelGamePageState extends State<LevelGamePage> {
       }
     }
     return null;
+  }
+
+  Future<void> _finishLessonOneToGallery({required bool openNextLesson}) async {
+    await _restorePortraitBeforePortraitRoute();
+    if (!mounted) return;
+    final host = DevGLessonHostScope.maybeOf(context);
+    if (host != null) {
+      final action = openNextLesson
+          ? host.continueToNextLesson
+          : host.exitToLessonsGallery;
+      await (action ?? host.exitAfterCompletion)();
+      return;
+    }
+    Navigator.of(context).pop();
   }
 
   LessonQuestion _questionFromQuizItem(QuizItem item) {
@@ -2343,6 +2383,7 @@ class _QuestionNumberBadge extends StatelessWidget {
 //scoreboard pop-up
 class _LessonCompleteDialog extends StatefulWidget {
   final int level;
+  final bool fullscreenResult;
   final String backgroundAsset;
   final int accuracy;
   final int mistakes;
@@ -2353,6 +2394,7 @@ class _LessonCompleteDialog extends StatefulWidget {
 
   const _LessonCompleteDialog({
     required this.level,
+    this.fullscreenResult = false,
     required this.backgroundAsset,
     required this.accuracy,
     required this.mistakes,
@@ -2383,6 +2425,10 @@ class _LessonCompleteDialogState extends State<_LessonCompleteDialog> {
     if (!_claimed) {
       _claimed = true;
     }
+    if (widget.fullscreenResult) {
+      unawaited(Future.sync(widget.onContinue));
+      return;
+    }
     if (showStreak) {
       setState(() => _showStreak = true);
       return;
@@ -2392,36 +2438,40 @@ class _LessonCompleteDialogState extends State<_LessonCompleteDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final content = AnimatedSwitcher(
+      duration: const Duration(milliseconds: 360),
+      switchInCurve: Curves.easeOutCubic,
+      switchOutCurve: Curves.easeInCubic,
+      child: _showStreak
+          ? _LessonStreakPage(
+              key: const ValueKey('streak'),
+              streakDays: AppData.streakDays,
+              onCommitted: widget.onContinue,
+              onBackToMap: widget.onBackToMap,
+            )
+          : _LessonResultPage(
+              key: const ValueKey('result'),
+              backgroundAsset: widget.backgroundAsset,
+              accuracy: widget.accuracy,
+              mistakes: widget.mistakes,
+              durationLabel: widget.durationLabel,
+              fullscreenResult: widget.fullscreenResult,
+              onBackToMap: widget.onBackToMap,
+              onContinue: _claimXp,
+            ),
+    );
+    if (widget.fullscreenResult) return SizedBox.expand(child: content);
     return Dialog(
       insetPadding: EdgeInsets.zero,
       backgroundColor: Colors.transparent,
-      child: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 360),
-        switchInCurve: Curves.easeOutCubic,
-        switchOutCurve: Curves.easeInCubic,
-        child: _showStreak
-            ? _LessonStreakPage(
-                key: const ValueKey('streak'),
-                streakDays: AppData.streakDays,
-                onCommitted: widget.onContinue,
-                onBackToMap: widget.onBackToMap,
-              )
-            : _LessonResultPage(
-                key: const ValueKey('result'),
-                backgroundAsset: widget.backgroundAsset,
-                accuracy: widget.accuracy,
-                mistakes: widget.mistakes,
-                durationLabel: widget.durationLabel,
-                onBackToMap: widget.onBackToMap,
-                onContinue: _claimXp,
-              ),
-      ),
+      child: content,
     );
   }
 }
 
 class _LessonResultPage extends StatelessWidget {
   final String backgroundAsset;
+  final bool fullscreenResult;
   final int accuracy;
   final int mistakes;
   final String durationLabel;
@@ -2431,6 +2481,7 @@ class _LessonResultPage extends StatelessWidget {
   const _LessonResultPage({
     super.key,
     required this.backgroundAsset,
+    this.fullscreenResult = false,
     required this.accuracy,
     required this.mistakes,
     required this.durationLabel,
@@ -2444,6 +2495,7 @@ class _LessonResultPage extends StatelessWidget {
     final bottom = MediaQuery.paddingOf(context).bottom;
     final top = MediaQuery.paddingOf(context).top;
     return SizedBox(
+      key: fullscreenResult ? const Key('lesson-one-result-screen') : null,
       width: size.width,
       height: size.height,
       child: Stack(
@@ -2451,19 +2503,25 @@ class _LessonResultPage extends StatelessWidget {
         children: [
           _LessonBackgroundAsset(asset: backgroundAsset),
           ColoredBox(color: TudloColors.ink.withValues(alpha: .48)),
-          Positioned(
-            left: 24,
-            top: top + 18,
-            child: _PresentationImageButton(
-              asset:
-                  'assets/images/level_game/lesson-game-assets/exit-page.png',
-              size: 54,
-              onTap: onBackToMap,
-              tooltip: 'Balik',
+          if (!fullscreenResult)
+            Positioned(
+              left: 24,
+              top: top + 18,
+              child: _PresentationImageButton(
+                asset:
+                    'assets/images/level_game/lesson-game-assets/exit-page.png',
+                size: 54,
+                onTap: onBackToMap,
+                tooltip: 'Balik',
+              ),
             ),
-          ),
           Padding(
-            padding: EdgeInsets.fromLTRB(24, top + 86, 24, 24 + bottom),
+            padding: EdgeInsets.fromLTRB(
+              24,
+              top + (fullscreenResult && size.height < 650 ? 40 : 86),
+              24,
+              (fullscreenResult ? 16 : 24) + bottom,
+            ),
             child: Column(
               children: [
                 Expanded(
@@ -2473,7 +2531,11 @@ class _LessonResultPage extends StatelessWidget {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const _ResultGoldStar(),
+                          _ResultGoldStar(
+                            maxSize: fullscreenResult && size.height < 650
+                                ? size.height * .23
+                                : null,
+                          ),
                           SizedBox(height: size.height * .035),
                           Text(
                             'Natapos mo na ang Leksyon!',
@@ -2517,24 +2579,66 @@ class _LessonResultPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: _ResultPrimaryButton(
-                        label: 'MAG BALIK SA MAPA',
-                        onTap: onBackToMap,
-                        outlined: true,
+                if (fullscreenResult)
+                  Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 352.295),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(
+                            width: double.infinity,
+                            child: StickerPressButton(
+                              key: const Key('lesson-result-gallery-button'),
+                              label: 'balik ta sa lessons gallery',
+                              onPressed: onBackToMap,
+                              frontColor: Colors.white,
+                              depthColor: const Color(0xFFCFCFCF),
+                              labelColor: const Color(0xFF1A1A1A),
+                              height: 48,
+                              borderRadius: 12,
+                              fontSize: 13,
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          SizedBox(
+                            width: double.infinity,
+                            child: StickerPressButton(
+                              key: const Key('lesson-result-continue-button'),
+                              label: 'padayunon ta',
+                              onPressed: () =>
+                                  unawaited(Future.sync(onContinue)),
+                              frontColor: Colors.white,
+                              depthColor: const Color(0xFFCFCFCF),
+                              labelColor: const Color(0xFF1A1A1A),
+                              height: 48,
+                              borderRadius: 12,
+                              fontSize: 13,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(width: 14),
-                    Expanded(
-                      child: _ResultPrimaryButton(
-                        label: 'PADAYUN KITA',
-                        onTap: onContinue,
+                  )
+                else
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _ResultPrimaryButton(
+                          label: 'MAG BALIK SA MAPA',
+                          onTap: onBackToMap,
+                          outlined: true,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: _ResultPrimaryButton(
+                          label: 'PADAYUN KITA',
+                          onTap: onContinue,
+                        ),
+                      ),
+                    ],
+                  ),
               ],
             ),
           ),
@@ -2666,13 +2770,18 @@ class _ResultGoldStar extends StatelessWidget {
   static const _asset =
       'assets/images/level_game/lesson-game-assets/Tudlo_Reward_Star_Rays_Exact.svg';
 
-  const _ResultGoldStar();
+  final double? maxSize;
+
+  const _ResultGoldStar({this.maxSize});
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
     final height = MediaQuery.sizeOf(context).height;
-    final size = math.min(width * .84, height * .34).clamp(260.0, 430.0);
+    final naturalSize = math.min(width * .84, height * .34).clamp(260.0, 430.0);
+    final size = maxSize == null
+        ? naturalSize
+        : math.min(naturalSize, maxSize!);
     return SizedBox(
       width: size,
       height: size,

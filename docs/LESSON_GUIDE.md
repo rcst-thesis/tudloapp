@@ -48,6 +48,20 @@ first completion increments `lessonsFinished` and
 counter or a second daily streak increment. Energy remains an existing
 10–100 display/cap and is never spent or recharged by this feature.
 
+Home's sticker tray reads saved completion rewards through
+`LessonProgressScope`. Each claimed reward reveals its matching Home thumbnail;
+an unfinished lesson leaves that thumbnail covered. Grade 1 Unit 1 Lesson 1
+shows the same School thumbnail artwork on its final reward screen.
+On that screen, tapping the smaller School sticker claims the reward and
+continues; it has no separate OK button. The sticker gently floats while
+ambient animation is enabled and stays still under reduced motion. The reward
+label sits 30 logical pixels above the resting sticker, with a smaller sticker
+on short screens to preserve that gap.
+After the sticker is tapped, Grade 1 Unit 1 Lesson 1 uses a full-screen result
+view. Its two vertically stacked white sticker-press buttons return to the
+Lessons gallery or open the next lesson's start popup. The reward claim is
+saved before either route change.
+
 ## Map boundary
 
 The progress controller clears the prior event override, then creates exactly
@@ -67,7 +81,10 @@ taps open that location's filtered source catalogue, where completed lessons
 remain replayable. House shows the Home-or-House-lessons dialog only without
 an active override. Map launches return to Map because the intro/session are
 pushed above it. Home and catalog launches return to their original route for
-the same reason.
+the same reason. The Lessons tab hides its bottom navigation while an activity
+is running and restores it when the child exits to the lesson cards.
+Home's lesson-preview start button opens the selected lesson's start popup on
+the Lessons tab; that popup starts the same full-screen activity as a card tap.
 
 ## Content, artwork, and audio
 

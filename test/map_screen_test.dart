@@ -95,4 +95,27 @@ void main() {
     expect(find.byKey(const Key('map-screen')), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('requested expanded entry uses the expand button view', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(800, 360);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      const MaterialApp(home: MapScreen(startExpanded: true)),
+    );
+    await tester.pump();
+
+    expect(find.byKey(const Key('map-exit-landscape-button')), findsOneWidget);
+    expect(find.byKey(const Key('map-expand-button')), findsNothing);
+    expect(find.byKey(const Key('home-bottom-navigation')), findsNothing);
+
+    await tester.tap(find.byKey(const Key('map-exit-landscape-button')));
+    await tester.pump();
+    expect(find.byKey(const Key('map-expand-button')), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
 }

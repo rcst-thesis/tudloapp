@@ -14,6 +14,7 @@ import 'package:tudloapp/features/learner/domain/learner_scope.dart';
 import 'package:tudloapp/features/lesson/domain/lesson_definition.dart';
 import 'package:tudloapp/features/lesson/domain/lesson_progress_controller.dart';
 import 'package:tudloapp/features/lesson/presentation/lesson_intro_screen.dart';
+import 'package:tudloapp/features/lesson/presentation/lesson_catalog_screen.dart';
 import 'package:tudloapp/features/placeholder/presentation/placeholder_screen.dart';
 import 'package:tudloapp/features/settings/presentation/settings_screen.dart';
 import 'package:tudloapp/shared/audio/audio_assets.dart';
@@ -109,6 +110,10 @@ class _HomeScreenState extends State<HomeScreen> {
     context,
   ).push(FadePageRoute<void>(page: LessonIntroScreen(lessonId: lessonId)));
 
+  void _openLessonStartPopup(String lessonId) => Navigator.of(context).push(
+    FadePageRoute<void>(page: LessonCatalogScreen(initialLessonId: lessonId)),
+  );
+
   void _openStickerScreen() => Navigator.of(context).push(
     FadePageRoute<void>(
       page: const PlaceholderScreen(
@@ -173,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Navigator.of(context).pop();
         final id = lesson.lessonId;
         if (id != null && lesson.status != HomeLessonStatus.locked) {
-          _openLessonIntro(id);
+          _openLessonStartPopup(id);
         } else {
           _openLessons();
         }
@@ -198,6 +203,12 @@ class _HomeScreenState extends State<HomeScreen> {
             wordId != null &&
             (profile?.favoritedWords.contains(wordId) ?? false),
         lessonPreviews: _homeLessonPreviews(),
+        earnedRewardAssets: LessonProgressScope.of(context)
+            .progress
+            .completions
+            .values
+            .map((completion) => completion.rewardAsset)
+            .toSet(),
         lessonsCollapsed: _lessonsCollapsed,
         onOpenSettings: _openSettings,
         onOpenMap: _openMap,

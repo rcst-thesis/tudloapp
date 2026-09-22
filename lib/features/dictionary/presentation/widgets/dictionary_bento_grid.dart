@@ -28,35 +28,35 @@ class DictionaryBentoGrid extends StatelessWidget {
     final hero = entries.first;
     final rest = entries.length > 1 ? entries.sublist(1) : <DictionaryEntry>[];
 
-    return DecoratedBox(
-      key: const Key('dictionary-bento-grid'),
-      decoration: BoxDecoration(
-        color: DictionaryColors.background,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        children: [
-          _BentoCompartment(entry: hero, height: 150, onTap: onTap),
-          if (rest.isNotEmpty) ...[
-            Container(height: 1.5, color: _dividerColor),
-            IntrinsicHeight(
-              child: Row(
-                children: [
-                  for (var i = 0; i < rest.length; i++) ...[
-                    if (i > 0) Container(width: 1.5, color: _dividerColor),
-                    Expanded(
-                      child: _BentoCompartment(
-                        entry: rest[i],
-                        height: 90,
-                        onTap: onTap,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: DecoratedBox(
+        key: const Key('dictionary-bento-grid'),
+        decoration: const BoxDecoration(color: DictionaryColors.background),
+        child: Column(
+          children: [
+            _BentoCompartment(entry: hero, height: 150, onTap: onTap),
+            if (rest.isNotEmpty) ...[
+              Container(height: 1.5, color: _dividerColor),
+              IntrinsicHeight(
+                child: Row(
+                  children: [
+                    for (var i = 0; i < rest.length; i++) ...[
+                      if (i > 0) Container(width: 1.5, color: _dividerColor),
+                      Expanded(
+                        child: _BentoCompartment(
+                          entry: rest[i],
+                          height: 90,
+                          onTap: onTap,
+                        ),
                       ),
-                    ),
+                    ],
                   ],
-                ],
+                ),
               ),
-            ),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }
@@ -89,11 +89,10 @@ class _BentoCompartment extends StatelessWidget {
           // set here -- this text fallback only guards against that
           // invariant ever slipping.
           child: frontCardImage != null
-              ? Padding(
-                  padding: const EdgeInsets.all(6),
+              ? ClipRect(
                   child: DictionaryAssetImage(
                     path: frontCardImage,
-                    fit: BoxFit.contain,
+                    fit: BoxFit.cover,
                   ),
                 )
               : Center(
