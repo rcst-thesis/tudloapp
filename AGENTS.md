@@ -151,10 +151,26 @@ Do not replace a working Flutter interaction with Rive without approval.
 
 ```shell
 flutter pub get
+dart run rive_native:setup --platform <linux|macos|windows>
 flutter run
 dart format --output=none --set-exit-if-changed lib test
 flutter analyze
 flutter test
+```
+
+`rive_native:setup` downloads the host's native Rive library. Skip it and
+every widget test that mounts a Rive scene fails with
+`Failed to load dynamic library 'librive_native_plugin.so'` -- over a
+hundred tests across Home, Settings, Me, Map and the lesson host. It is a
+one-time step per machine, not per checkout.
+
+On a distro without Perl's `shasum` (Fedora, for example), that setup step
+dies in its checksum check with `ProcessException: No such file or
+directory: shasum`. Put a shim early on `PATH` that forwards to coreutils:
+
+```shell
+printf '#!/bin/sh\nexec "sha${2}sum" "$3"\n' > /usr/local/bin/shasum
+chmod +x /usr/local/bin/shasum
 ```
 
 Focused Home checks:
