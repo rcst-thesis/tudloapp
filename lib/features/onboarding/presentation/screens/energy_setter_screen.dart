@@ -231,6 +231,8 @@ class _EnergySetterScreenState extends State<EnergySetterScreen> {
                           Positioned(
                             left: 30,
                             top: 807,
+                            width: 352,
+                            height: 76,
                             child: _EnergyNextButton(onPressed: _continue),
                           ),
                         ],
@@ -511,6 +513,8 @@ class _EnergyNextButton extends StatelessWidget {
     return RiveLongButton(
       key: const Key('energy-next-button'),
       label: 'next',
+      buttonHeight: 76,
+      fallbackFontSize: 21,
       onPressed: onPressed,
     );
   }
