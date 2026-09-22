@@ -29,6 +29,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
   /// show before cutting it off with "..." -- the button is a fixed-size
   /// Rive graphic, not a text field that can wrap or shrink to fit.
   static const _maxContinueNameLength = 10;
+  static const _menuButtonHeight = 70.0;
 
   LearnerProfile? _lastUsedProfile;
   var _resolvedLastUsed = false;
@@ -161,7 +162,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   Positioned(
                     key: const Key('main-menu-logo'),
                     left: 82,
-                    top: 280,
+                    top: 252,
                     width: 248,
                     height: 279,
                     child: Image.asset(
@@ -174,7 +175,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   Positioned(
                     key: const Key('main-menu-footer'),
                     left: 30,
-                    top: 820,
+                    top: 824,
                     width: 352,
                     height: 42,
                     child: Image.asset(
@@ -196,33 +197,36 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   ),
                   Positioned(
                     left: 30,
-                    top: 629,
+                    top: 594,
                     width: 352.295,
-                    height: RiveLongButton.height,
+                    height: _menuButtonHeight,
                     child: RiveLongButton(
                       label: 'start new koka',
+                      buttonHeight: _menuButtonHeight,
                       onPressed: () => _open(context, const NameScreen()),
                     ),
                   ),
                   Positioned(
                     left: 30,
-                    top: 699,
+                    top: 670,
                     width: 352,
-                    height: RiveLongButton.height,
+                    height: _menuButtonHeight,
                     child: RiveLongButton(
                       label: _continueLabel(context),
                       enabled: _canContinue(context),
+                      buttonHeight: _menuButtonHeight,
                       soundEffectAsset: TudloAudioAssets.mapUnlockedSoundEffect,
                       onPressed: () => unawaited(_continue(context)),
                     ),
                   ),
                   Positioned(
                     left: 30,
-                    top: 763,
+                    top: 746,
                     width: 352,
-                    height: RiveLongButton.height,
+                    height: _menuButtonHeight,
                     child: RiveLongButton(
                       label: 'load',
+                      buttonHeight: _menuButtonHeight,
                       onPressed: () => unawaited(_openLoad(context)),
                     ),
                   ),
