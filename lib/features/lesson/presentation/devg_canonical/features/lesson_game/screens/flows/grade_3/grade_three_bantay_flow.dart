@@ -6,14 +6,18 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/services/app_audio_service.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/theme/app_theme.dart';
+import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/widgets/animated_point_finger.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/widgets/language_toggle.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/widgets/mascot_widget.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_canonical/features/lesson_game/widgets/reward_overlay.dart';
 
 const _bantayRoot =
     'assets/images/level_game/grade3/G3_U2_L2.1_Ang_Nadula_nga_Ido_SVG_Assets';
+const _bantayUpdatedRoot = '$_bantayRoot/updated';
 const _bantayBackgroundRoot =
     'assets/images/level_game/backgrounds/grade3_landscape';
+const _bantayPointFinger =
+    'assets/images/level_game/lesson-game-assets/point-finger.png';
 const _bantayEvents = ['missing', 'clue', 'found'];
 
 enum _BantayStage {
@@ -53,20 +57,19 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
   _BantayStage _stage = _BantayStage.house;
   final Set<String> _searched = {};
   int _footprints = 0;
-  bool _clue = false, _found = false, _collected = false;
+  bool _clue = false, _collected = false;
   bool _ready = false, _busy = true;
   bool _sequenceValidated = false;
   final Set<int> _verifiedSlots = {};
   final List<String?> _slots = List.filled(3, null);
-  final List<String> _trayOrder = [..._bantayEvents]..shuffle();
+  final List<String> _trayOrder = const ['found', 'clue', 'missing'];
   String? _selected;
+  String? _activeMarketDialogueClip;
   Set<String> _wiggling = {};
   Set<String> _nudging = {};
   int _voiceGeneration = 0;
   Set<String> _voiceAssets = {};
   late final String _rewardStickerAsset = widget.rewardStickerAsset;
-  bool get _sequenceCorrect =>
-      _slots.indexed.every((e) => e.$2 == _bantayEvents[e.$1]);
   String get _location => switch (_stage) {
     _BantayStage.house => 'House',
     _BantayStage.schoolMap || _BantayStage.classroom => 'School',
@@ -123,13 +126,21 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
   // Semantic clip keys avoid assigning a numbered recording to the wrong line.
   Future<void> _line(String key, String text) async {
     if (!AppAudioService.instance.voiceOverEnabled) return;
-    final candidates = [
-      'assets/audio/VO-final/grade3/G3U2L2_1_$key.wav',
-      'assets/audio/VO-final/grade3/G3U2L2_1_$key.WAV',
-    ];
+    final numbered = int.tryParse(key) != null;
+    final candidates = numbered
+        ? [
+            'assets/audio/VO-final/grade3/Gr_3_Les_2_1_$key.wav',
+            'assets/audio/VO-final/grade3/Gr_3_Les_2_1_$key.WAV',
+          ]
+        : [
+            'assets/audio/VO-final/grade3/G3U2L2_1_$key.wav',
+            'assets/audio/VO-final/grade3/G3U2L2_1_$key.WAV',
+          ];
     final asset = candidates.where(_voiceAssets.contains).firstOrNull;
     if (asset != null) {
       await AppAudioService.instance.playVoiceAssets([asset.substring(7)]);
+    } else if (numbered) {
+      return;
     } else if (mounted) {
       await TudloVoiceButton.speak(context, text, hiligaynon: true);
     }
@@ -149,58 +160,62 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
     try {
       for (final line in lines) {
         if (!mounted || generation != _voiceGeneration) return;
+        final marketDialogueClip = _marketDialogueText(line.$1) == null
+            ? null
+            : line.$1;
+        if (_activeMarketDialogueClip != marketDialogueClip && mounted) {
+          setState(() => _activeMarketDialogueClip = marketDialogueClip);
+        }
         await _line(line.$1, line.$2);
+        if (mounted &&
+            generation == _voiceGeneration &&
+            _activeMarketDialogueClip == marketDialogueClip) {
+          setState(() => _activeMarketDialogueClip = null);
+        }
       }
     } finally {
       await AppAudioService.instance.restoreBackgroundVolume();
       if (mounted && generation == _voiceGeneration) {
-        setState(() => _busy = false);
+        setState(() {
+          _activeMarketDialogueClip = null;
+          _busy = false;
+        });
       }
     }
   }
 
-  List<(String, String)> _stageVoiceLines() => switch (_stage) {
-    _BantayStage.house => [
-      ('S01_D', 'Abyan, wala diri si Bantay! Buligan mo ako pangita sa iya?'),
-      ('S01_I', 'I-tap ang Pangitaon ta para magsugod.'),
-    ],
-    _BantayStage.schoolMap => [
-      ('S02_D', 'I-tap ang School. Basi ara siya sa classroom.'),
-      (
-        'S02_I',
-        'I-tap ang School sa mapa kag usisaon ang tatlo ka lugar sa classroom.',
-      ),
-    ],
-    _BantayStage.marketMap => [
-      ('S03_D', 'Pamangkuton ta ang tindera.'),
-      ('S03_I', 'I-tap ang Market sa mapa, dayon i-tap ang tindera.'),
-    ],
-    _BantayStage.farmMap => [
-      ('S04_D', 'May footprints! Sunda naton sila.'),
-      ('S04_I', 'I-tap ang Farm kag sundon ang tatlo ka footprints.'),
-    ],
-    _BantayStage.found => [('S06_D', 'Salamat! Nakita naton si Bantay!')],
-    _BantayStage.model => [('S05_D', 'Ano ang una, sunod, kag katapusan?')],
-    _BantayStage.sequence => [
-      ('S05_I', 'Ihan-ay ang nadula, clue, kag nakita.'),
-    ],
-    _BantayStage.reward => [('S06_I', 'I-tap ang Story Detective sticker.')],
-    _BantayStage.market =>
-      _clue
-          ? [('VENDOR', 'Tan-awa sa uma!')]
-          : [('S03_I', 'I-tap ang Market sa mapa, dayon i-tap ang tindera.')],
-    _BantayStage.classroom => [
-      (
-        'S02_I',
-        'I-tap ang School sa mapa kag usisaon ang tatlo ka lugar sa classroom.',
-      ),
-    ],
-    _BantayStage.farm => [
-      ('S04_I', 'I-tap ang Farm kag sundon ang tatlo ka footprints.'),
-    ],
+  String? _marketDialogueText(String clip) => switch (clip) {
+    '13' => 'Maayong Adlaw! May nakita ka bala nga ido nga nagalaw diri?',
+    '14' => 'Huo, may nakita ako nga ido nga nagadalan pakadto sa uma.',
+    '15' => 'Tan-awa ang mga marka lapit sa dalan.',
+    '16' => 'Salamat!',
+    _ => null,
   };
 
-  Future<void> _voiceForStage() => _speak(_stageVoiceLines());
+  List<(String, String)> _stageVoiceLines() => switch (_stage) {
+    _BantayStage.house => [('2', '')],
+    _BantayStage.schoolMap => [('3', '')],
+    _BantayStage.marketMap => [('10', '')],
+    _BantayStage.farmMap => [('19', '')],
+    _BantayStage.found => [('26', ''), ('27', '')],
+    _BantayStage.model => [('28', ''), ('29', '')],
+    _BantayStage.sequence => [('30', '')],
+    _BantayStage.reward => [('34', '')],
+    _BantayStage.market => _clue ? [('17', '')] : [('11', ''), ('12', '')],
+    _BantayStage.classroom => [('4', ''), ('5', '')],
+    _BantayStage.farm => [('20', ''), ('21', '')],
+  };
+
+  Future<void> _voiceForStage() async {
+    final stage = _stage;
+    await _speak(_stageVoiceLines());
+    if (!mounted || _stage != stage) return;
+    if (stage != _BantayStage.found && stage != _BantayStage.model) return;
+    setState(() => _busy = false);
+    await _go(
+      stage == _BantayStage.found ? _BantayStage.model : _BantayStage.sequence,
+    );
+  }
 
   Future<void> _replayInstruction() async {
     final lines = _stageVoiceLines();
@@ -238,25 +253,56 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
       await _nudge(id);
       return;
     }
+    if (id == 'classroom_door' &&
+        !(_searched.contains('classroom_desk') &&
+            _searched.contains('classroom_window'))) {
+      await _speak([('8', '')]);
+      await _nudge(id);
+      return;
+    }
     setState(() {
       _busy = true;
       _searched.add(id);
     });
     await _save();
     await AppAudioService.instance.playCorrect();
+    if (_stage == _BantayStage.classroom) {
+      final clips = switch (id) {
+        'classroom_desk' => const [('6', '')],
+        'classroom_window' => const [('7', '')],
+        'classroom_door' => const [('8', '')],
+        _ => const <(String, String)>[],
+      };
+      if (clips.isNotEmpty) await _speak(clips);
+    }
     await Future<void>.delayed(const Duration(milliseconds: 400));
+    if (mounted && id == 'classroom_door') {
+      setState(() => _busy = false);
+      await _go(_BantayStage.marketMap);
+      return;
+    }
     if (mounted) setState(() => _busy = false);
   }
 
   Future<void> _vendor() async {
     if (_busy || _clue) return;
-    await _speak([('S03_D', 'Pamangkuton ta ang tindera.')]);
+    setState(() {
+      _busy = true;
+      _selected = 'koka_hi';
+    });
+    await _speak([('13', '')]);
+    if (!mounted) return;
+    setState(() {
+      _busy = true;
+      _selected = 'vendor_reply';
+    });
+    await _speak([('14', '')]);
     if (!mounted) return;
     setState(() {
       _busy = true;
       _selected = 'vendor';
     });
-    await _speak([('VENDOR', 'Tan-awa sa uma!')]);
+    await _speak([('15', ''), ('16', ''), ('17', '')]);
     if (!mounted) return;
     setState(() {
       _busy = true;
@@ -265,37 +311,54 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
     await _save();
     await Future<void>.delayed(const Duration(milliseconds: 450));
     if (mounted) {
-      setState(() {
-        _busy = false;
-        _selected = null;
-      });
+      setState(() => _busy = false);
+      await _go(_BantayStage.farmMap);
     }
+  }
+
+  Future<void> _marketOutsideTap() async {
+    if (_busy || _clue || _stage != _BantayStage.market) return;
+    await _speak([('18', '')]);
   }
 
   Future<void> _footprint(int index) async {
     if (_busy) return;
     if (index != _footprints) {
+      await _speak([('25', '')]);
       await _nudge('footprint_$index');
       return;
     }
+    final nextCount = _footprints + 1;
     setState(() {
       _busy = true;
-      _footprints++;
+      _footprints = nextCount;
     });
     await _save();
     await AppAudioService.instance.playCorrect();
+    await _speak([
+      (
+        switch (nextCount) {
+          1 => '22',
+          2 => '23',
+          _ => '24',
+        },
+        '',
+      ),
+    ]);
     await Future<void>.delayed(const Duration(milliseconds: 450));
     if (!mounted) return;
     if (_footprints == 3) {
-      setState(() {
-        _found = true;
-        _stage = _BantayStage.found;
-      });
+      setState(() => _stage = _BantayStage.found);
       await _save();
       await _voiceForStage();
     } else {
       setState(() => _busy = false);
     }
+  }
+
+  Future<void> _wrongFootprintTap() async {
+    if (_busy || _stage != _BantayStage.farm) return;
+    await _speak([('25', '')]);
   }
 
   Future<void> _place(String id, int index) async {
@@ -310,6 +373,9 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
       _selected = null;
     });
     await _save();
+    if (!_slots.contains(null)) {
+      if (mounted) await _checkSequence();
+    }
   }
 
   Future<void> _checkSequence() async {
@@ -318,30 +384,42 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
         .where((e) => e.$2 != _bantayEvents[e.$1])
         .map((e) => e.$2!)
         .toSet();
-    _verifiedSlots.addAll(
-      _slots.indexed.where((e) => e.$2 == _bantayEvents[e.$1]).map((e) => e.$1),
-    );
+    _verifiedSlots
+      ..clear()
+      ..addAll(
+        _slots.indexed
+            .where((e) => e.$2 == _bantayEvents[e.$1])
+            .map((e) => e.$1),
+      );
     if (misplaced.isEmpty) {
       setState(() {
         _busy = true;
         _sequenceValidated = true;
       });
       await _save();
+      await _speak([('31', ''), ('32', '')]);
+      if (!mounted) return;
       await AppAudioService.instance.playCorrect();
       await Future<void>.delayed(const Duration(milliseconds: 500));
-      if (mounted) setState(() => _busy = false);
+      if (mounted) {
+        setState(() => _busy = false);
+        await _go(_BantayStage.reward);
+      }
     } else {
       setState(() {
         _busy = true;
         _wiggling = misplaced;
       });
-      await _speak([('RETRY', 'Hmmm, hindi amo na.')]);
+      await _speak([('33', '')]);
+      if (!mounted) return;
+      await Future<void>.delayed(const Duration(milliseconds: 250));
       if (!mounted) return;
       setState(() {
         for (var i = 0; i < 3; i++) {
           if (misplaced.contains(_slots[i])) _slots[i] = null;
         }
         _wiggling = {};
+        _verifiedSlots.clear();
         _busy = false;
       });
       await _save();
@@ -361,8 +439,16 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
     if (mounted) setState(() => _busy = false);
   }
 
-  Widget _asset(String path) =>
-      SvgPicture.asset('$_bantayRoot/$path', fit: BoxFit.contain);
+  Widget _asset(String path) {
+    final asset = path.startsWith('updated/')
+        ? '$_bantayUpdatedRoot/${path.substring('updated/'.length)}'
+        : '$_bantayRoot/$path';
+    if (asset.toLowerCase().endsWith('.png')) {
+      return Image.asset(asset, fit: BoxFit.contain);
+    }
+    return SvgPicture.asset(asset, fit: BoxFit.contain);
+  }
+
   Widget _at(double x, double y, double w, double h, Widget child) =>
       Positioned(left: x, top: y, width: w, height: h, child: child);
   Widget _text(String text, {double size = 25}) => Center(
@@ -390,82 +476,66 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
     ),
     child: child,
   );
+
+  Widget _prompt(String text) => _at(
+    96,
+    56,
+    768,
+    64,
+    Container(
+      padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 10),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFFFAE7).withValues(alpha: .96),
+        borderRadius: BorderRadius.circular(26),
+      ),
+      child: _text(text, size: 25),
+    ),
+  );
+
   Widget _button(String label, VoidCallback action) => ElevatedButton(
     onPressed: _busy ? null : action,
     style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.lightBlue,
+      elevation: 4,
+      shadowColor: Colors.black.withValues(alpha: .2),
+      backgroundColor: const Color(0xFF1BA7F2),
       foregroundColor: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      disabledBackgroundColor: const Color(0xFF1BA7F2).withValues(alpha: .65),
+      disabledForegroundColor: Colors.white.withValues(alpha: .75),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18),
+        side: const BorderSide(color: Colors.white, width: 4),
+      ),
     ),
     child: Text(
       label,
       style: const TextStyle(
         fontFamily: 'Baloo2',
-        fontSize: 24,
+        fontSize: 30,
         fontWeight: FontWeight.w800,
       ),
     ),
   );
-  Widget _next(_BantayStage next) =>
-      _at(660, 442, 260, sixty, _button('SUNOD', () => unawaited(_go(next))));
-  static const double sixty = 60;
 
-  Widget _event(String id, {bool correct = false}) {
+  Widget _bottomAction(String label, VoidCallback action) =>
+      _at(156, 458, 648, 64, _button(label, action));
+
+  Widget _event(String id, {bool correct = false, bool framed = true}) {
     final image = switch (id) {
-      'missing' => 'props/Dog_Bed_Empty.svg',
-      'clue' => 'people/Vendor_Female_Pointing.svg',
-      _ => 'animals/Bantay_Idle.svg',
+      'missing' => 'updated/NADULA_Card.png',
+      'clue' => 'updated/CLUE_Card.png',
+      _ => 'updated/NAKITA_Card.png',
     };
-    return _panel(
-      Column(
-        children: [
-          Text(
-            switch (id) {
-              'missing' => 'NADULA',
-              'clue' => 'CLUE',
-              _ => 'NAKITA',
-            },
-            style: const TextStyle(
-              fontFamily: 'Baloo2',
-              fontSize: 22,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          Expanded(
-            child: Stack(
-              children: [
-                if (id != 'clue')
-                  Positioned.fill(
-                    child: SvgPicture.asset(
-                      '$_bantayBackgroundRoot/${id == 'missing' ? 'HospitalLandscape-1 1.svg' : 'FarmLandscape 1.svg'}',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                Positioned.fill(child: _asset(image)),
-                if (id == 'clue')
-                  Positioned(
-                    right: 0,
-                    bottom: 0,
-                    width: 65,
-                    height: 65,
-                    child: _asset('clues/Farm_Clue_Card.svg'),
-                  ),
-                if (id == 'missing')
-                  Positioned(
-                    right: 0,
-                    bottom: 0,
-                    width: 60,
-                    height: 40,
-                    child: _asset('props/Dog_Bowl.svg'),
-                  ),
-              ],
-            ),
-          ),
-        ],
-      ),
-      correct: correct,
-    );
+    if (!framed) return _asset(image);
+    return _panel(_asset(image), correct: correct);
   }
+
+  Widget _grayEvent(String id) => Opacity(
+    opacity: .72,
+    child: ColorFiltered(
+      colorFilter: const ColorFilter.mode(Color(0xFFA8A8A8), BlendMode.srcIn),
+      child: _event(id, framed: false),
+    ),
+  );
 
   Widget _hotspot(
     String id,
@@ -474,39 +544,67 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
     double y,
     double w,
     double h,
-  ) => _at(
-    x,
-    y,
-    w,
-    h,
-    _BantayPulse(
-      active: !_searched.contains(id) || _nudging.contains(id),
-      wiggle: _nudging.contains(id),
-      child: GestureDetector(
-        onTap: () => unawaited(_search(id)),
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: _searched.contains(id)
-                  ? Colors.green
-                  : const Color(0xFFFFD447),
-              width: 3,
+  ) {
+    final searched = _searched.contains(id);
+    return _at(
+      x,
+      y + 16,
+      w,
+      h,
+      _BantayPulse(
+        active: false,
+        wiggle: _nudging.contains(id),
+        child: GestureDetector(
+          onTap: () => unawaited(_search(id)),
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            color: Colors.transparent,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  top: 0,
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 10,
+                    ),
+                    decoration: BoxDecoration(
+                      color: searched
+                          ? const Color.fromARGB(255, 255, 0, 0)
+                          : Colors.white.withValues(alpha: .94),
+                      borderRadius: BorderRadius.circular(18),
+                      border: searched
+                          ? null
+                          : Border.all(color: Colors.lightBlue, width: 3),
+                    ),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        label,
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontFamily: 'Baloo2',
+                          fontSize: 22,
+                          height: 1,
+                          fontWeight: FontWeight.w800,
+                          color: searched ? Colors.white : TudloColors.ink,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-          child: Column(
-            children: [
-              _panel(_text(label, size: 22)),
-              const Spacer(),
-              if (_searched.contains(id))
-                const Icon(Icons.check_circle, color: Colors.green, size: 48),
-            ],
           ),
         ),
       ),
-    ),
-  );
+    );
+  }
 
   List<Widget> _scene() {
     final map = [
@@ -518,7 +616,7 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
       final active = _location;
       const names = ['House', 'School', 'Market', 'Farm'];
       return [
-        _at(200, 86, 560, sixty, _panel(_text('I-tap ang $active.'))),
+        _prompt('I-tap ang $active.'),
         for (final entry in names.indexed)
           _at(
             160 + entry.$1 * 186,
@@ -573,174 +671,191 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
     }
     return switch (_stage) {
       _BantayStage.house => [
+        _prompt('Abyan, wala diri si Bantay! Buligan mo ako pangita sa iya?'),
         _at(
-          285,
-          96,
-          580,
-          100,
-          _panel(
-            _text(
-              'Abyan, wala diri si Bantay!\nBuligan mo ako pangita sa iya?',
-            ),
-          ),
+          330,
+          245,
+          350,
+          180,
+          _asset('updated/Bantay_Missing_White_Outline.png'),
         ),
-        _at(330, 285, 300, 120, _asset('props/Dog_Bed_Empty.svg')),
-        _at(640, 328, 110, 80, _asset('props/Dog_Bowl.svg')),
-        _at(
-          490,
-          442,
-          390,
-          sixty,
-          _button('PANGITAON TA', () => unawaited(_go(_BantayStage.schoolMap))),
+        _bottomAction(
+          'PANGITAON TA',
+          () => unawaited(_go(_BantayStage.schoolMap)),
         ),
       ],
       _BantayStage.classroom => [
-        _at(
-          250,
-          85,
-          600,
-          70,
-          _panel(
-            _text(
-              _searched.length == 3
-                  ? 'Wala siya diri. Pamangkuton ta ang tindera.'
-                  : 'Pangitaa si Bantay - ${_searched.length}/3',
-            ),
-          ),
+        _prompt(
+          _searched.length == 3
+              ? 'Wala siya diri. Pamangkuton ta ang tindera.'
+              : 'Pangitaa si Bantay - ${_searched.length}/3',
         ),
-        _hotspot('classroom_desk', 'Lamesa', 270, 265, 185, 140),
-        _hotspot('classroom_bag', 'Bag', 500, 280, 140, 140),
-        _hotspot('classroom_door', 'Pultahan', 770, 195, 155, 215),
-        if (_searched.length == 3) _next(_BantayStage.marketMap),
+        _hotspot('classroom_desk', 'Lamesa', 214, 218, 245, 132),
+        _hotspot('classroom_window', 'Bintana', 535, 112, 245, 160),
+        _hotspot('classroom_door', 'Purtahan', 800, 132, 132, 230),
       ],
       _BantayStage.market => [
         _at(
-          280,
-          90,
-          550,
-          70,
-          _panel(
-            _text(
-              _clue || _selected == 'vendor'
-                  ? 'Tan-awa sa uma!'
-                  : 'I-tap ang tindera.',
-            ),
+          0,
+          0,
+          960,
+          540,
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () => unawaited(_marketOutsideTap()),
           ),
         ),
+        _prompt(
+          _activeMarketDialogueClip != null
+              ? 'Pamati anay.'
+              : _clue || _selected == 'vendor' || _selected == 'vendor_reply'
+              ? 'Tan-awa sa uma!'
+              : 'I-tap ang tindera.',
+        ),
         _at(
-          570,
-          180,
-          285,
-          235,
+          462,
+          160,
+          510,
+          360,
           _BantayPulse(
-            active: !_clue,
+            active: false,
             child: GestureDetector(
               onTap: () => unawaited(_vendor()),
               child: _asset(
-                'people/Vendor_Female_${_clue || _selected == 'vendor' ? 'Pointing' : 'Idle'}.svg',
+                'updated/Market_Stall_With_Vendor_No_Green_Circle.png',
               ),
             ),
           ),
         ),
-        if (_clue)
+        if (_activeMarketDialogueClip == '13' ||
+            _activeMarketDialogueClip == '16')
           _at(
-            300,
-            305,
-            180,
-            135,
-            AnimatedScale(
-              scale: _clue ? 1 : .5,
-              duration: const Duration(milliseconds: 450),
-              child: _panel(_asset('clues/Farm_Clue_Card.svg'), correct: true),
+            310,
+            182,
+            265,
+            94,
+            _MarketDialogueBubble(
+              text: _marketDialogueText(_activeMarketDialogueClip!)!,
+              alignRight: false,
             ),
           ),
-        if (_clue) _next(_BantayStage.farmMap),
+        if (_activeMarketDialogueClip == '14' ||
+            _activeMarketDialogueClip == '15')
+          _at(
+            560,
+            108,
+            300,
+            94,
+            _MarketDialogueBubble(
+              text: _marketDialogueText(_activeMarketDialogueClip!)!,
+              alignRight: true,
+            ),
+          ),
+        if (!_clue)
+          _at(
+            672,
+            362,
+            82,
+            82,
+            IgnorePointer(
+              child: AnimatedPointFinger(
+                asset: _bantayPointFinger,
+                size: 74,
+                angle: -.14,
+                tapOffset: const Offset(8, -4),
+              ),
+            ),
+          ),
       ],
       _BantayStage.farm => [
         _at(
-          260,
-          90,
-          570,
-          70,
-          _panel(_text('Sunda ang footprints - $_footprints/3')),
+          0,
+          0,
+          960,
+          540,
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () => unawaited(_wrongFootprintTap()),
+          ),
         ),
+        _prompt('Sunda ang footprints - $_footprints/3'),
         for (var i = 0; i < 3; i++)
           _at(
-            310 + i * 185,
-            335 - i * 18,
-            125,
-            115,
+            255 + i * 190,
+            356,
+            155,
+            145,
             _BantayPulse(
-              active: i == _footprints || _nudging.contains('footprint_$i'),
+              active: _nudging.contains('footprint_$i'),
               wiggle: _nudging.contains('footprint_$i'),
               child: GestureDetector(
                 onTap: () => unawaited(_footprint(i)),
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: Opacity(
-                        opacity: i <= _footprints ? 1 : .35,
-                        child: _asset('clues/Dog_Footprint.svg'),
-                      ),
-                    ),
-                    if (i < _footprints)
-                      const Align(
-                        alignment: Alignment.bottomRight,
-                        child: Icon(
-                          Icons.check_circle,
-                          color: Colors.green,
-                          size: forty,
-                        ),
-                      ),
-                  ],
+                child: Opacity(
+                  opacity: i < _footprints ? 1 : .28,
+                  child: _asset('updated/Dog_Footprint_Trail.png'),
                 ),
+              ),
+            ),
+          ),
+        if (_footprints < 3)
+          _at(
+            292 + _footprints * 190,
+            444,
+            88,
+            88,
+            IgnorePointer(
+              child: AnimatedPointFinger(
+                asset: _bantayPointFinger,
+                size: 82,
+                angle: -.16,
+                tapOffset: const Offset(0, -8),
               ),
             ),
           ),
       ],
       _BantayStage.found => [
+        _prompt('Salamat! Nakita naton si Bantay!'),
         _at(
-          280,
-          90,
-          550,
-          85,
-          _panel(_text('Salamat! Nakita naton si Bantay!')),
-        ),
-        _at(
-          610,
-          215,
-          235,
           205,
-          _BantayPulse(active: true, child: _asset('animals/Bantay_Happy.svg')),
+          130,
+          430,
+          390,
+          const TudloMascot(size: 550, mood: KokaMood.idle),
         ),
-        _next(_BantayStage.model),
+        _at(475, 205, 270, 240, _asset('updated/Bantay_Idle.png')),
       ],
       _BantayStage.model => [
-        _at(
-          200,
-          90,
-          680,
-          70,
-          _panel(_text('Ano ang una, sunod, kag katapusan?')),
-        ),
-        for (final entry in _trayOrder.indexed)
-          _at(245 + entry.$1 * 205, 190, 185, 225, _event(entry.$2)),
-        _next(_BantayStage.sequence),
+        _prompt('Ano ang una, sunod, kag katapusan?'),
+        for (final entry in _bantayEvents.indexed)
+          _at(
+            150 + entry.$1 * 245,
+            176,
+            230,
+            230,
+            _event(entry.$2, framed: false),
+          ),
       ],
       _BantayStage.sequence => [
+        _prompt('Ihan-ay ang nadula, clue, kag nakita.'),
         _at(
-          185,
-          82,
-          735,
-          sixty,
-          _panel(_text('Ihan-ay ang nadula, clue, kag nakita.')),
+          38,
+          108,
+          884,
+          410,
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: .72),
+              borderRadius: BorderRadius.circular(28),
+              border: Border.all(color: const Color(0xFFFFC928), width: 4),
+            ),
+          ),
         ),
         for (var i = 0; i < 3; i++)
           _at(
-            225 + i * 220,
-            155,
-            205,
-            160,
+            75 + i * 290,
+            126,
+            230,
+            202,
             DragTarget<String>(
               onWillAcceptWithDetails: (d) =>
                   !_busy && _slots[i] == null && !_slots.contains(d.data),
@@ -751,16 +866,38 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
                 },
                 child: Column(
                   children: [
-                    _text(['UNA', 'SUNOD', 'KATAPUSAN'][i], size: 20),
+                    Container(
+                      width: double.infinity,
+                      height: 42,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1BA7F2),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Text(
+                        ['UNA', 'SUNOD', 'KATAPUSAN'][i],
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontFamily: 'Baloo2',
+                          color: Colors.white,
+                          fontSize: 20,
+                          height: 1,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
                     Expanded(
                       child: _slots[i] == null
-                          ? _panel(const SizedBox.expand())
+                          ? Padding(
+                              padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                              child: _grayEvent(_bantayEvents[i]),
+                            )
                           : _BantayPulse(
                               active: _wiggling.contains(_slots[i]),
                               wiggle: true,
-                              child: _event(
-                                _slots[i]!,
-                                correct: _verifiedSlots.contains(i),
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                                child: _event(_slots[i]!, framed: false),
                               ),
                             ),
                     ),
@@ -772,19 +909,19 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
         for (final entry in _trayOrder.indexed)
           if (!_slots.contains(entry.$2))
             _at(
-              225 + entry.$1 * 220,
-              332,
-              205,
-              130,
+              75 + entry.$1 * 290,
+              352,
+              230,
+              154,
               Draggable<String>(
                 data: entry.$2,
                 maxSimultaneousDrags: _busy ? 0 : 1,
                 feedback: Material(
                   color: Colors.transparent,
                   child: SizedBox(
-                    width: 180,
-                    height: 130,
-                    child: _event(entry.$2),
+                    width: 230,
+                    height: 154,
+                    child: _event(entry.$2, framed: false),
                   ),
                 ),
                 childWhenDragging: const SizedBox.expand(),
@@ -794,27 +931,11 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
                   },
                   child: _BantayPulse(
                     active: _selected == entry.$2,
-                    child: _event(entry.$2),
+                    child: _event(entry.$2, framed: false),
                   ),
                 ),
               ),
             ),
-        if (_sequenceValidated && _sequenceCorrect)
-          _at(
-            660,
-            474,
-            260,
-            48,
-            _button('SUNOD', () => unawaited(_go(_BantayStage.reward))),
-          )
-        else if (!_slots.contains(null))
-          _at(
-            660,
-            474,
-            260,
-            48,
-            _button('USISAON', () => unawaited(_checkSequence())),
-          ),
       ],
       _BantayStage.reward => [
         Positioned.fill(
@@ -840,12 +961,10 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
     };
   }
 
-  static const double forty = 40;
-
   @override
   Widget build(BuildContext context) {
     final background = switch (_location) {
-      'House' => 'HospitalLandscape-1 1.svg',
+      'House' => 'livingroom.svg',
       'School' => 'ClassroomLandscape 1.svg',
       'Market' => 'MarketLandscape 1.svg',
       _ => 'FarmLandscape 1.svg',
@@ -876,18 +995,37 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
                         fit: BoxFit.cover,
                       ),
                     ),
-                    _at(
-                      24,
-                      200,
-                      195,
-                      300,
-                      TudloMascot(
-                        size: 300,
-                        mood: _busy
-                            ? KokaMood.talking
-                            : (_found ? KokaMood.hi : KokaMood.curious),
+                    if (_stage != _BantayStage.found &&
+                        _stage != _BantayStage.model &&
+                        _stage != _BantayStage.sequence)
+                      _at(
+                        _stage == _BantayStage.house
+                            ? 112
+                            : _stage == _BantayStage.market
+                            ? 270
+                            : 24,
+                        _stage == _BantayStage.house
+                            ? 170
+                            : _stage == _BantayStage.market
+                            ? 280
+                            : 200,
+                        _stage == _BantayStage.house ? 250 : 195,
+                        _stage == _BantayStage.house ? 340 : 300,
+                        TudloMascot(
+                          size: _stage == _BantayStage.house
+                              ? 365
+                              : _stage == _BantayStage.farm
+                              ? 255
+                              : _stage == _BantayStage.market
+                              ? 270
+                              : 300,
+                          mood:
+                              _stage == _BantayStage.house ||
+                                  _stage == _BantayStage.farm
+                              ? KokaMood.curious
+                              : KokaMood.idle,
+                        ),
                       ),
-                    ),
                     ..._scene(),
                     _at(
                       24,
@@ -948,6 +1086,77 @@ class _GradeThreeBantayFlowState extends State<GradeThreeBantayFlow>
   }
 
   static const double thirty = 30;
+}
+
+class _MarketDialogueBubble extends StatelessWidget {
+  final String text;
+  final bool alignRight;
+
+  const _MarketDialogueBubble({required this.text, required this.alignRight});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        Positioned.fill(
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: .96),
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(color: const Color(0xFF1BA7F2), width: 3),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: .10),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Positioned.fill(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+            child: Center(
+              child: Text(
+                text,
+                textAlign: TextAlign.center,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontFamily: 'Baloo2',
+                  color: TudloColors.ink,
+                  fontSize: 20,
+                  height: 1,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: -10,
+          left: alignRight ? null : 24,
+          right: alignRight ? 24 : null,
+          child: Transform.rotate(
+            angle: .78,
+            child: Container(
+              width: 20,
+              height: 20,
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: .96),
+                border: const Border(
+                  right: BorderSide(color: Color(0xFF1BA7F2), width: 3),
+                  bottom: BorderSide(color: Color(0xFF1BA7F2), width: 3),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }
 
 class _BantayPulse extends StatefulWidget {

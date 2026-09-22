@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/theme/app_theme.dart';
@@ -24,8 +27,9 @@ class GradeThreeStickerRewardOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final view = MediaQuery.sizeOf(context);
-    final stickerSize = (view.height * .42).clamp(150.0, 215.0).toDouble();
-    final glowSize = stickerSize * 1.45;
+    final stickerHeight = (view.height * .50).clamp(210.0, 292.0).toDouble();
+    final stickerWidth = stickerHeight * .64;
+    final glowSize = stickerHeight * 1.34;
     final hasSecondary = secondaryLabel != null && onSecondary != null;
 
     return Stack(
@@ -82,10 +86,16 @@ class GradeThreeStickerRewardOverlay extends StatelessWidget {
                     child: SizedBox(width: glowSize, height: glowSize),
                   ),
                   Container(
-                    width: stickerSize,
-                    height: stickerSize,
+                    width: stickerWidth,
+                    height: stickerHeight,
+                    padding: EdgeInsets.all(stickerHeight * .035),
                     decoration: BoxDecoration(
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(18),
+                      border: Border.all(
+                        color: const Color(0xFFFFF3A6),
+                        width: 4,
+                      ),
                       boxShadow: [
                         BoxShadow(
                           color: const Color(0xFFFFF3A6).withValues(alpha: .66),
@@ -101,10 +111,7 @@ class GradeThreeStickerRewardOverlay extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(18),
-                      child: SvgPicture.asset(
-                        stickerAsset,
-                        fit: BoxFit.contain,
-                      ),
+                      child: _RewardStickerImage(asset: stickerAsset),
                     ),
                   ),
                 ],
@@ -139,6 +146,72 @@ class GradeThreeStickerRewardOverlay extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _RewardStickerImage extends StatelessWidget {
+  final String asset;
+
+  const _RewardStickerImage({required this.asset});
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<_EmbeddedStickerImage?>(
+      future: _loadEmbeddedStickerImage(asset),
+      builder: (context, snapshot) {
+        final embedded = snapshot.data;
+        if (embedded != null) {
+          return Image.memory(
+            embedded.bytes,
+            fit: BoxFit.contain,
+            gaplessPlayback: true,
+          );
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          return SvgPicture.asset(
+            asset,
+            fit: BoxFit.contain,
+            placeholderBuilder: (_) => const _RewardStickerPlaceholder(),
+          );
+        }
+        return const _RewardStickerPlaceholder();
+      },
+    );
+  }
+}
+
+class _EmbeddedStickerImage {
+  final Uint8List bytes;
+
+  const _EmbeddedStickerImage(this.bytes);
+}
+
+Future<_EmbeddedStickerImage?> _loadEmbeddedStickerImage(String asset) async {
+  if (!asset.toLowerCase().endsWith('.svg')) return null;
+  try {
+    final svg = await rootBundle.loadString(asset);
+    final match = RegExp(
+      r'data:image/(?:png|jpeg|jpg);base64,([^"]+)',
+    ).firstMatch(svg);
+    if (match == null) return null;
+    return _EmbeddedStickerImage(base64Decode(match.group(1)!));
+  } catch (_) {
+    return null;
+  }
+}
+
+class _RewardStickerPlaceholder extends StatelessWidget {
+  const _RewardStickerPlaceholder();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Icon(
+        Icons.workspace_premium_rounded,
+        color: Color(0xFFFFC928),
+        size: 96,
+      ),
     );
   }
 }

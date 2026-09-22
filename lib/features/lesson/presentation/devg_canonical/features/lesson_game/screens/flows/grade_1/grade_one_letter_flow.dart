@@ -180,8 +180,9 @@ class _GradeOneAlphabetLessonState extends State<_GradeOneAlphabetLesson> {
             imageAsset: 'assets/images/level_game/people/nanay.png',
             icon: Icons.family_restroom_rounded,
           );
-    final secondTarget =
-        _quizTargets.length > 1 ? _quizTargets[1] : _quizTargets.first;
+    final secondTarget = _quizTargets.length > 1
+        ? _quizTargets[1]
+        : _quizTargets.first;
     final secondAnchor = _bestAnchorForTarget(anchors, secondTarget);
     final animalAnchors = anchors
         .where(
@@ -958,53 +959,53 @@ class _GradeOneUnitOneLessonOneFlowState
         key: ValueKey('g1-u1-l1-flow-$_stepIndex'),
         child: switch (_stepIndex) {
           0 => _LessonOneIntroStep(
-              progress: _progress,
-              onExit: widget.onExit,
-              onReplay: _speakForStep,
-              onNext: () => _goToStep(1),
-            ),
+            progress: _progress,
+            onExit: widget.onExit,
+            onReplay: _speakForStep,
+            onNext: () => _goToStep(1),
+          ),
           1 => _LessonOneMapStep(
-              progress: _progress,
-              onExit: widget.onExit,
-              onReplay: _speakForStep,
-              onNext: () => _goToStep(2),
-            ),
+            progress: _progress,
+            onExit: widget.onExit,
+            onReplay: _speakForStep,
+            onNext: () => _goToStep(2),
+          ),
           2 => _LessonOneSearchStep(
-              progress: _progress,
-              letters: _letters,
-              foundLetters: _foundLetters,
-              onExit: widget.onExit,
-              onReplay: _speakForStep,
-              onLetterTap: _tapFoundLetter,
-              onNext: _foundLetters.length == _letters.length
-                  ? () => _goToStep(3)
-                  : null,
-            ),
+            progress: _progress,
+            letters: _letters,
+            foundLetters: _foundLetters,
+            onExit: widget.onExit,
+            onReplay: _speakForStep,
+            onLetterTap: _tapFoundLetter,
+            onNext: _foundLetters.length == _letters.length
+                ? () => _goToStep(3)
+                : null,
+          ),
           3 => _LessonOneChoiceStep(
-              progress: _progress,
-              question: _choiceQuestions[_choiceIndex],
-              choices: _letters,
-              selected: _selectedChoice,
-              wrongLetter: _wrongLetter,
-              onExit: widget.onExit,
-              onReplay: _speakForStep,
-              onChoice: _chooseFirstLetter,
-            ),
+            progress: _progress,
+            question: _choiceQuestions[_choiceIndex],
+            choices: _letters,
+            selected: _selectedChoice,
+            wrongLetter: _wrongLetter,
+            onExit: widget.onExit,
+            onReplay: _speakForStep,
+            onChoice: _chooseFirstLetter,
+          ),
           4 => _LessonOneArrangeStep(
-              progress: _progress,
-              question: _arrangeQuestions[_arrangeIndex],
-              arrangedLetters: _arrangedLetters,
-              wrongLetter: _wrongLetter,
-              onExit: widget.onExit,
-              onReplay: _speakForStep,
-              onLetterTap: _addArrangeLetter,
-            ),
+            progress: _progress,
+            question: _arrangeQuestions[_arrangeIndex],
+            arrangedLetters: _arrangedLetters,
+            wrongLetter: _wrongLetter,
+            onExit: widget.onExit,
+            onReplay: _speakForStep,
+            onLetterTap: _addArrangeLetter,
+          ),
           _ => _LessonOneRewardStep(
-              progress: _progress,
-              onExit: widget.onExit,
-              onReplay: _speakForStep,
-              onDone: _finishLesson,
-            ),
+            progress: _progress,
+            onExit: widget.onExit,
+            onReplay: _speakForStep,
+            onDone: _finishLesson,
+          ),
         },
       ),
     );
@@ -1211,8 +1212,9 @@ class _LessonPictureAsset extends StatelessWidget {
       fit: fit,
       alignment: Alignment.center,
       filterQuality: FilterQuality.high,
-      errorBuilder:
-          errorBuilder == null ? null : (_, __, ___) => errorBuilder!(context),
+      errorBuilder: errorBuilder == null
+          ? null
+          : (_, __, ___) => errorBuilder!(context),
     );
   }
 }
@@ -1286,9 +1288,7 @@ class _LessonOneIntroStep extends StatelessWidget {
                         Positioned(
                           left: _questionLeft,
                           top: _questionTop,
-                          child: _LessonOneQuestionMarks(
-                            size: _questionSize,
-                          ),
+                          child: _LessonOneQuestionMarks(size: _questionSize),
                         ),
                         Positioned(
                           right: _cardsRight,
@@ -2065,8 +2065,13 @@ class _StickerRewardAsset extends StatelessWidget {
 class _LessonOneMessageCard extends StatelessWidget {
   final String message;
   final bool compact;
+  final double? fontSize;
 
-  const _LessonOneMessageCard({required this.message, this.compact = false});
+  const _LessonOneMessageCard({
+    required this.message,
+    this.compact = false,
+    this.fontSize,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -2092,7 +2097,8 @@ class _LessonOneMessageCard extends StatelessWidget {
         textAlign: TextAlign.center,
         style: GoogleFonts.nunito(
           color: TudloColors.ink,
-          fontSize: (width * (compact ? .064 : .074)).clamp(22.0, 38.0),
+          fontSize:
+              fontSize ?? (width * (compact ? .064 : .074)).clamp(22.0, 38.0),
           height: 1.12,
           fontWeight: FontWeight.w900,
           letterSpacing: 0,
@@ -2324,8 +2330,9 @@ class _LessonOneSearchTray extends StatelessWidget {
               children: [
                 for (var index = 0; index < letters.length; index++)
                   _LessonOneSearchTraySlot(
-                    letter:
-                        index < foundLetters.length ? foundLetters[index] : '',
+                    letter: index < foundLetters.length
+                        ? foundLetters[index]
+                        : '',
                     found: index < foundLetters.length,
                     size: slotSize,
                     onTap: index < foundLetters.length
@@ -2435,7 +2442,8 @@ class _LessonOneArrangeSlots extends StatelessWidget {
               letter: question.fixedLetters[i] ?? _placedLetterForSlot(i),
               size: size,
               fixed: question.fixedLetters.containsKey(i),
-              filled: question.fixedLetters.containsKey(i) ||
+              filled:
+                  question.fixedLetters.containsKey(i) ||
                   _placedLetterForSlot(i).isNotEmpty,
             ),
             if (i != question.word.length - 1) const SizedBox(width: 12),
@@ -2479,15 +2487,15 @@ class _LessonOneArrangeSlot extends StatelessWidget {
         color: fixed
             ? Colors.white.withValues(alpha: .80)
             : filled
-                ? TudloColors.softGreen
-                : Colors.white.withValues(alpha: .54),
+            ? TudloColors.softGreen
+            : Colors.white.withValues(alpha: .54),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: fixed
               ? TudloColors.blue.withValues(alpha: .28)
               : filled
-                  ? TudloColors.green
-                  : Colors.grey.withValues(alpha: .55),
+              ? TudloColors.green
+              : Colors.grey.withValues(alpha: .55),
           width: 3,
         ),
       ),

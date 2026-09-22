@@ -422,7 +422,7 @@ class _Grade3IntroStep extends StatelessWidget {
             textAlign: TextAlign.center,
             style: GoogleFonts.nunito(
               color: TudloColors.forest,
-              fontSize: 34,
+              fontSize: 29,
               height: 1,
               fontWeight: FontWeight.w900,
               letterSpacing: 0,
@@ -434,14 +434,14 @@ class _Grade3IntroStep extends StatelessWidget {
             textAlign: TextAlign.center,
             style: GoogleFonts.nunito(
               color: TudloColors.ink,
-              fontSize: 27,
+              fontSize: 23,
               height: 1.05,
               fontWeight: FontWeight.w900,
               letterSpacing: 0,
             ),
           ),
           const SizedBox(height: 18),
-          const _Grade3TipBubble(
+          _Grade3TipBubble(
             text: 'Basaha anay. Pindoton ang speaker kon gusto mo mamati.',
           ),
           const SizedBox(height: 28),
@@ -504,7 +504,10 @@ class _Grade3MarketIntroStep extends StatelessWidget {
                   Positioned(
                     left: 16,
                     bottom: sceneHeight * .05,
-                    child: _LessonKokaMascot(size: kokaSize, mood: KokaMood.hi),
+                    child: _LessonKokaMascot(
+                      size: kokaSize,
+                      mood: KokaMood.idle,
+                    ),
                   ),
                   Positioned(
                     left: 118,
@@ -1018,7 +1021,7 @@ class _G3FindFruitStallPage extends StatelessWidget {
         onTap: onTapStall,
         child: const Column(
           children: [
-            _LessonKokaMascot(size: 112, mood: KokaMood.hi),
+            _LessonKokaMascot(size: 112, mood: KokaMood.idle),
             SizedBox(height: 8),
             SizedBox(
               height: 230,
@@ -1053,7 +1056,7 @@ class _G3SimpleMarketPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const _LessonKokaMascot(size: 112, mood: KokaMood.hi),
+          const _LessonKokaMascot(size: 112, mood: KokaMood.idle),
           const SizedBox(height: 18),
           child,
         ],
@@ -1360,7 +1363,7 @@ class _G3MarketIntroPage extends StatelessWidget {
                   bottom: view.height * .02,
                   child: _LessonKokaMascot(
                     size: (view.width * .44).clamp(160.0, 230.0),
-                    mood: KokaMood.hi,
+                    mood: KokaMood.idle,
                   ),
                 ),
                 Positioned(
@@ -1411,7 +1414,7 @@ class _G3NumberReviewPage extends StatelessWidget {
       footer: _LessonOneBlueButton(label: 'Sunod', onTap: onNext),
       child: Column(
         children: [
-          const _LessonKokaMascot(size: 124, mood: KokaMood.hi),
+          const _LessonKokaMascot(size: 124, mood: KokaMood.idle),
           const SizedBox(height: 8),
           Wrap(
             alignment: WrapAlignment.center,
@@ -1479,8 +1482,8 @@ class _G3ModelCountPage extends StatelessWidget {
     return _G3MarketContentFrame(
       prompt: 'Pila ka mangga?',
       footer: _LessonOneBlueButton(label: 'Sunod', onTap: onNext),
-      child: const Column(
-        children: [
+      child: Column(
+        children: const [
           _G3MarketSceneLayer(stallAsset: _grade3MarketFruitStallAsset),
           SizedBox(height: 10),
           _G3ObjectTray(
@@ -1808,10 +1811,10 @@ class _G3BuildSayPage extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Expanded(
+              Expanded(
                 child: SizedBox(
                   height: 150,
-                  child: _LessonPictureAsset(
+                  child: const _LessonPictureAsset(
                     asset: _grade3MarketPailFullAsset,
                     fit: BoxFit.contain,
                   ),
@@ -2076,10 +2079,10 @@ class _G3MarketRewardPage extends StatelessWidget {
     return _G3MarketContentFrame(
       prompt: 'Maayo gid!',
       footer: _LessonOneBlueButton(label: 'Padayon', onTap: onComplete),
-      child: const Column(
-        children: [
+      child: Column(
+        children: const [
           SizedBox(height: 12),
-          _LessonKokaMascot(size: 150, mood: KokaMood.hi),
+          _LessonKokaMascot(size: 150, mood: KokaMood.idle),
           SizedBox(height: 8),
           Icon(Icons.star_rounded, color: TudloColors.gold, size: 112),
           SizedBox(height: 8),
@@ -2095,12 +2098,14 @@ class _G3MarketContentFrame extends StatelessWidget {
   final Widget child;
   final Widget footer;
   final bool showContentPanel;
+  final double? promptFontSize;
 
   const _G3MarketContentFrame({
     required this.prompt,
     required this.child,
     required this.footer,
     this.showContentPanel = true,
+    this.promptFontSize,
   });
 
   @override
@@ -2119,7 +2124,11 @@ class _G3MarketContentFrame extends StatelessWidget {
             alignment: Alignment.topCenter,
             child: SizedBox(
               width: view.width * .78,
-              child: _LessonOneMessageCard(message: prompt, compact: true),
+              child: _LessonOneMessageCard(
+                message: prompt,
+                compact: true,
+                fontSize: promptFontSize,
+              ),
             ),
           ),
           const SizedBox(height: 10),
@@ -2839,8 +2848,8 @@ class _Grade3QuestionScreenState extends State<_Grade3QuestionScreen> {
               highlightedSentenceIndex: 0,
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(18, 0, 18, 18),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
             child: _Grade3TipBubble(
               text: 'Liwata. Pangitaa ang sabat sa sugilanon.',
             ),
@@ -2892,9 +2901,7 @@ class _Grade3QuestionScreenState extends State<_Grade3QuestionScreen> {
             const SizedBox(height: 12),
           ],
           const Spacer(),
-          const _Grade3TipBubble(
-            text: 'Kon indi sigurado, baliki ang sugilanon.',
-          ),
+          _Grade3TipBubble(text: 'Kon indi sigurado, baliki ang sugilanon.'),
         ],
       ),
     );
