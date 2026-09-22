@@ -1,11 +1,14 @@
-# Lesson "go to the map" step — fake pin to real Rive map
+# Lesson "go to the map" step — the standard fix
 
 Several preserved DevG lesson flows include a mid-lesson beat where the
 learner is told to "tap X on the map" before continuing. In the untouched
 source-preservation bridge, every one of these beats used the same
 decorative placeholder instead of Tudlo's real interactive map. This is the
-most common outstanding issue across the `devg_canonical` flows — apply this
-fix wherever you find the placeholder pattern below.
+most common outstanding issue across the `devg_canonical` flows.
+
+**This is now the standard fix for every flow with this beat.** Applied so
+far to `g1_u1_l1` (Letters, targets School) and `g1_u1_l7` (Numbers, targets
+Beach) — see "Already fixed" below for the exact files.
 
 ## The placeholder pattern (broken)
 
@@ -44,55 +47,111 @@ Symptoms:
   Rive map used everywhere else in the app.
 - The blinking pin (`_LessonOneMapDestinationCue`) is positioned by guessed
   percentages, not tied to any real map location's coordinates.
-- The tap target advances the lesson unconditionally — tapping the pin
-  always "succeeds" regardless of which real location it's near.
-- Visually inconsistent with `MapScreen`'s real map, and it never reflects
-  `isUnlocked`/`hasEvent` state.
+- The tap target advances the lesson unconditionally.
+- Never reflects `isUnlocked`/`hasEvent` state, and looks nothing like the
+  real Map tab.
 
-## The fix (real map)
+## An earlier, still-wrong attempt (rejected)
 
-Replace the `StatelessWidget` step with a `StatefulWidget` that hosts the
-real Rive map, scoped to this lesson step only:
+The first fix attempt replaced the fake image with a *second* hand-built
+widget hosting the bare `RiveMapScene` directly — its own
+`InteractiveViewer`, its own copy of `MapScreen`'s cropping/scale math, its
+own `RiveMapSceneController`. This is **not** the standard fix: it still
+duplicates the whole map instead of reusing it, just with the real Rive
+asset instead of a fake image. Do not do this. If you find a lesson step
+built this way, replace it with the pattern below.
+
+## The standard fix: reuse `MapScreen` itself, plus an instruction dialog
+
+Two parts, both required:
+
+1. Push Tudlo's **actual `MapScreen`** (the same class the Map tab uses —
+   full chrome, bottom nav, expand button, real `isUnlocked` state) with a
+   **standalone `MapEventOverrides`** scoped to just this lesson step, not
+   the app's shared instance from `MapProgressScope`. Only the target
+   location gets an override (`PopMapRouteAction`), so it's the only one
+   that glows (`hasEvent`) and is reachable regardless of its real unlocked
+   state; every other location keeps its normal locked/unlocked behavior
+   and normal navigation, since it's the real screen.
+
+   Also pass `temporaryUnlockedLocations: {target}` on that same
+   `MapScreen`. **This is required, not optional** — `hasEvent`'s golden
+   glow renders "on top of that location's normal unlocked visual" per
+   `RiveMapSceneController.setHasEvent`'s own doc comment, so a location
+   that's still really locked (hasn't been completed/claimed yet, which is
+   exactly the case while its own lesson is what's currently playing) shows
+   locked/grey with no visible glow even with `hasEvent` set — `isUnlocked`
+   and `hasEvent` are visually independent flags in code, but the Rive
+   asset draws the glow conditioned on the unlocked look. This param makes
+   the target location render/behave fully unlocked for the life of *this
+   pushed instance only* (`MapScreen`'s own `_syncEventVisuals`) — it never
+   writes to `MapProgressController.unlockedLocations`, so the permanent
+   reward-unlock state (earned only by completing and claiming the lesson)
+   is untouched.
+2. Before pushing it, show a dialog telling the learner what to do —
+   `_showMapBeatInstructionDialog`. The real `MapScreen` has no room for an
+   in-scene message card the way the old fake placeholder did, so the
+   dialog is the visual instruction. `_speakForStep`'s existing voice-over/
+   TTS narration for this step keeps playing independently, unchanged.
 
 ```dart
-class _FooMapStepState extends State<_FooMapStep> {
-  // Reuses MapScreen's real map (toadlu_map.riv) and its own default
-  // portrait framing constants (Koka's house) -- this is not a second/fake
-  // map, just this lesson's narrow "go to <Location>" beat on the one real
-  // Rive map, per the migration guide: keep Tudlo's existing Rive map,
-  // drive it only through semantic hasEvent/isUnlocked.
-  static const _mapWidth = tudlo_map.RiveMapScene.artboardWidth;
-  static const _mapHeight = tudlo_map.RiveMapScene.artboardHeight;
-  static const _houseCenterX = 2085.0;
-  static const _houseCenterY = 1064.5;
-  static const _cropWidth = 420.0;
-  static const _verticalAnchor = 0.42;
+class _FooMapStep extends StatefulWidget {
+  final double progress;
+  final VoidCallback onExit;
+  final VoidCallback onReplay;
+  final VoidCallback onNext;
 
-  final _transformationController = TransformationController();
-  final _riveMapController = tudlo_map.RiveMapSceneController();
-  Size? _viewportSize;
+  const _FooMapStep({
+    required this.progress,
+    required this.onExit,
+    required this.onReplay,
+    required this.onNext,
+  });
 
   @override
-  void dispose() {
-    _transformationController.dispose();
-    super.dispose();
+  State<_FooMapStep> createState() => _FooMapStepState();
+}
+
+class _FooMapStepState extends State<_FooMapStep> {
+  // Pushes Tudlo's one real Map screen -- the same MapScreen the Map tab
+  // uses -- instead of rebuilding a second map widget around the bare Rive
+  // scene. Its own standalone MapEventOverrides (not MapProgressScope's
+  // shared instance) glows only <Location> for the length of this push and
+  // pops back into this lesson step once <Location> is tapped; every other
+  // location keeps its real unlocked/locked behavior untouched.
+  final _overrides = tudlo_map.MapEventOverrides()
+    ..setOverride(
+      tudlo_map.MapLocation.<target>,
+      const tudlo_map.PopMapRouteAction(),
+    );
+  var _opened = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _openMap());
   }
 
-  // Nothing is glowing until this beat's own Rive scene finishes loading --
-  // the event exists only for this lesson step, never set early and never
-  // visible anywhere else on the real map.
-  void _onMapReady() {
-    _riveMapController.setUnlocked(tudlo_map.MapLocation.<target>, true);
-    _riveMapController.setHasEvent(tudlo_map.MapLocation.<target>, true);
-  }
-
-  Future<void> _handleLocationTapped(tudlo_map.MapLocation location) async {
-    if (location != tudlo_map.MapLocation.<target>) return;
+  Future<void> _openMap() async {
+    if (_opened || !mounted) return;
+    _opened = true;
+    await _showMapBeatInstructionDialog(
+      context,
+      message: '<the beat's own instruction line, reused from _speakForStep>',
+    );
+    if (!mounted) return;
+    await Navigator.of(context).push(
+      FadePageRoute<void>(
+        page: tudlo_map.MapScreen(
+          eventOverrides: _overrides,
+          temporaryUnlockedLocations: const {tudlo_map.MapLocation.<target>},
+        ),
+      ),
+    );
+    if (!mounted) return;
     await AppAudioService.instance.playCorrect();
     widget.onNext();
   }
-
-  Matrix4 _framedOnHouse(Size viewport) { /* crop math, unchanged */ }
 
   @override
   Widget build(BuildContext context) {
@@ -100,38 +159,70 @@ class _FooMapStepState extends State<_FooMapStep> {
       progress: widget.progress,
       onExit: widget.onExit,
       onReplay: widget.onReplay,
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          // frame the viewport on the house, compute min/max scale, then:
-          return InteractiveViewer(
-            transformationController: _transformationController,
-            constrained: false,
-            boundaryMargin: EdgeInsets.zero,
-            minScale: minScale,
-            maxScale: maxScale,
-            child: RepaintBoundary(
-              child: tudlo_map.RiveMapScene(
-                controller: _riveMapController,
-                onLocationTapped: _handleLocationTapped,
-                onReady: _onMapReady,
-              ),
-            ),
-          );
-        },
-      ),
+      child: const SizedBox.shrink(),
     );
   }
 }
 ```
 
-`tudlo_map` here is the alias already imported once in `level_game_page.dart`
-(`import '.../map_location.dart' as tudlo_map;` and
-`import '.../rive_map_scene.dart' as tudlo_map;`) — every flow file is a
-`part of` that library, so the alias is available without a new import.
+`_showMapBeatInstructionDialog` is defined once, shared library-wide, in
+`grade_one_letter_flow.dart` (every flow file is `part of` the same
+library, same as `_LessonOneMapDestinationCue`/`_LessonOneChrome`):
 
-The old placeholder message card (e.g. `_LessonOneMessageCard(message: 'Tap
-ang Beach.')`) is dropped; the real map fills the whole step, matching how
-`_LessonOneMapStep` already looks.
+```dart
+Future<void> _showMapBeatInstructionDialog(
+  BuildContext context, {
+  required String message,
+}) {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false,
+    builder: (dialogContext) => Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: const EdgeInsets.symmetric(horizontal: 28),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _LessonOneMessageCard(message: message),
+          const SizedBox(height: 16),
+          _LessonOneBlueButton(
+            label: 'Sige',
+            onTap: () => Navigator.of(dialogContext).pop(),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+```
+
+Reuse it as-is; don't reimplement it per flow.
+
+### What makes `PopMapRouteAction` work
+
+- `PopMapRouteAction` (`lib/features/map/domain/map_route_resolver.dart`) is
+  a `MapRouteAction` that means "pop this `MapScreen` route" instead of
+  navigating onward — added specifically for this pattern.
+- `MapScreen._handleLocationTapped`'s switch pops on this action
+  (`lib/features/map/presentation/screens/map_screen.dart`).
+- `MapTapPolicy.canOpen` (`lib/features/map/domain/map_tap_policy.dart`)
+  bypasses the normal `isUnlocked` requirement for `PopMapRouteAction`, the
+  same way it already does for `OpenActiveLessonRouteAction` — this beat is
+  a temporary in-lesson entrance, not a permanent unlock. (In practice
+  `temporaryUnlockedLocations` below already makes the target look/behave
+  unlocked, so this rarely matters for the target itself, but it's what
+  keeps the beat reachable in general even if a flow ever needs the target
+  to look locked while still being tappable.)
+- `MapScreen.temporaryUnlockedLocations` (`lib/features/map/presentation/
+  screens/map_screen.dart`) makes each listed location render/behave fully
+  unlocked for this pushed instance's lifetime only, without touching
+  `MapProgressController.unlockedLocations` — required for the target
+  location's `hasEvent` glow to actually be visible (see the fix
+  description above).
+- `tudlo_map` is the shared alias already imported once in
+  `level_game_page.dart` (covering `map_location.dart`,
+  `map_route_resolver.dart`, and `map_screen.dart`) — every flow file gets
+  it for free as a `part of` file; no new per-flow import needed.
 
 ## Picking `<target>`
 
@@ -139,29 +230,33 @@ ang Beach.')`) is dropped; the real map fills the whole step, matching how
 the location permanently unlocked when the *whole lesson* is completed and
 claimed (see `LESSON_GUIDE.md`'s "Map boundary" section) — it is not
 necessarily the same place this one mid-lesson beat's story is about. Read
-the step's own dialogue/asset context to find the real target:
+the step's own dialogue/asset context (and reuse its exact instruction
+text for the dialog) to find the real target:
 
-- `g1_u1_l1` (Letters) → beat targets **School** (`grade_one_letter_flow.dart`,
-  `_LessonOneMapStep`) — matches `LessonDefinition.location` here.
+- `g1_u1_l1` (Letters) → beat targets **School** — matches
+  `LessonDefinition.location` here.
 - `g1_u1_l7` (Numbers, lives in `grade_one_greeting_flow.dart` as
-  `_GradeOneUnitOneLessonSevenBeachFlow`) → beat targets **Beach**
-  (`_BeachMapStep`/`_BeachMapStepState`), even though this lesson's
-  `LessonDefinition.location` is School — the mid-lesson beat is the
-  beach-themed story ("Init gid ang balas!"), so it does **not** match the
-  catalog's completion-unlock location. Confirm the intended location with
-  product/the person asking before generalizing "beat target == catalog
-  location" to any other flow.
+  `_GradeOneUnitOneLessonSevenBeachFlow`) → beat targets **Beach**, even
+  though this lesson's `LessonDefinition.location` is School — the
+  mid-lesson beat is the beach-themed story ("Init gid ang balas!"), so it
+  does **not** match the catalog's completion-unlock location. Confirm the
+  intended location with product/the person asking before generalizing
+  "beat target == catalog location" to any other flow.
 
 ## Already fixed
 
-- `grade_one_letter_flow.dart` — `_LessonOneMapStep` → School.
-- `grade_one_greeting_flow.dart` — `_BeachMapStep` → Beach.
+- `grade_one_letter_flow.dart` — `_LessonOneMapStep` → School
+  (`temporaryUnlockedLocations: {MapLocation.school}`). Dialog message:
+  "I-tap ang eskwelahan sa mapa. Didto ta mangita."
+- `grade_one_greeting_flow.dart` — `_BeachMapStep` → Beach
+  (`temporaryUnlockedLocations: {MapLocation.beach}`). Dialog message:
+  "I-tap ang Beach sa mapa."
 
 ## Still using the fake pin (`_LessonOneMapDestinationCue`)
 
-Check each one's actual in-story target before fixing — do not default to
-`LessonDefinition.location` without verifying against the step's dialogue,
-per the caveat above.
+Check each one's actual in-story target (and its `_speakForStep` copy for
+the dialog message) before fixing — do not default to
+`LessonDefinition.location` without verifying against the step's dialogue.
 
 - `grade_one_family_flow.dart` (`g1_u2_l1`, catalog location: House)
 - `grade_two_new_friend_flow.dart` (`g2_u1_l1`, catalog location: School)
@@ -170,18 +265,24 @@ per the caveat above.
 - `grade_two_park_dialogue_flow.dart` (`g2_u2_l2`, catalog location: Plaza)
 
 `_LessonOneMapDestinationCue` is defined once in `grade_one_letter_flow.dart`
-but shared library-wide (every flow file is `part of` the same library) —
-update its "still used by" comment there each time another flow drops it, and
-do not delete the class until every flow in that list has been migrated.
+but shared library-wide — update its "still used by" comment there each
+time another flow drops it, and do not delete the class until every flow in
+that list has been migrated.
 
 ## Verification
 
-- `flutter analyze` on the changed flow file.
-- `flutter test test/lesson_progress_test.dart` and
-  `test/devg_lesson_flow_render_test.dart` (the latter has pre-existing,
-  unrelated flakiness around `g2_u2_l2` layout overflow and offline
-  `google_fonts` network fetches — check the failure names the lesson you
-  actually touched before assuming a regression).
-- Manually confirm the intended location actually glows (`hasEvent`) and
-  that tapping any other location does nothing, per
-  `_handleLocationTapped`'s guard.
+- `flutter analyze` on every changed file (flow file(s), plus
+  `map_route_resolver.dart`/`map_tap_policy.dart`/`map_screen.dart` the
+  first time this pattern is introduced — no changes needed there again
+  once `PopMapRouteAction` exists).
+- `flutter test test/lesson_progress_test.dart test/map_screen_test.dart`.
+- `test/devg_lesson_flow_render_test.dart` has pre-existing, unrelated
+  flakiness around `g2_u2_l2` layout overflow and offline `google_fonts`
+  network fetches — check the failure names the lesson you actually touched
+  before assuming a regression.
+- Manually confirm: the dialog shows the right instruction, dismissing it
+  opens the real Map screen with the target location both unlocked-looking
+  and glowing (not locked-with-glow — a real symptom if
+  `temporaryUnlockedLocations` is missing), tapping any other location
+  behaves exactly as it does on the real Map tab, and tapping the target
+  location pops back into the lesson and advances it.

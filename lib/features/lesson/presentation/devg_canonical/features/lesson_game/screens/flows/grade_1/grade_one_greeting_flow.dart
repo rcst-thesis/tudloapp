@@ -219,55 +219,55 @@ class _GradeOneUnitOneLessonSevenBeachFlowState
         key: ValueKey('g1-u1-l7-$_stepIndex'),
         child: switch (_stepIndex) {
           0 => _BeachIntroStep(
-            progress: _progress,
-            onExit: widget.onExit,
-            onReplay: _speakForStep,
-            onNext: () => _goToStep(1),
-          ),
+              progress: _progress,
+              onExit: widget.onExit,
+              onReplay: _speakForStep,
+              onNext: () => _goToStep(1),
+            ),
           1 => _BeachMapStep(
-            progress: _progress,
-            onExit: widget.onExit,
-            onReplay: _speakForStep,
-            onNext: () => _goToStep(2),
-          ),
+              progress: _progress,
+              onExit: widget.onExit,
+              onReplay: _speakForStep,
+              onNext: () => _goToStep(2),
+            ),
           2 => _BeachPathStep(
-            progress: _progress,
-            message: 'I-tap ang 1, dayon ang 2.',
-            enabledNumbers: const {1, 2},
-            completedUpTo: _kokaPosition,
-            expectedNumber: _expectedStep,
-            wrong: _wrongTap,
-            onExit: widget.onExit,
-            onReplay: _speakForStep,
-            onTapNumber: _tapPathNumber,
-          ),
+              progress: _progress,
+              message: 'I-tap ang 1, dayon ang 2.',
+              enabledNumbers: const {1, 2},
+              completedUpTo: _kokaPosition,
+              expectedNumber: _expectedStep,
+              wrong: _wrongTap,
+              onExit: widget.onExit,
+              onReplay: _speakForStep,
+              onTapNumber: _tapPathNumber,
+            ),
           3 => _BeachPathStep(
-            progress: _progress,
-            message: 'Sunod ang 3, 4, kag 5.',
-            enabledNumbers: const {3, 4, 5},
-            completedUpTo: _kokaPosition,
-            expectedNumber: _expectedStep,
-            wrong: _wrongTap,
-            onExit: widget.onExit,
-            onReplay: _speakForStep,
-            onTapNumber: _tapPathNumber,
-          ),
+              progress: _progress,
+              message: 'Sunod ang 3, 4, kag 5.',
+              enabledNumbers: const {3, 4, 5},
+              completedUpTo: _kokaPosition,
+              expectedNumber: _expectedStep,
+              wrong: _wrongTap,
+              onExit: widget.onExit,
+              onReplay: _speakForStep,
+              onTapNumber: _tapPathNumber,
+            ),
           4 => _BeachArrangeStep(
-            progress: _progress,
-            tiles: _tiles,
-            slots: _slots,
-            wrongTile: _wrongTile,
-            complete: _arrangeComplete,
-            onExit: widget.onExit,
-            onReplay: _speakForStep,
-            onPlaceTile: _placeTile,
-          ),
+              progress: _progress,
+              tiles: _tiles,
+              slots: _slots,
+              wrongTile: _wrongTile,
+              complete: _arrangeComplete,
+              onExit: widget.onExit,
+              onReplay: _speakForStep,
+              onPlaceTile: _placeTile,
+            ),
           _ => _BeachRewardStep(
-            progress: _progress,
-            onExit: widget.onExit,
-            onReplay: _speakForStep,
-            onDone: _finish,
-          ),
+              progress: _progress,
+              onExit: widget.onExit,
+              onReplay: _speakForStep,
+              onDone: _finish,
+            ),
         },
       ),
     );
@@ -374,56 +374,46 @@ class _BeachMapStep extends StatefulWidget {
 }
 
 class _BeachMapStepState extends State<_BeachMapStep> {
-  // Reuses MapScreen's real map (toadlu_map.riv) and its own default
-  // portrait framing constants (Koka's house) -- this is not a second/fake
-  // map, just this lesson's narrow "go to Beach" beat on the one real Rive
-  // map, per the migration guide: keep Tudlo's existing Rive map, drive it
-  // only through semantic hasEvent/isUnlocked.
+  // Pushes Tudlo's one real Map screen -- the same MapScreen the Map tab
+  // uses -- instead of rebuilding a second map widget around the bare Rive
+  // scene. Its own standalone MapEventOverrides (not MapProgressScope's
+  // shared instance) glows only Beach for the length of this push and pops
+  // back into this lesson step once Beach is tapped; every other location
+  // keeps its real unlocked/locked behavior untouched.
   // Mirrors _LessonOneMapStep in grade_one_letter_flow.dart (which targets
   // School instead of Beach).
-  static const _mapWidth = tudlo_map.RiveMapScene.artboardWidth;
-  static const _mapHeight = tudlo_map.RiveMapScene.artboardHeight;
-  static const _houseCenterX = 2085.0;
-  static const _houseCenterY = 1064.5;
-  static const _cropWidth = 420.0;
-  static const _verticalAnchor = 0.42;
-
-  final _transformationController = TransformationController();
-  final _riveMapController = tudlo_map.RiveMapSceneController();
-  Size? _viewportSize;
+  final _overrides = tudlo_map.MapEventOverrides()
+    ..setOverride(
+      tudlo_map.MapLocation.beach,
+      const tudlo_map.PopMapRouteAction(),
+    );
+  var _opened = false;
 
   @override
-  void dispose() {
-    _transformationController.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _openMap());
   }
 
-  // Nothing is glowing until this beat's own Rive scene finishes loading --
-  // the beach event exists only for this lesson step, never set early and
-  // never visible anywhere else on the real map.
-  void _onMapReady() {
-    _riveMapController.setUnlocked(tudlo_map.MapLocation.beach, true);
-    _riveMapController.setHasEvent(tudlo_map.MapLocation.beach, true);
-  }
-
-  Future<void> _handleLocationTapped(tudlo_map.MapLocation location) async {
-    if (location != tudlo_map.MapLocation.beach) return;
+  Future<void> _openMap() async {
+    if (_opened || !mounted) return;
+    _opened = true;
+    await _showMapBeatInstructionDialog(
+      context,
+      message: 'I-tap ang Beach sa mapa.',
+    );
+    if (!mounted) return;
+    await Navigator.of(context).push(
+      FadePageRoute<void>(
+        page: tudlo_map.MapScreen(
+          eventOverrides: _overrides,
+          temporaryUnlockedLocations: const {tudlo_map.MapLocation.beach},
+        ),
+      ),
+    );
+    if (!mounted) return;
     await AppAudioService.instance.playCorrect();
     widget.onNext();
-  }
-
-  Matrix4 _framedOnHouse(Size viewport) {
-    final scale = viewport.width / _cropWidth;
-    final cropHeight = viewport.height / scale;
-    final cropLeft = (_houseCenterX - _cropWidth / 2)
-        .clamp(0.0, math.max(0.0, _mapWidth - _cropWidth))
-        .toDouble();
-    final cropTop = (_houseCenterY - cropHeight * _verticalAnchor)
-        .clamp(0.0, math.max(0.0, _mapHeight - cropHeight))
-        .toDouble();
-    return Matrix4.identity()
-      ..scaleByDouble(scale, scale, scale, 1)
-      ..translateByDouble(-cropLeft, -cropTop, 0, 1);
   }
 
   @override
@@ -432,43 +422,7 @@ class _BeachMapStepState extends State<_BeachMapStep> {
       progress: widget.progress,
       onExit: widget.onExit,
       onReplay: widget.onReplay,
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final viewport = Size(constraints.maxWidth, constraints.maxHeight);
-          final hasValidViewport =
-              viewport.width.isFinite &&
-              viewport.height.isFinite &&
-              viewport.width > 0 &&
-              viewport.height > 0;
-          if (_viewportSize != viewport && hasValidViewport) {
-            _viewportSize = viewport;
-            _transformationController.value = _framedOnHouse(viewport);
-          }
-          final minScale = !hasValidViewport
-              ? 1.0
-              : viewport.width / _mapWidth > viewport.height / _mapHeight
-              ? viewport.width / _mapWidth
-              : viewport.height / _mapHeight;
-          final initialScale = hasValidViewport
-              ? viewport.width / _cropWidth
-              : 1.0;
-          final maxScale = math.max(minScale, initialScale * 3);
-          return InteractiveViewer(
-            transformationController: _transformationController,
-            constrained: false,
-            boundaryMargin: EdgeInsets.zero,
-            minScale: minScale,
-            maxScale: maxScale,
-            child: RepaintBoundary(
-              child: tudlo_map.RiveMapScene(
-                controller: _riveMapController,
-                onLocationTapped: _handleLocationTapped,
-                onReady: _onMapReady,
-              ),
-            ),
-          );
-        },
-      ),
+      child: const SizedBox.shrink(),
     );
   }
 }
@@ -552,12 +506,10 @@ class _BeachNumberPathScene extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final size = Size(constraints.maxWidth, constraints.maxHeight);
-        final rockWidth = math
-            .min(size.width * .21, size.height * .096)
-            .clamp(76.0, 104.0);
-        final kokaSize = math
-            .min(size.width * .58, size.height * .27)
-            .clamp(240.0, 330.0);
+        final rockWidth =
+            math.min(size.width * .21, size.height * .096).clamp(76.0, 104.0);
+        final kokaSize =
+            math.min(size.width * .58, size.height * .27).clamp(240.0, 330.0);
         final kokaNumber = completedUpTo > 0
             ? completedUpTo.clamp(1, 5)
             : expectedNumber.clamp(1, 5);
@@ -772,8 +724,8 @@ class _BeachStepRock extends StatelessWidget {
     final tone = completed
         ? _BeachNumberRockTone.completed
         : active
-        ? _BeachNumberRockTone.active
-        : _BeachNumberRockTone.normal;
+            ? _BeachNumberRockTone.active
+            : _BeachNumberRockTone.normal;
     return _FeedbackMotion(
       correct: completed,
       wrong: wrong && active,
@@ -953,15 +905,15 @@ class _BeachArrangeSlots extends StatelessWidget {
                         color: number == null
                             ? Colors.white.withValues(alpha: .66)
                             : complete
-                            ? TudloColors.softGreen
-                            : Colors.white.withValues(alpha: .92),
+                                ? TudloColors.softGreen
+                                : Colors.white.withValues(alpha: .92),
                         borderRadius: BorderRadius.circular(14),
                         border: Border.all(
                           color: number == null
                               ? Colors.grey.withValues(alpha: .62)
                               : complete
-                              ? TudloColors.green
-                              : TudloColors.blue,
+                                  ? TudloColors.green
+                                  : TudloColors.blue,
                           width: 3,
                         ),
                         boxShadow: number == null
@@ -1987,8 +1939,8 @@ class _AnimatedFruitCountState extends State<_AnimatedFruitCount> {
     final columns = count <= 2
         ? count
         : count <= 5
-        ? 2
-        : 3;
+            ? 2
+            : 3;
     final rows = (count / columns).ceil();
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -2084,14 +2036,10 @@ class _UnitOneQuizStage extends StatelessWidget {
     final width = view.width;
     final height = view.height;
     final safeTop = MediaQuery.paddingOf(context).top;
-    final topButtonSize = math
-        .min(width * .13, height * .08)
-        .clamp(48.0, 64.0)
-        .toDouble();
-    final mascotSize = math
-        .min(width * .42, height * .26)
-        .clamp(148.0, 232.0)
-        .toDouble();
+    final topButtonSize =
+        math.min(width * .13, height * .08).clamp(48.0, 64.0).toDouble();
+    final mascotSize =
+        math.min(width * .42, height * .26).clamp(148.0, 232.0).toDouble();
     return SizedBox.expand(
       child: Stack(
         fit: StackFit.expand,
@@ -2396,8 +2344,8 @@ class _UnitOneTapChoiceActivityState extends State<_UnitOneTapChoiceActivity>
       mascotMessage: _done
           ? 'Koka: Husto! Maayo gid.'
           : _wrong
-          ? 'Koka: Suliton liwat.'
-          : 'Koka: Pindoton ang husto nga sabat.',
+              ? 'Koka: Suliton liwat.'
+              : 'Koka: Pindoton ang husto nga sabat.',
       child: LayoutBuilder(
         builder: (context, constraints) {
           final width = constraints.maxWidth;
@@ -2746,9 +2694,8 @@ class _UnitOneNumberMatchingActivityState
     return _UnitOneQuizStage(
       prompt: widget.prompt,
       progress: widget.progress,
-      mascotMessage: _done
-          ? 'Koka: Husto!'
-          : 'Koka: Ipares ang numero kag prutas.',
+      mascotMessage:
+          _done ? 'Koka: Husto!' : 'Koka: Ipares ang numero kag prutas.',
       child: LayoutBuilder(
         builder: (context, constraints) {
           final width = constraints.maxWidth;
@@ -2798,8 +2745,7 @@ class _UnitOneNumberMatchingActivityState
                           ),
                         )
                         .toList();
-                    final activeLine =
-                        _dragStart != null &&
+                    final activeLine = _dragStart != null &&
                             _dragCurrent != null &&
                             _dragNumber != null
                         ? _NumberMatchLine(
@@ -2838,10 +2784,9 @@ class _UnitOneNumberMatchingActivityState
                                   fontSize: wordFont,
                                   selected:
                                       _dragSide == _NumberMatchDragSide.left &&
-                                      _dragNumber == number,
+                                          _dragNumber == number,
                                   connected: _connections.containsKey(number),
-                                  wrong:
-                                      _submittedWrong &&
+                                  wrong: _submittedWrong &&
                                       _connections[number] != null &&
                                       _connections[number] != number,
                                   onPanStart: (details) => _startDrag(
@@ -2876,10 +2821,9 @@ class _UnitOneNumberMatchingActivityState
                                   count: number,
                                   selected:
                                       _dragSide == _NumberMatchDragSide.right &&
-                                      _dragNumber == number,
+                                          _dragNumber == number,
                                   connected: _connections.containsValue(number),
-                                  wrong:
-                                      _submittedWrong &&
+                                  wrong: _submittedWrong &&
                                       _connections.entries.any(
                                         (entry) =>
                                             entry.value == number &&
@@ -2975,8 +2919,8 @@ class _NumberMatchLinePainter extends CustomPainter {
     for (final line in lines) {
       final color = showCorrectness
           ? line.correct
-                ? TudloColors.green
-                : TudloColors.coral
+              ? TudloColors.green
+              : TudloColors.coral
           : _numberMatchColor(line.colorKey);
       final paint = Paint()
         ..color = color.withValues(alpha: .92)
@@ -3108,8 +3052,8 @@ class _NumberMatchWord extends StatelessWidget {
             color: selected
                 ? TudloColors.blue.withValues(alpha: .32)
                 : connected
-                ? Colors.white.withValues(alpha: .16)
-                : Colors.transparent,
+                    ? Colors.white.withValues(alpha: .16)
+                    : Colors.transparent,
             borderRadius: BorderRadius.circular(18),
           ),
           child: Text(
@@ -3179,15 +3123,15 @@ class _NumberFruitMatchGroup extends StatelessWidget {
             color: selected
                 ? TudloColors.blue.withValues(alpha: .20)
                 : connected
-                ? Colors.white.withValues(alpha: .10)
-                : Colors.transparent,
+                    ? Colors.white.withValues(alpha: .10)
+                    : Colors.transparent,
             borderRadius: BorderRadius.circular(18),
             border: Border.all(
               color: wrong
                   ? TudloColors.coral
                   : selected
-                  ? TudloColors.blue
-                  : Colors.transparent,
+                      ? TudloColors.blue
+                      : Colors.transparent,
               width: selected || wrong ? 3 : 0,
             ),
           ),
@@ -3329,8 +3273,7 @@ class _UnitOneSpellingActivityState extends State<_UnitOneSpellingActivity>
   List<int> _buildMissingIndexes() {
     if (_letters.isEmpty) return const [0];
     if (_letters.length <= 2) return const [0];
-    final shouldUseTwoBlanks =
-        _letters.length >= 5 &&
+    final shouldUseTwoBlanks = _letters.length >= 5 &&
         widget.word.codeUnits.fold<int>(0, (sum, code) => sum + code).isEven;
     final first = _letters.length ~/ 2;
     if (!shouldUseTwoBlanks) return [first];
@@ -3493,8 +3436,8 @@ class _UnitOneSpellingActivityState extends State<_UnitOneSpellingActivity>
       mascotMessage: _done
           ? 'Koka: Nabuo mo ang ${_titleCase(widget.word)}!'
           : _wrongChoices.isNotEmpty
-          ? 'Koka: Suliton liwat.'
-          : 'Koka: Pamatia anay ang tinaga, dayon pilia ang kulang nga letra.',
+              ? 'Koka: Suliton liwat.'
+              : 'Koka: Pamatia anay ang tinaga, dayon pilia ang kulang nga letra.',
       child: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -3566,8 +3509,7 @@ class _UnitOneSpellingActivityState extends State<_UnitOneSpellingActivity>
                                     ? _letters[i]
                                     : _filledLetters[i] ?? '',
                                 lineColor: _quizLineColorAt(i),
-                                active:
-                                    candidates.isNotEmpty ||
+                                active: candidates.isNotEmpty ||
                                     _activeMissingIndex == i ||
                                     _filledLetters.containsKey(i),
                               ),
@@ -3890,19 +3832,13 @@ class _UnitOneHiddenSearchActivityState
     final width = view.width;
     final height = view.height;
     final safeTop = MediaQuery.paddingOf(context).top;
-    final controlSize = math
-        .min(width * .14, height * .075)
-        .clamp(48.0, 70.0)
-        .toDouble();
+    final controlSize =
+        math.min(width * .14, height * .075).clamp(48.0, 70.0).toDouble();
     final progressHeight = (height * .018).clamp(13.0, 20.0).toDouble();
-    final kokaSize = math
-        .min(width * .36, height * .20)
-        .clamp(110.0, 190.0)
-        .toDouble();
-    final letterSize = math
-        .min(width * .23, height * .11)
-        .clamp(74.0, 118.0)
-        .toDouble();
+    final kokaSize =
+        math.min(width * .36, height * .20).clamp(110.0, 190.0).toDouble();
+    final letterSize =
+        math.min(width * .23, height * .11).clamp(74.0, 118.0).toDouble();
 
     final placements = <String, Offset>{
       'A': Offset(width * .13, height * .63),
@@ -4011,8 +3947,8 @@ class _UnitOneHiddenSearchActivityState
       mascotMessage: _done
           ? 'Koka: Nakita mo sila tanan!'
           : _wrong != null
-          ? 'Koka: Indi ina ang ginapangita.'
-          : 'Koka: Unahon ta pangitaon ang letra nga mabatian mo.',
+              ? 'Koka: Indi ina ang ginapangita.'
+              : 'Koka: Unahon ta pangitaon ang letra nga mabatian mo.',
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -4036,12 +3972,10 @@ class _UnitOneHiddenSearchActivityState
                   children: [
                     for (var index = 0; index < _hiddenLetters.length; index++)
                       Positioned(
-                        left:
-                            width *
+                        left: width *
                             letterPlacements[index % letterPlacements.length]
                                 .dx,
-                        top:
-                            height *
+                        top: height *
                             letterPlacements[index % letterPlacements.length]
                                 .dy,
                         child: _HiddenLetterButton(
@@ -4210,8 +4144,8 @@ class _UnitOneSubjectMatchActivityState
       mascotMessage: _done
           ? 'Koka: Husto tanan!'
           : _wrong
-          ? 'Koka: Suliton liwat.'
-          : 'Koka: Pili-a ang ngalan, dayon pindoton ang sapat.',
+              ? 'Koka: Suliton liwat.'
+              : 'Koka: Pili-a ang ngalan, dayon pindoton ang sapat.',
       child: Column(
         children: [
           const SizedBox(height: 8),
@@ -4334,8 +4268,8 @@ class _UnitOneDragFillActivityState extends State<_UnitOneDragFillActivity> {
       mascotMessage: _done
           ? 'Koka: Husto! Natapos mo.'
           : _wrong != null
-          ? 'Koka: Suliton liwat.'
-          : 'Koka: Guyoda ang husto sa kahon.',
+              ? 'Koka: Suliton liwat.'
+              : 'Koka: Guyoda ang husto sa kahon.',
       child: Column(
         children: [
           SizedBox(
@@ -4463,17 +4397,17 @@ class _UnitOneSymbolButton extends StatelessWidget {
     final color = wrong
         ? TudloColors.coral
         : correct
-        ? TudloColors.green
-        : selected
-        ? TudloColors.blue
-        : Colors.white;
+            ? TudloColors.green
+            : selected
+                ? TudloColors.blue
+                : Colors.white;
     final feedbackColor = wrong
         ? TudloColors.coral
         : correct
-        ? TudloColors.green
-        : selected
-        ? TudloColors.blue
-        : TudloColors.green;
+            ? TudloColors.green
+            : selected
+                ? TudloColors.blue
+                : TudloColors.green;
     final choiceSize =
         assetSize ?? (usesAssetChoice ? 116.0 : (isLetter ? 100.0 : 112.0));
     final choiceHeight =
@@ -4501,10 +4435,10 @@ class _UnitOneSymbolButton extends StatelessWidget {
                       color: wrong
                           ? TudloColors.coral
                           : correct
-                          ? TudloColors.green
-                          : selected
-                          ? TudloColors.blue
-                          : TudloColors.green.withValues(alpha: .28),
+                              ? TudloColors.green
+                              : selected
+                                  ? TudloColors.blue
+                                  : TudloColors.green.withValues(alpha: .28),
                       width: selected || correct || wrong ? 4 : 2,
                     ),
               boxShadow: usesAssetChoice
@@ -5253,7 +5187,8 @@ class _AlphabetPresentationSlideData {
     return switch (type) {
       _AlphabetPresentationSlideType.letter => _letterSoundText(target.letter),
       _AlphabetPresentationSlideType.word ||
-      _AlphabetPresentationSlideType.highlight => target.speechWord,
+      _AlphabetPresentationSlideType.highlight =>
+        target.speechWord,
       _AlphabetPresentationSlideType.continuePrompt => voiceText,
     };
   }
@@ -5402,25 +5337,18 @@ class _AlphabetPresentationSlideState extends State<_AlphabetPresentationSlide>
     return LayoutBuilder(
       builder: (context, constraints) {
         final media = MediaQuery.sizeOf(context);
-        final width = constraints.maxWidth.isFinite
-            ? constraints.maxWidth
-            : media.width;
+        final width =
+            constraints.maxWidth.isFinite ? constraints.maxWidth : media.width;
         final height = constraints.maxHeight.isFinite
             ? constraints.maxHeight
             : media.height;
         final safeTop = MediaQuery.paddingOf(context).top;
-        final mascotSize = math
-            .min(width * .42, height * .26)
-            .clamp(148.0, 232.0)
-            .toDouble();
-        final topButtonSize = math
-            .min(width * .14, height * .075)
-            .clamp(48.0, 66.0)
-            .toDouble();
-        final navButtonSize = math
-            .min(width * .27, height * .15)
-            .clamp(110.0, 160.0)
-            .toDouble();
+        final mascotSize =
+            math.min(width * .42, height * .26).clamp(148.0, 232.0).toDouble();
+        final topButtonSize =
+            math.min(width * .14, height * .075).clamp(48.0, 66.0).toDouble();
+        final navButtonSize =
+            math.min(width * .27, height * .15).clamp(110.0, 160.0).toDouble();
         final isContinuePrompt =
             data.type == _AlphabetPresentationSlideType.continuePrompt;
 
@@ -6266,10 +6194,8 @@ class _QuizTimeSplashState extends State<_QuizTimeSplash> {
         final width = constraints.maxWidth;
         final height = constraints.maxHeight;
         final safeTop = MediaQuery.paddingOf(context).top;
-        final topButtonSize = math
-            .min(width * .14, height * .075)
-            .clamp(48.0, 66.0)
-            .toDouble();
+        final topButtonSize =
+            math.min(width * .14, height * .075).clamp(48.0, 66.0).toDouble();
         return SizedBox(
           width: width,
           height: height,
@@ -7565,8 +7491,8 @@ class _HelperWorkplaceDragCardState extends State<_HelperWorkplaceDragCard> {
       mascotMessage: _placed
           ? 'Koka: ${widget.helper.workplaceSpeech}'
           : _retrying
-          ? 'Koka: ${widget.helper.retryWorkplace}'
-          : 'Koka: ${widget.helper.workplaceInstruction}',
+              ? 'Koka: ${widget.helper.retryWorkplace}'
+              : 'Koka: ${widget.helper.workplaceInstruction}',
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -7686,8 +7612,8 @@ class _HelperToolDragCardState extends State<_HelperToolDragCard> {
       mascotMessage: _matched
           ? 'Koka: ${widget.helper.toolSuccess}'
           : _retrying
-          ? 'Koka: Liwata. Pangitaa ang sakto nga gamit.'
-          : 'Koka: ${widget.helper.toolInstruction}',
+              ? 'Koka: Liwata. Pangitaa ang sakto nga gamit.'
+              : 'Koka: ${widget.helper.toolInstruction}',
       child: Column(
         children: [
           Text(
@@ -7859,13 +7785,13 @@ class _HelperReviewCardState extends State<_HelperReviewCard> {
               final itemSize = itemCount == 0
                   ? 0.0
                   : math
-                        .min(
-                          126.0,
-                          (constraints.maxWidth - gap * (itemCount - 1)) /
-                              itemCount,
-                        )
-                        .clamp(0.0, 126.0)
-                        .toDouble();
+                      .min(
+                        126.0,
+                        (constraints.maxWidth - gap * (itemCount - 1)) /
+                            itemCount,
+                      )
+                      .clamp(0.0, 126.0)
+                      .toDouble();
               final dragSize = math.min(126.0, itemSize);
 
               return Column(
@@ -8235,9 +8161,8 @@ class _HelperStoryTapQuizCardState extends State<_HelperStoryTapQuizCard> {
     return _UnitOneQuizStage(
       prompt: _completed ? 'Maayo gid!' : _target.instruction,
       progress: widget.progress,
-      mascotMessage: _completed
-          ? 'Koka: Husto tanan!'
-          : 'Koka: ${widget.title}',
+      mascotMessage:
+          _completed ? 'Koka: Husto tanan!' : 'Koka: ${widget.title}',
       child: LayoutBuilder(
         builder: (context, constraints) {
           final width = constraints.maxWidth;
@@ -8397,8 +8322,7 @@ class _HelperToolSequenceQuizCardState
   _HelperTool? _wrongTool;
   bool _completed = false;
 
-  _HelperWord get _target =>
-      widget.targets[_targetIndex.clamp(
+  _HelperWord get _target => widget.targets[_targetIndex.clamp(
         0,
         math.max(0, widget.targets.length - 1),
       )];
@@ -8746,8 +8670,7 @@ class _HelperParadeQuizCardState extends State<_HelperParadeQuizCard> {
   bool _completed = false;
   int _feedbackKey = 0;
 
-  _HelperWord get _target =>
-      widget.helpers[_targetIndex.clamp(
+  _HelperWord get _target => widget.helpers[_targetIndex.clamp(
         0,
         math.max(0, widget.helpers.length - 1),
       )];
@@ -9329,15 +9252,15 @@ List<_HelperWord> _helpersForLesson(int lessonNumber) {
     2 => const [police, firefighter, vendor],
     3 => const [farmer, fisher],
     _ => const [
-      teacher,
-      doctor,
-      nurse,
-      police,
-      firefighter,
-      vendor,
-      farmer,
-      fisher,
-    ],
+        teacher,
+        doctor,
+        nurse,
+        police,
+        firefighter,
+        vendor,
+        farmer,
+        fisher,
+      ],
   };
 }
 
@@ -9634,11 +9557,9 @@ class _PlaceTapCardState extends State<_PlaceTapCard> {
                   _PlaceArt(place: widget.place, size: 330),
                   if (_tapped) ...[
                     const _AnimalSparkles(size: 360),
-                    for (
-                      var index = 0;
-                      index < widget.place.effects.length;
-                      index++
-                    )
+                    for (var index = 0;
+                        index < widget.place.effects.length;
+                        index++)
                       Positioned(
                         right: 16.0 + index * 34,
                         top: index.isEven ? 18 : 72,
@@ -9723,8 +9644,8 @@ class _KokaTravelCardState extends State<_KokaTravelCard> {
       mascotMessage: _arrived
           ? 'Koka: ${widget.place.arrivedSpeech}'
           : _retrying
-          ? 'Koka: Liwata. ${widget.place.travelInstruction}'
-          : 'Koka: ${widget.place.travelInstruction}',
+              ? 'Koka: Liwata. ${widget.place.travelInstruction}'
+              : 'Koka: ${widget.place.travelInstruction}',
       child: SizedBox(
         height: 530,
         child: Stack(
@@ -10043,10 +9964,8 @@ class _PlaceSituationGameCardState extends State<_PlaceSituationGameCard> {
 
   @override
   Widget build(BuildContext context) {
-    final choices = _choiceOrders[_index]
-        .map(_placeByHil)
-        .whereType<_PlaceWord>()
-        .toList();
+    final choices =
+        _choiceOrders[_index].map(_placeByHil).whereType<_PlaceWord>().toList();
     return _AnimalStage(
       mascotMessage: 'Koka: Diin kita makadto?',
       child: Column(
@@ -10169,14 +10088,14 @@ List<_PlaceWord> _placesForLesson(int lessonNumber) {
     2 => [all['tinda']!, all['plasa']!, all['ospital']!],
     3 => [all['uma']!, all['baybay']!],
     _ => [
-      all['balay']!,
-      all['eskwelahan']!,
-      all['tinda']!,
-      all['ospital']!,
-      all['uma']!,
-      all['baybay']!,
-      all['plasa']!,
-    ],
+        all['balay']!,
+        all['eskwelahan']!,
+        all['tinda']!,
+        all['ospital']!,
+        all['uma']!,
+        all['baybay']!,
+        all['plasa']!,
+      ],
   };
 }
 
@@ -10533,8 +10452,7 @@ class _FamilyHouseWindowQuizActivityState
   bool _done = false;
   int _feedbackKey = 0;
 
-  _FamilyWord get _target =>
-      widget.members[_targetIndex.clamp(
+  _FamilyWord get _target => widget.members[_targetIndex.clamp(
         0,
         math.max(0, widget.members.length - 1),
       )];
@@ -10631,11 +10549,9 @@ class _FamilyHouseWindowQuizActivityState
                       alignment: Alignment.center,
                       children: [
                         const Positioned.fill(child: _FamilyHouseShell()),
-                        for (
-                          var index = 0;
-                          index < _windowOrder.length && index < 3;
-                          index++
-                        )
+                        for (var index = 0;
+                            index < _windowOrder.length && index < 3;
+                            index++)
                           Positioned(
                             left: 31.0 + index * 105.0,
                             top: 114,
@@ -10722,8 +10638,7 @@ class _FamilyVisitorDoorQuizActivityState
   bool _done = false;
   int _feedbackKey = 0;
 
-  _FamilyWord get _target =>
-      widget.visitors[_targetIndex.clamp(
+  _FamilyWord get _target => widget.visitors[_targetIndex.clamp(
         0,
         math.max(0, widget.visitors.length - 1),
       )];
@@ -10925,8 +10840,7 @@ class _FamilyPhotoQuizActivityState extends State<_FamilyPhotoQuizActivity> {
       return;
     }
 
-    final correct =
-        member.hil == _target.member.hil &&
+    final correct = member.hil == _target.member.hil &&
         slot.member.hil == _target.member.hil;
     widget.onAttempt(correct);
     setState(() {
@@ -10989,9 +10903,8 @@ class _FamilyPhotoQuizActivityState extends State<_FamilyPhotoQuizActivity> {
     return _UnitOneQuizStage(
       prompt: 'Photo sang pamilya!',
       progress: widget.progress,
-      mascotMessage: _done
-          ? 'Koka: Kumpleto na ang photo!'
-          : 'Koka: $_instruction',
+      mascotMessage:
+          _done ? 'Koka: Kumpleto na ang photo!' : 'Koka: $_instruction',
       child: LayoutBuilder(
         builder: (context, constraints) {
           final width = constraints.maxWidth;
@@ -11143,8 +11056,8 @@ class _FamilyPhotoSlot extends StatelessWidget {
                 color: candidates.isNotEmpty
                     ? TudloColors.blue
                     : hasPlaced
-                    ? TudloColors.green
-                    : const Color(0xFFE8D59B),
+                        ? TudloColors.green
+                        : const Color(0xFFE8D59B),
                 width: 4,
               ),
             ),
@@ -11615,8 +11528,8 @@ class _FamilyMatchingCardState extends State<_FamilyMatchingCard> {
             backgroundColor: matched
                 ? TudloColors.green
                 : selected
-                ? TudloColors.blue
-                : const Color(0xFF49CC55),
+                    ? TudloColors.blue
+                    : const Color(0xFF49CC55),
             foregroundColor: Colors.white,
             elevation: selected || matched ? 7 : 4,
             shadowColor: TudloColors.forest.withValues(alpha: .20),
@@ -11652,8 +11565,8 @@ class _FamilyMatchingCardState extends State<_FamilyMatchingCard> {
             color: matched
                 ? const Color(0xFFE8FFD8)
                 : wrong
-                ? const Color(0xFFFFEEEE)
-                : Colors.transparent,
+                    ? const Color(0xFFFFEEEE)
+                    : Colors.transparent,
             borderRadius: BorderRadius.circular(18),
             boxShadow: matched
                 ? [
@@ -11861,8 +11774,8 @@ class _FamilyChoiceGrid extends StatelessWidget {
             backgroundColor: wrong
                 ? const Color(0xFFE53935)
                 : correct
-                ? TudloColors.green
-                : const Color(0xFF49CC55),
+                    ? TudloColors.green
+                    : const Color(0xFF49CC55),
             foregroundColor: Colors.white,
             elevation: active ? 8 : 3,
             shadowColor: TudloColors.forest.withValues(alpha: .24),
@@ -12412,8 +12325,8 @@ class _AnimalHomeDragCardState extends State<_AnimalHomeDragCard> {
       mascotMessage: _placed
           ? 'Koka: ${widget.animal.successSpeech}'
           : _retrying
-          ? 'Koka: ${widget.animal.retryInstruction}'
-          : 'Koka: ${widget.animal.dragInstruction}',
+              ? 'Koka: ${widget.animal.retryInstruction}'
+              : 'Koka: ${widget.animal.dragInstruction}',
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -12648,13 +12561,13 @@ class _AnimalReviewCardState extends State<_AnimalReviewCard> {
               final itemSize = itemCount == 0
                   ? 0.0
                   : math
-                        .min(
-                          136.0,
-                          (constraints.maxWidth - gap * (itemCount - 1)) /
-                              itemCount,
-                        )
-                        .clamp(0.0, 136.0)
-                        .toDouble();
+                      .min(
+                        136.0,
+                        (constraints.maxWidth - gap * (itemCount - 1)) /
+                            itemCount,
+                      )
+                      .clamp(0.0, 136.0)
+                      .toDouble();
               final dragSize = math.min(132.0, itemSize);
 
               return Column(
@@ -13189,9 +13102,8 @@ String _titleCase(String value) {
       .split(RegExp(r'\s+'))
       .where((word) => word.isNotEmpty)
       .map((word) {
-        final letters = word.characters.toList();
-        if (letters.isEmpty) return '';
-        return '${letters.first.toUpperCase()}${letters.skip(1).join().toLowerCase()}';
-      })
-      .join(' ');
+    final letters = word.characters.toList();
+    if (letters.isEmpty) return '';
+    return '${letters.first.toUpperCase()}${letters.skip(1).join().toLowerCase()}';
+  }).join(' ');
 }

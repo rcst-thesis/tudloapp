@@ -43,6 +43,17 @@ class PushScreenRouteAction extends MapRouteAction {
   final WidgetBuilder builder;
 }
 
+/// Pops the current [MapScreen] route instead of navigating onward.
+///
+/// Used when a lesson step pushes the real [MapScreen] as a one-off,
+/// in-lesson "tap the map" beat (its own standalone [MapEventOverrides]
+/// instance, not the app's shared one) rather than the persistent Map tab:
+/// tapping the target location should resume the lesson step that pushed
+/// it, not open a new lesson/catalog/screen.
+class PopMapRouteAction extends MapRouteAction {
+  const PopMapRouteAction();
+}
+
 /// Flutter-owned default destination for each map location. Lesson-mapped
 /// locations share the catalog used by the Lessons tab; unrelated locations
 /// keep their existing temporary shells.
@@ -64,28 +75,28 @@ class MapDefaultRoutes {
       _actions[location] ?? const GoHomeRouteAction();
 
   static Widget _farm(BuildContext context) => const PlaceholderScreen(
-    title: 'Farm',
-    description: 'Temporary Farm shell',
-    icon: Icons.agriculture_rounded,
-  );
+        title: 'Farm',
+        description: 'Temporary Farm shell',
+        icon: Icons.agriculture_rounded,
+      );
 
   static Widget _beach(BuildContext context) => const PlaceholderScreen(
-    title: 'Beach',
-    description: 'Temporary Beach shell',
-    icon: Icons.beach_access_rounded,
-  );
+        title: 'Beach',
+        description: 'Temporary Beach shell',
+        icon: Icons.beach_access_rounded,
+      );
 
   static Widget _church(BuildContext context) => const PlaceholderScreen(
-    title: 'Church',
-    description: 'Temporary Church shell',
-    icon: Icons.church_rounded,
-  );
+        title: 'Church',
+        description: 'Temporary Church shell',
+        icon: Icons.church_rounded,
+      );
 
   static Widget _hospital(BuildContext context) => const PlaceholderScreen(
-    title: 'Hospital',
-    description: 'Temporary Hospital shell',
-    icon: Icons.local_hospital_rounded,
-  );
+        title: 'Hospital',
+        description: 'Temporary Hospital shell',
+        icon: Icons.local_hospital_rounded,
+      );
 }
 
 /// Flutter-owned truth for any lesson/event that currently overrides a map

@@ -47,9 +47,23 @@ class MapScreen extends StatefulWidget {
   /// overrides survive leaving and returning to the Map tab, since
   /// MapScreen itself is rebuilt fresh every time it's navigated to (e.g.
   /// from [AppBottomTabNavigation]).
-  const MapScreen({this.eventOverrides, super.key});
+  ///
+  /// [temporaryUnlockedLocations] makes each listed location render/behave
+  /// fully unlocked for the life of *this* pushed instance only -- it never
+  /// touches [MapProgressController.unlockedLocations], so the permanent
+  /// reward state is untouched. This is for a lesson's own one-off "tap the
+  /// map" beat (see `docs/LESSON_MAP_STEP_FIX.md`): its target location
+  /// should look and behave available (not locked-but-glowing) while that
+  /// beat is on screen, even though the lesson hasn't been completed/claimed
+  /// yet.
+  const MapScreen({
+    this.eventOverrides,
+    this.temporaryUnlockedLocations = const {},
+    super.key,
+  });
 
   final MapEventOverrides? eventOverrides;
+  final Set<MapLocation> temporaryUnlockedLocations;
 
   @override
   State<MapScreen> createState() => _MapScreenState();
@@ -144,11 +158,17 @@ class _MapScreenState extends State<MapScreen> {
   // Keeps two Flutter-owned, Rive-visible booleans in sync: `hasEvent`
   // (golden/bouncy visual hint) follows whether each location currently has
   // an event override exactly, on while the override is set and off once
-  // it's cleared. `isUnlocked` is an independent permanent reward state:
-  // scheduling an event may create a temporary glowing lesson entrance but
-  // must never unlock the physical location. Only a claimed lesson updates
-  // the learner-owned unlocked-location set. House stays the intentional
-  // permanent Home destination from a new game.
+  // it's cleared. `isUnlocked` is otherwise an independent permanent reward
+  // state: scheduling an event on the app's shared Map tab may create a
+  // temporary glowing lesson entrance but must never unlock the physical
+  // location there -- only a claimed lesson updates the learner-owned
+  // unlocked-location set. The one exception is `temporaryUnlockedLocations`
+  // (a lesson's own one-off "tap the map" beat, a caller-supplied instance
+  // never reused by the Map tab): those render fully unlocked for this
+  // pushed instance's lifetime without ever touching
+  // `_mapProgress.unlockedLocations`, so the permanent reward state still
+  // isn't touched. House stays the intentional permanent Home destination
+  // from a new game.
   //
   // Unlike the previous map asset, `isUnlocked` isn't partially Rive-owned
   // here -- Flutter is the sole source of truth for it now, so every
@@ -169,7 +189,8 @@ class _MapScreenState extends State<MapScreen> {
       if (location == MapLocation.house) continue;
       _riveMapController.setUnlocked(
         location,
-        _mapProgress.unlockedLocations.contains(location),
+        _mapProgress.unlockedLocations.contains(location) ||
+            widget.temporaryUnlockedLocations.contains(location),
       );
     }
     for (final location in MapLocation.values) {
@@ -305,6 +326,8 @@ class _MapScreenState extends State<MapScreen> {
         Navigator.of(
           context,
         ).push(FadePageRoute<void>(page: Builder(builder: builder)));
+      case PopMapRouteAction():
+        Navigator.of(context).pop();
     }
 
     _isHandlingTap = false;
