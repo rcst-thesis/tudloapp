@@ -14,6 +14,15 @@ import 'package:tudloapp/features/translation/services/nmt_translation_service.d
 import 'package:tudloapp/features/translation/services/translation_history.dart';
 import 'package:tudloapp/core/navigation/app_bottom_tab_navigation.dart';
 import 'package:tudloapp/shared/widgets/content_footer_wave.dart';
+import 'package:tudloapp/features/dictionary/domain/dictionary_entry.dart'
+    as dict;
+import 'package:tudloapp/features/dictionary/domain/dictionary_search.dart';
+import 'package:tudloapp/features/dictionary/domain/dictionary_words.dart'
+    as dict;
+import 'package:tudloapp/features/dictionary/presentation/dictionary_colors.dart';
+import 'package:tudloapp/features/dictionary/presentation/widgets/dictionary_lookup_page.dart';
+import 'package:tudloapp/features/dictionary/presentation/widgets/dictionary_word_grid_card.dart';
+import 'package:tudloapp/features/learner/domain/learner_scope.dart';
 
 class _TranslateStyle {
   /// Mockup tones: a light green page closed by a deeper green wave, the
@@ -1345,38 +1354,113 @@ class _DictionarySheet extends StatelessWidget {
 
   const _DictionarySheet({required this.entry});
 
-  List<DictionaryEntry> _matches() {
-    final words = <String>{
-      for (final part in '${entry.source} ${entry.target}'.split(
+  /// The Hiligaynon half of the pair, whichever direction produced it.
+  String get _hiligaynon => entry.fromEnglish ? entry.target : entry.source;
+
+  /// Every dictionary entry whose word appears anywhere in the Hiligaynon
+  /// text, in the order it appears there.
+  ///
+  /// Matching is per word rather than a substring scan, so "aga" in
+  /// "Maayong aga" is found while "aga" inside a longer word is not. A
+  /// multi-word entry is matched as a phrase.
+  ///
+  /// Comparison uses [stripAccentsLower], not the dictionary's
+  /// [normalizeForSearch]: that one folds k and s together (both to c) so a
+  /// child's typo still finds the word, which is right for a search box but
+  /// would list "ka" as a word found in "sa". Here the text and the words
+  /// are both known, so only case and accents should be ignored.
+  List<dict.DictionaryEntry> _matches() {
+    final tokens = [
+      for (final part in _hiligaynon.split(
         RegExp(r'[^\p{L}\p{N}]+', unicode: true),
       ))
-        if (part.isNotEmpty) DictionaryData.normalizeForSearch(part),
-    }..removeWhere((w) => w.isEmpty);
-    return [
-      for (final item in DictionaryData.entries)
-        if (words.contains(
-              DictionaryData.normalizeForSearch(item.hiligaynon),
-            ) ||
-            item.english
-                .split(RegExp(r'[;,/]'))
-                .map((m) => DictionaryData.normalizeForSearch(m))
-                .any(words.contains))
-          item,
-    ];
+        if (part.isNotEmpty) stripAccentsLower(part),
+    ]..removeWhere((token) => token.isEmpty);
+    if (tokens.isEmpty) return const [];
+
+    // Keyed by entry, not by position: "sa" and "sa imo" both start at the
+    // same word, and the drawer should show both.
+    final found = <dict.DictionaryEntry, int>{};
+    for (final item in dict.DictionaryWords.all) {
+      final wordParts = [
+        for (final part in item.word.split(
+          RegExp(r'[^\p{L}\p{N}]+', unicode: true),
+        ))
+          if (part.isNotEmpty) stripAccentsLower(part),
+      ];
+      if (wordParts.isEmpty) continue;
+      final at = _indexOfSequence(tokens, wordParts);
+      if (at != -1) found[item] = at;
+    }
+    final ordered = found.keys.toList()
+      ..sort((a, b) {
+        final byPosition = found[a]!.compareTo(found[b]!);
+        // A longer phrase starting at the same word comes first.
+        return byPosition != 0
+            ? byPosition
+            : b.word.length.compareTo(a.word.length);
+      });
+    return ordered;
+  }
+
+  /// Where [needle] starts inside [haystack], or -1.
+  static int _indexOfSequence(List<String> haystack, List<String> needle) {
+    for (var i = 0; i + needle.length <= haystack.length; i++) {
+      var matched = true;
+      for (var j = 0; j < needle.length; j++) {
+        if (haystack[i + j] != needle[j]) {
+          matched = false;
+          break;
+        }
+      }
+      if (matched) return i;
+    }
+    return -1;
+  }
+
+  void _openLookup(BuildContext context, dict.DictionaryEntry item) {
+    final controller = LearnerScope.of(context);
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => Scaffold(
+          backgroundColor: DictionaryColors.background,
+          body: SafeArea(
+            child: Stack(
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: DictionaryLookupPage(
+                    entry: item,
+                    isFavorited:
+                        controller.profile?.favoritedWords.contains(item.id) ??
+                        false,
+                    onFavoriteChanged: (_) =>
+                        controller.toggleFavoriteWord(item.id),
+                  ),
+                ),
+                Positioned(
+                  top: 12,
+                  right: 12,
+                  child: _SheetCloseButton(
+                    onTap: () => Navigator.of(context).pop(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final matches = _matches();
     return _SheetFrame(
-      title: 'Dictionary',
-      child: ListView(
-        primary: true,
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
-        children: [
-          if (matches.isEmpty)
-            Padding(
-              padding: const EdgeInsets.all(8),
+      title: 'Meaning',
+      child: matches.isEmpty
+          ? Padding(
+              padding: const EdgeInsets.fromLTRB(24, 8, 24, 40),
               child: Text(
                 'No dictionary entries for these words yet.',
                 style: GoogleFonts.nunito(
@@ -1385,87 +1469,25 @@ class _DictionarySheet extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-            ),
-          for (final item in matches)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 14),
-              child: _DictionaryCard(item: item),
-            ),
-        ],
-      ),
-    );
-  }
-}
-
-class _DictionaryCard extends StatelessWidget {
-  final DictionaryEntry item;
-
-  const _DictionaryCard({required this.item});
-
-  @override
-  Widget build(BuildContext context) {
-    final meta = [
-      if (item.pronunciation case final p? when p.trim().isNotEmpty) p,
-      if (item.partOfSpeech case final p? when p.trim().isNotEmpty) p,
-    ].join(' · ');
-    return Container(
-      decoration: BoxDecoration(
-        color: _TranslateStyle.card,
-        borderRadius: BorderRadius.circular(_TranslateStyle.radius),
-        boxShadow: _TranslateStyle.shadow,
-      ),
-      padding: const EdgeInsets.fromLTRB(22, 18, 14, 18),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  item.hiligaynon,
-                  style: GoogleFonts.nunito(
-                    color: TudloColors.forest,
-                    fontSize: 26,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
+            )
+          : GridView.builder(
+              primary: true,
+              padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 220,
+                mainAxisSpacing: 14,
+                crossAxisSpacing: 14,
+                childAspectRatio: .92,
               ),
-            ],
-          ),
-          if (meta.isNotEmpty)
-            Text(
-              meta,
-              style: GoogleFonts.nunito(
-                color: TudloColors.muted,
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-              ),
+              itemCount: matches.length,
+              itemBuilder: (context, index) {
+                final item = matches[index];
+                return DictionaryWordGridCard(
+                  entry: item,
+                  onTap: () => _openLookup(context, item),
+                );
+              },
             ),
-          const SizedBox(height: 8),
-          Text(
-            item.english,
-            style: GoogleFonts.nunito(
-              color: TudloColors.ink,
-              fontSize: 18,
-              height: 1.3,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          if (item.exampleSentence case final example?
-              when example.trim().isNotEmpty) ...[
-            const SizedBox(height: 8),
-            Text(
-              '▸ $example',
-              style: GoogleFonts.nunito(
-                color: TudloColors.muted,
-                fontSize: 15,
-                height: 1.3,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ],
-        ],
-      ),
     );
   }
 }
