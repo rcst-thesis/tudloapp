@@ -41,6 +41,80 @@ void main() {
     SharedPreferences.setMockInitialValues({});
   });
 
+  testWidgets('lesson loading card fits a short landscape viewport', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(640, 312);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    AppData.configureHostedSession(
+      grade: 3,
+      energy: 60,
+      unlockedLevels: const [1],
+      completed: const <int>[],
+      stickers: const <int, String>{},
+      catalogLevels: const [1],
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: AppStateScope(
+          notifier: AppState()..username = 'Koka',
+          child: const LevelGamePage(level: 1),
+        ),
+      ),
+    );
+
+    expect(find.text('Ginakuha ang leksiyon...'), findsOneWidget);
+    expect(_renderException(tester), isNull);
+  });
+
+  testWidgets('lesson result scrolls above its actions in short landscape', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(640, 312);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: LessonResultPage(
+            backgroundAsset:
+                'assets/images/level_game/backgrounds/classroom.svg',
+            fullscreenResult: true,
+            accuracy: 100,
+            mistakes: 0,
+            durationLabel: '1:00',
+            onBackToMap: () {},
+            onContinue: () {},
+          ),
+        ),
+      ),
+    );
+
+    expect(find.text('Natapos mo na ang Leksyon!'), findsOneWidget);
+    expect(find.byType(SingleChildScrollView), findsOneWidget);
+    expect(
+      tester
+          .state<ScrollableState>(find.byType(Scrollable))
+          .position
+          .maxScrollExtent,
+      greaterThan(0),
+    );
+    expect(
+      find.byKey(const Key('lesson-result-gallery-button')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const Key('lesson-result-continue-button')),
+      findsOneWidget,
+    );
+    expect(_renderException(tester), isNull);
+  });
+
   testWidgets('all twelve preserved DevG activities mount in the Tudlo host', (
     tester,
   ) async {

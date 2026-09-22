@@ -1490,7 +1490,13 @@ class _LessonLoadingCard extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: const [
-            _LessonKokaMascot(size: 126, mood: KokaMood.idle),
+            Flexible(
+              fit: FlexFit.loose,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: _LessonKokaMascot(size: 126, mood: KokaMood.idle),
+              ),
+            ),
             SizedBox(height: 14),
             Text(
               'Ginakuha ang leksiyon...',
@@ -2515,7 +2521,7 @@ class _LessonCompleteDialogState extends State<_LessonCompleteDialog> {
               onCommitted: widget.onContinue,
               onBackToMap: widget.onBackToMap,
             )
-          : _LessonResultPage(
+          : LessonResultPage(
               key: const ValueKey('result'),
               backgroundAsset: widget.backgroundAsset,
               accuracy: widget.accuracy,
@@ -2535,7 +2541,7 @@ class _LessonCompleteDialogState extends State<_LessonCompleteDialog> {
   }
 }
 
-class _LessonResultPage extends StatelessWidget {
+class LessonResultPage extends StatelessWidget {
   final String backgroundAsset;
   final bool fullscreenResult;
   final int accuracy;
@@ -2544,7 +2550,7 @@ class _LessonResultPage extends StatelessWidget {
   final VoidCallback onBackToMap;
   final FutureOr<void> Function() onContinue;
 
-  const _LessonResultPage({
+  const LessonResultPage({
     super.key,
     required this.backgroundAsset,
     this.fullscreenResult = false,
@@ -2560,6 +2566,7 @@ class _LessonResultPage extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
     final bottom = MediaQuery.paddingOf(context).bottom;
     final top = MediaQuery.paddingOf(context).top;
+    final compactFullscreen = fullscreenResult && size.height < 650;
     return SizedBox(
       key: fullscreenResult ? const Key('lesson-one-result-screen') : null,
       width: size.width,
@@ -2591,56 +2598,77 @@ class _LessonResultPage extends StatelessWidget {
             child: Column(
               children: [
                 Expanded(
-                  child: Center(
-                    child: Transform.translate(
-                      offset: Offset(0, -size.height * .045),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Maayo gid!',
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.nunito(
-                              color: Colors.white,
-                              fontSize: (size.width * .03).clamp(17.0, 24.0),
-                              height: 1,
-                              fontWeight: FontWeight.w900,
-                              letterSpacing: 0,
-                              shadows: [
-                                Shadow(
-                                  color: TudloColors.ink.withValues(alpha: .70),
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 3),
+                  child: LayoutBuilder(
+                    builder: (context, constraints) => SingleChildScrollView(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minHeight: constraints.maxHeight,
+                        ),
+                        child: Center(
+                          child: Transform.translate(
+                            offset: compactFullscreen
+                                ? Offset.zero
+                                : Offset(0, -size.height * .045),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'Maayo gid!',
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.nunito(
+                                    color: Colors.white,
+                                    fontSize: (size.width * .03).clamp(
+                                      17.0,
+                                      24.0,
+                                    ),
+                                    height: 1,
+                                    fontWeight: FontWeight.w900,
+                                    letterSpacing: 0,
+                                    shadows: [
+                                      Shadow(
+                                        color: TudloColors.ink.withValues(
+                                          alpha: .70,
+                                        ),
+                                        blurRadius: 8,
+                                        offset: const Offset(0, 3),
+                                      ),
+                                    ],
+                                  ),
                                 ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  'Natapos mo na ang Leksyon!',
+                                  textAlign: TextAlign.center,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: GoogleFonts.nunito(
+                                    color: Colors.white,
+                                    fontSize: (size.width * .038).clamp(
+                                      20.0,
+                                      30.0,
+                                    ),
+                                    height: 1,
+                                    fontWeight: FontWeight.w900,
+                                    letterSpacing: 0,
+                                    shadows: [
+                                      Shadow(
+                                        color: TudloColors.ink.withValues(
+                                          alpha: .70,
+                                        ),
+                                        blurRadius: 8,
+                                        offset: const Offset(0, 3),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: (size.height * .025).clamp(8.0, 16.0),
+                                ),
+                                const _ResultGoldStar(),
                               ],
                             ),
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'Natapos mo na ang Leksyon!',
-                            textAlign: TextAlign.center,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.nunito(
-                              color: Colors.white,
-                              fontSize: (size.width * .038).clamp(20.0, 30.0),
-                              height: 1,
-                              fontWeight: FontWeight.w900,
-                              letterSpacing: 0,
-                              shadows: [
-                                Shadow(
-                                  color: TudloColors.ink.withValues(alpha: .70),
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: (size.height * .025).clamp(8.0, 16.0),
-                          ),
-                          const _ResultGoldStar(),
-                        ],
+                        ),
                       ),
                     ),
                   ),
