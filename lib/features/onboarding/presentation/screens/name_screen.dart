@@ -240,10 +240,10 @@ class _NameScreenState extends State<NameScreen> {
                             ),
                           ),
                           const Positioned(
-                            left: 175,
-                            top: 415,
-                            width: 64,
-                            height: 18,
+                            left: 164,
+                            top: 462,
+                            width: 86,
+                            height: 22,
                             child: DecoratedBox(
                               decoration: BoxDecoration(
                                 color: Color(0x706B6B6B),
@@ -254,10 +254,10 @@ class _NameScreenState extends State<NameScreen> {
                             ),
                           ),
                           const Positioned(
-                            left: 167,
-                            top: 325,
-                            width: 77,
-                            height: 103,
+                            left: 154,
+                            top: 342,
+                            width: 104,
+                            height: 134,
                             // `contain`, not `fill` -- unlike the old
                             // static placeholder image, stretching Rive's
                             // own artwork non-uniformly visibly distorts
@@ -282,6 +282,8 @@ class _NameScreenState extends State<NameScreen> {
                           Positioned(
                             left: 30,
                             top: 807,
+                            width: 352,
+                            height: 70,
                             child: _NextButton(onPressed: _continue),
                           ),
                         ],
@@ -335,6 +337,8 @@ class _NextButton extends StatelessWidget {
     return RiveLongButton(
       key: const Key('name-next-button'),
       label: 'next',
+      buttonHeight: 70,
+      fallbackFontSize: 19,
       onPressed: onPressed,
     );
   }

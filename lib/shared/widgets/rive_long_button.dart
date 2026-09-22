@@ -16,6 +16,9 @@ class RiveLongButton extends StatefulWidget {
     this.semanticLabel,
     this.enabled = true,
     this.soundEffectAsset,
+    this.buttonHeight = RiveLongButton.height,
+    this.fillBounds = false,
+    this.fallbackFontSize,
     super.key,
   });
 
@@ -31,6 +34,9 @@ class RiveLongButton extends StatefulWidget {
   final VoidCallback onPressed;
   final String? semanticLabel;
   final bool enabled;
+  final double buttonHeight;
+  final bool fillBounds;
+  final double? fallbackFontSize;
 
   /// Overrides the shared tap cue for a specific action.
   final String? soundEffectAsset;
@@ -46,10 +52,13 @@ class _RiveLongButtonState extends State<RiveLongButton> {
   rive.ViewModelInstanceString? _labelProperty;
   rive.BooleanInput? _pressInput;
 
+  bool get _usesFlutterSurface =>
+      widget.buttonHeight > RiveLongButton.height && !widget.fillBounds;
+
   @override
   void initState() {
     super.initState();
-    unawaited(_load());
+    if (!_usesFlutterSurface) unawaited(_load());
   }
 
   @override
@@ -58,6 +67,7 @@ class _RiveLongButtonState extends State<RiveLongButton> {
     if (oldWidget.label != widget.label) {
       _labelProperty?.value = widget.label;
     }
+    if (!_usesFlutterSurface && _controller == null) unawaited(_load());
   }
 
   Future<void> _load() async {
@@ -147,7 +157,7 @@ class _RiveLongButtonState extends State<RiveLongButton> {
       opacity: widget.enabled ? 1 : RiveLongButton._disabledOpacity,
       child: SizedBox(
         width: RiveLongButton.width,
-        height: RiveLongButton.height,
+        height: widget.buttonHeight,
         child: Semantics(
           button: true,
           enabled: widget.enabled,
@@ -161,11 +171,14 @@ class _RiveLongButtonState extends State<RiveLongButton> {
             onTap: widget.enabled ? _handleTap : null,
             child: IgnorePointer(
               ignoring: !widget.enabled,
-              child: controller == null
-                  ? _LongButtonFallback(label: widget.label)
+              child: _usesFlutterSurface || controller == null
+                  ? _LongButtonFallback(
+                      label: widget.label,
+                      fontSize: widget.fallbackFontSize,
+                    )
                   : rive.RiveWidget(
                       controller: controller,
-                      fit: rive.Fit.contain,
+                      fit: widget.fillBounds ? rive.Fit.fill : rive.Fit.contain,
                       alignment: Alignment.center,
                     ),
             ),
@@ -177,9 +190,10 @@ class _RiveLongButtonState extends State<RiveLongButton> {
 }
 
 class _LongButtonFallback extends StatelessWidget {
-  const _LongButtonFallback({required this.label});
+  const _LongButtonFallback({required this.label, this.fontSize});
 
   final String label;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -211,9 +225,8 @@ class _LongButtonFallback extends StatelessWidget {
                   style: const TextStyle(
                     color: Colors.white,
                     fontFamily: 'ComicRelief',
-                    fontSize: 15,
                     fontWeight: FontWeight.w700,
-                  ),
+                  ).copyWith(fontSize: fontSize ?? 15),
                 ),
               ),
             ),
