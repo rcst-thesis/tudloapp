@@ -399,4 +399,35 @@ void main() {
       history.reset();
     },
   );
+
+  testWidgets('the header shows the translate wordmark beside its button', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(412, 917);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      MaterialApp(home: TranslationPage(translateEnglish: (_) async => 'aga')),
+    );
+    await tester.pump();
+
+    final wordmark = find.byWidgetPredicate(
+      (widget) =>
+          widget is Image &&
+          widget.image is AssetImage &&
+          (widget.image as AssetImage).assetName ==
+              'assets/images/translate_title.png',
+    );
+    expect(wordmark, findsOneWidget);
+    // Sits to the right of the disc button, and the row fits the phone.
+    final button = find.byTooltip('Favorites and recents');
+    expect(button, findsOneWidget);
+    expect(
+      tester.getTopLeft(wordmark).dx,
+      greaterThan(tester.getTopRight(button).dx - 1),
+    );
+    expect(tester.takeException(), isNull);
+  });
 }

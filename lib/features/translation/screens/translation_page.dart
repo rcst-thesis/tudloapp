@@ -30,6 +30,7 @@ class _TranslateStyle {
   static const softBg = Color(0xFFC9EFBF);
   static const wave = Color(0xFF6FBF5A);
   static const heading = Color(0xFF3FA93F);
+  static const discButton = Color(0xFF3B8B2E);
   static const card = Colors.white;
   static const sourceLabel = Color(0xFF6B86A8);
   static const targetLabel = TudloColors.forest;
@@ -357,11 +358,11 @@ class _TranslationPageState extends State<TranslationPage> {
         backgroundColor: _TranslateStyle.softBg,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
-        toolbarHeight: 72,
+        toolbarHeight: 88,
         automaticallyImplyLeading: false,
         titleSpacing: 0,
         title: _TranslateHeader(
-          titleSize: MediaQuery.sizeOf(context).width >= 700 ? 40 : 32,
+          titleSize: MediaQuery.sizeOf(context).width >= 700 ? 64 : 52,
           onHistory: _openHistory,
         ),
       ),
@@ -559,6 +560,7 @@ class _SwipeableResultCard extends StatelessWidget {
 }
 
 class _TranslateHeader extends StatelessWidget {
+  /// Height the wordmark is drawn at; the disc button sits beside it.
   final double titleSize;
   final VoidCallback onHistory;
 
@@ -570,25 +572,23 @@ class _TranslateHeader extends StatelessWidget {
       children: [
         _RoundButton(
           tooltip: 'Favorites and recents',
-          icon: Icons.format_list_bulleted_rounded,
+          icon: Icons.exit_to_app_rounded,
           onTap: onHistory,
         ),
+        const SizedBox(width: 12),
+        // The wordmark carries the screen's name, so there is no text title.
+        // Scales down on a narrow phone rather than overflowing the row.
         Expanded(
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text(
-              'Translate',
-              textAlign: TextAlign.center,
-              maxLines: 1,
-              style: GoogleFonts.archivoBlack(
-                color: _TranslateStyle.heading,
-                fontSize: titleSize,
-                letterSpacing: 0,
-              ),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Image.asset(
+              'assets/images/translate_title.png',
+              height: titleSize,
+              fit: BoxFit.contain,
+              semanticLabel: 'Translate',
             ),
           ),
         ),
-        const SizedBox(width: 52),
       ],
     );
   }
@@ -610,7 +610,7 @@ class _RoundButton extends StatelessWidget {
     return Tooltip(
       message: tooltip,
       child: Material(
-        color: _TranslateStyle.card,
+        color: _TranslateStyle.discButton,
         shape: const CircleBorder(),
         elevation: 4,
         shadowColor: TudloColors.ink.withValues(alpha: .25),
@@ -618,8 +618,8 @@ class _RoundButton extends StatelessWidget {
           customBorder: const CircleBorder(),
           onTap: onTap,
           child: SizedBox.square(
-            dimension: 52,
-            child: Icon(icon, color: TudloColors.forest, size: 26),
+            dimension: 56,
+            child: Icon(icon, color: Colors.white, size: 28),
           ),
         ),
       ),
