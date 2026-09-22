@@ -252,7 +252,8 @@ text for the dialog) to find the real target:
   view; ordinary Map-tab entry still opens in portrait.
 - `grade_one_greeting_flow.dart` — `_BeachMapStep` → Beach
   (`temporaryUnlockedLocations: {MapLocation.beach}`). Dialog message:
-  "I-tap ang Beach sa mapa."
+  "I-tap ang Beach sa mapa." This step also passes `startExpanded: true`
+  so the map opens in the expanded view.
 
 ## Still using the fake pin (`_LessonOneMapDestinationCue`)
 

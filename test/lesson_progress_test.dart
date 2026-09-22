@@ -182,6 +182,22 @@ void main() {
       expect(afterReplay.lessonsFinished, 1);
       expect(afterReplay.stickersEarned, 1);
       expect(afterReplay.lessonProgress.completions[first.id]!.score, 100);
+
+      final seventh = LessonCatalog.byId('g1_u1_l7')!;
+      await controller.completeAndClaim(
+        lesson: seventh,
+        score: 100,
+        accuracy: 1,
+        mistakes: 0,
+        duration: const Duration(seconds: 40),
+      );
+      final afterSeventh = learner.profile!;
+      expect(
+        afterSeventh.lessonProgress.completions[seventh.id]!.rewardAsset,
+        'assets/images/stickers/rewards/home/cat-home-sticker.svg',
+      );
+      expect(afterSeventh.lessonProgress.activeLessonId, 'g1_u2_l1');
+      expect(afterSeventh.stickersEarned, 2);
     },
   );
 

@@ -1843,6 +1843,13 @@ class _LessonOneRewardStep extends StatelessWidget {
       child: _StickerUnlockRewardContent(
         fallback: const _FamilyReferenceBadge(label: 'LETTER\nFINDER'),
         message: 'Yehey! Nabalik na ang mga letra!',
+        stickerAsset: 'assets/images/home_sticker_school.png',
+        portraitStickerRatio: 248 / 472,
+        stickerScale: .82,
+        stickerAlignmentY: .13,
+        messageStickerGap: 30,
+        floatSticker: true,
+        showOkButton: false,
         onDone: onDone,
       ),
     );
@@ -1853,12 +1860,26 @@ class _StickerUnlockRewardContent extends StatefulWidget {
   final Widget fallback;
   final String message;
   final String buttonLabel;
+  final String? stickerAsset;
+  final double? portraitStickerRatio;
+  final double stickerScale;
+  final double stickerAlignmentY;
+  final double? messageStickerGap;
+  final bool floatSticker;
+  final bool showOkButton;
   final VoidCallback onDone;
 
   const _StickerUnlockRewardContent({
     required this.fallback,
     required this.message,
     this.buttonLabel = 'OK',
+    this.stickerAsset,
+    this.portraitStickerRatio,
+    this.stickerScale = 1,
+    this.stickerAlignmentY = -.08,
+    this.messageStickerGap,
+    this.floatSticker = false,
+    this.showOkButton = true,
     required this.onDone,
   });
 
@@ -1868,22 +1889,60 @@ class _StickerUnlockRewardContent extends StatefulWidget {
 }
 
 class _StickerUnlockRewardContentState
-    extends State<_StickerUnlockRewardContent> {
-  late final String _selectedStickerAsset = _activeLessonStickerAsset();
+    extends State<_StickerUnlockRewardContent>
+    with SingleTickerProviderStateMixin {
+  late final String _selectedStickerAsset =
+      widget.stickerAsset ?? _activeLessonStickerAsset();
+  late final AnimationController _floatController = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 2200),
+  );
+  bool _floatEnabled = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _floatEnabled =
+        widget.floatSticker && effectiveAmbientMotionEnabled(context);
+    if (_floatEnabled) {
+      if (!_floatController.isAnimating) _floatController.repeat(reverse: true);
+    } else {
+      _floatController
+        ..stop()
+        ..value = 0;
+    }
+  }
+
+  @override
+  void dispose() {
+    _floatController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final view = MediaQuery.sizeOf(context);
     final landscapeSticker = AppData.selectedGradeLevel == GradeLevel.grade3;
-    const portraitStickerRatio = 60 / 118;
-    final stickerWidth = landscapeSticker
-        ? (view.width * .74).clamp(230.0, 340.0).toDouble()
-        : (view.width * .56).clamp(190.0, 270.0).toDouble();
+    final portraitStickerRatio = widget.portraitStickerRatio ?? 60 / 118;
+    final requestedStickerWidth =
+        (landscapeSticker
+            ? (view.width * .74).clamp(230.0, 340.0).toDouble()
+            : (view.width * .56).clamp(190.0, 270.0).toDouble()) *
+        widget.stickerScale;
+    final stickerWidth = widget.messageStickerGap != null && !landscapeSticker
+        ? math.min(
+            requestedStickerWidth,
+            view.height * .45 * portraitStickerRatio,
+          )
+        : requestedStickerWidth;
     final stickerHeight = landscapeSticker
         ? stickerWidth * .64
         : stickerWidth / portraitStickerRatio;
     final glowWidth = stickerWidth * 1.24;
     final glowHeight = stickerHeight * (landscapeSticker ? 1.42 : 1.2);
+    final stickerTop =
+        (view.height - stickerHeight) / 2 +
+        widget.stickerAlignmentY * (view.height - glowHeight) / 2;
     final stickerRadius = landscapeSticker ? 12.0 : 22.0;
     final stickerFit = landscapeSticker ? BoxFit.contain : BoxFit.cover;
     return Stack(
@@ -1892,71 +1951,84 @@ class _StickerUnlockRewardContentState
           child: ColoredBox(color: Colors.black.withValues(alpha: .56)),
         ),
         Align(
-          alignment: const Alignment(0, -.08),
-          child: GestureDetector(
-            onTap: widget.onDone,
-            child: SizedBox(
-              width: glowWidth,
-              height: glowHeight,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  SizedBox(
-                    width: glowWidth,
-                    height: glowHeight,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(999),
-                        gradient: RadialGradient(
-                          radius: .84,
-                          colors: [
-                            const Color(0xFFFFF0A8).withValues(alpha: .48),
-                            const Color(0xFFFFD33D).withValues(alpha: .25),
-                            Colors.transparent,
-                          ],
-                          stops: const [0, .50, 1],
+          alignment: Alignment(0, widget.stickerAlignmentY),
+          child: AnimatedBuilder(
+            animation: _floatController,
+            builder: (context, child) => Transform.translate(
+              offset: Offset(
+                0,
+                _floatEnabled
+                    ? -9 *
+                          Curves.easeInOutSine.transform(_floatController.value)
+                    : 0,
+              ),
+              child: child,
+            ),
+            child: GestureDetector(
+              onTap: widget.onDone,
+              child: SizedBox(
+                width: glowWidth,
+                height: glowHeight,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    SizedBox(
+                      width: glowWidth,
+                      height: glowHeight,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(999),
+                          gradient: RadialGradient(
+                            radius: .84,
+                            colors: [
+                              const Color(0xFFFFF0A8).withValues(alpha: .48),
+                              const Color(0xFFFFD33D).withValues(alpha: .25),
+                              Colors.transparent,
+                            ],
+                            stops: const [0, .50, 1],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: stickerWidth,
-                    height: stickerHeight,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
+                    SizedBox(
+                      width: stickerWidth,
+                      height: stickerHeight,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(stickerRadius),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(
+                                0xFFFFF3A6,
+                              ).withValues(alpha: .66),
+                              blurRadius: 26,
+                              spreadRadius: 7,
+                            ),
+                            BoxShadow(
+                              color: const Color(
+                                0xFFFFB800,
+                              ).withValues(alpha: .35),
+                              blurRadius: 48,
+                              spreadRadius: 12,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: stickerWidth,
+                      height: stickerHeight,
+                      child: ClipRRect(
                         borderRadius: BorderRadius.circular(stickerRadius),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(
-                              0xFFFFF3A6,
-                            ).withValues(alpha: .66),
-                            blurRadius: 26,
-                            spreadRadius: 7,
-                          ),
-                          BoxShadow(
-                            color: const Color(
-                              0xFFFFB800,
-                            ).withValues(alpha: .35),
-                            blurRadius: 48,
-                            spreadRadius: 12,
-                          ),
-                        ],
+                        child: _StickerRewardAsset(
+                          asset: _selectedStickerAsset,
+                          fit: stickerFit,
+                          fallback: widget.fallback,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: stickerWidth,
-                    height: stickerHeight,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(stickerRadius),
-                      child: _StickerRewardAsset(
-                        asset: _selectedStickerAsset,
-                        fit: stickerFit,
-                        fallback: widget.fallback,
-                      ),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -1964,7 +2036,10 @@ class _StickerUnlockRewardContentState
         Positioned(
           left: view.width * .08,
           right: view.width * .08,
-          top: view.height * .13,
+          top: widget.messageStickerGap == null ? view.height * .13 : null,
+          bottom: widget.messageStickerGap == null
+              ? null
+              : view.height - stickerTop + widget.messageStickerGap!,
           child: Text(
             widget.message,
             textAlign: TextAlign.center,
@@ -1984,15 +2059,16 @@ class _StickerUnlockRewardContentState
             ),
           ),
         ),
-        Positioned(
-          left: view.width * .14,
-          right: view.width * .14,
-          bottom: view.height * .055,
-          child: _StickerUnlockOkButton(
-            label: widget.buttonLabel,
-            onTap: widget.onDone,
+        if (widget.showOkButton)
+          Positioned(
+            left: view.width * .14,
+            right: view.width * .14,
+            bottom: view.height * .055,
+            child: _StickerUnlockOkButton(
+              label: widget.buttonLabel,
+              onTap: widget.onDone,
+            ),
           ),
-        ),
       ],
     );
   }

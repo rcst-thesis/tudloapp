@@ -99,6 +99,9 @@ This status is based only on current code and tests.
   exactly one active map event, persists claimed completions/results, unlocks
   the completed lesson's location only after reward claim, and prevents
   replayed stickers/lesson counts.
+- Grade 1 Unit 1 Lessons 1 and 7 show their matching Home sticker as a
+  floating tap-to-claim reward, followed by a full-screen result with gallery
+  and next-lesson popup actions.
 - The source Hiligaynon dataset is imported through an audited manifest.
   The complete canonical DevG production lesson visual, reward, sound-effect,
   and final voice-over asset set is staged under `assets/` (see

@@ -275,6 +275,12 @@ class _GradeOneUnitOneLessonSevenBeachFlowState
 }
 
 class _BeachLessonChrome extends StatelessWidget {
+  static const _mascotLeftFraction = .03;
+  static const _mascotTopFraction = .30;
+  static const _mascotWidthFraction = .50;
+  static const _mascotMinSize = 185.0;
+  static const _mascotMaxSize = 255.0;
+
   static const originalBackground =
       'assets/images/level_game/backgrounds/beach_with_number_path.svg';
   static const cleanBackground =
@@ -331,10 +337,14 @@ class _BeachIntroStep extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            left: view.width * .03,
-            top: view.height * .39,
+            left: view.width * _BeachLessonChrome._mascotLeftFraction,
+            top: view.height * _BeachLessonChrome._mascotTopFraction,
             child: _LessonKokaMascot(
-              size: (view.width * .50).clamp(185.0, 255.0),
+              size: (view.width * _BeachLessonChrome._mascotWidthFraction)
+                  .clamp(
+                    _BeachLessonChrome._mascotMinSize,
+                    _BeachLessonChrome._mascotMaxSize,
+                  ),
               mood: KokaMood.idle,
             ),
           ),
@@ -356,7 +366,7 @@ class _BeachIntroStep extends StatelessWidget {
   }
 }
 
-class _BeachMapStep extends StatelessWidget {
+class _BeachMapStep extends StatefulWidget {
   final double progress;
   final VoidCallback onExit;
   final VoidCallback onReplay;
@@ -370,12 +380,71 @@ class _BeachMapStep extends StatelessWidget {
   });
 
   @override
+  State<_BeachMapStep> createState() => _BeachMapStepState();
+}
+
+class _BeachMapStepState extends State<_BeachMapStep> {
+  // Under a Tudlo host this beat uses Tudlo's one real Map screen rather than
+  // the inline map below. Its own standalone overrides (not
+  // MapProgressScope's shared instance) glow only Beach for the length of
+  // that push and pop back here once Beach is tapped; every other location
+  // keeps its real locked/unlocked behaviour. Mirrors _LessonOneMapStep in
+  // grade_one_letter_flow.dart, which targets School.
+  final _overrides = tudlo_map.MapEventOverrides()
+    ..setOverride(
+      tudlo_map.MapLocation.beach,
+      const tudlo_map.PopMapRouteAction(),
+    );
+  var _openedHostedMap = false;
+  bool _hosted = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _hosted = DevGLessonHostScope.maybeOf(context) != null;
+    if (_hosted && !_openedHostedMap) {
+      _openedHostedMap = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) => _openHostedMap());
+    }
+  }
+
+  Future<void> _openHostedMap() async {
+    if (!mounted) return;
+    await _showMapBeatInstructionDialog(
+      context,
+      message: 'I-tap ang Beach sa mapa.',
+    );
+    if (!mounted) return;
+    await Navigator.of(context).push(
+      FadePageRoute<void>(
+        page: tudlo_map.MapScreen(
+          eventOverrides: _overrides,
+          temporaryUnlockedLocations: const {tudlo_map.MapLocation.beach},
+          startExpanded: true,
+        ),
+      ),
+    );
+    if (!mounted) return;
+    await AppAudioService.instance.playCorrect();
+    widget.onNext();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (_hosted) {
+      // The real map is a pushed route, so this step itself shows only chrome.
+      return _LessonOneChrome(
+        progress: widget.progress,
+        onExit: widget.onExit,
+        onReplay: widget.onReplay,
+        child: const SizedBox.shrink(),
+      );
+    }
     final view = MediaQuery.sizeOf(context);
     return _LessonOneChrome(
-      progress: progress,
-      onExit: onExit,
-      onReplay: onReplay,
+      progress: widget.progress,
+      onExit: widget.onExit,
+      onReplay: widget.onReplay,
       backgroundAsset: 'assets/images/level_game/backgrounds/tudlomap.svg',
       child: Stack(
         children: [
@@ -393,7 +462,7 @@ class _BeachMapStep extends StatelessWidget {
               behavior: HitTestBehavior.opaque,
               onTap: () async {
                 await AppAudioService.instance.playCorrect();
-                onNext();
+                widget.onNext();
               },
               child: const _LessonOneMapDestinationCue(),
             ),
@@ -630,7 +699,7 @@ class _BeachArrangeStep extends StatelessWidget {
           Positioned(
             left: view.width * .025,
             right: view.width * .025,
-            top: view.height * .45,
+            top: view.height * .53,
             child: _BeachArrangeSlots(
               slots: slots,
               complete: complete,
@@ -677,6 +746,13 @@ class _BeachRewardStep extends StatelessWidget {
       child: _StickerUnlockRewardContent(
         fallback: const _FamilyReferenceBadge(label: 'NUMBER\nEXPLORER'),
         message: 'Yehey! Nakaabot kita sa payong!',
+        stickerAsset: 'assets/images/home_sticker_cat.png',
+        portraitStickerRatio: 248 / 472,
+        stickerScale: .82,
+        stickerAlignmentY: .13,
+        messageStickerGap: 30,
+        floatSticker: true,
+        showOkButton: false,
         onDone: onDone,
       ),
     );

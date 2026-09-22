@@ -31,6 +31,7 @@ import 'package:tudloapp/features/map/domain/map_route_resolver.dart'
     as tudlo_map;
 import 'package:tudloapp/features/map/presentation/screens/map_screen.dart'
     as tudlo_map;
+import 'package:tudloapp/features/settings/domain/app_settings_scope.dart';
 import 'package:tudloapp/shared/widgets/sticker_press_button.dart';
 
 import 'flows/grade_3/grade_three_bantay_flow.dart';
@@ -572,18 +573,19 @@ class _LevelGamePageState extends State<LevelGamePage> {
     final durationLabel = _formatDuration(
       DateTime.now().difference(_levelStartedAt),
     );
-    final lessonOneResult =
+    final galleryResult =
         AppData.selectedGradeLevel == GradeLevel.grade1 &&
         AppData.unitForLevel(widget.level).number == 1 &&
-        AppData.lessonNumberForLevel(widget.level) == 1;
+        (AppData.lessonNumberForLevel(widget.level) == 1 ||
+            AppData.lessonNumberForLevel(widget.level) == 7);
     showDialog(
       context: context,
-      useSafeArea: !lessonOneResult,
+      useSafeArea: !galleryResult,
       barrierDismissible: false,
       barrierColor: TudloColors.ink.withValues(alpha: .62),
       builder: (_) => _LessonCompleteDialog(
         level: widget.level,
-        fullscreenResult: lessonOneResult,
+        fullscreenResult: galleryResult,
         backgroundAsset: _lessonCompleteBackgroundAsset(widget.level),
         accuracy: accuracy,
         mistakes: scoreStats.mistakes,
@@ -593,16 +595,16 @@ class _LevelGamePageState extends State<LevelGamePage> {
           _claimRewardsOnce();
           Navigator.pop(context);
           unawaited(
-            lessonOneResult
-                ? _finishLessonOneToGallery(openNextLesson: false)
+            galleryResult
+                ? _finishLessonToGallery(openNextLesson: false)
                 : _returnToMapAfterPortraitRestore(),
           );
         },
         onContinue: () async {
           _claimRewardsOnce();
           Navigator.pop(context);
-          if (lessonOneResult) {
-            await _finishLessonOneToGallery(openNextLesson: true);
+          if (galleryResult) {
+            await _finishLessonToGallery(openNextLesson: true);
             return;
           }
           if (DevGLessonHostScope.maybeOf(context) != null) {
@@ -689,7 +691,7 @@ class _LevelGamePageState extends State<LevelGamePage> {
     return null;
   }
 
-  Future<void> _finishLessonOneToGallery({required bool openNextLesson}) async {
+  Future<void> _finishLessonToGallery({required bool openNextLesson}) async {
     await _restorePortraitBeforePortraitRoute();
     if (!mounted) return;
     final host = DevGLessonHostScope.maybeOf(context);
