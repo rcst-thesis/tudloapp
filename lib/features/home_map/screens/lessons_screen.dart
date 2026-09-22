@@ -14,6 +14,7 @@ import 'package:tudloapp/core/widgets/language_toggle.dart';
 import 'package:tudloapp/core/widgets/mascot_widget.dart';
 import 'package:tudloapp/data/lesson_bank/lesson_bank.dart';
 import 'package:tudloapp/features/energy/widgets/energy_indicator.dart';
+import 'package:tudloapp/features/learner/domain/learner_scope.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_lesson_host_scope.dart';
 import 'package:tudloapp/features/lesson/presentation/widgets/lesson_content_footer.dart';
 import 'package:tudloapp/shared/widgets/sticker_press_button.dart';
@@ -1316,11 +1317,9 @@ class _GradeOneHeader extends StatelessWidget {
 }
 
 /// Dashboard battery-style energy gauge, replacing the DevG-source
-/// [EnergyIndicator] pill for this header only. Same real data source
-/// (`AppData.currentEnergy`/`maxEnergy`, already Tudlo's 10-100 learner
-/// energy -- see `AppData.configure`) and the same live-update/tap-to-open
-/// behavior as [EnergyIndicator]; only the presentation changes to match
-/// the supplied battery artwork.
+/// [EnergyIndicator] pill for this header only. It displays the same
+/// learner-owned 0-100 energy as Home; AppData's separate 0-30 meter is used
+/// by the preserved lesson gameplay and must not drive this percentage.
 ///
 /// The fill bars and the "n%" label are Flutter-drawn on top of the SVG
 /// shell, the same technique `HomeEnergyIndicator` uses -- the source
@@ -1370,9 +1369,7 @@ class _GradeOneEnergyIndicatorState extends State<_GradeOneEnergyIndicator> {
   @override
   void initState() {
     super.initState();
-    AppData.refreshEnergy(save: true);
-    _timer = Timer.periodic(const Duration(minutes: 1), (_) async {
-      await AppData.refreshEnergy(save: true);
+    _timer = Timer.periodic(const Duration(minutes: 1), (_) {
       if (mounted) setState(() {});
     });
   }
@@ -1385,76 +1382,72 @@ class _GradeOneEnergyIndicatorState extends State<_GradeOneEnergyIndicator> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<int>(
-      valueListenable: AppData.energyRevision,
-      builder: (context, _, __) {
-        final displayedEnergy = AppData.developerMode
-            ? AppData.maxEnergy
-            : AppData.currentEnergy.clamp(0, AppData.maxEnergy);
-        final filledBars = (displayedEnergy / AppData.maxEnergy * _barCount)
-            .round();
-        return Semantics(
-          key: const Key('grade-one-energy-indicator'),
-          label: 'Energy $displayedEnergy percent',
-          child: GestureDetector(
-            onTap: () => showEnergyDetails(context),
-            behavior: HitTestBehavior.opaque,
-            child: Transform.scale(
-              scale: _scale,
-              alignment: Alignment.centerLeft,
-              child: SizedBox(
-                width: 86,
-                height: 60,
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: SvgPicture.asset(
-                        'assets/images/lesson_energy_indicator.svg',
-                        fit: BoxFit.contain,
-                        excludeFromSemantics: true,
-                      ),
-                    ),
-                    for (var index = 0; index < filledBars; index++)
-                      Positioned(
-                        left: _barLeftStart + index * _barLeftStep,
-                        top: _barTop,
-                        width: _barWidth,
-                        height: _barHeight,
-                        child: DecoratedBox(
-                          key: Key('grade-one-energy-bar-$index'),
-                          decoration: BoxDecoration(
-                            color: _filledColor,
-                            borderRadius: BorderRadius.circular(_barRadius),
-                          ),
-                        ),
-                      ),
-                    Positioned(
-                      left: _labelLeft,
-                      top: _labelTop,
-                      width: _labelWidth,
-                      height: _labelHeight,
-                      child: Center(
-                        child: Text(
-                          AppData.developerMode ? '∞' : '$displayedEnergy%',
-                          key: const Key('grade-one-energy-label'),
-                          maxLines: 1,
-                          style: const TextStyle(
-                            color: _labelColor,
-                            fontFamily: 'ComicRelief',
-                            fontSize: 11,
-                            height: 1,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+    final displayedEnergy =
+        (LearnerScope.of(context).profile?.effectiveEnergy() ?? 60).clamp(
+          0,
+          100,
+        );
+    final filledBars = (displayedEnergy / 100 * _barCount).round();
+    return Semantics(
+      key: const Key('grade-one-energy-indicator'),
+      label: 'Energy $displayedEnergy percent',
+      child: GestureDetector(
+        onTap: () => showEnergyDetails(context),
+        behavior: HitTestBehavior.opaque,
+        child: Transform.scale(
+          scale: _scale,
+          alignment: Alignment.centerLeft,
+          child: SizedBox(
+            width: 86,
+            height: 60,
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: SvgPicture.asset(
+                    'assets/images/lesson_energy_indicator.svg',
+                    fit: BoxFit.contain,
+                    excludeFromSemantics: true,
+                  ),
                 ),
-              ),
+                for (var index = 0; index < filledBars; index++)
+                  Positioned(
+                    left: _barLeftStart + index * _barLeftStep,
+                    top: _barTop,
+                    width: _barWidth,
+                    height: _barHeight,
+                    child: DecoratedBox(
+                      key: Key('grade-one-energy-bar-$index'),
+                      decoration: BoxDecoration(
+                        color: _filledColor,
+                        borderRadius: BorderRadius.circular(_barRadius),
+                      ),
+                    ),
+                  ),
+                Positioned(
+                  left: _labelLeft,
+                  top: _labelTop,
+                  width: _labelWidth,
+                  height: _labelHeight,
+                  child: Center(
+                    child: Text(
+                      '$displayedEnergy%',
+                      key: const Key('grade-one-energy-label'),
+                      maxLines: 1,
+                      style: const TextStyle(
+                        color: _labelColor,
+                        fontFamily: 'ComicRelief',
+                        fontSize: 11,
+                        height: 1,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
