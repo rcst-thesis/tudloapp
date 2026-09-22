@@ -15,7 +15,7 @@ twelve exact flows:
 | 3 | `g3_u1_l1`, `g3_u1_l3`, `g3_u2_l1`, `g3_u2_l2` | market numbers, shopping, Bantay, story |
 
 The initial fidelity port keeps DevG's production page and flow parts under
-`lib/features/lesson/presentation/devg_canonical/`. This is a deliberately
+`lib/vendor/devg/`. This is a deliberately
 marked **source-preservation bridge**: its game page plus flow parts are over
 40,000 lines and retain the original artwork, mechanics, Hiligaynon copy,
 reward flow, and voice call sites while Tudlo replaces the incompatible global

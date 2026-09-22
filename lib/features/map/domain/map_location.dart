@@ -25,6 +25,26 @@ enum MapLocation {
 
   String get riveId => this == MapLocation.plaza ? 'park' : name;
 
+  /// The child-facing name used in on-screen copy. Kept separate from
+  /// [persistedId] and [riveId] for the same reason those are separate:
+  /// wording can change without touching saved data or the Rive contract.
+  String get displayName => switch (this) {
+    MapLocation.house => 'house',
+    MapLocation.school => 'school',
+    MapLocation.plaza => 'plaza',
+    MapLocation.market => 'market',
+    MapLocation.farm => 'farm',
+    MapLocation.beach => 'beach',
+    MapLocation.church => 'church',
+    MapLocation.hospital => 'hospital',
+  };
+
+  /// Child-friendly, not a bare "locked" error -- explains a locked tap
+  /// without technical language, per the map's not-busy/not-distracting,
+  /// playful-but-inviting design.
+  String get lockedMessage =>
+      'The $displayName is still locked! Finish more lessons to open it.';
+
   /// The [MapLocation] whose [persistedId] matches [id], or `null` if none
   /// does -- e.g. a stale id from a saved learner profile if a location is
   /// ever renamed or removed.

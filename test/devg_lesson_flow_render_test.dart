@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:tudloapp/features/lesson/domain/lesson_definition.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/data/app_data.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/state/app_state.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/features/lesson_game/screens/level_game_page.dart';
+import 'package:tudloapp/vendor/devg/core/data/app_data.dart';
+import 'package:tudloapp/vendor/devg/core/state/app_state.dart';
+import 'package:tudloapp/vendor/devg/features/lesson_game/screens/level_game_page.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_lesson_host_scope.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_lesson_mapping.dart';
 

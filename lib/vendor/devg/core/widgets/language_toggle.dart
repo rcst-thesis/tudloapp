@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/services/app_audio_service.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/state/app_state.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/theme/app_theme.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/widgets/dialogue_assets.dart';
+import 'package:tudloapp/vendor/devg/core/services/app_audio_service.dart';
+import 'package:tudloapp/vendor/devg/core/state/app_state.dart';
+import 'package:tudloapp/vendor/devg/core/theme/app_theme.dart';
+import 'package:tudloapp/vendor/devg/core/widgets/dialogue_assets.dart';
 
 class TudloLanguageToggle extends StatelessWidget {
   const TudloLanguageToggle({super.key});

@@ -280,7 +280,7 @@ class _MapScreenState extends State<MapScreen> {
       if (lastShown == null ||
           now.difference(lastShown) >= _lockedMessageCooldown) {
         _lastLockedMessageAt[location] = now;
-        showMapLockedToast(context, _lockedMessageFor(location));
+        showMapLockedToast(context, location.lockedMessage);
       }
       return;
     }
@@ -346,25 +346,6 @@ class _MapScreenState extends State<MapScreen> {
         ),
       ),
     );
-  }
-
-  static const _locationNames = {
-    MapLocation.house: 'house',
-    MapLocation.school: 'school',
-    MapLocation.plaza: 'plaza',
-    MapLocation.market: 'market',
-    MapLocation.farm: 'farm',
-    MapLocation.beach: 'beach',
-    MapLocation.church: 'church',
-    MapLocation.hospital: 'hospital',
-  };
-
-  // Child-friendly, not a bare "locked" error -- explains a locked tap
-  // without technical language, per the map's not-busy/not-distracting,
-  // playful-but-inviting design.
-  String _lockedMessageFor(MapLocation location) {
-    final name = _locationNames[location] ?? 'this place';
-    return 'The $name is still locked! Finish more lessons to open it.';
   }
 
   void _enterFullscreen() {

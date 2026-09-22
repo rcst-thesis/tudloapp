@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/data/app_data.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/services/app_audio_service.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/theme/app_theme.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/widgets/dialogue_assets.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/widgets/language_toggle.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/data/dictionary/dictionary_data.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/data/lesson_bank/lesson_bank.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/features/lesson_game/screens/level_game_page.dart';
+import 'package:tudloapp/vendor/devg/core/data/app_data.dart';
+import 'package:tudloapp/vendor/devg/core/services/app_audio_service.dart';
+import 'package:tudloapp/vendor/devg/core/theme/app_theme.dart';
+import 'package:tudloapp/vendor/devg/core/widgets/dialogue_assets.dart';
+import 'package:tudloapp/vendor/devg/core/widgets/language_toggle.dart';
+import 'package:tudloapp/vendor/devg/data/dictionary/dictionary_data.dart';
+import 'package:tudloapp/vendor/devg/data/lesson_bank/lesson_bank.dart';
+import 'package:tudloapp/vendor/devg/features/lesson_game/screens/level_game_page.dart';
 import 'package:tudloapp/features/lesson/presentation/devg_lesson_host_scope.dart';
 
 class LessonIntroPage extends StatefulWidget {

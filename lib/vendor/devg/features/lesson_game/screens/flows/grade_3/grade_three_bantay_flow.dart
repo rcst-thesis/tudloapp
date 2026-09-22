@@ -4,12 +4,12 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/services/app_audio_service.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/theme/app_theme.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/widgets/animated_point_finger.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/widgets/language_toggle.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/widgets/mascot_widget.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/features/lesson_game/widgets/reward_overlay.dart';
+import 'package:tudloapp/vendor/devg/core/services/app_audio_service.dart';
+import 'package:tudloapp/vendor/devg/core/theme/app_theme.dart';
+import 'package:tudloapp/vendor/devg/core/widgets/animated_point_finger.dart';
+import 'package:tudloapp/vendor/devg/core/widgets/language_toggle.dart';
+import 'package:tudloapp/vendor/devg/core/widgets/mascot_widget.dart';
+import 'package:tudloapp/vendor/devg/features/lesson_game/widgets/reward_overlay.dart';
 
 const _bantayRoot =
     'assets/images/level_game/grade3/G3_U2_L2.1_Ang_Nadula_nga_Ido_SVG_Assets';

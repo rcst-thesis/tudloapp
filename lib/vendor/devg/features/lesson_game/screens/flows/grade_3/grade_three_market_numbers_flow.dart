@@ -4,12 +4,12 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/services/app_audio_service.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/services/lesson_number_voice_service.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/theme/app_theme.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/widgets/animated_point_finger.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/widgets/mascot_widget.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/features/lesson_game/widgets/reward_overlay.dart';
+import 'package:tudloapp/vendor/devg/core/services/app_audio_service.dart';
+import 'package:tudloapp/vendor/devg/core/services/lesson_number_voice_service.dart';
+import 'package:tudloapp/vendor/devg/core/theme/app_theme.dart';
+import 'package:tudloapp/vendor/devg/core/widgets/animated_point_finger.dart';
+import 'package:tudloapp/vendor/devg/core/widgets/mascot_widget.dart';
+import 'package:tudloapp/vendor/devg/features/lesson_game/widgets/reward_overlay.dart';
 
 const String _marketRoot =
     'assets/images/level_game/grade3/G3_U1_L1.1_Numero_sa_Merkado_SVG_Assets';

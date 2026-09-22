@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/models/grade_level.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/models/lesson_score.dart';
+import 'package:tudloapp/vendor/devg/core/models/grade_level.dart';
+import 'package:tudloapp/vendor/devg/core/models/lesson_score.dart';
 
 /// Compatibility facade for code copied from DevG lesson screens.
 ///

@@ -1,4 +1,4 @@
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/services/app_audio_service.dart';
+import 'package:tudloapp/vendor/devg/core/services/app_audio_service.dart';
 
 const lessonNumberVoiceBase = 'audio/VO-final/numbers1-10';
 

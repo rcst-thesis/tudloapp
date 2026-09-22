@@ -1,9 +1,9 @@
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/data/content_repository.dart';
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/models/language_dictionary.dart'
+import 'package:tudloapp/vendor/devg/core/data/content_repository.dart';
+import 'package:tudloapp/vendor/devg/core/models/language_dictionary.dart'
     as formatted;
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/data/dictionary/dictionary_item.dart';
+import 'package:tudloapp/vendor/devg/data/dictionary/dictionary_item.dart';
 
-export 'package:tudloapp/features/lesson/presentation/devg_canonical/data/dictionary/dictionary_item.dart';
+export 'package:tudloapp/vendor/devg/data/dictionary/dictionary_item.dart';
 
 /// JSON-backed lookup data for Dictionary, Translation, and word tooltips.
 ///

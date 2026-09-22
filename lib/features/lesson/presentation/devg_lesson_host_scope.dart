@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:tudloapp/features/lesson/presentation/devg_canonical/core/models/lesson_score.dart';
+import 'package:tudloapp/vendor/devg/core/models/lesson_score.dart';
 
 /// Boundary between preserved DevG visuals/mechanics and Tudlo application
 /// ownership. Source screens call these semantic intents; they never navigate
