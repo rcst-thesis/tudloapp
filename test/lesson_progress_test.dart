@@ -276,6 +276,38 @@ void main() {
     expect(AppData.catalogLevelsForUnit(AppData.unitForNumber(1)), [1, 7]);
   });
 
+  testWidgets('Lessons battery matches Home energy and 0-100 bar scale', (
+    tester,
+  ) async {
+    final learner = LearnerController();
+    await learner.createAndSave(name: 'Koka', grade: 1, energy: 30);
+    final controller = LessonProgressController(
+      learnerController: learner,
+      mapProgress: MapProgressController(),
+    );
+    addTearDown(controller.dispose);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: LearnerScope(
+          controller: learner,
+          child: LessonProgressScope(
+            controller: controller,
+            child: const LessonCatalogScreen(),
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    expect(find.text('30%'), findsOneWidget);
+    expect(find.byKey(const Key('grade-one-energy-indicator')), findsOneWidget);
+    for (var index = 0; index < 3; index++) {
+      expect(find.byKey(Key('grade-one-energy-bar-$index')), findsOneWidget);
+    }
+    expect(find.byKey(const Key('grade-one-energy-bar-3')), findsNothing);
+  });
+
   testWidgets(
     'Lessons tab hides navigation during an activity and restores it on exit',
     (tester) async {
