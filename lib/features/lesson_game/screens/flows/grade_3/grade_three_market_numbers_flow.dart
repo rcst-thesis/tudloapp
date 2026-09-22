@@ -10,7 +10,7 @@ import 'package:tudloapp/core/services/app_audio_service.dart';
 import 'package:tudloapp/core/services/lesson_number_voice_service.dart';
 import 'package:tudloapp/core/state/app_state.dart';
 import 'package:tudloapp/core/theme/app_theme.dart';
-import 'package:tudloapp/core/widgets/lesson_asset_glow.dart';
+import 'package:tudloapp/core/widgets/animated_point_finger.dart';
 import 'package:tudloapp/core/widgets/mascot_widget.dart';
 import 'package:tudloapp/features/lesson_game/widgets/reward_overlay.dart';
 
@@ -19,25 +19,28 @@ const String _marketRoot =
 const String _marketBg = '$_marketRoot/background/MarketLandscape.svg';
 const String _fruitStall = '$_marketRoot/stalls/Stall_Fruit_Empty.svg';
 const String _vendor = '$_marketRoot/people/Vendor_Female.svg';
+const String _pointFinger =
+    'assets/images/level_game/lesson-game-assets/point-finger.png';
 const String _apple = 'assets/images/level_game/apple.png';
 const String _crate = '$_marketRoot/inventory/Produce_Crate_Empty.svg';
+const String _displayTray = '$_marketRoot/inventory/Display_Tray_Empty.svg';
 const Duration _marketCompletionHold = Duration(seconds: 3);
+const double _g3DialogueX = 96;
+const double _g3DialogueY = 56;
+const double _g3DialogueWidth = 768;
+const double _g3DialogueHeight = 64;
 
 enum _MarketState {
   intro,
-  start,
   map,
   stall,
   numberTeach,
   numberExplore,
   appleModel,
   guidedCount,
-  countCheck,
   question,
-  correctFive,
   setupOrder,
   arrangeOrder,
-  openStall,
   reward,
 }
 
@@ -128,10 +131,15 @@ class _GradeThreeMarketNumbersFlowState
     if (raw != null) {
       try {
         final data = jsonDecode(raw) as Map<String, dynamic>;
-        _state = _MarketState.values.firstWhere(
-          (item) => item.name == data['state'],
-          orElse: () => _MarketState.intro,
-        );
+        final savedState = data['state'];
+        _state = switch (savedState) {
+          'countCheck' => _MarketState.question,
+          'openStall' => _MarketState.reward,
+          _ => _MarketState.values.firstWhere(
+            (item) => item.name == savedState,
+            orElse: () => _MarketState.intro,
+          ),
+        };
         _heardNumbers.addAll(List<int>.from(data['heardNumbers'] ?? []));
         _placedApples.addAll(List<int>.from(data['placedAppleIds'] ?? []));
         _lockedSlots.addAll(List<int>.from(data['lockedSlots'] ?? []));
@@ -189,24 +197,31 @@ class _GradeThreeMarketNumbersFlowState
   int _clipForState() {
     return switch (_state) {
       _MarketState.intro => 1,
-      _MarketState.start => 2,
       _MarketState.map => 3,
       _MarketState.stall => 4,
       _MarketState.numberTeach => 6,
       _MarketState.numberExplore => 7,
       _MarketState.appleModel => 8,
       _MarketState.guidedCount => 8,
-      _MarketState.countCheck => 9,
       _MarketState.question => 10,
-      _MarketState.correctFive => 11,
       _MarketState.setupOrder => 16,
       _MarketState.arrangeOrder => 21,
-      _MarketState.openStall => 25,
       _MarketState.reward => 25,
     };
   }
 
-  Future<void> _playStateVoice() => _playClip(_clipForState());
+  Future<void> _playStateVoice() {
+    if (_state == _MarketState.numberTeach) return _playNumberIntroSequence();
+    return _playClip(_clipForState());
+  }
+
+  Future<void> _playNumberIntroSequence() async {
+    if (mounted) setState(() => _busy = true);
+    await _playClip(5);
+    await _playClip(6);
+    await _playClip(7);
+    if (mounted) setState(() => _busy = false);
+  }
 
   Future<void> _go(_MarketState next, {bool voice = true}) async {
     if (_busy) return;
@@ -249,12 +264,17 @@ class _GradeThreeMarketNumbersFlowState
 
   Future<void> _tapStall() async {
     if (_busy) return;
-    setState(() => _busy = true);
+    setState(() {
+      _state = _MarketState.numberTeach;
+      _wrongChoice = null;
+      _correctChoice = null;
+      _selectedTile = null;
+      _busy = true;
+    });
+    await _save();
     await AppAudioService.instance.playCorrect();
-    await _playClip(5);
     if (!mounted) return;
-    setState(() => _busy = false);
-    await _go(_MarketState.numberTeach);
+    await _playNumberIntroSequence();
   }
 
   Future<void> _tapNumber(int number) async {
@@ -276,11 +296,16 @@ class _GradeThreeMarketNumbersFlowState
       _placedApples.add(appleId);
     });
     await AppAudioService.instance.playTap();
+    await playLessonNumberVoice(_placedApples.length);
     await _save();
     if (!mounted) return;
     setState(() => _busy = false);
     if (_placedApples.length == 5) {
-      await _go(_MarketState.countCheck);
+      setState(() => _busy = true);
+      await _playClip(11);
+      if (!mounted) return;
+      setState(() => _busy = false);
+      await _go(_MarketState.question);
     }
   }
 
@@ -297,15 +322,17 @@ class _GradeThreeMarketNumbersFlowState
     await AppAudioService.instance.playCorrect();
     await _playClip(11);
     await _save();
-    if (mounted) setState(() => _busy = false);
+    if (!mounted) return;
+    setState(() => _busy = false);
+    await Future<void>.delayed(const Duration(milliseconds: 650));
+    if (mounted) await _go(_MarketState.setupOrder);
   }
 
   Future<void> _placeNumber(int number, int slot) async {
     if (_busy || _lockedSlots.length == _targetOrder.length) return;
     final expected = _targetOrder[slot];
     if (number != expected) {
-      await playLessonNumberVoice(number);
-      await _wrong(choice: number);
+      await _wrongOrderNumber(number);
       return;
     }
     setState(() {
@@ -324,7 +351,24 @@ class _GradeThreeMarketNumbersFlowState
     await _save();
     if (_lockedSlots.length == 5) {
       await _playClip(22);
+      if (mounted) await _openStall();
     }
+  }
+
+  Future<void> _wrongOrderNumber(int number) async {
+    setState(() {
+      _wrongChoice = number;
+      _wrongPulse++;
+      _busy = true;
+    });
+    unawaited(AppAudioService.instance.playWrong());
+    await _playClip(23);
+    await _playClip(24);
+    if (!mounted) return;
+    setState(() {
+      _wrongChoice = null;
+      _busy = false;
+    });
   }
 
   Future<void> _openStall() async {
@@ -398,12 +442,7 @@ class _GradeThreeMarketNumbersFlowState
   List<Widget> _scene() {
     return switch (_state) {
       _MarketState.intro => _introScene(
-        speech: 'Madamo nga prutas\nsa merkado. Buligan\nta ang tindera!',
-        showButton: false,
-      ),
-      _MarketState.start => _introScene(
-        speech: 'I-tap ang\nSIGE para\nbuksan ang merkado!',
-        showButton: true,
+        speech: 'Madamo nga prutas sa merkado. Buligan ta ang tindera!',
       ),
       _MarketState.map => _mapScene(),
       _MarketState.stall => _stallScene(),
@@ -411,46 +450,26 @@ class _GradeThreeMarketNumbersFlowState
       _MarketState.numberExplore => _numberExploreScene(),
       _MarketState.appleModel => _appleModelScene(),
       _MarketState.guidedCount => _guidedCountScene(),
-      _MarketState.countCheck => _countCheckScene(),
       _MarketState.question => _questionScene(),
-      _MarketState.correctFive => _correctFiveScene(),
       _MarketState.setupOrder => _setupOrderScene(),
       _MarketState.arrangeOrder => _arrangeScene(),
-      _MarketState.openStall => _openStallScene(),
       _MarketState.reward => _rewardScene(),
     };
   }
 
-  List<Widget> _introScene({required String speech, required bool showButton}) {
+  List<Widget> _introScene({required String speech}) {
     return [
-      _at(105, 102, 300, 150, _speech(speech, size: 22)),
-      _at(36, 228, 205, 245, const TudloMascot(size: 245, mood: KokaMood.idle)),
-      _at(350, 130, 285, 285, _asset(_crate)),
-      _at(540, 128, 380, 315, _asset(_vendor)),
-      _at(224, 145, 340, 185, _asset(_fruitStall)),
-      if (showButton)
-        _at(
-          420,
-          385,
-          250,
-          72,
-          _blueButton('SIGE', () => unawaited(_activateMarket())),
-        )
-      else
-        _at(
-          420,
-          442,
-          250,
-          58,
-          _blueButton('SIGE', () => unawaited(_go(_MarketState.start))),
-        ),
+      _dialogue(speech),
+      _at(86, 200, 260, 300, const TudloMascot(size: 300, mood: KokaMood.idle)),
+      _at(560, 160, 360, 330, _vendorAsset()),
+      _bottomActionButton('SIGE', () => unawaited(_activateMarket())),
     ];
   }
 
   List<Widget> _mapScene() {
     const names = ['MARKET', 'PARK', 'SCHOOL', 'BAHAY'];
     return [
-      _at(235, 105, 490, 70, _woodSign('I-tap ang Market.')),
+      _dialogue('I-tap ang Market.'),
       for (final item in names.indexed)
         _at(
           50 + item.$1 * 220,
@@ -468,185 +487,114 @@ class _GradeThreeMarketNumbersFlowState
 
   List<Widget> _stallScene() {
     return [
-      _at(106, 112, 285, 92, _speech('Pangitaa kag i-tap\nang fruit stall.')),
+      _dialogue('Pangitaa kag i-tap ang fruit stall.'),
       _at(38, 252, 205, 230, const TudloMascot(size: 235, mood: KokaMood.idle)),
-      _at(555, 155, 330, 255, _asset(_vendor)),
+      _at(555, 155, 330, 255, _vendorAsset()),
       _at(
-        372,
-        140,
-        350,
-        250,
-        _pulse(
-          active: !_busy,
-          child: GestureDetector(
-            onTap: () => unawaited(_tapStall()),
-            child: _glowFrame(_fruitStall),
+        238,
+        146,
+        300,
+        172,
+        GestureDetector(
+          onTap: () => unawaited(_tapStall()),
+          behavior: HitTestBehavior.opaque,
+          child: const SizedBox.expand(),
+        ),
+      ),
+      _at(
+        445,
+        198,
+        84,
+        84,
+        GestureDetector(
+          onTap: () => unawaited(_tapStall()),
+          child: const AnimatedPointFinger(
+            asset: _pointFinger,
+            size: 84,
+            angle: -.55,
+            tapOffset: Offset(-8, -8),
           ),
         ),
       ),
-      _at(370, 350, 250, 125, _asset(_crate)),
     ];
   }
 
   List<Widget> _numberTeachScene() {
     return [
-      _at(
-        55,
-        112,
-        280,
-        92,
-        _speech('Paminawa ug ihinumdom\nang mga numero\n1 hangtod 10.'),
-      ),
-      _at(28, 255, 205, 225, const TudloMascot(size: 230, mood: KokaMood.idle)),
-      _at(200, 160, 650, 240, _numberBoard(interactive: false)),
-      _at(
-        650,
-        430,
-        230,
-        58,
-        _blueButton('SUNOD', () => unawaited(_go(_MarketState.numberExplore))),
+      _dialogue('Paminawa ug ihinumdom ang mga numero 1 hangtod 10.'),
+      _at(16, 218, 250, 285, const TudloMascot(size: 285, mood: KokaMood.idle)),
+      _at(185, 158, 725, 245, _numberBoard(interactive: !_busy)),
+      _bottomActionButton(
+        'SUNOD',
+        _busy ? null : () => unawaited(_go(_MarketState.appleModel)),
       ),
     ];
   }
 
   List<Widget> _numberExploreScene() {
     return [
-      _at(
-        72,
-        112,
-        310,
-        105,
-        _speech('I-tap ang number strip\npara mabatian ang\n1 tubtob 10.'),
-      ),
+      _dialogue('I-tap ang number strip para mabatian ang 1 tubtob 10.'),
       _at(28, 250, 205, 230, const TudloMascot(size: 235, mood: KokaMood.idle)),
       _at(200, 235, 650, 200, _numberBoard(interactive: true)),
       if (_heardNumbers.length >= 10)
-        _at(
-          650,
-          455,
-          230,
-          54,
-          _blueButton('SUNOD', () => unawaited(_go(_MarketState.appleModel))),
+        _bottomActionButton(
+          'SUNOD',
+          () => unawaited(_go(_MarketState.appleModel)),
         ),
     ];
   }
 
   List<Widget> _appleModelScene() {
     return [
-      _at(120, 105, 280, 95, _speech('Isa ka mansanas\nuna.')),
+      _dialogue('Ibutang ang mansanas sa basket.'),
       _at(35, 245, 200, 235, const TudloMascot(size: 235, mood: KokaMood.idle)),
-      _at(662, 112, 250, 335, _asset(_vendor)),
-      _at(245, 305, 270, 125, _appleShelf(4)),
-      _at(468, 268, 310, 205, _basketDropTarget()),
-      _at(392, 198, 82, 82, _asset(_apple)),
-      _at(585, 115, 100, 125, _counterCard(1, '1/5')),
+      _at(662, 112, 250, 335, _vendorAsset()),
+      _at(380, 270, 470, 330, _basketDropTarget()),
+      _at(235, 428, 300, 78, _remainingApples()),
       _at(
-        650,
-        455,
-        230,
-        54,
-        _blueButton('SUNOD', () {
-          _placedApples.add(0);
-          unawaited(_save());
-          unawaited(_go(_MarketState.guidedCount));
-        }),
+        565,
+        178,
+        100,
+        125,
+        _counterCard(_placedApples.length, '${_placedApples.length}/5'),
       ),
     ];
   }
 
   List<Widget> _guidedCountScene() {
-    final count = math.max(1, _placedApples.length);
+    final count = _placedApples.length;
     return [
-      _at(
-        112,
-        105,
-        295,
-        100,
-        _speech('Ibutang ang\nsunod nga mansanas\nsa basket.'),
-      ),
+      _dialogue('Ibutang ang sunod nga mansanas sa basket.'),
       _at(35, 245, 200, 235, const TudloMascot(size: 235, mood: KokaMood.idle)),
-      _at(662, 112, 250, 335, _asset(_vendor)),
-      _at(425, 258, 330, 215, _basketDropTarget()),
-      _at(250, 330, 210, 118, _remainingApples()),
-      _at(585, 115, 100, 125, _counterCard(count, '$count/5')),
-    ];
-  }
-
-  List<Widget> _countCheckScene() {
-    return [
-      _at(118, 108, 292, 88, _speech('Lima ka mansanas\nsa basket!')),
-      _at(35, 245, 200, 235, const TudloMascot(size: 235, mood: KokaMood.idle)),
-      _at(662, 112, 250, 335, _asset(_vendor)),
-      _at(350, 258, 380, 215, _basketWithApples(5, numbered: true)),
-      _at(585, 115, 100, 125, _counterCard(5, '5/5')),
-      _at(
-        650,
-        455,
-        230,
-        54,
-        _blueButton('SUNOD', () => unawaited(_go(_MarketState.question))),
-      ),
+      _at(662, 112, 250, 335, _vendorAsset()),
+      _at(380, 270, 470, 330, _basketDropTarget()),
+      _at(235, 428, 300, 78, _remainingApples()),
+      _at(565, 178, 100, 125, _counterCard(count, '$count/5')),
     ];
   }
 
   List<Widget> _questionScene() {
     return [
-      _at(128, 118, 260, 82, _speech('How many apples?')),
-      _at(
-        40,
-        250,
-        200,
-        230,
-        const TudloMascot(size: 230, mood: KokaMood.curious),
-      ),
-      _at(690, 132, 210, 300, _asset(_vendor)),
-      _at(230, 250, 350, 220, _basketWithApples(5, numbered: false)),
+      _dialogue('How many apples?'),
+      _at(270, 165, 420, 245, _displayTrayWithApples(5)),
       for (final entry in [4, 5, 6].indexed)
-        _at(420 + entry.$1 * 120, 365, 110, 118, _answerCard(entry.$2)),
+        _at(315 + entry.$1 * 135, 372, 118, 118, _answerCard(entry.$2)),
       if (_correctChoice == 5)
-        _at(
-          700,
-          455,
-          180,
-          54,
-          _blueButton('SUNOD', () => unawaited(_go(_MarketState.correctFive))),
+        _bottomActionButton(
+          'SUNOD',
+          () => unawaited(_go(_MarketState.setupOrder)),
         ),
-    ];
-  }
-
-  List<Widget> _correctFiveScene() {
-    return [
-      _at(
-        118,
-        108,
-        292,
-        88,
-        _speech('Husto ang imo pag-isip!\nMaka-open na ang stall.'),
-      ),
-      _at(35, 245, 200, 235, const TudloMascot(size: 235, mood: KokaMood.idle)),
-      _at(662, 112, 250, 335, _asset(_vendor)),
-      _at(285, 220, 480, 265, _basketWithApples(5, numbered: true)),
-      _at(
-        650,
-        455,
-        230,
-        54,
-        _blueButton('SUNOD', () => unawaited(_go(_MarketState.setupOrder))),
-      ),
     ];
   }
 
   List<Widget> _setupOrderScene() {
     return [
-      _at(110, 106, 310, 82, _speech('Ihan-ay ang six\npakadto ten.')),
+      _dialogue('Ihan-ay ang six pakadto ten.'),
       _at(35, 245, 200, 235, const TudloMascot(size: 235, mood: KokaMood.idle)),
       _at(265, 205, 570, 125, _numberStrip(_orderTray)),
-      _at(
-        650,
-        455,
-        230,
-        54,
-        _blueButton('SUNOD', () => unawaited(_go(_MarketState.arrangeOrder))),
+      _bottomActionButton(
+        'SUNOD',
+        () => unawaited(_go(_MarketState.arrangeOrder)),
       ),
     ];
   }
@@ -654,7 +602,7 @@ class _GradeThreeMarketNumbersFlowState
   List<Widget> _arrangeScene() {
     final placed = _orderSlots.whereType<int>().toSet();
     return [
-      _at(150, 90, 660, 65, _speech('Ihan-ay ang 6, 7, 8, 9, kag 10.')),
+      _dialogue('Ihan-ay ang 6, 7, 8, 9, kag 10.'),
       for (var i = 0; i < 5; i++)
         _at(145 + i * 137, 175, 118, 92, _dropSlot(i)),
       for (final entry in _orderTray.indexed)
@@ -666,30 +614,6 @@ class _GradeThreeMarketNumbersFlowState
             88,
             _numberTile(entry.$2, draggable: true),
           ),
-      if (_lockedSlots.length == 5)
-        _at(
-          650,
-          455,
-          230,
-          54,
-          _blueButton('SUNOD', () => unawaited(_go(_MarketState.openStall))),
-        ),
-    ];
-  }
-
-  List<Widget> _openStallScene() {
-    return [
-      _at(118, 105, 310, 88, _speech('Husto! Ablihan ta\nang stall.')),
-      _at(35, 245, 200, 235, const TudloMascot(size: 235, mood: KokaMood.idle)),
-      _at(555, 126, 295, 270, _asset(_vendor)),
-      _at(310, 140, 390, 285, _glowFrame(_fruitStall)),
-      _at(
-        640,
-        455,
-        240,
-        54,
-        _blueButton('OPEN', () => unawaited(_openStall())),
-      ),
     ];
   }
 
@@ -707,52 +631,32 @@ class _GradeThreeMarketNumbersFlowState
   }
 
   Widget _remainingApples() {
-    final remaining = [1, 2, 3, 4].where((id) => !_placedApples.contains(id));
+    final remaining = [
+      1,
+      2,
+      3,
+      4,
+      5,
+    ].where((id) => !_placedApples.contains(id));
     return Stack(
       children: [
         for (final entry in remaining.indexed)
           Positioned(
-            left: entry.$1 * 42,
-            top: entry.$1.isEven ? 0 : 24,
-            width: 64,
-            height: 64,
+            left: entry.$1 * 54,
+            top: 0,
+            width: 68,
+            height: 68,
             child: Draggable<int>(
               data: entry.$2,
               maxSimultaneousDrags: _busy ? 0 : 1,
               feedback: Material(
                 color: Colors.transparent,
-                child: SizedBox(width: 68, height: 68, child: _asset(_apple)),
+                child: SizedBox(width: 76, height: 76, child: _asset(_apple)),
               ),
               childWhenDragging: Opacity(opacity: .25, child: _asset(_apple)),
               child: _pulse(active: !_busy, child: _asset(_apple)),
             ),
           ),
-      ],
-    );
-  }
-
-  Widget _appleShelf(int count) {
-    return Stack(
-      children: [
-        Positioned(
-          left: 0,
-          right: 0,
-          bottom: 0,
-          height: 38,
-          child: Container(
-            decoration: BoxDecoration(
-              color: const Color(0xFFBA7A38),
-              borderRadius: BorderRadius.circular(4),
-            ),
-          ),
-        ),
-        Positioned(
-          left: 10,
-          right: 10,
-          bottom: 26,
-          height: 75,
-          child: _appleRow(count, numbered: false),
-        ),
       ],
     );
   }
@@ -895,7 +799,7 @@ class _GradeThreeMarketNumbersFlowState
     );
   }
 
-  Widget _appleRow(int count, {required bool numbered}) {
+  Widget _appleRow(int count, {required bool numbered, int startNumber = 1}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -911,7 +815,7 @@ class _GradeThreeMarketNumbersFlowState
                   Positioned(
                     bottom: 9,
                     child: Text(
-                      '${i + 1}',
+                      '${startNumber + i}',
                       style: GoogleFonts.nunito(
                         color: Colors.white,
                         fontWeight: FontWeight.w900,
@@ -941,11 +845,68 @@ class _GradeThreeMarketNumbersFlowState
       children: [
         Positioned.fill(child: _asset(_crate)),
         Positioned(
-          left: numbered ? 18 : 38,
-          right: numbered ? 18 : 38,
-          bottom: numbered ? 44 : 42,
-          height: numbered ? 92 : 72,
-          child: _appleRow(count, numbered: numbered),
+          left: numbered ? 32 : 62,
+          right: numbered ? 32 : 62,
+          bottom: numbered ? 126 : 136,
+          height: numbered ? 128 : 112,
+          child: _basketAppleRows(count, numbered: numbered),
+        ),
+      ],
+    );
+  }
+
+  Widget _displayTrayWithApples(int count) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Positioned.fill(child: _asset(_displayTray)),
+        Positioned(
+          left: 50,
+          right: 50,
+          top: 58,
+          height: 116,
+          child: _trayAppleRows(count),
+        ),
+      ],
+    );
+  }
+
+  Widget _trayAppleRows(int count) {
+    if (count <= 3) return _appleRow(count, numbered: false);
+    final topCount = count - 3;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(height: 54, child: _appleRow(topCount, numbered: false)),
+        Transform.translate(
+          offset: const Offset(0, -8),
+          child: SizedBox(height: 62, child: _appleRow(3, numbered: false)),
+        ),
+      ],
+    );
+  }
+
+  Widget _basketAppleRows(int count, {required bool numbered}) {
+    if (count <= 3) return _appleRow(count, numbered: numbered);
+    final topCount = count - 3;
+    final bottomCount = math.min(3, count);
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        SizedBox(
+          height: numbered ? 58 : 48,
+          child: _appleRow(topCount, numbered: numbered),
+        ),
+        Transform.translate(
+          offset: const Offset(0, -12),
+          child: SizedBox(
+            height: numbered ? 72 : 62,
+            child: _appleRow(
+              bottomCount,
+              numbered: numbered,
+              startNumber: topCount + 1,
+            ),
+          ),
         ),
       ],
     );
@@ -957,7 +918,7 @@ class _GradeThreeMarketNumbersFlowState
           !_busy && !_placedApples.contains(details.data),
       onAcceptWithDetails: (details) => unawaited(_placeApple(details.data)),
       builder: (context, candidates, rejected) {
-        final count = math.max(1, _placedApples.length);
+        final count = _placedApples.length;
         return _pulse(
           active: candidates.isNotEmpty,
           child: _basketWithApples(count, numbered: false),
@@ -1072,31 +1033,29 @@ class _GradeThreeMarketNumbersFlowState
     );
   }
 
+  Widget _bottomActionButton(String label, VoidCallback? onTap) {
+    return _at(40, 430, 880, 66, _blueButton(label, onTap));
+  }
+
   Widget _blueButton(String label, VoidCallback? onTap) {
     return GestureDetector(
       onTap: onTap,
       child: Opacity(
         opacity: onTap == null ? .55 : 1,
         child: Container(
+          height: 66,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: TudloColors.blue,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: const Color(0xFF7ED8FF), width: 3),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: .18),
-                blurRadius: 10,
-                offset: const Offset(0, 5),
-              ),
-            ],
+            color: const Color(0xFF1BA7F2),
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(color: Colors.white, width: 4),
           ),
           child: Text(
             label,
             textAlign: TextAlign.center,
             style: GoogleFonts.nunito(
               color: Colors.white,
-              fontSize: 31,
+              fontSize: 28,
               height: 1,
               fontWeight: FontWeight.w900,
               letterSpacing: 0,
@@ -1107,35 +1066,33 @@ class _GradeThreeMarketNumbersFlowState
     );
   }
 
-  Widget _speech(String text, {double size = 25}) {
+  Widget _topPrompt(String text) {
     return Container(
       alignment: Alignment.center,
-      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFFFF9E7).withValues(alpha: .96),
         borderRadius: BorderRadius.circular(26),
-        border: Border.all(color: TudloColors.blue, width: 3),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: .14),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
-          ),
-        ],
       ),
-      child: _bigLabel(text, size: size),
+      child: _bigLabel(text, size: 26),
     );
   }
 
-  Widget _woodSign(String text) {
-    return Container(
+  Widget _dialogue(String text) {
+    return _at(
+      _g3DialogueX,
+      _g3DialogueY,
+      _g3DialogueWidth,
+      _g3DialogueHeight,
+      _topPrompt(text),
+    );
+  }
+
+  Widget _vendorAsset() {
+    return Transform(
       alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: const Color(0xFFE7B36F),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: const Color(0xFF8A5A2E), width: 4),
-      ),
-      child: _bigLabel(text, size: 28),
+      transform: Matrix4.diagonal3Values(-1, 1, 1),
+      child: _asset(_vendor),
     );
   }
 
@@ -1149,23 +1106,6 @@ class _GradeThreeMarketNumbersFlowState
         border: Border.all(color: const Color(0xFFFFCA31), width: 3),
       ),
       child: child,
-    );
-  }
-
-  Widget _glowFrame(String asset) {
-    return Stack(
-      alignment: Alignment.center,
-      clipBehavior: Clip.none,
-      children: [
-        Positioned.fill(
-          child: LessonAssetGlow(
-            asset: asset,
-            fallbackIcon: Icons.storefront_rounded,
-            fallbackSize: 170,
-          ),
-        ),
-        Padding(padding: const EdgeInsets.all(8), child: _asset(asset)),
-      ],
     );
   }
 

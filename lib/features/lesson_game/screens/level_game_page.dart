@@ -23,10 +23,12 @@ import 'package:tudloapp/data/dictionary/dictionary_data.dart';
 import 'package:tudloapp/data/lesson_bank/lesson_bank.dart';
 import 'package:tudloapp/core/widgets/word_tooltip.dart';
 import 'package:tudloapp/features/energy/widgets/energy_indicator.dart';
+import 'package:tudloapp/features/lesson_game/widgets/reward_overlay.dart';
 import 'package:tudloapp/features/navigation/app_shell.dart';
 
 import 'flows/grade_3/grade_three_bantay_flow.dart';
 import 'flows/grade_3/grade_three_market_numbers_flow.dart';
+import 'flows/grade_3/grade_three_new_student_flow.dart';
 
 part 'flows/grade_1/grade_one_letter_flow.dart';
 part 'flows/grade_1/grade_one_number_flow.dart';
@@ -113,6 +115,7 @@ Future<bool> _showLessonExitConfirmation(BuildContext context) async {
           )
           .toDouble();
       final height = width / popupAspect;
+      final closeButtonSize = (width * .095).clamp(38.0, 56.0);
       const assetBase = 'assets/images/level_game/lesson-game-assets';
       return Dialog(
         backgroundColor: Colors.transparent,
@@ -130,16 +133,16 @@ Future<bool> _showLessonExitConfirmation(BuildContext context) async {
                 ),
               ),
               Positioned(
-                right: -width * .015,
-                top: height * .31,
+                right: width * .012,
+                top: -closeButtonSize * .1,
                 child: Semantics(
                   button: true,
                   label: 'Magpabilin',
                   child: GestureDetector(
                     onTap: () => Navigator.pop(dialogContext, false),
                     child: SizedBox(
-                      width: (width * .095).clamp(38.0, 56.0),
-                      height: (width * .095).clamp(38.0, 56.0),
+                      width: closeButtonSize,
+                      height: closeButtonSize,
                       child: SvgPicture.asset(
                         '$assetBase/Tudlo_Exit_X_Button.svg',
                         fit: BoxFit.contain,
@@ -399,7 +402,9 @@ class _LevelGamePageState extends State<LevelGamePage> {
     final previousNextLevel = AppData.firstUnlockedIncompleteLevel;
     AppData.lessonDashboardFocusLevel = widget.level;
     AppData.saveLevelScore(widget.level, _buildLessonScoreStats());
-    _showDailyStreakAfterCompletion = AppData.recordLessonStreakForToday();
+    _showDailyStreakAfterCompletion = wasCompleted
+        ? false
+        : AppData.recordLessonStreakForToday();
     AppData.unlockedLevel = AppData.firstUnlockedIncompleteLevel;
     final unlockedNewLesson =
         AppData.firstUnlockedIncompleteLevel != previousNextLevel;
@@ -830,6 +835,11 @@ class _LevelGamePageState extends State<LevelGamePage> {
             levelContent != null && _isGrade3MarketNumbersLesson(levelContent);
         final gradeThreeShoppingLesson =
             levelContent != null && _isGrade3ShoppingLesson(levelContent);
+        final gradeThreeNewStudentLesson =
+            levelContent != null &&
+            levelContent.gradeLevel == 3 &&
+            levelContent.unitNumber == 2 &&
+            levelContent.lessonNumber == 2;
         final customLessonFlow =
             alphabetLesson ||
             unitOneReviewLesson ||
@@ -1067,13 +1077,69 @@ class _LevelGamePageState extends State<LevelGamePage> {
                                       : gradeThreeShoppingLesson
                                       ? _GradeThreeShoppingFlow(
                                           onExit: _showPauseMenu,
-                                          onLessonComplete:
-                                              _completeGradeThreeLesson,
+                                          rewardStickerAsset:
+                                              _activeLessonStickerAsset(),
+                                          onBackToMap: () async {
+                                            _claimRewardsOnce();
+                                            await _returnToMapAfterPortraitRestore();
+                                          },
+                                          onContinue:
+                                              _showCustomLessonCompleteDialog,
                                         )
                                       : gradeThreeLesson &&
                                             levelContent.unitNumber == 2 &&
                                             levelContent.lessonNumber == 1
                                       ? GradeThreeBantayFlow(
+                                          onExit: _showPauseMenu,
+                                          rewardStickerAsset:
+                                              _activeLessonStickerAsset(),
+                                          onLessonComplete: () {
+                                            _claimRewardsOnce();
+                                          },
+                                          onBackToMap: () async {
+                                            await _returnToMapAfterPortraitRestore();
+                                          },
+                                          onContinue: () async {
+                                            if (widget.level >=
+                                                AppData.maxLevel) {
+                                              await _returnToMapAfterPortraitRestore();
+                                              return;
+                                            }
+                                            final nextLevel =
+                                                _nextAvailableLevel();
+                                            if (nextLevel == null) {
+                                              await _returnToMapAfterPortraitRestore();
+                                              return;
+                                            }
+                                            final spent =
+                                                await AppData.spendLessonEnergy();
+                                            if (!mounted || !context.mounted) {
+                                              return;
+                                            }
+                                            if (!spent) {
+                                              await showLowEnergyDialog(
+                                                context,
+                                              );
+                                              return;
+                                            }
+                                            await AppStateScope.of(
+                                              context,
+                                            ).saveActiveProfileProgress();
+                                            if (!mounted || !context.mounted) {
+                                              return;
+                                            }
+                                            Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (_) => LevelGamePage(
+                                                  level: nextLevel,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        )
+                                      : gradeThreeNewStudentLesson
+                                      ? GradeThreeNewStudentFlow(
                                           onExit: _showPauseMenu,
                                           rewardStickerAsset:
                                               _activeLessonStickerAsset(),

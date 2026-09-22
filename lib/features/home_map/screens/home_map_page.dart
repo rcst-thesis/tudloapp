@@ -4,6 +4,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tudloapp/core/data/app_data.dart';
 import 'package:tudloapp/core/models/grade_level.dart';
 import 'package:tudloapp/core/services/app_audio_service.dart';
@@ -32,6 +33,8 @@ enum MapLocation {
   church,
   beach,
 }
+
+enum _LessonLaunchChoice { resume, restart }
 
 class MapAnchor {
   final Offset normalizedPosition;
@@ -392,6 +395,29 @@ class _HomeMapPageState extends State<HomeMapPage> {
     AppData.lessonDashboardFocusLevel = level;
     _stopLessonCardVoice();
     _launchingLevel = true;
+    if (isLessonCompleted(AppData.lessonIdForLevel(level))) {
+      await _clearSavedLessonAttempt(level);
+      if (!mounted) {
+        _launchingLevel = false;
+        return;
+      }
+    }
+    final launchChoice = await _showLessonLaunchChoiceIfNeeded(level);
+    if (!mounted) {
+      _launchingLevel = false;
+      return;
+    }
+    if (launchChoice == null) {
+      setState(() => _launchingLevel = false);
+      return;
+    }
+    if (launchChoice == _LessonLaunchChoice.restart) {
+      await _clearSavedLessonAttempt(level);
+      if (!mounted) {
+        _launchingLevel = false;
+        return;
+      }
+    }
     // Start button in the level popup:
     // Refresh real-time energy before gating access. If the learner has less
     // than the fixed lesson cost, the unit does not start.
@@ -419,6 +445,67 @@ class _HomeMapPageState extends State<HomeMapPage> {
     } else {
       _launchingLevel = false;
     }
+  }
+
+  Future<_LessonLaunchChoice?> _showLessonLaunchChoiceIfNeeded(
+    int level,
+  ) async {
+    final completed = isLessonCompleted(AppData.lessonIdForLevel(level));
+    if (completed) return _LessonLaunchChoice.resume;
+    final hasSavedAttempt = await _hasSavedLessonAttempt(level);
+    if (!mounted) return null;
+    if (!hasSavedAttempt) return _LessonLaunchChoice.resume;
+    return showDialog<_LessonLaunchChoice>(
+      context: context,
+      barrierColor: TudloColors.ink.withValues(alpha: .58),
+      builder: (_) => const _LessonResumeReplayDialog(completed: false),
+    );
+  }
+
+  bool isLessonCompleted(String lessonId) {
+    return AppData.completedLevels.any(
+      (level) => AppData.lessonIdForLevel(level) == lessonId,
+    );
+  }
+
+  Future<bool> _hasSavedLessonAttempt(int level) async {
+    final key = _savedLessonAttemptKey(level);
+    if (key == null) return false;
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.containsKey(key) || prefs.containsKey('$key.stage');
+  }
+
+  Future<void> _clearSavedLessonAttempt(int level) async {
+    final key = _savedLessonAttemptKey(level);
+    if (key == null) return;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(key);
+    await prefs.remove('$key.stage');
+    await prefs.remove('$key.correctId');
+    await prefs.remove('$key.sequenceSlots');
+    await prefs.remove('$key.completedCallbackSent');
+  }
+
+  String? _savedLessonAttemptKey(int level) {
+    final profileId = AppStateScope.of(context).activeProfileId ?? 'guest';
+    final unit = AppData.unitForLevel(level);
+    final lesson = AppData.lessonNumberForLevel(level);
+    if (AppData.selectedGradeLevel == GradeLevel.grade3 &&
+        unit.number == 1 &&
+        lesson == 1) {
+      return 'g3.u1.l1.1.market.$profileId';
+    }
+    if (AppData.selectedGradeLevel == GradeLevel.grade3 &&
+        unit.number == 2 &&
+        lesson == 1) {
+      return 'bantay.g3.u2.l2.1.$profileId';
+    }
+    if (AppData.selectedGradeLevel == GradeLevel.grade3 &&
+        unit.number == 2 &&
+        lesson == 2) {
+      return 'newstudent.g3.u2.l2.2.$profileId';
+    }
+    return null;
   }
 
   Future<void> _showUnitPicker() async {
@@ -1797,7 +1884,11 @@ class _GradeOneLessonCard extends StatelessWidget {
                           child: Stack(
                             fit: StackFit.expand,
                             children: [
-                              _DashboardSvgImage(asset: thumbnail),
+                              _DashboardLessonThumbnail(
+                                asset: thumbnail,
+                                unitNumber: unit.number,
+                                lessonNumber: lessonNumber,
+                              ),
                               Container(
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
@@ -1933,6 +2024,50 @@ class _DashboardSvgImage extends StatelessWidget {
         color: const Color(0xFFE7FCFF),
         child: const Center(child: TudloMascot(size: 120, mood: KokaMood.hi)),
       ),
+    );
+  }
+}
+
+class _DashboardLessonThumbnail extends StatelessWidget {
+  final String asset;
+  final int unitNumber;
+  final int lessonNumber;
+
+  const _DashboardLessonThumbnail({
+    required this.asset,
+    required this.unitNumber,
+    required this.lessonNumber,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final grade = AppData.selectedGradeLevel;
+    final overlay = switch ((grade, unitNumber, lessonNumber)) {
+      (GradeLevel.grade3, 2, 1) =>
+        'assets/images/level_game/grade3/G3_U2_L2.1_Ang_Nadula_nga_Ido_SVG_Assets/updated/Bantay_Idle.png',
+      (GradeLevel.grade3, 2, 2) =>
+        'assets/images/level_game/grade3/G3_U2_L2.2_Ang_Bag-o_nga_Estudyante/character_ana_shy_transparent.png',
+      _ => null,
+    };
+
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        _DashboardSvgImage(asset: asset),
+        if (overlay != null)
+          Align(
+            alignment: Alignment.center,
+            child: FractionallySizedBox(
+              widthFactor: lessonNumber == 1 ? .52 : .43,
+              heightFactor: lessonNumber == 1 ? .62 : .82,
+              child: Image.asset(
+                overlay,
+                fit: BoxFit.contain,
+                filterQuality: FilterQuality.high,
+              ),
+            ),
+          ),
+      ],
     );
   }
 }
@@ -2154,6 +2289,14 @@ String _lessonTitleForDashboard(int level) {
     (GradeLevel.grade1, 1, 7) => 'Isa tubtob Lima',
     (GradeLevel.grade1, 2, 1) => 'Kilalahon ta ang Pamilya',
     (GradeLevel.grade1, 2, 4) => 'Nagtipon ang Pamilya sa Picnic',
+    (GradeLevel.grade2, 1, 1) => 'Hello! My name is ___',
+    (GradeLevel.grade2, 1, 2) => 'I am seven years old',
+    (GradeLevel.grade2, 2, 1) => 'Good Morning, Good Afternoon, Good Evening',
+    (GradeLevel.grade2, 2, 2) => 'How are you?',
+    (GradeLevel.grade3, 1, 1) => 'One to Ten',
+    (GradeLevel.grade3, 1, 3) => 'Using Numbers at the Market',
+    (GradeLevel.grade3, 2, 1) => 'Ang Nadula nga Ido',
+    (GradeLevel.grade3, 2, 2) => 'Ang Bag-o nga Estudyante',
     _ => LessonBank.lessonTitleForLevel(level),
   };
 }
@@ -2271,6 +2414,210 @@ class _MapHeader extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _LessonResumeReplayDialog extends StatelessWidget {
+  final bool completed;
+
+  const _LessonResumeReplayDialog({required this.completed});
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 24),
+      child: Center(
+        child: _LessonResumeReplayCard(
+          heading: completed ? 'COMPLETED' : 'MAGPADAYON',
+          leftLabel: completed ? 'BALIKAN' : 'SUGuDAN LIWAT',
+          rightLabel: completed ? 'HAMPANG LIWAT' : 'SUGPON',
+          onLeft: () => Navigator.pop(
+            context,
+            completed
+                ? _LessonLaunchChoice.resume
+                : _LessonLaunchChoice.restart,
+          ),
+          onRight: () => Navigator.pop(
+            context,
+            completed
+                ? _LessonLaunchChoice.restart
+                : _LessonLaunchChoice.resume,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _LessonResumeReplayCard extends StatelessWidget {
+  final String heading;
+  final String leftLabel;
+  final String rightLabel;
+  final VoidCallback onLeft;
+  final VoidCallback onRight;
+
+  const _LessonResumeReplayCard({
+    required this.heading,
+    required this.leftLabel,
+    required this.rightLabel,
+    required this.onLeft,
+    required this.onRight,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
+    final cardWidth = (size.width * .86).clamp(342.0, 560.0);
+    final buttonHeight = (size.height * .072).clamp(44.0, 58.0);
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        Container(
+          width: cardWidth,
+          padding: const EdgeInsets.fromLTRB(26, 22, 26, 24),
+          decoration: BoxDecoration(
+            color: const Color(0xFFF8E2BD),
+            borderRadius: BorderRadius.circular(28),
+            border: Border.all(color: const Color(0xFFF4B966), width: 10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: .10),
+                blurRadius: 14,
+                offset: const Offset(0, 6),
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                heading,
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.nunito(
+                  color: Colors.white,
+                  fontSize: (cardWidth * .102).clamp(33.0, 54.0),
+                  height: 1,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 0,
+                  shadows: const [
+                    Shadow(color: Color(0xFF16304A), offset: Offset(-2, -2)),
+                    Shadow(color: Color(0xFF16304A), offset: Offset(2, -2)),
+                    Shadow(color: Color(0xFF16304A), offset: Offset(-2, 2)),
+                    Shadow(color: Color(0xFF16304A), offset: Offset(2, 2)),
+                  ],
+                ),
+              ),
+              SizedBox(height: (size.height * .055).clamp(26.0, 42.0)),
+              Row(
+                children: [
+                  Expanded(
+                    flex: leftLabel.length > rightLabel.length ? 11 : 10,
+                    child: _LessonResumeReplayButton(
+                      label: leftLabel,
+                      color: const Color(0xFF28A9F2),
+                      height: buttonHeight,
+                      onTap: onLeft,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    flex: rightLabel.length > leftLabel.length ? 11 : 10,
+                    child: _LessonResumeReplayButton(
+                      label: rightLabel,
+                      color: const Color(0xFF67D600),
+                      height: buttonHeight,
+                      onTap: onRight,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        Positioned(
+          top: -10,
+          right: -10,
+          child: GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: Container(
+              width: 46,
+              height: 46,
+              alignment: Alignment.center,
+              decoration: const BoxDecoration(
+                color: Color(0xFFFF4B55),
+                shape: BoxShape.circle,
+              ),
+              child: Text(
+                'X',
+                style: GoogleFonts.nunito(
+                  color: Colors.white,
+                  fontSize: 28,
+                  height: 1,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 0,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _LessonResumeReplayButton extends StatelessWidget {
+  final String label;
+  final Color color;
+  final double height;
+  final VoidCallback onTap;
+
+  const _LessonResumeReplayButton({
+    required this.label,
+    required this.color,
+    required this.height,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: height,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: .08),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              label,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.nunito(
+                color: Colors.white,
+                fontSize: 28,
+                height: 1,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 0,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
