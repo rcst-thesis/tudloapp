@@ -1,0 +1,43 @@
+/// Measured values from the original 378-wide lesson-panel artwork.
+abstract final class HomeLessonPanelLayout {
+  static const double designWidth = 378;
+  static const double headingLeftInset = 2;
+  static const double headingIconSize = 20;
+  static const double headingGap = 6;
+  static const double headingFontSize = 13;
+  static const double headingToSectionGap = 6;
+  static const double sectionLabelFontSize = 11;
+  static const double sectionLabelToLineGap = 12;
+  static const double sectionChevronSize = 16;
+  static const double dividerHeight = 1;
+  static const double sectionToCardGap = 8;
+  static const double deckVerticalOffset = 9;
+  static const double deckHorizontalOffset = 0;
+  static const double deckSideInset = 10;
+  static const double deckCardHeight = 63;
+  static const double cardHeight = 63;
+  static const double lessonCardGap = 8;
+  static const double cardRadius = 11;
+  static const double cardHorizontalPadding = 16;
+  static const double dotsWidth = 10;
+  static const double dotsHeight = 17;
+  static const double dotsOffsetX = -10;
+  static const double dotsOffsetY = 0;
+  static const double dotsToIconGap = 4;
+  static const double categoryIconSize = 46;
+  static const double summaryIconToTextGap = 10;
+  static const double summaryTitleFontSize = 17;
+  static const double summaryCategoryFontSize = 11;
+  static const double summaryTextGap = 5;
+  static const double categoryToTextGap = 10;
+  static const double unitTextWidth = 100;
+  static const double textColumnsGap = 10;
+  static const double unitFontSize = 30;
+  static const double categoryFontSize = 14;
+  static const double statusGap = 8;
+  static const double statusWidth = 24;
+  static const double statusHeight = 22.4;
+  static const double statusRadius = 5;
+  static const double statusDepth = 1.6;
+  static const double statusIconSize = 18;
+}

@@ -3,7 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tudloapp/core/data/app_data.dart';
+import 'package:tudloapp/core/services/app_audio_service.dart';
 import 'package:tudloapp/data/dictionary/dictionary_data.dart';
+import 'package:tudloapp/features/dictionary/domain/dictionary_search.dart';
+import 'package:tudloapp/features/dictionary/presentation/widgets/dictionary_word_grid_card.dart';
 import 'package:tudloapp/features/translation/screens/translation_page.dart';
 import 'package:tudloapp/features/translation/services/child_safety_filter.dart';
 import 'package:tudloapp/features/translation/services/translation_history.dart';
@@ -347,5 +350,87 @@ void main() {
     expect(ChildSafetyFilter.isUnsafe('f@ck!'), isTrue);
     expect(ChildSafetyFilter.isUnsafe('I'), isFalse);
     expect(ChildSafetyFilter.isUnsafe('classroom grass'), isFalse);
+  });
+
+  testWidgets(
+    'the meaning drawer lists every dictionary word in the Hiligaynon text',
+    (tester) async {
+      // The card's dictionary action awaits a tap sound first, so without an
+      // audio platform that await never completes and the sheet never opens.
+      // Attaching without a controller is the hosted-silent path: the await
+      // resolves immediately and no player is ever built.
+      AppAudioService.instance.attach(null);
+      addTearDown(AppAudioService.instance.detach);
+      final history = TranslationHistory.instance..reset();
+      await tester.pumpWidget(
+        MaterialApp(
+          home: TranslationPage(
+            translateEnglish: (_) async => 'maayong aga sa imo balay',
+          ),
+        ),
+      );
+      await tester.pump();
+
+      await tester.enterText(find.byType(TextField), 'good morning');
+      await tester.pump(const Duration(milliseconds: 451));
+      await tester.pump();
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+
+      await tester.tap(find.byTooltip('Dictionary').first);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400));
+      await tester.pump(const Duration(milliseconds: 400));
+
+      // Several words are found, wherever they sit in the phrase -- not just
+      // a leading one -- and each gets its own dictionary card.
+      final cards = find.byType(DictionaryWordGridCard);
+      expect(cards, findsWidgets);
+      expect(tester.widgetList(cards).length, greaterThan(1));
+      final words = tester
+          .widgetList<DictionaryWordGridCard>(cards)
+          .map((card) => stripAccentsLower(card.entry.word))
+          .toList();
+      expect(words, contains('aga'));
+      expect(words, contains('balay'));
+      expect(words, contains('imo'));
+      // Cancels the recents TTL timer the added pair started.
+      history.reset();
+    },
+  );
+
+  testWidgets('the header shows the translate wordmark beside its button', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(412, 917);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      MaterialApp(home: TranslationPage(translateEnglish: (_) async => 'aga')),
+    );
+    await tester.pump();
+
+    final wordmark = find.byWidgetPredicate(
+      (widget) =>
+          widget is Image &&
+          widget.image is AssetImage &&
+          (widget.image as AssetImage).assetName ==
+              'assets/images/translate_title.png',
+    );
+    expect(wordmark, findsOneWidget);
+    final button = find.byTooltip('Favorites and recents');
+    expect(button, findsOneWidget);
+
+    // Centred on the screen, not merely placed right of the button: its
+    // midpoint sits on the screen's, within a pixel.
+    final screenWidth =
+        tester.view.physicalSize.width / tester.view.devicePixelRatio;
+    final box = tester.getRect(wordmark);
+    expect(box.center.dx, closeTo(screenWidth / 2, 1));
+    expect(box.left, greaterThan(tester.getRect(button).right));
+    expect(tester.takeException(), isNull);
   });
 }

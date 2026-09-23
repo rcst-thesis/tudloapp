@@ -2,11 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:tudloapp/features/dictionary/screens/dictionary_page.dart';
+import 'package:tudloapp/features/daily_words/screens/daily_words_page.dart';
 import 'package:tudloapp/features/translation/screens/translation_page.dart';
 import 'package:tudloapp/features/home_map/screens/home_map_page.dart';
 import 'package:tudloapp/features/profile/screens/profile_page.dart';
 import 'package:tudloapp/features/navigation/bottom_nav_bar.dart';
-import 'package:tudloapp/core/widgets/language_toggle.dart';
 import 'package:tudloapp/core/widgets/mascot_widget.dart';
 import 'package:tudloapp/data/dictionary/dictionary_data.dart';
 
@@ -32,7 +32,7 @@ class AppShellState extends State<AppShell> {
   void initState() {
     super.initState();
     _selectedIndex = widget.initialIndex;
-    if (_selectedIndex == 1 || _selectedIndex == 2) {
+    if (_selectedIndex == 1 || _selectedIndex == 3) {
       _dictionaryFuture = DictionaryData.initialize();
     }
   }
@@ -40,7 +40,7 @@ class AppShellState extends State<AppShell> {
   void switchTo(int index) {
     // Called by the bottom navigation bar.
     setState(() {
-      if (index == 1 || index == 2) {
+      if (index == 1 || index == 3) {
         _dictionaryFuture ??= DictionaryData.initialize();
       }
       _selectedIndex = index;
@@ -50,19 +50,21 @@ class AppShellState extends State<AppShell> {
   @override
   Widget build(BuildContext context) {
     // Keep page order, icons, and labels aligned by index.
-    // Example: index 0 = Map page, Map icon, and "Map" label.
+    // Example: index 0 = Daily Word page, Home icon, and "Home" label.
     final pages = [
-      // Opens the Home Map where learners choose lesson levels.
-      const HomeMapPage(),
+      // Opens the Word of the Day home screen.
+      DailyWordsPage(onOpenLessons: () => switchTo(2)),
       // Opens the translator helper tab.
       const TranslationPage(),
+      // Opens the lesson dashboard where learners choose lesson levels.
+      const HomeMapPage(),
       // Opens the searchable vocabulary dictionary.
       const DictionaryPage(),
       // Opens the user's profile, streak, and progress page.
       const ProfilePage(),
     ];
 
-    final page = _selectedIndex != 1 && _selectedIndex != 2
+    final page = _selectedIndex != 1 && _selectedIndex != 3
         ? pages[_selectedIndex]
         : FutureBuilder<void>(
             future: _dictionaryFuture,
@@ -84,17 +86,11 @@ class AppShellState extends State<AppShell> {
       body: Stack(
         children: [
           page,
-          if (_selectedIndex == 0 || _selectedIndex == 3)
-            const Positioned(
-              top: 12,
-              left: 16,
-              child: SafeArea(child: TudloLanguageToggle()),
-            ),
           Positioned(
             left: 0,
             right: 0,
             bottom: 0,
-            height: 210,
+            height: 168,
             child: IgnorePointer(
               child: ClipRect(
                 child: ShaderMask(
@@ -130,9 +126,9 @@ class AppShellState extends State<AppShell> {
           // Floating navbar stays above the current page instead of being part
           // of each screen, so tab styling is consistent everywhere.
           Positioned(
-            left: 18,
-            right: 18,
-            bottom: 18,
+            left: 14,
+            right: 14,
+            bottom: 12,
             child: TudloBottomNavBar(
               selectedIndex: _selectedIndex,
               onTap: switchTo,

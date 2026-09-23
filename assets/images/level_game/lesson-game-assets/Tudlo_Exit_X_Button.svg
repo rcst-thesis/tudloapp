@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" role="img" aria-label="Exit button">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#F48155"/><stop offset="1" stop-color="#C94D34"/></linearGradient>
+    <filter id="s" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="7" stdDeviation="5" flood-color="#4B3027" flood-opacity=".32"/></filter>
+  </defs>
+  <g filter="url(#s)">
+    <path d="M80 13 C119 13 146 41 145 81 C144 119 118 145 79 145 C40 145 14 119 15 79 C16 40 42 13 80 13Z" fill="url(#g)" stroke="#744736" stroke-width="8"/>
+    <path d="M48 49 C54 43 60 44 66 50 L80 65 L95 49 C101 43 108 44 113 50 C118 56 118 62 112 68 L97 82 L112 97 C118 103 118 110 112 116 C106 122 99 121 93 115 L79 100 L64 116 C58 122 51 121 46 115 C40 109 41 102 47 96 L62 82 L47 67 C41 61 42 55 48 49Z" fill="#FFF9EE" stroke="#FFF" stroke-width="2"/>
+    <path d="M43 41 C60 23 94 18 119 34" fill="none" stroke="#FFAE8B" stroke-width="7" stroke-linecap="round" opacity=".8"/>
+  </g>
+</svg>

@@ -13,6 +13,7 @@ class LearnerProfile {
   final String? lastDailyStreakDate;
   final int currentEnergy;
   final Map<int, int> levelStars;
+  final Map<int, String> lessonStickers;
   final Map<String, LessonScoreStats> lessonScores;
   final Set<int> completedLevels;
   final Set<String> favoriteWords;
@@ -29,6 +30,7 @@ class LearnerProfile {
     required this.lastDailyStreakDate,
     required this.currentEnergy,
     required this.levelStars,
+    required this.lessonStickers,
     required this.lessonScores,
     required this.completedLevels,
     required this.favoriteWords,
@@ -50,6 +52,7 @@ class LearnerProfile {
       lastDailyStreakDate: null,
       currentEnergy: AppData.maxEnergy,
       levelStars: const {},
+      lessonStickers: const {},
       lessonScores: const {},
       completedLevels: const {},
       favoriteWords: const {},
@@ -71,6 +74,7 @@ class LearnerProfile {
       lastDailyStreakDate: json['lastDailyStreakDate'] as String?,
       currentEnergy: json['currentEnergy'] as int? ?? AppData.maxEnergy,
       levelStars: _intMap(json['levelStars']),
+      lessonStickers: _stringMap(json['lessonStickers']),
       lessonScores: _lessonScoreMap(json['lessonScores']),
       completedLevels: {
         for (final value in (json['completedLevels'] as List<dynamic>? ?? []))
@@ -94,6 +98,7 @@ class LearnerProfile {
     Object? lastDailyStreakDate = _unchanged,
     int? currentEnergy,
     Map<int, int>? levelStars,
+    Map<int, String>? lessonStickers,
     Map<String, LessonScoreStats>? lessonScores,
     Set<int>? completedLevels,
     Set<String>? favoriteWords,
@@ -112,6 +117,7 @@ class LearnerProfile {
           : lastDailyStreakDate as String?,
       currentEnergy: currentEnergy ?? this.currentEnergy,
       levelStars: levelStars ?? this.levelStars,
+      lessonStickers: lessonStickers ?? this.lessonStickers,
       lessonScores: lessonScores ?? this.lessonScores,
       completedLevels: completedLevels ?? this.completedLevels,
       favoriteWords: favoriteWords ?? this.favoriteWords,
@@ -132,6 +138,9 @@ class LearnerProfile {
       'currentEnergy': currentEnergy,
       'levelStars': {
         for (final entry in levelStars.entries) '${entry.key}': entry.value,
+      },
+      'lessonStickers': {
+        for (final entry in lessonStickers.entries) '${entry.key}': entry.value,
       },
       'lessonScores': {
         for (final entry in lessonScores.entries)
@@ -154,6 +163,15 @@ class LearnerProfile {
       for (final entry in source.entries)
         if (int.tryParse('${entry.key}') != null && entry.value is int)
           int.parse('${entry.key}'): entry.value as int,
+    };
+  }
+
+  static Map<int, String> _stringMap(dynamic value) {
+    final source = value is Map ? value : const {};
+    return {
+      for (final entry in source.entries)
+        if (int.tryParse('${entry.key}') != null && entry.value is String)
+          int.parse('${entry.key}'): entry.value as String,
     };
   }
 

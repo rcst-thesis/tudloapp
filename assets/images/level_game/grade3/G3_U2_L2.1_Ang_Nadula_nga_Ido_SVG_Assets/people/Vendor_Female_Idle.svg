@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 620" role="img" aria-label="Female market vendor idle">
+  <defs><linearGradient id="ap" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff7e0"/><stop offset="1" stop-color="#ead8b7"/></linearGradient><filter id="ds"><feDropShadow dy="6" stdDeviation="5" flood-opacity=".18"/></filter></defs>
+  <g stroke="#513022" stroke-width="6" stroke-linejoin="round">
+    <path fill="#503326" d="M101 207q2-140 109-140t109 140l-23 123H124z"/>
+    <ellipse fill="#f5b184" cx="210" cy="201" rx="101" ry="112"/>
+    <path fill="#493025" d="M111 183q18-123 105-118 82 4 98 118-60-36-96-102-30 70-107 102z"/>
+    <path fill="none" d="M151 204q15 18 30 0M239 204q15 18 30 0" stroke-linecap="round"/>
+    <path fill="#fff" d="M171 239q39 35 78 0-9 54-39 54t-39-54z"/>
+    <circle fill="#f58b7d" cx="139" cy="229" r="14" stroke="none"/><circle fill="#f58b7d" cx="281" cy="229" r="14" stroke="none"/>
+    <path fill="#f3e0bd" d="M126 91q84-65 168 0l-16 44q-68-37-136 0z"/>
+    <path fill="#8c5b37" d="M136 78q74-39 148 0l-9 25q-65-27-130 0z"/>
+    <path fill="#8a5ad1" d="M104 324q106-56 212 0l44 235H60z"/>
+    <path fill="url(#ap)" d="M132 334q78 39 156 0l30 225H102z"/>
+    <path fill="#f5b184" d="M111 348q-58 52-72 142l51 15 75-116zM309 348q58 52 72 142l-51 15-75-116z"/>
+    <path fill="none" d="M146 382q64 38 128 0" stroke="#b89262"/>
+  </g>
+</svg>

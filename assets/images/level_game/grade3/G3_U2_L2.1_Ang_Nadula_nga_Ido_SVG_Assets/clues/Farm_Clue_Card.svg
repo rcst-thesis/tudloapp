@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 420" role="img" aria-label="Farm clue card">
+  <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9ee4ff"/><stop offset="1" stop-color="#e7fbff"/></linearGradient><filter id="s"><feDropShadow dy="8" stdDeviation="7" flood-opacity=".2"/></filter></defs>
+  <rect x="24" y="24" width="472" height="372" rx="38" fill="#fff9e8" stroke="#f2c236" stroke-width="12"/>
+  <rect x="55" y="55" width="410" height="265" rx="24" fill="url(#sky)"/>
+  <circle cx="399" cy="106" r="35" fill="#ffd43b"/>
+  <path fill="#72bb55" d="M55 204q84-88 168 0 95-112 242 0v116H55z"/><path fill="#9bd861" d="M55 252q105-68 205 3 111-70 205 4v61H55z"/>
+  <path fill="#e94d3d" stroke="#8d3026" stroke-width="7" d="M154 171h176v145H154z"/><path fill="#a52f2a" stroke="#8d3026" stroke-width="7" d="M130 179l112-83 112 83z"/>
+  <path fill="#fff5d2" stroke="#8d3026" stroke-width="6" d="M207 235h70v81h-70zM171 199h45v38h-45zM268 199h45v38h-45z"/>
+  <path fill="#fff" d="M205 235l37 35 35-35-35 81z" opacity=".72"/>
+  <text x="260" y="371" text-anchor="middle" font-family="Arial Rounded MT Bold,Arial,sans-serif" font-size="46" font-weight="800" fill="#123a70">FARM</text>
+</svg>

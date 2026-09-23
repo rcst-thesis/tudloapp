@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:tudloapp/core/models/grade_level.dart';
 import 'package:tudloapp/core/models/learner_profile.dart';
 import 'package:tudloapp/core/models/lesson_score.dart';
@@ -48,7 +49,10 @@ class AppData {
   static bool get dictionaryFallbackEnabled =>
       dictionaryFallbackEnabledNotifier.value;
   static GradeLevel selectedGradeLevel = GradeLevel.grade1;
+  static int? activeLessonLevel;
+  static int? lessonDashboardFocusLevel;
   static final Map<int, int> levelStars = {};
+  static final Map<int, String> lessonStickers = {};
   static final Map<String, LessonScoreStats> lessonScores = {};
   static final Set<int> completedLevels = {};
 
@@ -194,7 +198,125 @@ class AppData {
     return '$year-$month-$day';
   }
 
+  /// Whether a Tudlo lesson host is driving this session.
+  ///
+  /// The DevG lesson screens call these statics directly. When Tudlo hosts
+  /// them, it owns progress and energy itself, so the writes below become
+  /// no-ops and the unlock/catalogue state is projected from the active
+  /// learner profile through [configureHostedSession] instead.
+  static bool hostedSession = false;
+  static bool _energyNotificationPending = false;
+  static Set<int> _hostedUnlockedLevels = {1};
+  static Set<int> _hostedCatalogLevels = {1};
+
+  /// Projects the active Tudlo learner profile onto the statics the DevG
+  /// screens read. No value supplied here is written back by this class.
+  static void configureHostedSession({
+    required int grade,
+    required int energy,
+    required Iterable<int> unlockedLevels,
+    required Iterable<int> completed,
+    required Map<int, String> stickers,
+    required Iterable<int> catalogLevels,
+  }) {
+    hostedSession = true;
+    selectedGradeLevel = GradeLevel.values.firstWhere(
+      (value) => value.number == grade,
+      orElse: () => GradeLevel.grade1,
+    );
+    final nextEnergy = energy.clamp(10, maxEnergy).toInt();
+    final energyChanged = currentEnergy != nextEnergy;
+    currentEnergy = nextEnergy;
+    _hostedUnlockedLevels = unlockedLevels.toSet();
+    _hostedCatalogLevels = catalogLevels.toSet();
+    completedLevels
+      ..clear()
+      ..addAll(completed);
+    lessonStickers
+      ..clear()
+      ..addAll(stickers);
+    unlockedLevel = _hostedUnlockedLevels.isEmpty
+        ? 1
+        : _hostedUnlockedLevels.reduce((a, b) => a > b ? a : b);
+    if (!energyChanged) return;
+    // A host configures this from its build, and energyRevision drives
+    // widgets that are building right then -- notifying synchronously would
+    // mutate a notifier mid-build. Defer to after the frame in that case.
+    if (SchedulerBinding.instance.schedulerPhase ==
+        SchedulerPhase.persistentCallbacks) {
+      if (_energyNotificationPending) return;
+      _energyNotificationPending = true;
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        _energyNotificationPending = false;
+        energyRevision.value++;
+      });
+      return;
+    }
+    energyRevision.value++;
+  }
+
+  /// Hands progress and energy back to the app when a lesson host goes away.
+  ///
+  /// Without this the writes above stay suppressed for the rest of the
+  /// process, so the app's own energy would never recharge again after the
+  /// first hosted lesson.
+  static void endHostedSession() {
+    hostedSession = false;
+    _hostedUnlockedLevels = {1};
+    _hostedCatalogLevels = {1};
+  }
+
+  /// Units holding at least one card the current entry point allows, so the
+  /// DevG dashboard stays visually intact while a map location shows only
+  /// its own lessons.
+  static List<AppUnit> get catalogUnits => hostedSession
+      ? units.where((unit) => catalogLevelsForUnit(unit).isNotEmpty).toList()
+      : units;
+
+  static int get catalogLevelCount {
+    if (!hostedSession) return maxLevel;
+    // Grade 3's catalogue follows which lessons are actually built rather
+    // than the host's per-location card list.
+    if (selectedGradeLevel == GradeLevel.grade3) {
+      return catalogUnits.fold<int>(
+        0,
+        (count, unit) => count + catalogLevelsForUnit(unit).length,
+      );
+    }
+    return _hostedCatalogLevels.length;
+  }
+
+  static bool isCatalogLevel(int level) =>
+      !hostedSession || _hostedCatalogLevels.contains(level);
+
+  static List<int> catalogLevelsForUnit(AppUnit unit) => [
+    for (var level = unit.startLevel; level <= unit.endLevel; level++)
+      if (selectedGradeLevel == GradeLevel.grade3
+          ? isProductionLessonAvailable(level)
+          : isCatalogLevel(level))
+        level,
+  ];
+
+  /// A sensible first card for a filtered catalogue: an active incomplete
+  /// card when there is one, otherwise any card, so a child can still see
+  /// locked future lessons.
+  static int get firstCatalogLevel {
+    for (final unit in catalogUnits) {
+      for (final level in catalogLevelsForUnit(unit)) {
+        if (isLevelUnlocked(level) && !completedLevels.contains(level)) {
+          return level;
+        }
+      }
+    }
+    for (final unit in catalogUnits) {
+      final levels = catalogLevelsForUnit(unit);
+      if (levels.isNotEmpty) return levels.first;
+    }
+    return 1;
+  }
+
   static bool recordLessonStreakForToday({DateTime? now}) {
+    if (hostedSession) return false;
     final today = dateKeyFor(now ?? DateTime.now());
     if (lastDailyStreakDate == today) return false;
     streakDays = streakDays <= 0 ? 1 : streakDays + 1;
@@ -206,6 +328,7 @@ class AppData {
     streakDays = profile.streakDays;
     lastDailyStreakDate = profile.lastDailyStreakDate;
     selectedGradeLevel = profile.parsedGrade;
+    lessonDashboardFocusLevel = null;
     mapHelpDone = profile.mapHelpDone;
     unlockedLevel = profile.unlockedLevel.clamp(1, maxLevel);
     currentEnergy = profile.currentEnergy.clamp(0, maxEnergy).toInt();
@@ -213,6 +336,9 @@ class AppData {
     levelStars
       ..clear()
       ..addAll(profile.levelStars);
+    lessonStickers
+      ..clear()
+      ..addAll(profile.lessonStickers);
     lessonScores
       ..clear()
       ..addAll(profile.lessonScores);
@@ -229,6 +355,7 @@ class AppData {
       lastDailyStreakDate: lastDailyStreakDate,
       currentEnergy: currentEnergy,
       levelStars: Map<int, int>.from(levelStars),
+      lessonStickers: Map<int, String>.from(lessonStickers),
       lessonScores: Map<String, LessonScoreStats>.from(lessonScores),
       completedLevels: Set<int>.from(completedLevels),
       mapHelpDone: mapHelpDone,
@@ -239,9 +366,11 @@ class AppData {
     streakDays = 0;
     lastDailyStreakDate = null;
     unlockedLevel = 1;
+    lessonDashboardFocusLevel = null;
     currentEnergy = maxEnergy;
     _lastEnergyAt = DateTime.now();
     levelStars.clear();
+    lessonStickers.clear();
     lessonScores.clear();
     completedLevels.clear();
     mapHelpDone = false;
@@ -253,6 +382,7 @@ class AppData {
   /// The saved timestamp marks the last recharge boundary. If the app was
   /// closed for 72 minutes, this adds 3 energy because 72 / 24 = 3 intervals.
   static Future<void> refreshEnergy({DateTime? now, bool save = false}) async {
+    if (hostedSession) return;
     if (developerMode) {
       final changed = currentEnergy != maxEnergy;
       currentEnergy = maxEnergy;
@@ -305,6 +435,7 @@ class AppData {
   /// Deducts the fixed lesson-start cost. Individual quiz attempts do not
   /// spend energy, so one lesson always costs exactly 10 energy.
   static Future<bool> spendLessonEnergy() async {
+    if (hostedSession) return true;
     await refreshEnergy();
     if (developerMode) return true;
     if (currentEnergy < minimumEnergyToStartUnit) return false;
@@ -327,6 +458,7 @@ class AppData {
   }
 
   static Duration timeUntilNextEnergy({DateTime? now}) {
+    if (hostedSession) return Duration.zero;
     final updatedAt = now ?? DateTime.now();
     _applyRecharge(updatedAt);
     if (currentEnergy >= maxEnergy) return Duration.zero;
@@ -336,6 +468,7 @@ class AppData {
   }
 
   static Duration timeUntilFullEnergy({DateTime? now}) {
+    if (hostedSession) return Duration.zero;
     _applyRecharge(now ?? DateTime.now());
     if (currentEnergy >= maxEnergy) return Duration.zero;
     final missing = maxEnergy - currentEnergy;
@@ -356,13 +489,33 @@ class AppData {
     return lessonNumberForLevel(level) == 1;
   }
 
+  static bool isProductionLessonAvailable(int level) {
+    if (level < 1 || level > maxLevel) return false;
+    final unit = unitForLevel(level);
+    final lesson = lessonNumberForLevel(level);
+    return switch ((selectedGradeLevel, unit.number, lesson)) {
+      (GradeLevel.grade1, 1, 1) ||
+      (GradeLevel.grade1, 1, 7) ||
+      (GradeLevel.grade1, 2, 1) ||
+      (GradeLevel.grade1, 2, 4) ||
+      (GradeLevel.grade2, 1, 1) ||
+      (GradeLevel.grade2, 1, 2) ||
+      (GradeLevel.grade2, 2, 1) ||
+      (GradeLevel.grade2, 2, 2) ||
+      (GradeLevel.grade3, 1, 1) ||
+      (GradeLevel.grade3, 1, 3) ||
+      (GradeLevel.grade3, 2, 1) ||
+      (GradeLevel.grade3, 2, 2) => true,
+      _ => false,
+    };
+  }
+
   static bool isLevelUnlocked(int level) {
     if (level < 1 || level > maxLevel) return false;
+    if (!isProductionLessonAvailable(level)) return false;
     if (developerMode) return true;
-    final lessonNumber = lessonNumberForLevel(level);
-    if (lessonNumber == 1) return true;
-    if (completedLevels.contains(level)) return true;
-    return completedLevels.contains(level - 1);
+    if (hostedSession) return _hostedUnlockedLevels.contains(level);
+    return true;
   }
 
   static String lessonIdForLevel(int level) {
@@ -384,7 +537,9 @@ class AppData {
   static int get firstUnlockedIncompleteLevel {
     for (final unit in units) {
       for (var level = unit.startLevel; level <= unit.endLevel; level++) {
-        if (isLevelUnlocked(level) && !completedLevels.contains(level)) {
+        if (isProductionLessonAvailable(level) &&
+            isLevelUnlocked(level) &&
+            !completedLevels.contains(level)) {
           return level;
         }
       }

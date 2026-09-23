@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tudloapp/core/data/app_data.dart';
 import 'package:tudloapp/core/services/app_audio_service.dart';
@@ -11,6 +13,7 @@ import 'package:tudloapp/core/widgets/language_toggle.dart';
 import 'package:tudloapp/data/dictionary/dictionary_data.dart';
 import 'package:tudloapp/data/lesson_bank/lesson_bank.dart';
 import 'package:tudloapp/features/lesson_game/screens/level_game_page.dart';
+import 'package:tudloapp/features/lesson/presentation/devg_lesson_host_scope.dart';
 
 class LessonIntroPage extends StatefulWidget {
   final int level;
@@ -38,6 +41,11 @@ class _LessonIntroPageState extends State<LessonIntroPage> {
   int get _localLessonNumber => AppData.lessonNumberForLevel(widget.level);
 
   void _openLessonGame() {
+    final host = DevGLessonHostScope.maybeOf(context);
+    if (host != null) {
+      host.startSourceLevel(widget.level);
+      return;
+    }
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (_) => LevelGamePage(level: widget.level)),
@@ -65,7 +73,14 @@ class _LessonIntroPageState extends State<LessonIntroPage> {
             children: [
               _IntroHeader(
                 lessonNumber: _localLessonNumber,
-                onBack: () => Navigator.pop(context),
+                onBack: () {
+                  final host = DevGLessonHostScope.maybeOf(context);
+                  if (host != null) {
+                    unawaited(host.exitIncomplete());
+                  } else {
+                    Navigator.pop(context);
+                  }
+                },
               ),
               SizedBox(height: topContentGap),
               Expanded(
@@ -152,6 +167,35 @@ class _IntroHeader extends StatelessWidget {
   }
 }
 
+class _LessonIntroTitle extends StatelessWidget {
+  final String title;
+
+  const _LessonIntroTitle({required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
+    final cleaned = title.trim();
+    if (cleaned.isEmpty) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: Text(
+        cleaned,
+        textAlign: TextAlign.center,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        style: GoogleFonts.nunito(
+          color: TudloColors.forest,
+          fontSize: (width * .052).clamp(20.0, 30.0),
+          height: 1.05,
+          fontWeight: FontWeight.w900,
+          letterSpacing: 0,
+        ),
+      ),
+    );
+  }
+}
+
 class _AnimatedLessonIntroContent extends StatefulWidget {
   final int lessonNumber;
   final LevelContent content;
@@ -176,6 +220,7 @@ class _AnimatedLessonIntroContentState
   bool _introVoicePlaying = false;
   late final List<_IntroLetterItem> _letters;
   late final String _introVoiceText;
+  late final String? _introVoiceAsset;
   int _voiceRun = 0;
 
   @override
@@ -183,6 +228,7 @@ class _AnimatedLessonIntroContentState
     super.initState();
     _letters = _introLettersFor(widget.content);
     _introVoiceText = _introVoiceFor(widget.content, _letters);
+    _introVoiceAsset = _introVoiceAssetFor(widget.content);
     unawaited(_playLetterAnimation());
     Future<void>.delayed(const Duration(milliseconds: 120), () {
       if (mounted) unawaited(_playIntroVoice());
@@ -217,14 +263,38 @@ class _AnimatedLessonIntroContentState
       _introVoicePlaying = true;
       _showStart = true;
     });
-    await TudloVoiceButton.speak(
-      context,
-      _introVoiceText,
-      hiligaynon: true,
-      waitForCompletion: true,
-    );
+    final voiceAsset = _introVoiceAsset;
+    final hasRecordedVoice =
+        voiceAsset != null && await _assetExists(voiceAsset);
+    if (!mounted || run != _voiceRun) return;
+    if (hasRecordedVoice) {
+      await TudloVoiceButton.stop();
+      await AppAudioService.instance.lowerBackgroundVolume();
+      try {
+        await AppAudioService.instance.playVoiceAssets([voiceAsset]);
+      } finally {
+        await AppAudioService.instance.restoreBackgroundVolume();
+      }
+    } else {
+      await TudloVoiceButton.speak(
+        context,
+        _introVoiceText,
+        hiligaynon: true,
+        waitForCompletion: true,
+      );
+    }
     if (!mounted || run != _voiceRun) return;
     setState(() => _introVoicePlaying = false);
+  }
+
+  String? _introVoiceAssetFor(LevelContent content) {
+    if (content.gradeLevel != 3) return null;
+    return 'audio/VO-final/grade3/Gr_3_Les_${content.unitNumber}_${content.lessonNumber}_1.wav';
+  }
+
+  Future<bool> _assetExists(String asset) async {
+    final manifest = await AssetManifest.loadFromAssetBundle(rootBundle);
+    return manifest.listAssets().contains(asset);
   }
 
   String _introVoiceFor(LevelContent content, List<_IntroLetterItem> items) {
@@ -306,7 +376,9 @@ class _AnimatedLessonIntroContentState
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _TuonTaHeading(width: headingWidth, height: headingHeight),
-                  SizedBox(height: compactHeight ? 6 : 12),
+                  SizedBox(height: compactHeight ? 4 : 8),
+                  _LessonIntroTitle(title: widget.content.title),
+                  SizedBox(height: compactHeight ? 8 : 14),
                   Expanded(
                     child: _IntroLetterGrid(
                       children: [
@@ -642,46 +714,22 @@ class _AnimatedLessonIntroContentState
     int lessonNumber,
   ) {
     const grade2 = 'assets/images/level_game';
-    const school = _IntroLetterItem(
-      label: 'school',
-      asset: '$grade2/school-entrance.png',
+    const classroomWithAna = _IntroLetterItem(
+      label: 'Ana',
+      asset:
+          'assets/images/level_game/grade2/backgrounds/Tudlo_Classroom_Background_With_Ana.svg',
       icon: Icons.school_rounded,
       color: TudloColors.blue,
+      large: true,
       pictureOnly: true,
     );
-    const juan = _IntroLetterItem(
-      label: 'Juan',
-      asset: 'assets/images/level_game/people/boy-juan.png',
-      icon: Icons.face_rounded,
-      color: TudloColors.green,
-      pictureOnly: true,
-    );
-    const ana = _IntroLetterItem(
-      label: 'Ana',
-      asset: 'assets/images/level_game/people/girl-ana.png',
-      icon: Icons.face_rounded,
-      color: TudloColors.coral,
-      pictureOnly: true,
-    );
-    const cake = _IntroLetterItem(
-      label: 'keyk',
-      asset: '$grade2/cake.png',
+    const birthdayAnaCake = _IntroLetterItem(
+      label: 'kaadlawan',
+      asset:
+          'assets/images/level_game/grade2/backgrounds/Tudlo_Birthday_Background_Ana_Holding_Cake.svg',
       icon: Icons.cake_rounded,
       color: TudloColors.coral,
-      pictureOnly: true,
-    );
-    const balloons = _IntroLetterItem(
-      label: 'lobo',
-      asset: '$grade2/ballons.png',
-      icon: Icons.celebration_rounded,
-      color: TudloColors.gold,
-      pictureOnly: true,
-    );
-    const birthdayParty = _IntroLetterItem(
-      label: 'kaadlawan',
-      asset: '$grade2/birthday-party.png',
-      icon: Icons.celebration_rounded,
-      color: TudloColors.coral,
+      large: true,
       pictureOnly: true,
     );
     const family = _IntroLetterItem(
@@ -791,8 +839,8 @@ class _AnimatedLessonIntroContentState
     );
 
     return switch ((unitNumber, lessonNumber)) {
-      (1, 1) => const [school, juan, ana],
-      (1, 2) => const [birthdayParty, cake, balloons],
+      (1, 1) => const [classroomWithAna],
+      (1, 2) => const [birthdayAnaCake],
       (1, 3) => const [family],
       (2, 1) => const [
         _IntroLetterItem(
@@ -1144,8 +1192,19 @@ class _IntroPictureArt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (item.asset != null) {
+      final asset = item.asset!;
+      if (asset.toLowerCase().endsWith('.svg')) {
+        return SvgPicture.asset(
+          asset,
+          width: size,
+          height: size,
+          fit: BoxFit.contain,
+          alignment: Alignment.center,
+          placeholderBuilder: (_) => _IntroIconArt(item: item, size: size),
+        );
+      }
       return Image.asset(
-        item.asset!,
+        asset,
         width: size,
         height: size,
         fit: BoxFit.contain,

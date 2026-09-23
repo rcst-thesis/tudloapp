@@ -86,7 +86,7 @@ class JsonLoader {
       final activeBundle = bundle ?? rootBundle;
       final ByteData byteData = await activeBundle.load(path);
 
-      return compute(
+      return await compute(
         _decodeJson,
         byteData.buffer.asUint8List(
           byteData.offsetInBytes,

@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Dog footprint">
+  <defs><filter id="s"><feDropShadow dy="5" stdDeviation="5" flood-opacity=".2"/></filter><linearGradient id="p" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a96a3a"/><stop offset="1" stop-color="#6b3b22"/></linearGradient></defs>
+  <g fill="url(#p)"><ellipse cx="150" cy="190" rx="76" ry="64"/><ellipse cx="66" cy="104" rx="34" ry="45" transform="rotate(-24 66 104)"/><ellipse cx="119" cy="63" rx="34" ry="45" transform="rotate(-8 119 63)"/><ellipse cx="181" cy="63" rx="34" ry="45" transform="rotate(8 181 63)"/><ellipse cx="234" cy="104" rx="34" ry="45" transform="rotate(24 234 104)"/></g>
+</svg>

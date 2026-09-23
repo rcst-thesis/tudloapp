@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220" role="img" aria-label="Red dog bowl">
+  <defs><linearGradient id="r" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ff6258"/><stop offset="1" stop-color="#c8242b"/></linearGradient><filter id="s"><feDropShadow dy="7" stdDeviation="6" flood-opacity=".22"/></filter></defs>
+  <g stroke="#8a2027" stroke-width="7"><ellipse fill="#7c282a" cx="180" cy="70" rx="119" ry="38"/><path fill="url(#r)" d="M59 68h242l-26 105q-95 31-190 0z"/><ellipse fill="#e83d40" cx="180" cy="69" rx="117" ry="34"/></g>
+  <g fill="#fff5dd" transform="translate(139 105)"><ellipse cx="41" cy="28" rx="23" ry="18"/><circle cx="10" cy="8" r="11"/><circle cx="32" cy="1" r="11"/><circle cx="53" cy="1" r="11"/><circle cx="74" cy="8" r="11"/></g>
+</svg>

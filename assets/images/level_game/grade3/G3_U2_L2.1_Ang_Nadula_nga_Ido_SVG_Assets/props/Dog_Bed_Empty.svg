@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 250" role="img" aria-label="Empty dog bed">
+  <defs><linearGradient id="b" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f59a6b"/><stop offset="1" stop-color="#d76445"/></linearGradient><filter id="s"><feDropShadow dy="8" stdDeviation="7" flood-opacity=".22"/></filter></defs>
+  <g stroke="#8d3e30" stroke-width="8"><ellipse fill="url(#b)" cx="260" cy="135" rx="223" ry="89"/><ellipse fill="#ffd2a8" cx="260" cy="123" rx="174" ry="55"/><path fill="#ef6f52" d="M86 130q174 62 348 0l-12 70q-162 54-324 0z"/></g>
+  <g fill="#fff2df" transform="translate(217 151)"><ellipse cx="43" cy="26" rx="25" ry="20"/><circle cx="12" cy="6" r="12"/><circle cx="35" cy="0" r="12"/><circle cx="58" cy="0" r="12"/><circle cx="81" cy="6" r="12"/></g>
+</svg>

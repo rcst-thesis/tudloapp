@@ -1,5 +1,5 @@
 name: tudloapp
-description: "A new Flutter project."
+description: "Toadlu: a Hiligaynon learning app for children."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -44,6 +44,10 @@ dependencies:
   path_provider: ^2.1.5
   rive: ^0.14.10
   safe_text: ^2.1.6
+  flutter_svg: ^2.3.0
+  vector_graphics: ^1.2.3
+  flutter_soloud: ^3.1.7
+  sensors_plus: ^7.1.0
 
 dev_dependencies:
   audioplayers_platform_interface: ^7.1.1
@@ -79,14 +83,65 @@ flutter:
     - assets/images/onbaording/
     - assets/images/profile/
     - assets/images/level_game/
+    - assets/images/level_game/backgrounds/
     - assets/images/level_game/animals/
     - assets/images/level_game/letters/
     - assets/images/level_game/numbers/
     - assets/images/level_game/people/
     - assets/images/level_game/lesson-game-assets/
+    - assets/images/level_game/grade1/backgrounds/
+    - assets/images/level_game/grade1/people/
+    - assets/images/level_game/grade2/backgrounds/
+    - assets/images/level_game/grade2/people/
+    - assets/images/level_game/grade2/lesson-game-assets/
+    - assets/images/level_game/grade3/
+    - assets/images/level_game/grade3/G3_U2_L2.1_Ang_Nadula_nga_Ido_SVG_Assets/animals/
+    - assets/images/level_game/grade3/G3_U2_L2.1_Ang_Nadula_nga_Ido_SVG_Assets/people/
+    - assets/images/level_game/grade3/G3_U2_L2.1_Ang_Nadula_nga_Ido_SVG_Assets/props/
+    - assets/images/level_game/grade3/G3_U2_L2.1_Ang_Nadula_nga_Ido_SVG_Assets/clues/
+    - assets/images/level_game/grade3/G3_U2_L2.1_Ang_Nadula_nga_Ido_SVG_Assets/map/
+    - assets/images/level_game/grade3/G3_U2_L2.1_Ang_Nadula_nga_Ido_SVG_Assets/reward/
+    - assets/images/level_game/grade3/G3_U2_L2.1_Ang_Nadula_nga_Ido_SVG_Assets/updated/
+    - assets/images/level_game/grade3/G3_U1_L1.1_Numero_sa_Merkado_SVG_Assets/background/
+    - assets/images/level_game/grade3/G3_U1_L1.1_Numero_sa_Merkado_SVG_Assets/counting_objects/
+    - assets/images/level_game/grade3/G3_U1_L1.1_Numero_sa_Merkado_SVG_Assets/inventory/
+    - assets/images/level_game/grade3/G3_U1_L1.1_Numero_sa_Merkado_SVG_Assets/people/
+    - assets/images/level_game/grade3/G3_U1_L1.1_Numero_sa_Merkado_SVG_Assets/shells/
+    - assets/images/level_game/grade3/G3_U1_L1.1_Numero_sa_Merkado_SVG_Assets/stalls/
+    - assets/images/level_game/grade3/G3_U1_L1.3_Pagbakal_ni_Koka_sa_Merkado_SVG_Assets/background/
+    - assets/images/level_game/grade3/G3_U1_L1.3_Pagbakal_ni_Koka_sa_Merkado_SVG_Assets/people/
+    - assets/images/level_game/grade3/G3_U1_L1.3_Pagbakal_ni_Koka_sa_Merkado_SVG_Assets/products/
+    - assets/images/level_game/grade3/G3_U1_L1.3_Pagbakal_ni_Koka_sa_Merkado_SVG_Assets/shopping_props/
+    - assets/images/level_game/grade3/G3_U1_L1.3_Pagbakal_ni_Koka_sa_Merkado_SVG_Assets/stalls/
+    - assets/images/level_game/grade3/G3_U2_L2.2_Ang_Bag-o_nga_Estudyante/
+    - assets/images/level_game/backgrounds/grade3_landscape/
+    - assets/images/stickers/rewards/home/
     - assets/images/word-of-the-day/
     - assets/audio/effects/
     - assets/audio/VO/
+    - assets/audio/VO-final/grade1/
+    - assets/audio/VO-final/grade2/
+    - assets/audio/VO-final/grade3/
+    - assets/audio/VO-final/numbers1-10/
+    - assets/audio/
+    - assets/audio/VO-final/
+    - assets/images/lesson/
+    - assets/images/lesson/rewards/
+    - assets/images/lesson/rewards/home/
+    - assets/images/level_game/grade1/
+    - assets/images/level_game/grade2/
+    - assets/images/level_game/grade3/G3_U1_L1.1_Numero_sa_Merkado_SVG_Assets/
+    - assets/images/level_game/grade3/G3_U1_L1.3_Pagbakal_ni_Koka_sa_Merkado_SVG_Assets/
+    - assets/images/level_game/grade3/G3_U2_L2.1_Ang_Nadula_nga_Ido_SVG_Assets/
+    - assets/images/stickers/
+    - assets/images/stickers/rewards/
+  fonts:
+    - family: ComicRelief
+      fonts:
+        - asset: assets/fonts/ComicRelief-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/ComicRelief-Bold.ttf
+          weight: 700
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

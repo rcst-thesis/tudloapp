@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:tudloapp/core/constants/app_strings.dart';
 import 'package:tudloapp/core/services/app_audio_service.dart';
 import 'package:tudloapp/core/theme/app_theme.dart';
 
@@ -18,16 +20,32 @@ class TudloBottomNavBar extends StatelessWidget {
     required this.onTap,
   });
 
-  static const iconAssets = [
-    'assets/images/navbar/home.png',
-    'assets/images/navbar/translate.png',
-    'assets/images/navbar/dictionary.png',
-    'assets/images/navbar/profile.png',
+  static const items = [
+    _BottomNavDestination(
+      label: AppStrings.navHome,
+      asset: 'assets/images/navbar/home.png',
+    ),
+    _BottomNavDestination(
+      label: AppStrings.navTranslate,
+      asset: 'assets/images/navbar/translate.png',
+    ),
+    _BottomNavDestination(
+      label: AppStrings.navLessons,
+      icon: Icons.menu_book_rounded,
+    ),
+    _BottomNavDestination(
+      label: AppStrings.navDictionary,
+      asset: 'assets/images/navbar/dictionary.png',
+    ),
+    _BottomNavDestination(
+      label: AppStrings.navProfile,
+      asset: 'assets/images/navbar/profile.png',
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
-    const radius = BorderRadius.all(Radius.circular(40));
+    const radius = BorderRadius.all(Radius.circular(30));
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: radius,
@@ -49,8 +67,8 @@ class TudloBottomNavBar extends StatelessWidget {
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 22, sigmaY: 22),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-            height: 104,
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
+            height: 82,
             decoration: BoxDecoration(
               borderRadius: radius,
               border: Border.all(
@@ -68,11 +86,11 @@ class TudloBottomNavBar extends StatelessWidget {
               ),
             ),
             child: Row(
-              children: List.generate(iconAssets.length, (index) {
+              children: List.generate(items.length, (index) {
                 final isSelected = selectedIndex == index;
                 return Expanded(
                   child: _BottomNavItem(
-                    asset: iconAssets[index],
+                    destination: items[index],
                     selected: isSelected,
                     onTap: () async {
                       await AppAudioService.instance.playTap();
@@ -89,13 +107,21 @@ class TudloBottomNavBar extends StatelessWidget {
   }
 }
 
+class _BottomNavDestination {
+  final String label;
+  final String? asset;
+  final IconData? icon;
+
+  const _BottomNavDestination({required this.label, this.asset, this.icon});
+}
+
 class _BottomNavItem extends StatefulWidget {
-  final String asset;
+  final _BottomNavDestination destination;
   final bool selected;
   final VoidCallback onTap;
 
   const _BottomNavItem({
-    required this.asset,
+    required this.destination,
     required this.selected,
     required this.onTap,
   });
@@ -129,12 +155,12 @@ class _BottomNavItemState extends State<_BottomNavItem> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 180),
           curve: Curves.easeOut,
-          height: 84,
+          height: 68,
           decoration: BoxDecoration(
             color: widget.selected
                 ? Colors.white.withValues(alpha: .24)
                 : Colors.transparent,
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(24),
             border: widget.selected
                 ? Border.all(color: Colors.white.withValues(alpha: .46))
                 : null,
@@ -148,16 +174,56 @@ class _BottomNavItemState extends State<_BottomNavItem> {
                 : null,
           ),
           child: Center(
-            child: Image.asset(
-              widget.asset,
-              width: widget.selected ? 84 : 76,
-              height: widget.selected ? 84 : 76,
-              fit: BoxFit.contain,
-              filterQuality: FilterQuality.high,
+            child: _NavItemArtwork(
+              destination: widget.destination,
+              selected: widget.selected,
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class _NavItemArtwork extends StatelessWidget {
+  final _BottomNavDestination destination;
+  final bool selected;
+
+  const _NavItemArtwork({required this.destination, required this.selected});
+
+  @override
+  Widget build(BuildContext context) {
+    final asset = destination.asset;
+    if (asset != null) {
+      return Image.asset(
+        asset,
+        width: selected ? 62 : 54,
+        height: selected ? 62 : 54,
+        fit: BoxFit.contain,
+        filterQuality: FilterQuality.high,
+      );
+    }
+
+    final color = selected ? TudloColors.blue : TudloColors.muted;
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(destination.icon, color: color, size: selected ? 32 : 29),
+        const SizedBox(height: 1),
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            destination.label,
+            maxLines: 1,
+            style: GoogleFonts.nunito(
+              color: color,
+              fontSize: 12,
+              height: 1,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

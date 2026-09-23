@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 420" role="img" aria-label="Bantay idle">
+  <defs><linearGradient id="fur" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fffdf6"/><stop offset="1" stop-color="#f3ead7"/></linearGradient><filter id="s"><feDropShadow dx="0" dy="5" stdDeviation="4" flood-opacity=".18"/></filter></defs>
+  <g stroke="#5a331e" stroke-width="6" stroke-linejoin="round">
+    <path fill="#8b4a25" d="M84 167C28 145 31 71 90 66c25-3 49 14 56 43z"/>
+    <path fill="#8b4a25" d="M276 167c56-22 53-96-6-101-25-3-49 14-56 43z"/>
+    <path fill="url(#fur)" d="M180 57c79 0 126 56 112 126-9 45-45 76-112 76S77 228 68 183C54 113 101 57 180 57z"/>
+    <path fill="#8b4a25" d="M82 125c15-49 50-69 91-67-8 30-28 56-60 76z"/>
+    <path fill="#8b4a25" d="M278 126c-15-49-50-69-91-67 8 30 28 56 60 76z"/>
+    <ellipse fill="#fff" cx="139" cy="151" rx="25" ry="31"/><ellipse fill="#fff" cx="221" cy="151" rx="25" ry="31"/>
+    <ellipse fill="#242424" cx="145" cy="158" rx="11" ry="15" stroke="none"/><ellipse fill="#242424" cx="215" cy="158" rx="11" ry="15" stroke="none"/>
+    <circle fill="#fff" cx="149" cy="152" r="4" stroke="none"/><circle fill="#fff" cx="219" cy="152" r="4" stroke="none"/>
+    <ellipse fill="#33231c" cx="180" cy="193" rx="24" ry="18"/>
+    <path fill="#e94e55" d="M147 218q33 35 66 0-4 52-33 52t-33-52z"/>
+    <path fill="url(#fur)" d="M94 244q86-35 172 0l26 105-62 12-20-68-7 94h-46l-7-94-20 68-62-12z"/>
+    <path fill="none" d="M252 271q70-25 63 40-4 30-34 24" stroke="#8b4a25" stroke-width="18" stroke-linecap="round"/>
+    <path fill="#e9443f" d="M104 239q76 31 152 0l8 25q-84 33-168 0z"/>
+    <circle fill="#ffd34f" cx="180" cy="271" r="19"/><path fill="#ef9d22" stroke="none" d="M180 257l4 9 10 1-8 7 3 10-9-5-9 5 3-10-8-7 10-1z"/>
+  </g>
+</svg>
