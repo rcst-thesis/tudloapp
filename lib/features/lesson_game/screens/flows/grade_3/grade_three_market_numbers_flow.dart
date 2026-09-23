@@ -1237,7 +1237,7 @@ Future<void> _showGradeThreeMapInstructionDialog(
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 22),
+            padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 16),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(22),
@@ -1254,7 +1254,7 @@ Future<void> _showGradeThreeMapInstructionDialog(
               message,
               textAlign: TextAlign.center,
               style: GoogleFonts.nunito(
-                fontSize: 28,
+                fontSize: 22,
                 height: 1.08,
                 fontWeight: FontWeight.w900,
                 color: TudloColors.ink,
@@ -1264,8 +1264,8 @@ Future<void> _showGradeThreeMapInstructionDialog(
           ),
           const SizedBox(height: 16),
           SizedBox(
-            width: 180,
-            height: 58,
+            width: 142,
+            height: 46,
             child: FilledButton(
               onPressed: () => Navigator.of(dialogContext).pop(),
               style: FilledButton.styleFrom(
@@ -1278,7 +1278,7 @@ Future<void> _showGradeThreeMapInstructionDialog(
               child: Text(
                 'SIGE',
                 style: GoogleFonts.nunito(
-                  fontSize: 26,
+                  fontSize: 20,
                   height: 1,
                   fontWeight: FontWeight.w900,
                   color: Colors.white,
