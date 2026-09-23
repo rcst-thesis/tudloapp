@@ -25,15 +25,16 @@ class GradeThreeStickerRewardOverlay extends StatelessWidget {
   Widget build(BuildContext context) {
     final view = MediaQuery.sizeOf(context);
     final hasSecondary = secondaryLabel != null && onSecondary != null;
-    final buttonHeight = (view.height * .075).clamp(36.0, 46.0).toDouble();
-    final buttonBottom = (view.height * .045).clamp(14.0, 26.0).toDouble();
-    final middleTop = (view.height * .075).clamp(22.0, 40.0).toDouble();
+    final buttonHeight = (view.height * .092).clamp(44.0, 58.0).toDouble();
+    final buttonBottom = (view.height * .04).clamp(12.0, 24.0).toDouble();
+    final middleTop = (view.height * .035).clamp(12.0, 26.0).toDouble();
     final middleBottom = buttonBottom + buttonHeight + 10;
     final middleHeight = (view.height - middleTop - middleBottom)
         .clamp(150.0, 380.0)
         .toDouble();
-    final messageHeight = (view.height * .14).clamp(48.0, 72.0).toDouble();
-    final stickerHeight = (middleHeight - messageHeight - 4)
+    final messageHeight = (view.height * .13).clamp(42.0, 64.0).toDouble();
+    final stickerDrop = (view.height * .055).clamp(20.0, 36.0).toDouble();
+    final stickerHeight = (middleHeight - messageHeight)
         .clamp(170.0, 340.0)
         .toDouble();
     final stickerWidth = (view.width * .48)
@@ -58,7 +59,8 @@ class GradeThreeStickerRewardOverlay extends StatelessWidget {
               children: [
                 SizedBox(
                   height: messageHeight,
-                  child: Center(
+                  child: Align(
+                    alignment: Alignment.topCenter,
                     child: Text(
                       message,
                       textAlign: TextAlign.center,
@@ -66,7 +68,7 @@ class GradeThreeStickerRewardOverlay extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.nunito(
                         color: Colors.white,
-                        fontSize: (view.width * .024).clamp(17.0, 25.0),
+                        fontSize: (view.width * .03).clamp(21.0, 32.0),
                         height: 1.04,
                         fontWeight: FontWeight.w900,
                         letterSpacing: 0,
@@ -81,51 +83,57 @@ class GradeThreeStickerRewardOverlay extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 6),
                 GestureDetector(
                   onTap: onPrimary,
-                  child: SizedBox(
-                    width: stickerWidth,
-                    height: stickerHeight,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Positioned.fill(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: stickerWidth * .17,
-                              vertical: stickerHeight * .05,
-                            ),
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                color: const Color(
-                                  0xFFFFD94A,
-                                ).withValues(alpha: .12),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: const Color(
-                                      0xFFFFD33D,
-                                    ).withValues(alpha: .74),
-                                    blurRadius: 42,
-                                    spreadRadius: 12,
-                                  ),
-                                  BoxShadow(
-                                    color: Colors.white.withValues(alpha: .32),
-                                    blurRadius: 22,
-                                    spreadRadius: 1,
-                                  ),
-                                ],
+                  child: Transform.translate(
+                    offset: Offset(0, stickerDrop),
+                    child: SizedBox(
+                      width: stickerWidth,
+                      height: stickerHeight,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Positioned.fill(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: stickerWidth * .32,
+                                vertical: stickerHeight * .06,
+                              ),
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(24),
+                                  color: const Color(
+                                    0xFFFFD94A,
+                                  ).withValues(alpha: .10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: const Color(
+                                        0xFFFFD33D,
+                                      ).withValues(alpha: .68),
+                                      blurRadius: 30,
+                                      spreadRadius: 7,
+                                    ),
+                                    BoxShadow(
+                                      color: Colors.white.withValues(
+                                        alpha: .32,
+                                      ),
+                                      blurRadius: 14,
+                                      spreadRadius: 1,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          width: stickerWidth,
-                          height: stickerHeight,
-                          child: _GradeThreeRewardSticker(asset: stickerAsset),
-                        ),
-                      ],
+                          SizedBox(
+                            width: stickerWidth,
+                            height: stickerHeight,
+                            child: _GradeThreeRewardSticker(
+                              asset: stickerAsset,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -211,11 +219,11 @@ class _GradeThreeRewardButton extends StatelessWidget {
       onTap: onTap,
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          minWidth: (view.width * .18).clamp(135.0, 190.0),
-          maxWidth: (view.width * .28).clamp(185.0, 270.0),
+          minWidth: (view.width * .24).clamp(175.0, 240.0),
+          maxWidth: (view.width * .34).clamp(240.0, 340.0),
         ),
         child: Container(
-          height: (view.height * .075).clamp(36.0, 46.0),
+          height: (view.height * .092).clamp(44.0, 58.0),
           alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
@@ -237,7 +245,7 @@ class _GradeThreeRewardButton extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             style: GoogleFonts.nunito(
               color: filled ? Colors.white : green,
-              fontSize: (view.width * .014).clamp(13.0, 18.0),
+              fontSize: (view.width * .018).clamp(16.0, 23.0),
               height: 1,
               fontWeight: FontWeight.w900,
               letterSpacing: 0,
